@@ -150,7 +150,10 @@ def lint_css(css, origin):
         if stripped.startswith("@media") or stripped.startswith("@supports") or "url(" in stripped:
             continue
         for pattern, label in BAD_PATTERNS:
-            if pattern.search(line):
+            hits = [m.group(0) for m in pattern.finditer(line)]
+            # A zero length or duration is not a design value.
+            hits = [h for h in hits if not re.fullmatch(r"0*\.?0+[a-z]*", h)]
+            if hits:
                 problems.append(f"{origin}:{lineno}: hardcoded {label}: {stripped}")
                 break
     return problems

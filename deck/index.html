@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en" data-brand="holding">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Brand Deck</title>
+  <meta name="description" content="Interactive brand presentation for the holding and its four companies. Working draft.">
+  <meta name="theme-color" content="#FBFAF7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Brand Deck">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../brand/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../brand/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../brand/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="../brand/tokens.css">
+  <link rel="stylesheet" href="../brand/components.css">
+  <link rel="stylesheet" href="deck.css">
+</head>
+<body>
+  <div class="deck-progress" aria-hidden="true"><div class="deck-progress__fill" id="progress"></div></div>
+
+  <main class="deck" id="deck" aria-roledescription="presentation" aria-label="Brand deck">
+
+    <!-- 1 COVER -->
+    <section class="slide slide--inverse" aria-label="Cover">
+      <div class="slide__inner">
+        <div class="cluster" data-reveal style="--i: 0">
+          <span class="tag tag--warning">Working draft</span>
+          <span class="eyebrow">Brand system · v0.1</span>
+        </div>
+        <h1 class="slide__title slide__title--xl" data-reveal style="--i: 1">Four companies. One loop.</h1>
+        <p class="lead" data-reveal style="--i: 2">A brand system for <span data-brand-name="holding"></span> (name to be decided) and <span data-brand-name="veriterra"></span>, <span data-brand-name="verdo"></span>, <span data-brand-name="vaya"></span> and <span data-brand-name="viva"></span>.</p>
+        <div class="slide__foot" data-reveal style="--i: 3"><span>Swipe, or tap the screen edges</span><span>South Sri Lanka</span></div>
+      </div>
+    </section>
+
+    <!-- 2 STATUS -->
+    <section class="slide" aria-label="Status">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">Read this first</span>
+          <h2 class="slide__title">This is the frame, not the brand.</h2>
+        </div>
+        <div class="cols cols--2">
+          <div class="stack" data-reveal style="--i: 1">
+            <span class="eyebrow">Real now</span>
+            <ul class="list-plain">
+              <li><span class="icon" data-icon="check"></span>One token file drives everything</li>
+              <li><span class="icon" data-icon="check"></span>Five themes from one system</li>
+              <li><span class="icon" data-icon="check"></span>Components in every state</li>
+              <li><span class="icon" data-icon="check"></span>Rules for logo, imagery, motion</li>
+              <li><span class="icon" data-icon="check"></span>Works on iPad, installs as an app</li>
+            </ul>
+          </div>
+          <div class="stack" data-reveal style="--i: 2">
+            <span class="eyebrow">Placeholder</span>
+            <ul class="list-plain">
+              <li><span class="icon" data-icon="minus"></span>Holding name</li>
+              <li><span class="icon" data-icon="minus"></span>Colours and typefaces</li>
+              <li><span class="icon" data-icon="minus"></span>Logos</li>
+              <li><span class="icon" data-icon="minus"></span>Photography</li>
+              <li><span class="icon" data-icon="minus"></span>Positioning and personality</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 THE GROUP -->
+    <section class="slide" aria-label="The group">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">The group</span>
+          <h2 class="slide__title">One group, four companies.</h2>
+        </div>
+        <div class="cols cols--4" id="companies"></div>
+      </div>
+    </section>
+
+    <!-- 4 ESSENCE -->
+    <section class="slide" aria-label="Brand essence">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">Brand essence · hypothesis</span>
+          <h2 class="slide__title">Each company feeds the next.</h2>
+          <p class="lead">The loop is what makes four young businesses read as one group instead of four small bets.</p>
+        </div>
+        <ol class="loop-big">
+          <li data-brand="veriterra" data-reveal style="--i: 1"><span class="icon icon--lg" data-icon="sprout"></span><span class="loop-big__word">Land</span><span class="caption"><span data-brand-name="veriterra"></span> feeds the soil</span></li>
+          <li data-brand="verdo" data-reveal style="--i: 2"><span class="icon icon--lg" data-icon="basket"></span><span class="loop-big__word">Product</span><span class="caption"><span data-brand-name="verdo"></span> grows the food</span></li>
+          <li data-brand="vaya" data-reveal style="--i: 3"><span class="icon icon--lg" data-icon="person"></span><span class="loop-big__word">Person</span><span class="caption"><span data-brand-name="vaya"></span> hosts the guest</span></li>
+          <li data-brand="viva" data-reveal style="--i: 4"><span class="icon icon--lg" data-icon="home"></span><span class="loop-big__word">Space</span><span class="caption"><span data-brand-name="viva"></span> builds the place</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5 PERSONALITY -->
+    <section class="slide slide--inverse" aria-label="Personality">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">Personality · to be set</span>
+          <h2 class="slide__title">Where on each line?</h2>
+          <p class="lead">The next interview round places the holding on each scale. Each company can then sit at its own point within that range.</p>
+        </div>
+        <ul class="spectrum-deck" data-reveal style="--i: 1">
+          <li><span>Quiet</span><span class="spectrum-deck__track"></span><span>Loud</span></li>
+          <li><span>Technical</span><span class="spectrum-deck__track"></span><span>Sensory</span></li>
+          <li><span>Local</span><span class="spectrum-deck__track"></span><span>Global</span></li>
+          <li><span>Rugged</span><span class="spectrum-deck__track"></span><span>Refined</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6 TONE -->
+    <section class="slide" aria-label="Tone of voice">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">Tone of voice</span>
+          <h2 class="slide__title">Specific beats grand.</h2>
+          <p class="lead">A number, a place or a fact instead of an adjective. Say what is built and what is planned, and never blur the two.</p>
+        </div>
+        <div class="versus">
+          <div class="versus__row" data-reveal style="--i: 1"><div class="versus__yes">3,000 m² of greenhouses on five acres in Koggala.</div><div class="versus__no">A next-generation agro-park of the future.</div></div>
+          <div class="versus__row" data-reveal style="--i: 2"><div class="versus__yes">Picked in the morning, on the restaurant table by evening.</div><div class="versus__no">Harmony of nature, comfort and mindful living.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 ARCHITECTURE -->
+    <section class="slide" aria-label="Brand architecture">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">Architecture · proposed</span>
+          <h2 class="slide__title">One system, five themes.</h2>
+          <p class="lead">Every company leads on its own website. The holding appears as a quiet endorsement. Underneath, they all share the same foundations.</p>
+        </div>
+        <div class="arch">
+          <div class="arch__themes" id="arch-themes" data-reveal style="--i: 1"></div>
+          <div class="arch__layer" data-reveal style="--i: 2"><span>Components</span><span>buttons · forms · cards · navigation</span></div>
+          <div class="arch__layer" data-reveal style="--i: 3"><span>Type · grid · motion</span><span>shared by all five</span></div>
+          <div class="arch__layer arch__layer--base" data-reveal style="--i: 4"><span>brand/tokens.css</span><span>single source of truth</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 LOGO -->
+    <section class="slide" aria-label="Logo" data-brand-scope data-brand="vaya">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">Logo · slots ready, artwork pending</span>
+          <h2 class="slide__title">Every company, the same lockup logic.</h2>
+        </div>
+        <div data-brand-switch data-target="scope" aria-label="Preview brand" data-reveal style="--i: 1" data-no-swipe></div>
+        <div class="cols cols--2" data-reveal style="--i: 2">
+          <div class="stage-box"><span class="deck-lockup"><span class="deck-lockup__mark">mark</span><span><span class="deck-lockup__word" data-scope-brand-name></span><span class="deck-lockup__endorse">Part of <span data-brand-name="holding"></span></span></span></span></div>
+          <div class="stage-box stage-box--accent"><span class="deck-lockup"><span class="deck-lockup__mark">mark</span><span class="deck-lockup__word" data-scope-brand-name></span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 COLOUR -->
+    <section class="slide" aria-label="Colour">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">Colour · placeholders</span>
+          <h2 class="slide__title">Shared neutrals, one accent each.</h2>
+          <p class="lead">These accents are deliberately muted stand-ins. Real palettes come in the visual-directions phase.</p>
+        </div>
+        <div class="palette" id="palette" data-reveal style="--i: 1"></div>
+        <div class="neutrals" aria-label="Neutrals" data-reveal style="--i: 2">
+          <span style="background: var(--color-paper-0)"></span>
+          <span style="background: var(--color-paper-1)"></span>
+          <span style="background: var(--color-paper-2)"></span>
+          <span style="background: var(--color-ink-300)"></span>
+          <span style="background: var(--color-ink-500)"></span>
+          <span style="background: var(--color-ink-900)"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 TYPOGRAPHY -->
+    <section class="slide" aria-label="Typography">
+      <div class="slide__inner">
+        <div class="cols cols--split">
+          <div class="stack" data-reveal style="--i: 0">
+            <span class="eyebrow">Typography · system placeholders</span>
+            <span class="type-hero">Aa</span>
+          </div>
+          <div class="type-ladder" data-reveal style="--i: 1">
+            <span style="font-family: var(--font-display); font-size: var(--text-4xl); line-height: var(--leading-tight)">Display for headlines</span>
+            <span style="font-family: var(--font-display); font-size: var(--text-2xl)">Short, specific, sentence case</span>
+            <span style="font-size: var(--text-lg)">Body for reading and interface text, set for long lines on iPad.</span>
+            <span class="eyebrow">Mono for labels, indexes and data</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 COMPONENTS -->
+    <section class="slide" aria-label="Components" data-brand-scope data-brand="verdo">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">Components</span>
+          <h2 class="slide__title">Built once, themed five times.</h2>
+        </div>
+        <div data-brand-switch data-target="scope" aria-label="Preview brand" data-reveal style="--i: 1" data-no-swipe></div>
+        <div class="cols cols--3" data-reveal style="--i: 2" data-no-swipe>
+          <div class="stack">
+            <button class="btn" type="button">Request a call</button>
+            <button class="btn btn--secondary" type="button">See the projects</button>
+            <a class="link link--block" href="#11">All updates <span class="icon icon--sm" data-icon="arrow-right"></span></a>
+          </div>
+          <div class="field">
+            <label class="label" for="deck-email">Work email</label>
+            <input class="input" id="deck-email" placeholder="name@company.com">
+            <span class="hint">We reply within two working days.</span>
+          </div>
+          <div class="card card--accent">
+            <span class="card__title">Card on accent</span>
+            <span class="caption">The same component in every brand.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 APPLICATION: HOMEPAGE -->
+    <section class="slide" aria-label="Application: homepage" data-brand-scope data-brand="vaya">
+      <div class="slide__inner">
+        <div class="cluster" data-reveal style="--i: 0">
+          <span class="eyebrow">Application · homepage</span>
+          <span data-brand-switch data-target="scope" aria-label="Preview brand" data-no-swipe></span>
+        </div>
+        <div class="mock" data-reveal style="--i: 1">
+          <div class="mock__bar"><span class="mock__dot"></span><span class="mock__dot"></span><span class="mock__dot"></span><span data-scope-url></span></div>
+          <div class="mock__page">
+            <nav class="nav container" aria-label="Mockup">
+              <span class="nav__brand"><span class="nav__mark" aria-hidden="true"></span><span data-scope-brand-name></span></span>
+              <ul class="nav__links">
+                <li><span class="nav__link" aria-current="page">Overview</span></li>
+                <li><span class="nav__link">Projects</span></li>
+                <li><span class="nav__link">About</span></li>
+              </ul>
+              <span class="btn btn--sm">Contact</span>
+            </nav>
+            <div class="mock__hero">
+              <div class="stack">
+                <span class="eyebrow" data-scope-descriptor></span>
+                <h1 data-scope-headline></h1>
+                <p class="lead">Placeholder copy. Real copy follows the brief and tone of voice.</p>
+                <div class="cluster"><span class="btn">Get in touch</span><span class="btn btn--secondary">Read more</span></div>
+              </div>
+              <div class="media-placeholder media-placeholder--wide">Real photo to come</div>
+            </div>
+            <div class="mock__cards">
+              <div class="card"><span class="card__title">What we do</span><span class="caption">One paragraph, one fact.</span></div>
+              <div class="card"><span class="card__title">Where</span><span class="caption">South Sri Lanka.</span></div>
+              <div class="card card--accent"><span class="card__title">Part of the loop</span><span class="caption">How we connect to the group.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 APPLICATION: SOCIAL -->
+    <section class="slide" aria-label="Application: social posts" data-brand-scope data-brand="verdo">
+      <div class="slide__inner">
+        <div class="cluster" data-reveal style="--i: 0">
+          <span class="eyebrow">Application · social posts</span>
+          <span data-brand-switch data-target="scope" aria-label="Preview brand" data-no-swipe></span>
+        </div>
+        <div class="posts" data-reveal style="--i: 1">
+          <div class="post">
+            <div class="post__meta"><span data-scope-brand-name></span><span>01</span></div>
+            <div class="stack stack--sm"><span class="post__stat" data-scope-stat></span><span class="post__line" data-scope-stat-line></span></div>
+          </div>
+          <div class="post post--photo">
+            <div class="media-placeholder">Real photo to come</div>
+            <div class="post__caption stack stack--sm"><span class="post__line" data-scope-headline></span><span class="caption">@<span data-scope-handle></span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 HOW WE WORK -->
+    <section class="slide" aria-label="How we work">
+      <div class="slide__inner">
+        <div class="slide__head" data-reveal style="--i: 0">
+          <span class="eyebrow">How we work</span>
+          <h2 class="slide__title">Decisions first, then pixels.</h2>
+        </div>
+        <ol class="process" data-reveal style="--i: 1">
+          <li aria-current="step"><span class="eyebrow">01 · now</span><strong>Brief</strong><span class="caption">Names, audience, positioning, tone. Interview paused, facts collected.</span></li>
+          <li><span class="eyebrow">02</span><strong>Directions</strong><span class="caption">Two or three visual routes. One gets chosen.</span></li>
+          <li><span class="eyebrow">03</span><strong>System</strong><span class="caption">Real tokens, logos, type. This deck and the style guide update themselves.</span></li>
+          <li><span class="eyebrow">04</span><strong>Four sites</strong><span class="caption">One per company, built on the same system.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 15 CLOSING -->
+    <section class="slide slide--inverse" aria-label="Next">
+      <div class="slide__inner">
+        <span class="eyebrow" data-reveal style="--i: 0">What we need next</span>
+        <h2 class="slide__title slide__title--xl" data-reveal style="--i: 1">Names, references, real photos.</h2>
+        <ul class="list-plain" data-reveal style="--i: 2">
+          <li><span class="icon" data-icon="arrow-right"></span>The holding's name, and whether Veriterra keeps its own</li>
+          <li><span class="icon" data-icon="arrow-right"></span>Real references, and what exactly is liked in each</li>
+          <li><span class="icon" data-icon="arrow-right"></span>Primary audience for each of the four sites</li>
+        </ul>
+        <div class="cluster" data-reveal style="--i: 3">
+          <a class="btn btn--secondary" href="../styleguide/">Open the style guide</a>
+          <a class="btn btn--ghost" href="../">Back to hub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="deck-bar" aria-label="Slide controls">
+    <span class="deck-bar__count" id="count" aria-live="polite"></span>
+    <a class="deck-btn" href="../" aria-label="Back to hub"><span class="icon" data-icon="home"></span></a>
+    <button class="deck-btn" type="button" id="fullscreen" aria-label="Full screen" aria-pressed="false" hidden><span class="icon" data-icon="expand"></span></button>
+    <button class="deck-btn" type="button" id="prev" aria-label="Previous slide"><span class="icon" data-icon="arrow-left"></span></button>
+    <button class="deck-btn" type="button" id="next" aria-label="Next slide"><span class="icon" data-icon="arrow-right"></span></button>
+  </nav>
+
+  <script src="../brand/brands.js"></script>
+  <script src="../brand/brand-ui.js"></script>
+  <script src="deck.js"></script>
+</body>
+</html>

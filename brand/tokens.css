@@ -98,6 +98,8 @@
   --tracking-wide: 0.08em;
 
   --measure: 65ch;
+  --measure-headline: 18ch;
+  --measure-display: 14ch;
   --underline-offset: 0.18em;
   --underline-thickness: 0.06em;
 
@@ -173,6 +175,7 @@
   --z-overlay: 200;
   --z-toast: 300;
   --opacity-disabled: 0.45;
+  --opacity-quiet: 0.85;
 }
 
 /* ---------- Brand themes ----------
