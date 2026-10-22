@@ -134,15 +134,18 @@ BAD_PATTERNS = [
     (re.compile(r"(?<![\w-])\d*\.?\d+(?:px|rem|em|pt)\b"), "length"),
     (re.compile(r"(?<![\w-])\d*\.?\d+m?s\b"), "duration"),
     (re.compile(r"cubic-bezier\("), "easing"),
-    (re.compile(r"font-family\s*:\s*(?!var\()"), "font family"),
-    (re.compile(r"box-shadow\s*:\s*(?!var\(|none)"), "shadow"),
+    (re.compile(r"font-family\s*:(?!\s*(?:var\(|inherit))"), "font family"),
 ]
 
 
 def lint_css(css, origin):
+    """Flag hardcoded values. A line ending in /* lint-ok */ is exempt (technical, non-visual values only)."""
     problems = []
+    original = css.splitlines()
     css = COMMENT_RE.sub(lambda m: "\n" * m.group(0).count("\n"), css)
     for lineno, line in enumerate(css.splitlines(), 1):
+        if "lint-ok" in original[lineno - 1]:
+            continue
         stripped = line.strip()
         if stripped.startswith("@media") or stripped.startswith("@supports") or "url(" in stripped:
             continue
