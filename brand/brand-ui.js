@@ -198,6 +198,7 @@
 
   window.BrandUI = {
     icon: icon,
+    iconNames: Object.keys(ICONS),
     hydrateIcons: hydrateIcons,
     brands: brands,
     brandById: brandById,

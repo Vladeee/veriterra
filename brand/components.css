@@ -481,6 +481,7 @@ textarea.input {
 /* ---------- Segmented control (brand switcher, tabs) ---------- */
 .segmented {
   display: inline-flex;
+  align-self: flex-start;
   flex-wrap: wrap;
   gap: var(--space-1);
   padding: var(--space-1);
@@ -540,6 +541,15 @@ textarea.input {
 .tag--warning {
   background: var(--color-surface-strong);
   color: var(--color-warning);
+}
+
+/* ---------- Hairline rule ---------- */
+.hairline {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: var(--border-width) solid var(--color-border);
 }
 
 /* ---------- Media placeholder (for photos that do not exist yet) ---------- */
