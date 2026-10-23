@@ -18,6 +18,8 @@ A holding company (**name to be decided**: the working name "Veriterra Global" w
 ## 2. What is established
 
 - **There will be four websites, one per company.** Whether the holding gets its own site is still open.
+- **The holding has no name yet.** It is not a customer-facing brand, so for now it works only as an endorsement.
+- **The visitors are potential customers**, not investors. Each site sells to a different buyer (see the table above). The exact target action for each site is still to be confirmed.
 - **Content language: English.**
 - **The existing presentations are context only.** Their colours, logos, typefaces and imagery are explicitly *not* a reference. New presentations will be made from this system.
 - **The current imagery is AI-generated placeholder material.** None of it may be shipped as if it were real.
@@ -31,9 +33,9 @@ A holding company (**name to be decided**: the working name "Veriterra Global" w
 
 ## 4. Open questions
 
-1. What is the holding called?
+1. What is the holding called? (Answer: no name yet.)
 2. Is Veriterra being renamed? If so, to what, and when?
-3. Who is the primary visitor of each site? Investor, government partner or customer, ranked.
+3. What is the one target action on each site (quote, order, booking, consultation)? Who is Viva's outside customer today?
 4. What is real today: signed land, built facilities, team, partners, first sales, real photographs?
 5. Brand personality and tone of voice (interview not finished).
 6. Real references, and what exactly is liked in each one.
