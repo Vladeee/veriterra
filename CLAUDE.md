@@ -1,6 +1,6 @@
 # Project rules
 
-Brand system for a holding company and its four companies: Veriterra (fertilizers), Verdo (farm and food), Vaya (eco-glamping) and Viva (construction). First we build a style guide and a brand deck. Then four websites (one per company) get built in this same repo, on top of them.
+Brand system for the holding company VITREEONE and its four companies: Veriterra (fertilizers), Verdo (farm and food), Vaya (eco-glamping) and Viva (construction). First we build a style guide and a brand deck. Then four websites (one per company) get built in this same repo, on top of them.
 
 **Stage: working draft, Veriterra only.** The user asked to keep it minimal. The style guide and deck currently contain **typography only**, and the other three companies are paused. New sections are added **one at a time, only when the user asks**, in the order they choose. Don't bring back removed sections (essence, logo, colour, spacing, components, imagery, motion) unprompted; they are in git history if needed. Colours and typefaces are placeholders. Read `brand/BRIEF.md` before any brand decision.
 
