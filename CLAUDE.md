@@ -2,7 +2,7 @@
 
 Brand system for a holding company and its four companies: Veriterra (fertilizers), Verdo (farm and food), Vaya (eco-glamping) and Viva (construction). First we build a style guide and a brand deck. Then four websites (one per company) get built in this same repo, on top of them.
 
-**Stage: working draft.** Names, colours, typefaces and logos are placeholders. Read `brand/BRIEF.md` before any brand decision. The holding's name is undecided and Veriterra may be renamed.
+**Stage: working draft, Veriterra only.** The user asked to keep it minimal. The style guide and deck currently contain **typography only**, and the other three companies are paused. New sections are added **one at a time, only when the user asks**, in the order they choose. Don't bring back removed sections (essence, logo, colour, spacing, components, imagery, motion) unprompted; they are in git history if needed. Colours and typefaces are placeholders. Read `brand/BRIEF.md` before any brand decision.
 
 ## Where things live
 
@@ -10,14 +10,14 @@ Brand system for a holding company and its four companies: Veriterra (fertilizer
 |---|---|
 | `brand/tokens.css` | **Single source of truth** for every visual value (colour, type, spacing, radii, shadows, motion, layers) |
 | `brand/tokens.json` | Mirror of tokens.css for tools and other platforms. Generated: `python3 tools/tokens.py sync` |
-| `brand/components.css` | Shared reset, base typography and UI components. Used by the style guide, the deck and the sites |
+| `brand/components.css` | Shared reset, base typography and the few components in use. Grows with each new section |
 | `brand/brands.js` | Brand registry (ids, names, descriptors). Brand names are written here, nowhere else in code |
-| `brand/brand-ui.js` | Shared behaviour: brand switcher, inline icons, copy-to-clipboard |
+| `brand/brand-ui.js` | Shared behaviour: inline icons, brand names |
 | `brand/BRIEF.md` | Positioning, audience, tone; facts and open questions |
 | `brand/logo/`, `brand/fonts/`, `brand/icons/` | Assets (logos and fonts not supplied yet) |
 | `styleguide/` | One-page style guide |
 | `deck/` | Interactive brand presentation |
-| `site/<brand>/` | The four websites (later) |
+| `site/` | Websites (later) |
 | `tools/tokens.py` | Sync and lint for tokens |
 
 ## Hard rules
@@ -26,7 +26,7 @@ Brand system for a holding company and its four companies: Veriterra (fertilizer
    - Allowed exceptions: `@media` breakpoint values (sm 40rem, md 48rem, lg 64rem, xl 80rem), colours inside `*.webmanifest`, `<meta name="theme-color">`, SVG and PNG asset files.
    - Escape hatch: end a line with `/* lint-ok */`. Only for technical, non-visual values (for example the 1px of a visually-hidden helper), never to skip a design decision.
 2. **Change tokens in one commit:** edit `tokens.css`, then run `python3 tools/tokens.py sync`, then run `python3 tools/tokens.py check`. `check` must pass before every commit.
-3. **Theming goes through `data-brand`.** Components read only the `--brand-*` variables (`--brand-accent`, `--brand-accent-strong`, `--brand-accent-soft`, `--brand-on-accent`). Never reference `--color-verdo-600` and similar from a component. Put `data-brand="verdo"` on `<html>` for a whole site, or on an element for a scoped preview.
+3. **Theming goes through `data-brand`.** Components read only the `--brand-*` variables (`--brand-accent`, `--brand-accent-strong`, `--brand-accent-soft`, `--brand-on-accent`), never brand primitives like `--color-veriterra-600`. Only Veriterra exists now; another company becomes one more `[data-brand]` block later.
 4. **Static only:** HTML, CSS and vanilla JS. No npm, bundlers or frameworks. Everything must work on GitHub Pages and from a plain local server.
 5. **Relative paths everywhere** (`../brand/tokens.css`, never `/brand/...`). The site is served from `vladeee.github.io/veriterra/`.
 6. **iPad first:**
@@ -43,5 +43,6 @@ Brand system for a holding company and its four companies: Veriterra (fertilizer
 
 - Work in small logical steps. Run `python3 tools/tokens.py check`, commit with a clear message and push after each step.
 - Preview locally with `python3 -m http.server 8000` from the repo root, then open `http://localhost:8000/`.
-- The style guide and deck pick up token changes automatically: colour values, contrast ratios and type sizes are read live from the CSS. Don't duplicate token values in HTML.
-- Adding a brand: add primitives and a `[data-brand]` block to tokens.css, an entry in `brand/brands.js`, then sync.
+- The style guide picks up token changes automatically (type sizes and font stacks are read live from the CSS). Don't duplicate token values in HTML.
+- Adding a company later: add primitives and a `[data-brand]` block to tokens.css, an entry in `brand/brands.js`, then sync.
+- Adding a section: add it to the style guide and, if the user wants, one or two deck slides; add only the components and tokens it needs.

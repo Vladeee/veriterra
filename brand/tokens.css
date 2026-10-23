@@ -3,7 +3,7 @@
   Mirrored 1:1 in brand/tokens.json. Change both in the same commit,
   then run: python3 tools/check_tokens.py
 
-  STATUS: working draft. Colours, typefaces and brand accents are
+  STATUS: working draft, Veriterra only. Colours and typefaces are
   PLACEHOLDERS. They exist so the system works end to end; they are
   not brand decisions.
 
@@ -32,26 +32,11 @@
   --color-danger: #A3322B;
   --color-info: #2F5A85;
 
-  /* ---------- Colour: brand primitives (PLACEHOLDERS) ---------- */
-  --color-holding-100: #ECE8DF;
-  --color-holding-600: #2E2C27;
-  --color-holding-700: #1A1916;
-
+  /* ---------- Colour: Veriterra accent (PLACEHOLDER) ---------- */
   --color-veriterra-100: #ECE8F4;
   --color-veriterra-600: #5A4A8A;
   --color-veriterra-700: #45386C;
 
-  --color-verdo-100: #E6EEE7;
-  --color-verdo-600: #3E6247;
-  --color-verdo-700: #2F4C37;
-
-  --color-vaya-100: #E3ECF2;
-  --color-vaya-600: #34617F;
-  --color-vaya-700: #274B63;
-
-  --color-viva-100: #F2EADF;
-  --color-viva-600: #7D5A2E;
-  --color-viva-700: #604421;
 
   /* ---------- Colour: semantic roles ---------- */
   --color-bg: var(--color-paper-0);
@@ -178,42 +163,14 @@
   --opacity-quiet: 0.85;
 }
 
-/* ---------- Brand themes ----------
-   Components read only --brand-* variables. Set data-brand on <html>
-   (a whole site) or on any element (a scoped preview). */
+/* ---------- Brand theme ----------
+   Current focus: Veriterra only. Components read only --brand-* variables,
+   so other companies can be added later as extra [data-brand] blocks. */
 :root,
-[data-brand="holding"] {
-  --brand-accent: var(--color-holding-600);
-  --brand-accent-strong: var(--color-holding-700);
-  --brand-accent-soft: var(--color-holding-100);
-  --brand-on-accent: var(--color-white);
-}
-
 [data-brand="veriterra"] {
   --brand-accent: var(--color-veriterra-600);
   --brand-accent-strong: var(--color-veriterra-700);
   --brand-accent-soft: var(--color-veriterra-100);
-  --brand-on-accent: var(--color-white);
-}
-
-[data-brand="verdo"] {
-  --brand-accent: var(--color-verdo-600);
-  --brand-accent-strong: var(--color-verdo-700);
-  --brand-accent-soft: var(--color-verdo-100);
-  --brand-on-accent: var(--color-white);
-}
-
-[data-brand="vaya"] {
-  --brand-accent: var(--color-vaya-600);
-  --brand-accent-strong: var(--color-vaya-700);
-  --brand-accent-soft: var(--color-vaya-100);
-  --brand-on-accent: var(--color-white);
-}
-
-[data-brand="viva"] {
-  --brand-accent: var(--color-viva-600);
-  --brand-accent-strong: var(--color-viva-700);
-  --brand-accent-soft: var(--color-viva-100);
   --brand-on-accent: var(--color-white);
 }
 

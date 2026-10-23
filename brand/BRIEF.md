@@ -1,5 +1,7 @@
 # Brief — Draft 0
 
+> **Current focus: Veriterra only, typography first.** The other companies are paused; sections get added one at a time.
+>
 > **Status: not approved.** This file holds the facts collected so far and the questions still open.
 > The strategy interview is paused while the working setup is built. Nothing below is a final brand decision.
 > This repository is **public**: keep financials, investment figures and legal or ownership details out of it.

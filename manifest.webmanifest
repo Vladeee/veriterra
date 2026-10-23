@@ -1,7 +1,7 @@
 {
-  "name": "Brand System",
-  "short_name": "Brand",
-  "description": "Brand system hub: style guide and brand deck (working draft).",
+  "name": "Veriterra Brand System",
+  "short_name": "Veriterra",
+  "description": "Veriterra brand system: style guide and brand deck (working draft).",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

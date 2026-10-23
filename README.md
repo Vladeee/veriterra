@@ -1,31 +1,20 @@
-# Brand system (working draft)
+# Veriterra brand system (working draft)
 
-Brand system for a holding company and its four companies: **Veriterra**, **Verdo**, **Vaya** and **Viva**.
-Static HTML, CSS and vanilla JS, with no build step. Runs on GitHub Pages and installs on an iPad home screen.
+Brand system for **Veriterra** (water-soluble fertilizers), built one section at a time.
+**Current scope: typography only.** Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
 
-> Names, colours, typefaces and logos are **placeholders**. The structure, rules and tools are real.
+> Typefaces and colours are **placeholders** until they are chosen.
 
 ## Open it
 
-| | Link (once GitHub Pages is on) |
+| | Link |
 |---|---|
 | Hub | https://vladeee.github.io/veriterra/ |
 | Style guide | https://vladeee.github.io/veriterra/styleguide/ |
-| Brand deck | https://vladeee.github.io/veriterra/deck/ (`#5` opens slide 5) |
+| Brand deck | https://vladeee.github.io/veriterra/deck/ (`#3` opens slide 3) |
 | Brief | [`brand/BRIEF.md`](brand/BRIEF.md) |
 
-### Turn on GitHub Pages (one time)
-
-1. Open the repo on GitHub, then **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to *Deploy from a branch*.
-3. Pick the branch with this work (`main` once merged), folder `/ (root)`, then **Save**.
-4. After about a minute the site is live at the address above.
-
-### Add to the iPad home screen
-
-1. Open the style guide, the deck or the hub in **Safari**.
-2. Tap **Share**, then **Add to Home Screen**.
-3. Each one gets its own icon and opens full screen, like an app.
+On iPad, open the page in Safari, tap **Share**, then **Add to Home Screen**. It opens full screen, like an app.
 
 ### Deck controls
 
@@ -52,15 +41,15 @@ python3 -m http.server 8000
 │   ├── BRIEF.md            facts, hypotheses, open questions
 │   ├── tokens.css          single source of truth for every visual value
 │   ├── tokens.json         mirror of tokens.css (generated)
-│   ├── components.css      shared base and UI components
+│   ├── components.css      shared base, typography, components in use
 │   ├── brands.js           brand registry (names live here)
-│   ├── brand-ui.js         brand switcher, icons, copy-to-clipboard
+│   ├── brand-ui.js         icons, brand names
 │   ├── icons/              app icons
-│   ├── logo/               (empty until logos are decided)
-│   └── fonts/              (empty until fonts are decided)
-├── styleguide/             one-page style guide
-├── deck/                   interactive brand presentation
-├── site/                   four websites, later
+│   ├── logo/               (empty for now)
+│   └── fonts/              (empty until fonts are chosen)
+├── styleguide/             style guide (typography)
+├── deck/                   brand presentation (typography)
+├── site/                   website, later
 ├── tools/tokens.py         token sync and "tokens only" lint
 └── CLAUDE.md               rules for future sessions
 ```

@@ -18,67 +18,7 @@
   var nextBtn = document.getElementById("next");
   var fsBtn = document.getElementById("fullscreen");
 
-  // Placeholder copy per brand for the application mockups.
-  var COPY = {
-    holding: { headline: "Four companies. One loop.", stat: "4", statLine: "companies, one loop, one coast" },
-    veriterra: { headline: "Fertilizer formulated for the crop, not the catalogue.", stat: "Per crop", statLine: "and per growth stage" },
-    verdo: { headline: "Picked in the morning, on the table by evening.", stat: "3,000 m²", statLine: "of greenhouses in phase one" },
-    vaya: { headline: "Twenty units on one stretch of the south coast.", stat: "20", statLine: "units, each out of sight of the next" },
-    viva: { headline: "We build the places the group runs on.", stat: "Design + build", statLine: "for every company in the group" }
-  };
-
   function pad(n) { return (n < 10 ? "0" : "") + n; }
-
-  // ---------- content built from the brand registry ----------
-  function buildRegistryContent() {
-    var companies = document.getElementById("companies");
-    var themes = document.getElementById("arch-themes");
-    var palette = document.getElementById("palette");
-    BrandUI.brands().forEach(function (b, i) {
-      if (b.id !== "holding") {
-        var c = document.createElement("div");
-        c.className = "company";
-        c.setAttribute("data-brand", b.id);
-        c.setAttribute("data-reveal", "");
-        c.style.setProperty("--i", String(i));
-        c.innerHTML = '<span class="tag">' + b.loop + '</span><span class="company__name">' + b.name +
-          '</span><span class="caption">' + b.descriptor + "</span>" +
-          (b.note ? '<span class="caption">' + b.note + "</span>" : "");
-        companies.appendChild(c);
-      }
-      var t = document.createElement("div");
-      t.className = "arch__theme";
-      t.setAttribute("data-brand", b.id);
-      t.innerHTML = "<strong>" + b.name + '</strong><span class="caption">' +
-        (b.id === "holding" ? "Endorser" : b.descriptor) + "</span>";
-      themes.appendChild(t);
-
-      var p = document.createElement("div");
-      p.className = "palette__chip";
-      p.setAttribute("data-brand", b.id);
-      palette.appendChild(p);
-      var hex = BrandUI.toHex(BrandUI.resolveColor("var(--brand-accent)", p));
-      p.innerHTML = "<strong>" + b.name + '</strong><span class="mono">' + hex + "</span>";
-    });
-    BrandUI.hydrateIcons(deck);
-  }
-
-  // ---------- brand-scoped slides ----------
-  function fillScope(scope) {
-    var b = BrandUI.brandById(scope.getAttribute("data-brand"));
-    if (!b) return;
-    var copy = COPY[b.id] || COPY.holding;
-    var set = function (attr, text) {
-      scope.querySelectorAll("[" + attr + "]").forEach(function (n) { n.textContent = text; });
-    };
-    set("data-scope-brand-name", b.name);
-    set("data-scope-descriptor", b.descriptor);
-    set("data-scope-headline", copy.headline);
-    set("data-scope-stat", copy.stat);
-    set("data-scope-stat-line", copy.statLine);
-    set("data-scope-handle", b.name.toLowerCase());
-    set("data-scope-url", "site/" + b.id + "/");
-  }
 
   // ---------- navigation ----------
   function go(index) {
@@ -93,7 +33,6 @@
     var active = slides[index];
     active.scrollTop = 0;
     deck.classList.toggle("is-inverse", active.classList.contains("slide--inverse"));
-    deck.classList.toggle("is-accent", active.classList.contains("slide--accent"));
     countEl.textContent = pad(index + 1) + " / " + pad(total);
     progressEl.style.setProperty("--progress", String(total > 1 ? index / (total - 1) : 1));
     prevBtn.disabled = index === 0;
@@ -210,12 +149,6 @@
 
   // ---------- init ----------
   function init() {
-    buildRegistryContent();
-    deck.querySelectorAll("[data-brand-scope]").forEach(fillScope);
-    deck.addEventListener("brandchange", function (e) {
-      var scope = e.target.closest && e.target.closest("[data-brand-scope]");
-      if (scope) fillScope(scope);
-    });
     go(indexFromHash());
   }
 

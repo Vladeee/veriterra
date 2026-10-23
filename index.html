@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" data-brand="holding">
+<html lang="en" data-brand="veriterra">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Brand System</title>
-  <meta name="description" content="Brand system hub: style guide and brand deck for the holding and its four companies. Working draft.">
+  <title>Veriterra Brand System</title>
+  <meta name="description" content="Veriterra brand system: style guide and brand deck. Working draft.">
   <meta name="theme-color" content="#FBFAF7">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Brand">
+  <meta name="apple-mobile-web-app-title" content="Veriterra">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="brand/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="brand/icons/favicon-32.png" sizes="32x32" type="image/png">
@@ -18,40 +18,25 @@
   <link rel="stylesheet" href="brand/components.css">
   <style>
     .hub {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-7);
       padding-top: max(var(--space-8), env(safe-area-inset-top));
       padding-bottom: max(var(--space-8), env(safe-area-inset-bottom));
     }
 
-    .hub__header {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-4);
-      padding-bottom: var(--space-7);
-      border-bottom: var(--border-width) solid var(--color-border);
-    }
-
-    .hub__section {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-5);
-      padding-block: var(--space-7);
-      border-bottom: var(--border-width) solid var(--color-border);
-    }
-
-    .hub__section:last-of-type { border-bottom: 0; }
-
-    .hub__primary {
+    .hub__links {
       display: grid;
       gap: var(--grid-gap);
       grid-template-columns: 1fr;
     }
 
     @media (min-width: 48rem) {
-      .hub__primary { grid-template-columns: 1fr 1fr; }
+      .hub__links { grid-template-columns: 1fr 1fr; }
     }
 
     .hub__card {
-      min-height: calc(var(--space-10) * 1.75);
+      min-height: calc(var(--space-10) * 1.5);
       justify-content: space-between;
       padding: var(--space-6);
     }
@@ -63,151 +48,42 @@
       gap: var(--space-4);
     }
 
-    .hub__card .card__title { font-size: var(--text-3xl); line-height: var(--leading-tight); }
-
-    .brand-list {
-      display: grid;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      border-top: var(--border-width) solid var(--color-border);
-    }
-
-    .brand-row {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: var(--space-4);
-      min-height: var(--tap-comfort);
-      padding-block: var(--space-4);
-      border-bottom: var(--border-width) solid var(--color-border);
-    }
-
-    .brand-row__swatch {
-      width: var(--icon-lg);
-      height: var(--icon-lg);
-      border-radius: var(--radius-pill);
-      background: var(--brand-accent);
-    }
-
-    .brand-row__name {
-      font-family: var(--font-display);
-      font-size: var(--text-xl);
-      line-height: var(--leading-snug);
-    }
-
-    .brand-row__meta {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: var(--space-2);
-    }
-
-    .steps {
-      display: grid;
-      gap: var(--space-4);
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      counter-reset: step;
-    }
-
-    @media (min-width: 48rem) {
-      .steps { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    .steps li {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
-      counter-increment: step;
-    }
-
-    .steps li::before {
-      content: "0" counter(step);
-      font-family: var(--font-mono);
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
+    .hub__card .card__title {
+      font-size: var(--text-3xl);
+      line-height: var(--leading-tight);
     }
   </style>
 </head>
 <body>
   <main class="hub container">
-    <header class="hub__header">
+    <header class="stack">
       <div class="cluster">
         <span class="tag tag--warning">Working draft</span>
-        <span class="eyebrow">v0.1 · placeholders throughout</span>
+        <span class="eyebrow">Typography only, for now</span>
       </div>
-      <h1>Brand system</h1>
-      <p class="lead">One system for the holding and its four companies. The structure, rules and tools are real. Names, colours, typefaces and imagery are placeholders until the brand decisions are made.</p>
+      <h1 data-brand-name="veriterra"></h1>
+      <p class="lead">The Veriterra brand system, built one section at a time.</p>
     </header>
 
-    <section class="hub__section" aria-labelledby="open-heading">
-      <h2 id="open-heading" class="eyebrow">Open</h2>
-      <div class="hub__primary">
-        <a class="card card--interactive hub__card" href="styleguide/">
-          <div class="hub__card-head">
-            <span class="eyebrow">Reference</span>
-            <span class="icon icon--lg" data-icon="arrow-right"></span>
-          </div>
-          <div class="stack stack--sm">
-            <span class="card__title">Style guide</span>
-            <p class="caption">Tokens, colour with live contrast checks, type, spacing, components in every state, imagery and motion.</p>
-          </div>
-        </a>
-        <a class="card card--accent card--interactive hub__card" href="deck/">
-          <div class="hub__card-head">
-            <span class="eyebrow">Presentation</span>
-            <span class="icon icon--lg" data-icon="arrow-right"></span>
-          </div>
-          <div class="stack stack--sm">
-            <span class="card__title">Brand deck</span>
-            <p>Swipe or tap the screen edges to move through it. Each slide has its own link, so you can share a specific one.</p>
-          </div>
-        </a>
-      </div>
-      <a class="link link--block" href="https://github.com/Vladeee/veriterra/blob/HEAD/brand/BRIEF.md">
-        Read the brief: facts, hypotheses, open questions
-        <span class="icon icon--sm" data-icon="arrow-up-right"></span>
+    <div class="hub__links">
+      <a class="card card--interactive hub__card" href="styleguide/">
+        <div class="hub__card-head">
+          <span class="eyebrow">Reference</span>
+          <span class="icon icon--lg" data-icon="arrow-right"></span>
+        </div>
+        <span class="card__title">Style guide</span>
       </a>
-    </section>
-
-    <section class="hub__section" aria-labelledby="brands-heading">
-      <h2 id="brands-heading" class="eyebrow">One group, four companies</h2>
-      <ul class="brand-list" id="brand-list"></ul>
-      <p class="caption">Each company gets its own website, built in <span class="mono">site/</span> on the same tokens and components.</p>
-    </section>
-
-    <section class="hub__section" aria-labelledby="install-heading">
-      <h2 id="install-heading" class="eyebrow">Put it on the iPad home screen</h2>
-      <ol class="steps">
-        <li><strong>Open in Safari</strong><span class="caption">The hub, the style guide or the deck. Each one installs as its own app.</span></li>
-        <li><strong>Share → Add to Home Screen</strong><span class="caption">Tap the share icon in the toolbar and scroll to the option.</span></li>
-        <li><strong>Open from the icon</strong><span class="caption">It opens full screen, without the browser bar.</span></li>
-      </ol>
-    </section>
+      <a class="card card--accent card--interactive hub__card" href="deck/">
+        <div class="hub__card-head">
+          <span class="eyebrow">Presentation</span>
+          <span class="icon icon--lg" data-icon="arrow-right"></span>
+        </div>
+        <span class="card__title">Brand deck</span>
+      </a>
+    </div>
   </main>
 
   <script src="brand/brands.js"></script>
   <script src="brand/brand-ui.js"></script>
-  <script>
-    (function () {
-      var list = document.getElementById("brand-list");
-      BrandUI.brands().forEach(function (b) {
-        var li = document.createElement("li");
-        li.className = "brand-row";
-        li.setAttribute("data-brand", b.id);
-        var tags = "";
-        if (b.loop) tags += '<span class="tag">' + b.loop + "</span>";
-        if (b.note) tags += '<span class="tag tag--neutral">' + b.note + "</span>";
-        li.innerHTML =
-          '<span class="brand-row__swatch" aria-hidden="true"></span>' +
-          '<span class="stack stack--sm"><span class="brand-row__name">' + b.name + "</span>" +
-          '<span class="caption">' + b.descriptor + "</span></span>" +
-          '<span class="brand-row__meta">' + tags + "</span>";
-        list.appendChild(li);
-      });
-    })();
-  </script>
 </body>
 </html>

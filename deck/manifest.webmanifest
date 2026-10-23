@@ -1,7 +1,7 @@
 {
-  "name": "Brand Deck",
+  "name": "Veriterra Brand Deck",
   "short_name": "Brand Deck",
-  "description": "Interactive brand presentation (working draft).",
+  "description": "Veriterra brand presentation (working draft).",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
