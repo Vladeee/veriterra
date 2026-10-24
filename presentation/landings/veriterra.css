@@ -1,5 +1,177 @@
 /*
   veriterra landing. Styles for this landing only, scoped to
   .landing[data-brand="veriterra"]. Tokens only (see brand/tokens.css).
-  Empty for now: the shared skeleton lives in presentation/presentation.css.
+  Main reference: Farm Minerals. Split hero with a full-height photo on the left,
+  and a flat cream panel on the right: headline, then big figures over hairlines.
+  The typeface switcher sets data-font on the landing; every display text
+  here reads --font-display, so one attribute changes them all.
 */
+
+.landing[data-brand="veriterra"] {
+  --brand-bg: var(--color-paper-1);
+  padding-bottom: calc(var(--tap-comfort) + var(--space-6));
+}
+
+/* ---------- Typeface trial ---------- */
+.landing[data-brand="veriterra"][data-font="asul"] { --font-display: var(--font-asul); }
+.landing[data-brand="veriterra"][data-font="old-standard"] { --font-display: var(--font-old-standard); }
+.landing[data-brand="veriterra"][data-font="young-serif"] { --font-display: var(--font-young-serif); }
+.landing[data-brand="veriterra"][data-font="bona-nova"] { --font-display: var(--font-bona-nova); }
+.landing[data-brand="veriterra"][data-font="mynerve"] { --font-display: var(--font-mynerve); }
+.landing[data-brand="veriterra"][data-font="accidenz"] { --font-display: var(--font-accidenz); }
+
+/* ---------- Split hero ---------- */
+.v-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100dvh - var(--nav-height) - env(safe-area-inset-top));
+}
+
+@media (min-width: 64rem) {
+  .v-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+.v-hero__photo {
+  min-height: 40dvh;
+  aspect-ratio: auto;
+  border-radius: var(--radius-none);
+}
+
+.v-hero__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-7) max(var(--page-margin), env(safe-area-inset-right)) var(--space-10) var(--space-7);
+  color: var(--brand-accent);
+}
+
+@media (max-width: 63.99rem) {
+  .v-hero__panel { padding-left: max(var(--page-margin), env(safe-area-inset-left)); }
+}
+
+/* Logo sits on the seam between photo and panel, like the reference */
+.v-hero__logo {
+  align-items: flex-start;
+  margin: 0;
+  color: var(--color-text);
+}
+
+@media (min-width: 64rem) {
+  .v-hero__logo {
+    position: absolute;
+    top: var(--space-5);
+    left: 50%;
+    z-index: var(--z-raised);
+    align-items: center;
+    transform: translateX(-50%);
+  }
+  .v-hero__panel { padding-top: var(--space-9); }
+}
+
+.v-hero__title {
+  max-width: var(--measure-headline);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+.v-hero__title em { font-style: italic; }
+
+.v-stats {
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.v-stats li {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: end;
+  gap: var(--space-4);
+  padding-block: var(--space-4) var(--space-3);
+  border-bottom: var(--border-width) solid var(--brand-accent-soft);
+}
+
+.v-stats__value {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.v-stats__label {
+  padding-bottom: var(--space-1);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.v-hero__note {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  opacity: var(--opacity-quiet);
+}
+
+/* The first section after the hero gets breathing room */
+.landing[data-brand="veriterra"] .v-hero + .l-section { padding-top: var(--space-8); }
+
+.landing[data-brand="veriterra"] .l-cta__title { font-family: var(--font-display); font-weight: var(--font-weight-regular); }
+
+/* ---------- Typeface switcher (fixed, bottom) ---------- */
+.font-trial {
+  position: fixed;
+  left: 50%;
+  bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  max-width: calc(100vw - var(--page-margin) * 2);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+  box-shadow: var(--shadow-3);
+  transform: translateX(-50%);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.font-trial::-webkit-scrollbar { display: none; }
+
+.landing[hidden] .font-trial { display: none; }
+
+.font-trial__label {
+  flex: none;
+  padding-inline: var(--space-3) var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-inverse-muted);
+}
+
+.font-trial button {
+  flex: none;
+  min-height: var(--tap-min);
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: inherit;
+  font-size: var(--text-md);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.font-trial button[aria-pressed="true"] {
+  background: var(--color-inverse-text);
+  color: var(--color-inverse-bg);
+}
+
+.font-trial button:active { opacity: var(--opacity-quiet); }

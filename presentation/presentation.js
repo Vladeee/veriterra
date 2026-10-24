@@ -127,11 +127,34 @@
     });
   }
 
+  // ---------- typeface trial: [data-font-switch] sets data-font on its landing ----------
+  function initFontSwitches() {
+    document.querySelectorAll("[data-font-switch]").forEach(function (box) {
+      var landing = box.closest(".landing");
+      var key = "font-" + landing.id;
+      var saved = null;
+      try { saved = window.localStorage.getItem(key); } catch (e) { /* storage unavailable */ }
+      function pick(font) {
+        landing.setAttribute("data-font", font);
+        box.querySelectorAll("[data-font]").forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b.getAttribute("data-font") === font));
+        });
+        try { window.localStorage.setItem(key, font); } catch (e) { /* storage unavailable */ }
+      }
+      box.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-font]");
+        if (b) pick(b.getAttribute("data-font"));
+      });
+      pick(saved && box.querySelector('[data-font="' + saved + '"]') ? saved : box.querySelector("[data-font]").getAttribute("data-font"));
+    });
+  }
+
   // ---------- init ----------
   function init() {
     buildMenu();
     buildLoops();
     initPlaceholders();
+    initFontSwitches();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
     // Tapping the menu item of the landing already open scrolls back to its top.
