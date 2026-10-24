@@ -1,7 +1,7 @@
 /*
   Shared behaviour for the style guide, the deck and the sites.
   - Icons:       <span class="icon" data-icon="arrow-right"></span>
-  - Brand names: <span data-brand-name="veriterra"></span>
+  - Brand names: <span data-brand-name="veriterra"></span>, descriptors: data-brand-descriptor
   Needs brand/brands.js loaded first.
 */
 (function () {
@@ -37,6 +37,10 @@
     (root || document).querySelectorAll("[data-brand-name]").forEach(function (el) {
       var b = brandById(el.getAttribute("data-brand-name"));
       if (b) el.textContent = b.name;
+    });
+    (root || document).querySelectorAll("[data-brand-descriptor]").forEach(function (el) {
+      var b = brandById(el.getAttribute("data-brand-descriptor"));
+      if (b) el.textContent = b.descriptor;
     });
   }
 

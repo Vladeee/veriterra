@@ -50,6 +50,15 @@ button {
   color: var(--color-text);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px; /* lint-ok */
+  height: 1px; /* lint-ok */
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* ---------- Typography ---------- */
 h1,
 h2,

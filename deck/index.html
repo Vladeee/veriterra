@@ -27,8 +27,11 @@
 <body>
   <nav class="topnav" aria-label="Landings">
     <div class="topnav__inner">
+      <div class="topnav__side" id="topnav-home"></div>
       <ul class="topnav__list" id="topnav-list"></ul>
-      <button class="topnav__fs" type="button" id="fullscreen" aria-label="Full screen" aria-pressed="false" hidden><span class="icon" data-icon="expand"></span></button>
+      <div class="topnav__side topnav__side--end">
+        <button class="topnav__fs" type="button" id="fullscreen" aria-label="Full screen" aria-pressed="false" hidden><span class="icon" data-icon="expand"></span></button>
+      </div>
     </div>
   </nav>
 
@@ -37,29 +40,62 @@
     <!-- ==================== VITREEONE ==================== -->
     <article class="landing" id="vitreeone" data-brand="vitreeone" aria-labelledby="vitreeone-title" hidden>
       <header class="l-hero container">
-        <div class="l-hero__text">
-          <span class="eyebrow"><span data-brand-name="vitreeone"></span> · The group</span>
-          <h1 class="l-hero__title" id="vitreeone-title">Four companies. One loop.</h1>
-          <p class="lead">From the soil to the stay, in the south of Sri Lanka.</p>
-          <div class="cluster">
-            <a class="btn" href="#vitreeone-contact">Get in touch</a>
-            <a class="btn btn--secondary" href="#vitreeone-offer">See the companies</a>
+        <div class="l-logo" aria-label="Logo placeholder">
+          <span class="l-logo__mark" aria-hidden="true"></span>
+          <span class="l-logo__word" data-brand-name="vitreeone"></span>
+        </div>
+        <h1 class="l-hero__title" id="vitreeone-title">Four companies. <em>One</em> loop.</h1>
+        <p class="l-hero__lead">From the soil to the stay, in the south of Sri Lanka.</p>
+        <form class="l-signup" data-signup>
+          <label class="visually-hidden" for="vitreeone-email">Your email</label>
+          <input class="l-signup__input" id="vitreeone-email" type="email" placeholder="Your email" autocomplete="email">
+          <button class="l-signup__btn" type="submit">Get in touch <span class="icon" data-icon="arrow-right"></span></button>
+        </form>
+        <div class="l-media">
+          <div class="media-placeholder l-media__photo">Real photo to come</div>
+          <div class="l-media__card">
+            <div class="spec">
+              <span class="spec__title">The loop</span>
+              <div class="spec__row"><span>Land</span><span>Veriterra</span></div>
+              <div class="spec__row"><span>Product</span><span>Verdo</span></div>
+              <div class="spec__row"><span>Person</span><span>Vaya</span></div>
+              <div class="spec__row"><span>Space</span><span>Viva</span></div>
+            </div>
           </div>
         </div>
-        <div class="media-placeholder l-hero__media">Real photo to come</div>
       </header>
 
-      <section class="l-facts container" aria-label="Key facts">
-          <div class="l-fact"><span class="l-fact__value">4</span><span class="l-fact__label">companies, one group</span></div>
-          <div class="l-fact"><span class="l-fact__value">1</span><span class="l-fact__label">region: the south of Sri Lanka</span></div>
-          <div class="l-fact"><span class="l-fact__value">Soil → stay</span><span class="l-fact__label">every step in-house</span></div>
+      <section class="l-bento container" id="vitreeone-offer" aria-label="What we do">
+        <div class="bento">
+          <div class="bento__tile bento__tile--fact bento__tile--hero bento__tile--accent"><span class="bento__value">4</span><span class="bento__label">companies, one group</span></div>
+          <a class="bento__tile bento__tile--m bento__tile--link" href="#veriterra" data-brand="veriterra"><span class="bento__dot" aria-hidden="true"></span><span class="bento__title" data-brand-name="veriterra"></span><span class="bento__text" data-brand-descriptor="veriterra"></span></a>
+          <a class="bento__tile bento__tile--m bento__tile--link" href="#verdo" data-brand="verdo"><span class="bento__dot" aria-hidden="true"></span><span class="bento__title" data-brand-name="verdo"></span><span class="bento__text" data-brand-descriptor="verdo"></span></a>
+          <a class="bento__tile bento__tile--m bento__tile--link" href="#vaya" data-brand="vaya"><span class="bento__dot" aria-hidden="true"></span><span class="bento__title" data-brand-name="vaya"></span><span class="bento__text" data-brand-descriptor="vaya"></span></a>
+          <a class="bento__tile bento__tile--m bento__tile--link" href="#viva" data-brand="viva"><span class="bento__dot" aria-hidden="true"></span><span class="bento__title" data-brand-name="viva"></span><span class="bento__text" data-brand-descriptor="viva"></span></a>
+          <div class="bento__tile bento__tile--fact bento__tile--half"><span class="bento__value">1</span><span class="bento__label">region: the south of Sri Lanka</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--half"><span class="bento__value">Soil → stay</span><span class="bento__label">every step in-house</span></div>
+        </div>
       </section>
 
-      <section class="l-offer container" id="vitreeone-offer" aria-labelledby="vitreeone-offer-title">
-        <h2 class="l-section-title" id="vitreeone-offer-title">Four companies</h2>
-        <div class="l-cards" data-companies>
-          <!-- filled from brand/brands.js: one card per company, linking to its landing -->
+      <section class="l-split container" aria-label="Details">
+        <div class="details">
+          <div class="details__group">
+            <span class="details__label">Companies</span>
+            <ul class="details__items"><li>Veriterra</li><li>Verdo</li><li>Vaya</li><li>Viva</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Region</span>
+            <ul class="details__items"><li>South Sri Lanka</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Loop</span>
+            <ul class="details__items"><li>Land</li><li>Product</li><li>Person</li><li>Space</li></ul>
+          </div>
         </div>
+        <figure class="l-split__photo">
+          <div class="media-placeholder">Real photo to come</div>
+          <figcaption class="caption">The region, wide, at first light</figcaption>
+        </figure>
       </section>
 
       <section class="l-loop container" aria-label="Part of the loop">
@@ -67,11 +103,9 @@
         <ol class="l-loop__steps" data-loop></ol>
       </section>
 
-      <section class="l-cta" id="vitreeone-contact" aria-labelledby="vitreeone-cta-title">
-        <div class="container l-cta__inner">
-          <h2 class="l-cta__title" id="vitreeone-cta-title">Work with the group.</h2>
-          <a class="btn btn--inverse" href="#vitreeone-contact">Get in touch</a>
-        </div>
+      <section class="l-cta container" id="vitreeone-contact" aria-labelledby="vitreeone-cta-title">
+        <h2 class="l-cta__title" id="vitreeone-cta-title">Work with <em>the group</em>.</h2>
+        <a class="l-signup__btn" href="#vitreeone-email" data-focus-signup>Get in touch <span class="icon" data-icon="arrow-right"></span></a>
       </section>
 
       <footer class="l-footer container">
@@ -83,31 +117,61 @@
     <!-- ==================== VERITERRA ==================== -->
     <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="veriterra-title" hidden>
       <header class="l-hero container">
-        <div class="l-hero__text">
-          <span class="eyebrow"><span data-brand-name="veriterra"></span> · Water-soluble fertilizers</span>
-          <h1 class="l-hero__title" id="veriterra-title">Nutrition formulated for the crop and its stage.</h1>
-          <p class="lead">Water-soluble fertilizers for greenhouse and drip-irrigated crops, made in Sri Lanka.</p>
-          <div class="cluster">
-            <a class="btn" href="#veriterra-contact">Request a sample</a>
-            <a class="btn btn--secondary" href="#veriterra-offer">What we make</a>
+        <div class="l-logo" aria-label="Logo placeholder">
+          <span class="l-logo__mark" aria-hidden="true"></span>
+          <span class="l-logo__word" data-brand-name="veriterra"></span>
+        </div>
+        <h1 class="l-hero__title" id="veriterra-title">Nutrition formulated for the <em>crop</em> and its stage.</h1>
+        <p class="l-hero__lead">Water-soluble fertilizers for greenhouse and drip-irrigated crops, made in Sri Lanka.</p>
+        <form class="l-signup" data-signup>
+          <label class="visually-hidden" for="veriterra-email">Your work email</label>
+          <input class="l-signup__input" id="veriterra-email" type="email" placeholder="Your work email" autocomplete="email">
+          <button class="l-signup__btn" type="submit">Request a sample <span class="icon" data-icon="arrow-right"></span></button>
+        </form>
+        <div class="l-media">
+          <div class="media-placeholder l-media__photo">Real photo to come</div>
+          <div class="l-media__card">
+            <div class="spec">
+              <span class="spec__title">Tomato · Bloom stage</span>
+              <div class="spec__row"><span>N</span><span>19</span></div>
+              <div class="spec__row"><span>P</span><span>19</span></div>
+              <div class="spec__row"><span>K</span><span>19</span></div>
+              <div class="spec__row"><span>Format</span><span>25 kg bag</span></div>
+            </div>
           </div>
         </div>
-        <div class="media-placeholder l-hero__media">Real photo to come</div>
       </header>
 
-      <section class="l-facts container" aria-label="Key facts">
-          <div class="l-fact"><span class="l-fact__value">4</span><span class="l-fact__label">growth stages: root, grow, bloom, fruit</span></div>
-          <div class="l-fact"><span class="l-fact__value">Per crop</span><span class="l-fact__label">tomato, cucumber, pepper, greens, strawberry</span></div>
-          <div class="l-fact"><span class="l-fact__value">Local</span><span class="l-fact__label">raw materials from Sri Lankan coconut</span></div>
+      <section class="l-bento container" id="veriterra-offer" aria-label="What we do">
+        <div class="bento">
+          <div class="bento__tile bento__tile--fact bento__tile--hero bento__tile--accent"><span class="bento__value">4</span><span class="bento__label">growth stages: root, grow, bloom, fruit</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Crop formulas</span><span class="bento__text">Water-soluble NPK and micronutrients, matched to crop and stage.</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Lab analysis</span><span class="bento__text">Water, soil and substrate tests before a formula is set.</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Per crop</span><span class="bento__label">tomato, cucumber, pepper, greens, strawberry</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Local</span><span class="bento__label">raw materials from Sri Lankan coconut</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Agronomy support</span><span class="bento__text">Monitoring and adjustments through the season.</span></div>
+        </div>
       </section>
 
-      <section class="l-offer container" id="veriterra-offer" aria-labelledby="veriterra-offer-title">
-        <h2 class="l-section-title" id="veriterra-offer-title">What we make</h2>
-        <div class="l-cards">
-          <div class="card l-card"><span class="card__title">Crop formulas</span><span class="caption">Water-soluble NPK and micronutrients, matched to crop and stage.</span></div>
-          <div class="card l-card"><span class="card__title">Lab analysis</span><span class="caption">Water, soil and substrate tests before a formula is set.</span></div>
-          <div class="card l-card"><span class="card__title">Agronomy support</span><span class="caption">Monitoring and adjustments through the season.</span></div>
+      <section class="l-split container" aria-label="Details">
+        <div class="details">
+          <div class="details__group">
+            <span class="details__label">Stages</span>
+            <ul class="details__items"><li>Root</li><li>Grow</li><li>Bloom</li><li>Fruit</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Crops</span>
+            <ul class="details__items"><li>Tomato</li><li>Cucumber</li><li>Pepper</li><li>Leafy greens</li><li>Strawberry</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Formats</span>
+            <ul class="details__items"><li>25 kg bag</li><li>Big bag</li></ul>
+          </div>
         </div>
+        <figure class="l-split__photo">
+          <div class="media-placeholder">Real photo to come</div>
+          <figcaption class="caption">Granules dissolving in water, close-up</figcaption>
+        </figure>
       </section>
 
       <section class="l-loop container" aria-label="Part of the loop">
@@ -115,11 +179,9 @@
         <ol class="l-loop__steps" data-loop></ol>
       </section>
 
-      <section class="l-cta" id="veriterra-contact" aria-labelledby="veriterra-cta-title">
-        <div class="container l-cta__inner">
-          <h2 class="l-cta__title" id="veriterra-cta-title">Tell us the crop. We'll match the formula.</h2>
-          <a class="btn btn--inverse" href="#veriterra-contact">Request a sample</a>
-        </div>
+      <section class="l-cta container" id="veriterra-contact" aria-labelledby="veriterra-cta-title">
+        <h2 class="l-cta__title" id="veriterra-cta-title">Tell us the crop. <em>We'll match the formula.</em></h2>
+        <a class="l-signup__btn" href="#veriterra-email" data-focus-signup>Request a sample <span class="icon" data-icon="arrow-right"></span></a>
       </section>
 
       <footer class="l-footer container">
@@ -131,31 +193,61 @@
     <!-- ==================== VERDO ==================== -->
     <article class="landing" id="verdo" data-brand="verdo" aria-labelledby="verdo-title" hidden>
       <header class="l-hero container">
-        <div class="l-hero__text">
-          <span class="eyebrow"><span data-brand-name="verdo"></span> · Farm and food</span>
-          <h1 class="l-hero__title" id="verdo-title">Picked in the morning, in the kitchen by evening.</h1>
-          <p class="lead">Greenhouse vegetables and greens for hotels and restaurants on the island.</p>
-          <div class="cluster">
-            <a class="btn" href="#verdo-contact">Request the price list</a>
-            <a class="btn btn--secondary" href="#verdo-offer">What we grow</a>
+        <div class="l-logo" aria-label="Logo placeholder">
+          <span class="l-logo__mark" aria-hidden="true"></span>
+          <span class="l-logo__word" data-brand-name="verdo"></span>
+        </div>
+        <h1 class="l-hero__title" id="verdo-title">Picked in the morning, in the kitchen by <em>evening</em>.</h1>
+        <p class="l-hero__lead">Greenhouse vegetables and greens for hotels and restaurants on the island.</p>
+        <form class="l-signup" data-signup>
+          <label class="visually-hidden" for="verdo-email">Your kitchen's email</label>
+          <input class="l-signup__input" id="verdo-email" type="email" placeholder="Your kitchen's email" autocomplete="email">
+          <button class="l-signup__btn" type="submit">Request the price list <span class="icon" data-icon="arrow-right"></span></button>
+        </form>
+        <div class="l-media">
+          <div class="media-placeholder l-media__photo">Real photo to come</div>
+          <div class="l-media__card">
+            <div class="spec">
+              <span class="spec__title">This week's delivery</span>
+              <div class="spec__row"><span>Tomatoes</span><span>40 kg</span></div>
+              <div class="spec__row"><span>Cucumbers</span><span>25 kg</span></div>
+              <div class="spec__row"><span>Ramiro peppers</span><span>10 kg</span></div>
+              <div class="spec__row"><span>Greens</span><span>6 kg</span></div>
+            </div>
           </div>
         </div>
-        <div class="media-placeholder l-hero__media">Real photo to come</div>
       </header>
 
-      <section class="l-facts container" aria-label="Key facts">
-          <div class="l-fact"><span class="l-fact__value">3,000 m²</span><span class="l-fact__label">of greenhouses in phase one</span></div>
-          <div class="l-fact"><span class="l-fact__value">Weekly</span><span class="l-fact__label">deliveries across the island</span></div>
-          <div class="l-fact"><span class="l-fact__value">Solar</span><span class="l-fact__label">power for the farm</span></div>
+      <section class="l-bento container" id="verdo-offer" aria-label="What we do">
+        <div class="bento">
+          <div class="bento__tile bento__tile--fact bento__tile--hero bento__tile--accent"><span class="bento__value">3,000 m²</span><span class="bento__label">of greenhouses in phase one</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Greenhouse vegetables</span><span class="bento__text">Tomatoes, cucumbers, Ramiro peppers and greens.</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Kitchen supply</span><span class="bento__text">Weekly deliveries to hotels and restaurants.</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Weekly</span><span class="bento__label">deliveries across the island</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Solar</span><span class="bento__label">power for the farm</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">What's next</span><span class="bento__text">Sauces, bakery and dairy, once the greenhouses sell.</span></div>
+        </div>
       </section>
 
-      <section class="l-offer container" id="verdo-offer" aria-labelledby="verdo-offer-title">
-        <h2 class="l-section-title" id="verdo-offer-title">What we grow</h2>
-        <div class="l-cards">
-          <div class="card l-card"><span class="card__title">Greenhouse vegetables</span><span class="caption">Tomatoes, cucumbers, Ramiro peppers and greens.</span></div>
-          <div class="card l-card"><span class="card__title">Kitchen supply</span><span class="caption">Weekly deliveries to hotels and restaurants.</span></div>
-          <div class="card l-card"><span class="card__title">What's next</span><span class="caption">Sauces, bakery and dairy, once the greenhouses sell.</span></div>
+      <section class="l-split container" aria-label="Details">
+        <div class="details">
+          <div class="details__group">
+            <span class="details__label">Greenhouse</span>
+            <ul class="details__items"><li>Tomatoes</li><li>Cucumbers</li><li>Ramiro peppers</li><li>Greens</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Supply</span>
+            <ul class="details__items"><li>Weekly</li><li>Island-wide</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Next</span>
+            <ul class="details__items"><li>Sauces</li><li>Bakery</li><li>Dairy</li></ul>
+          </div>
         </div>
+        <figure class="l-split__photo">
+          <div class="media-placeholder">Real photo to come</div>
+          <figcaption class="caption">A crate of tomatoes in the greenhouse</figcaption>
+        </figure>
       </section>
 
       <section class="l-loop container" aria-label="Part of the loop">
@@ -163,11 +255,9 @@
         <ol class="l-loop__steps" data-loop></ol>
       </section>
 
-      <section class="l-cta" id="verdo-contact" aria-labelledby="verdo-cta-title">
-        <div class="container l-cta__inner">
-          <h2 class="l-cta__title" id="verdo-cta-title">Supply for your kitchen, every week.</h2>
-          <a class="btn btn--inverse" href="#verdo-contact">Request the price list</a>
-        </div>
+      <section class="l-cta container" id="verdo-contact" aria-labelledby="verdo-cta-title">
+        <h2 class="l-cta__title" id="verdo-cta-title">Supply for your kitchen, <em>every week</em>.</h2>
+        <a class="l-signup__btn" href="#verdo-email" data-focus-signup>Request the price list <span class="icon" data-icon="arrow-right"></span></a>
       </section>
 
       <footer class="l-footer container">
@@ -179,31 +269,61 @@
     <!-- ==================== VAYA ==================== -->
     <article class="landing" id="vaya" data-brand="vaya" aria-labelledby="vaya-title" hidden>
       <header class="l-hero container">
-        <div class="l-hero__text">
-          <span class="eyebrow"><span data-brand-name="vaya"></span> · Eco-glamping</span>
-          <h1 class="l-hero__title" id="vaya-title">Twenty units on the south coast.</h1>
-          <p class="lead">Private dome stays by the ocean, with food from our own farm.</p>
-          <div class="cluster">
-            <a class="btn" href="#vaya-contact">Join the waitlist</a>
-            <a class="btn btn--secondary" href="#vaya-offer">What's here</a>
+        <div class="l-logo" aria-label="Logo placeholder">
+          <span class="l-logo__mark" aria-hidden="true"></span>
+          <span class="l-logo__word" data-brand-name="vaya"></span>
+        </div>
+        <h1 class="l-hero__title" id="vaya-title">Twenty units on the <em>south coast</em>.</h1>
+        <p class="l-hero__lead">Private dome stays by the ocean, with food from our own farm.</p>
+        <form class="l-signup" data-signup>
+          <label class="visually-hidden" for="vaya-email">Your email</label>
+          <input class="l-signup__input" id="vaya-email" type="email" placeholder="Your email" autocomplete="email">
+          <button class="l-signup__btn" type="submit">Join the waitlist <span class="icon" data-icon="arrow-right"></span></button>
+        </form>
+        <div class="l-media">
+          <div class="media-placeholder l-media__photo">Real photo to come</div>
+          <div class="l-media__card">
+            <div class="spec">
+              <span class="spec__title">Unit 07</span>
+              <div class="spec__row"><span>Size</span><span>38 m²</span></div>
+              <div class="spec__row"><span>Terrace</span><span>Private</span></div>
+              <div class="spec__row"><span>View</span><span>Ocean</span></div>
+              <div class="spec__row"><span>Power</span><span>Solar</span></div>
+            </div>
           </div>
         </div>
-        <div class="media-placeholder l-hero__media">Real photo to come</div>
       </header>
 
-      <section class="l-facts container" aria-label="Key facts">
-          <div class="l-fact"><span class="l-fact__value">20</span><span class="l-fact__label">units, out of sight of each other</span></div>
-          <div class="l-fact"><span class="l-fact__value">38 m²</span><span class="l-fact__label">per unit, with a private terrace</span></div>
-          <div class="l-fact"><span class="l-fact__value">Farm</span><span class="l-fact__label">food, from Verdo</span></div>
+      <section class="l-bento container" id="vaya-offer" aria-label="What we do">
+        <div class="bento">
+          <div class="bento__tile bento__tile--fact bento__tile--hero bento__tile--accent"><span class="bento__value">20</span><span class="bento__label">units, out of sight of each other</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Stay</span><span class="bento__text">Dome units with a bedroom, bathroom and private terrace.</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Eat</span><span class="bento__text">Restaurant and bar, cooking with Verdo produce.</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">38 m²</span><span class="bento__label">per unit, with a private terrace</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Farm</span><span class="bento__label">food, from Verdo</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Move and rest</span><span class="bento__text">Surf, yoga, sport and quiet.</span></div>
+        </div>
       </section>
 
-      <section class="l-offer container" id="vaya-offer" aria-labelledby="vaya-offer-title">
-        <h2 class="l-section-title" id="vaya-offer-title">What's here</h2>
-        <div class="l-cards">
-          <div class="card l-card"><span class="card__title">Stay</span><span class="caption">Dome units with a bedroom, bathroom and private terrace.</span></div>
-          <div class="card l-card"><span class="card__title">Eat</span><span class="caption">Restaurant and bar, cooking with Verdo produce.</span></div>
-          <div class="card l-card"><span class="card__title">Move and rest</span><span class="caption">Surf, yoga, sport and quiet.</span></div>
+      <section class="l-split container" aria-label="Details">
+        <div class="details">
+          <div class="details__group">
+            <span class="details__label">Stay</span>
+            <ul class="details__items"><li>20 units</li><li>38 m²</li><li>Private terrace</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Do</span>
+            <ul class="details__items"><li>Surf</li><li>Yoga</li><li>Sport</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Eat</span>
+            <ul class="details__items"><li>Restaurant</li><li>Bar</li><li>Verdo produce</li></ul>
+          </div>
         </div>
+        <figure class="l-split__photo">
+          <div class="media-placeholder">Real photo to come</div>
+          <figcaption class="caption">The site at sunrise, before anything is built</figcaption>
+        </figure>
       </section>
 
       <section class="l-loop container" aria-label="Part of the loop">
@@ -211,11 +331,9 @@
         <ol class="l-loop__steps" data-loop></ol>
       </section>
 
-      <section class="l-cta" id="vaya-contact" aria-labelledby="vaya-cta-title">
-        <div class="container l-cta__inner">
-          <h2 class="l-cta__title" id="vaya-cta-title">Opening soon. Be the first to know.</h2>
-          <a class="btn btn--inverse" href="#vaya-contact">Join the waitlist</a>
-        </div>
+      <section class="l-cta container" id="vaya-contact" aria-labelledby="vaya-cta-title">
+        <h2 class="l-cta__title" id="vaya-cta-title">Opening soon. <em>Be the first to know.</em></h2>
+        <a class="l-signup__btn" href="#vaya-email" data-focus-signup>Join the waitlist <span class="icon" data-icon="arrow-right"></span></a>
       </section>
 
       <footer class="l-footer container">
@@ -227,31 +345,61 @@
     <!-- ==================== VIVA ==================== -->
     <article class="landing" id="viva" data-brand="viva" aria-labelledby="viva-title" hidden>
       <header class="l-hero container">
-        <div class="l-hero__text">
-          <span class="eyebrow"><span data-brand-name="viva"></span> · Design and construction</span>
-          <h1 class="l-hero__title" id="viva-title">We build the places the group runs on.</h1>
-          <p class="lead">Design and construction with solar, water and low-impact materials built in.</p>
-          <div class="cluster">
-            <a class="btn" href="#viva-contact">Discuss a project</a>
-            <a class="btn btn--secondary" href="#viva-offer">What we do</a>
+        <div class="l-logo" aria-label="Logo placeholder">
+          <span class="l-logo__mark" aria-hidden="true"></span>
+          <span class="l-logo__word" data-brand-name="viva"></span>
+        </div>
+        <h1 class="l-hero__title" id="viva-title">We <em>build</em> the places the group runs on.</h1>
+        <p class="l-hero__lead">Design and construction with solar, water and low-impact materials built in.</p>
+        <form class="l-signup" data-signup>
+          <label class="visually-hidden" for="viva-email">Your email</label>
+          <input class="l-signup__input" id="viva-email" type="email" placeholder="Your email" autocomplete="email">
+          <button class="l-signup__btn" type="submit">Discuss a project <span class="icon" data-icon="arrow-right"></span></button>
+        </form>
+        <div class="l-media">
+          <div class="media-placeholder l-media__photo">Real photo to come</div>
+          <div class="l-media__card">
+            <div class="spec">
+              <span class="spec__title">Project sheet</span>
+              <div class="spec__row"><span>Scope</span><span>Design + build</span></div>
+              <div class="spec__row"><span>Energy</span><span>Solar</span></div>
+              <div class="spec__row"><span>Water</span><span>Harvest + treat</span></div>
+              <div class="spec__row"><span>Materials</span><span>Low-impact</span></div>
+            </div>
           </div>
         </div>
-        <div class="media-placeholder l-hero__media">Real photo to come</div>
       </header>
 
-      <section class="l-facts container" aria-label="Key facts">
-          <div class="l-fact"><span class="l-fact__value">Design</span><span class="l-fact__label">architecture, planning, permits</span></div>
-          <div class="l-fact"><span class="l-fact__value">Build</span><span class="l-fact__label">construction and fit-out</span></div>
-          <div class="l-fact"><span class="l-fact__value">Systems</span><span class="l-fact__label">solar, water and waste</span></div>
+      <section class="l-bento container" id="viva-offer" aria-label="What we do">
+        <div class="bento">
+          <div class="bento__tile bento__tile--fact bento__tile--hero bento__tile--accent"><span class="bento__value">Design</span><span class="bento__label">architecture, planning, permits</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Design</span><span class="bento__text">Architecture, planning and permits.</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Build</span><span class="bento__text">Construction with low-impact materials.</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Build</span><span class="bento__label">construction and fit-out</span></div>
+          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Systems</span><span class="bento__label">solar, water and waste</span></div>
+          <div class="bento__tile bento__tile--m"><span class="bento__title">Systems</span><span class="bento__text">Solar power, water and waste, designed in.</span></div>
+        </div>
       </section>
 
-      <section class="l-offer container" id="viva-offer" aria-labelledby="viva-offer-title">
-        <h2 class="l-section-title" id="viva-offer-title">What we do</h2>
-        <div class="l-cards">
-          <div class="card l-card"><span class="card__title">Design</span><span class="caption">Architecture, planning and permits.</span></div>
-          <div class="card l-card"><span class="card__title">Build</span><span class="caption">Construction with low-impact materials.</span></div>
-          <div class="card l-card"><span class="card__title">Systems</span><span class="caption">Solar power, water and waste, designed in.</span></div>
+      <section class="l-split container" aria-label="Details">
+        <div class="details">
+          <div class="details__group">
+            <span class="details__label">Design</span>
+            <ul class="details__items"><li>Architecture</li><li>Planning</li><li>Permits</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Build</span>
+            <ul class="details__items"><li>Construction</li><li>Fit-out</li></ul>
+          </div>
+          <div class="details__group">
+            <span class="details__label">Systems</span>
+            <ul class="details__items"><li>Solar</li><li>Water</li><li>Waste</li></ul>
+          </div>
         </div>
+        <figure class="l-split__photo">
+          <div class="media-placeholder">Real photo to come</div>
+          <figcaption class="caption">Timber and stone on site, detail</figcaption>
+        </figure>
       </section>
 
       <section class="l-loop container" aria-label="Part of the loop">
@@ -259,11 +407,9 @@
         <ol class="l-loop__steps" data-loop></ol>
       </section>
 
-      <section class="l-cta" id="viva-contact" aria-labelledby="viva-cta-title">
-        <div class="container l-cta__inner">
-          <h2 class="l-cta__title" id="viva-cta-title">Have a site? Let's talk.</h2>
-          <a class="btn btn--inverse" href="#viva-contact">Discuss a project</a>
-        </div>
+      <section class="l-cta container" id="viva-contact" aria-labelledby="viva-cta-title">
+        <h2 class="l-cta__title" id="viva-cta-title">Have a site? <em>Let's talk.</em></h2>
+        <a class="l-signup__btn" href="#viva-email" data-focus-signup>Discuss a project <span class="icon" data-icon="arrow-right"></span></a>
       </section>
 
       <footer class="l-footer container">

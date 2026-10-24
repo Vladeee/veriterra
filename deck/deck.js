@@ -2,8 +2,7 @@
   Presentation: five landings behind one fixed menu.
   - The URL hash picks the landing: deck/#verdo. A hash pointing inside a
     landing (#verdo-offer) opens that landing and scrolls to the block.
-  - The menu, the "loop" strip and the holding's company cards are built
-    from brand/brands.js, so names live in one place.
+  - The menu and the "loop" strip are built from brand/brands.js.
 */
 (function () {
   "use strict";
@@ -16,14 +15,15 @@
 
   // ---------- built from the brand registry ----------
   function buildMenu() {
+    var home = document.getElementById("topnav-home");
     BRANDS.forEach(function (b) {
-      var li = document.createElement("li");
-      li.className = "topnav__item" + (b.holding ? " topnav__item--holding" : "");
       var a = document.createElement("a");
       a.className = "topnav__link" + (b.holding ? " topnav__link--holding" : "");
       a.href = "#" + b.id;
       a.setAttribute("data-brand", b.id);
       a.textContent = b.name;
+      if (b.holding) { home.appendChild(a); return; }
+      var li = document.createElement("li");
       li.appendChild(a);
       menu.appendChild(li);
     });
@@ -47,17 +47,6 @@
           ol.appendChild(li);
         });
       });
-      landing.querySelectorAll("[data-companies]").forEach(function (box) {
-        companies.forEach(function (b) {
-          var a = document.createElement("a");
-          a.className = "card card--interactive l-card";
-          a.href = "#" + b.id;
-          a.setAttribute("data-brand", b.id);
-          a.innerHTML = '<span class="eyebrow">' + b.loop + '</span><span class="card__title">' + b.name +
-            '</span><span class="caption">' + b.descriptor + "</span>";
-          box.appendChild(a);
-        });
-      });
     });
   }
 
@@ -71,7 +60,7 @@
       landings.forEach(function (l) { l.hidden = l !== landing; });
       current = landing;
       root.setAttribute("data-brand", landing.id);
-      menu.querySelectorAll(".topnav__link").forEach(function (a) {
+      document.querySelectorAll(".topnav__link").forEach(function (a) {
         if (a.getAttribute("href") === "#" + landing.id) a.setAttribute("aria-current", "page");
         else a.removeAttribute("aria-current");
       });
@@ -114,14 +103,33 @@
     document.addEventListener("webkitfullscreenchange", syncFullscreen);
   }
 
+  // ---------- sign-up forms (placeholders, not connected yet) ----------
+  function initForms() {
+    document.querySelectorAll("[data-signup]").forEach(function (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var btn = form.querySelector("button");
+        btn.textContent = "Thanks. Not connected yet";
+        btn.disabled = true;
+      });
+    });
+    document.querySelectorAll("[data-focus-signup]").forEach(function (link) {
+      link.addEventListener("click", function () {
+        var input = document.getElementById(link.getAttribute("href").slice(1));
+        if (input) setTimeout(function () { input.focus({ preventScroll: true }); }, 0);
+      });
+    });
+  }
+
   // ---------- init ----------
   function init() {
     buildMenu();
     buildLoops();
+    initForms();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
     // Tapping the menu item of the landing already open scrolls back to its top.
-    menu.addEventListener("click", function (e) {
+    document.querySelector(".topnav").addEventListener("click", function (e) {
       var a = e.target.closest(".topnav__link");
       if (a && a.getAttribute("href") === location.hash) { e.preventDefault(); window.scrollTo(0, 0); }
     });
