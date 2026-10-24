@@ -102,12 +102,15 @@
     </article>
 
     <!-- ==================== VERITERRA ==================== -->
-    <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="veriterra-title" hidden>
-      <header class="logo-hero" data-logo-hero>
+    <!-- Presentation-style: five full-screen slides that snap on scroll. -->
+    <article class="landing" id="veriterra" data-brand="veriterra" data-slides aria-labelledby="veriterra-title" hidden>
+
+      <!-- 1. Logo -->
+      <header class="v-slide v-slide--light logo-hero" data-logo-hero data-tone="light">
         <h1 class="logo-hero__word" id="veriterra-title" data-brand-name="veriterra"></h1>
         <p class="logo-hero__caption">Water-soluble fertilizers · Made in Sri Lanka</p>
-        <a class="logo-hero__scroll" href="#veriterra-field" aria-label="Scroll down"><span class="logo-hero__scroll-line" aria-hidden="true"></span></a>
-        <div class="font-trial" data-font-switch data-default="accidenz" data-reveal style="--i: 6" role="group" aria-label="Try a logo typeface">
+        <a class="logo-hero__scroll" href="#veriterra-field" aria-label="Next slide"><span class="logo-hero__scroll-line" aria-hidden="true"></span></a>
+        <div class="font-trial" data-font-switch data-default="accidenz" role="group" aria-label="Try a logo typeface">
           <span class="font-trial__label">Logo typeface</span>
           <button type="button" data-font="system" style="font-family: var(--font-serif-system)">System</button>
           <button type="button" data-font="asul" style="font-family: var(--font-asul)">Asul</button>
@@ -119,73 +122,75 @@
         </div>
       </header>
 
-      <section class="v-hero page-grid" id="veriterra-field" aria-labelledby="veriterra-field-title">
-        <div class="media-placeholder v-hero__photo">Real photo to come · a crop in the field</div>
-        <div class="v-hero__panel">
-          <h2 class="v-hero__title" id="veriterra-field-title" data-reveal>Formulated for the <em>crop</em>. Proven in the field.</h2>
-          <ul class="v-stats" aria-label="Key figures">
-            <li data-reveal style="--i: 1"><span class="v-stats__value">4</span><span class="v-stats__label">growth stages, one formula for each</span></li>
-            <li data-reveal style="--i: 2"><span class="v-stats__value">5</span><span class="v-stats__label">crops with their own programme</span></li>
-            <li data-reveal style="--i: 3"><span class="v-stats__value">100%</span><span class="v-stats__label">water-soluble</span></li>
-            <li data-reveal style="--i: 4"><span class="v-stats__value">3</span><span class="v-stats__label">export regions: India, Middle East, Africa</span></li>
-          </ul>
-          <p class="v-hero__note" data-reveal style="--i: 5">*Placeholder figures. Final numbers come from field trials and the product sheet.</p>
-        </div>
-      </section>
-
-      <section class="l-section page-grid v-offer" id="veriterra-offer" aria-labelledby="veriterra-offer-title">
-        <h2 class="l-label" id="veriterra-offer-title" data-reveal>What we do</h2>
-        <ul class="v-offer__list">
-          <li data-reveal style="--i: 1"><span class="ornament" data-ornament="wheat"></span><span class="v-offer__title">Crop formulas</span><span class="v-offer__text">Water-soluble NPK and micronutrients, matched to the crop and its growth stage.</span></li>
-          <li data-reveal style="--i: 2"><span class="ornament" data-ornament="drop"></span><span class="v-offer__title">Lab analysis</span><span class="v-offer__text">Water, soil and substrate are tested before a formula is set.</span></li>
-          <li data-reveal style="--i: 3"><span class="ornament" data-ornament="sprout"></span><span class="v-offer__title">Agronomy support</span><span class="v-offer__text">Monitoring and adjustments through the season, on the farm.</span></li>
+      <!-- 2. Statement + figures (paypath) -->
+      <section class="v-slide v-slide--glow v-statement" id="veriterra-field" data-tone="dark" aria-labelledby="veriterra-field-title">
+        <div class="v-glow" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h2 class="v-statement__title" id="veriterra-field-title" data-reveal>Formulated for the <em>crop</em>.<br>Proven in the field.</h2>
+        <ul class="v-figures" aria-label="Key figures">
+          <li data-reveal style="--i: 1"><span class="v-figures__value">4</span><span class="v-figures__label">Growth stages, one formula each</span></li>
+          <li data-reveal style="--i: 2"><span class="v-figures__value">5</span><span class="v-figures__label">Crops with their own programme</span></li>
+          <li data-reveal style="--i: 3"><span class="v-figures__value">100%</span><span class="v-figures__label">Water-soluble</span></li>
+          <li data-reveal style="--i: 4"><span class="v-figures__value">3</span><span class="v-figures__label">Export regions</span></li>
         </ul>
+        <p class="v-slide__note" data-reveal style="--i: 5">Placeholder figures</p>
       </section>
 
-      <section class="v-split page-grid" aria-labelledby="veriterra-system-title">
-        <div class="v-split__panel">
-          <h2 class="v-split__title" id="veriterra-system-title" data-reveal>One system, <em>four stages</em>.</h2>
-          <div class="v-split__group" data-reveal style="--i: 1">
-            <span class="v-split__label">Stages</span>
+      <!-- 3. What we do: photo + list over hairlines (Farm Minerals) -->
+      <section class="v-slide v-slide--light v-offer" id="veriterra-offer" data-tone="light" aria-labelledby="veriterra-offer-title">
+        <div class="media-placeholder v-offer__photo">Real photo to come · a crop in the field</div>
+        <div class="v-offer__panel">
+          <h2 class="v-kicker" id="veriterra-offer-title" data-reveal>What we do</h2>
+          <ul class="v-rows">
+            <li data-reveal style="--i: 1"><span class="ornament" data-ornament="wheat"></span><span class="v-rows__title">Crop formulas</span><span class="v-rows__text">Water-soluble NPK and micronutrients, matched to the crop and its growth stage.</span></li>
+            <li data-reveal style="--i: 2"><span class="ornament" data-ornament="drop"></span><span class="v-rows__title">Lab analysis</span><span class="v-rows__text">Water, soil and substrate are tested before a formula is set.</span></li>
+            <li data-reveal style="--i: 3"><span class="ornament" data-ornament="sprout"></span><span class="v-rows__title">Agronomy support</span><span class="v-rows__text">Monitoring and adjustments through the season, on the farm.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 4. Ornament panel + linen backdrop (Dix Hectares) -->
+      <section class="v-slide v-dix" data-tone="light" aria-labelledby="veriterra-system-title">
+        <div class="v-dix__panel">
+          <h2 class="v-dix__title" id="veriterra-system-title" data-reveal>One system, <em>four stages</em>.</h2>
+          <div class="v-dix__group" data-reveal style="--i: 1">
+            <span class="v-dix__label">Stages</span>
             <ul class="v-glyphs">
-              <li data-reveal style="--i: 4"><span class="ornament" data-ornament="seed"></span>Root</li>
-              <li data-reveal style="--i: 5"><span class="ornament" data-ornament="sprout"></span>Grow</li>
-              <li data-reveal style="--i: 6"><span class="ornament" data-ornament="flower"></span>Bloom</li>
-              <li data-reveal style="--i: 7"><span class="ornament" data-ornament="quatrefoil"></span>Fruit</li>
+              <li><span class="ornament" data-ornament="seed"></span>Root</li>
+              <li><span class="ornament" data-ornament="sprout"></span>Grow</li>
+              <li><span class="ornament" data-ornament="flower"></span>Bloom</li>
+              <li><span class="ornament" data-ornament="quatrefoil"></span>Fruit</li>
             </ul>
           </div>
-          <div class="v-split__group" data-reveal style="--i: 2">
-            <span class="v-split__label">Crops</span>
-            <p class="v-split__text">Tomato · Cucumber · Pepper · Leafy greens · Strawberry</p>
+          <div class="v-dix__group" data-reveal style="--i: 2">
+            <span class="v-dix__label">Crops</span>
+            <p class="v-dix__text">Tomato · Cucumber · Pepper · Leafy greens · Strawberry</p>
           </div>
-          <div class="v-split__group" data-reveal style="--i: 3">
-            <span class="v-split__label">Made with</span>
+          <div class="v-dix__group" data-reveal style="--i: 3">
+            <span class="v-dix__label">Made with</span>
             <ul class="v-glyphs v-glyphs--small">
-              <li data-reveal style="--i: 8"><span class="ornament" data-ornament="leaf"></span>Coconut, local</li>
-              <li data-reveal style="--i: 9"><span class="ornament" data-ornament="sun"></span>Solar power</li>
-              <li data-reveal style="--i: 10"><span class="ornament" data-ornament="star"></span>Lab control</li>
+              <li><span class="ornament" data-ornament="leaf"></span>Local coconut</li>
+              <li><span class="ornament" data-ornament="sun"></span>Solar power</li>
+              <li><span class="ornament" data-ornament="star"></span>Lab control</li>
             </ul>
           </div>
         </div>
-        <div class="v-split__photo" data-reveal>
-          <div class="media-placeholder v-split__media">Real photo to come · the product on a deep green backdrop</div>
+        <div class="v-dix__backdrop" data-tone="dark">
+          <div class="media-placeholder v-dix__frame" data-reveal>Real photo to come · the product on linen</div>
         </div>
       </section>
 
-      <section class="l-section page-grid" aria-labelledby="veriterra-loop-title">
-        <h2 class="l-label" id="veriterra-loop-title" data-reveal>Part of one loop</h2>
-        <ol class="l-loop__steps" data-loop data-reveal style="--i: 1"></ol>
+      <!-- 5. Call to action + the loop -->
+      <section class="v-slide v-slide--light v-final" id="veriterra-contact" data-tone="light" aria-labelledby="veriterra-cta-title">
+        <div class="v-final__main">
+          <h2 class="v-final__title" id="veriterra-cta-title" data-reveal>Tell us the crop.<br><em>We'll match the formula.</em></h2>
+          <a class="l-btn" href="#veriterra-contact" data-placeholder-action data-reveal style="--i: 1">Request a sample <span class="icon" data-icon="arrow-right"></span></a>
+        </div>
+        <div class="v-final__foot">
+          <span class="v-kicker">Part of one loop</span>
+          <ol class="l-loop__steps" data-loop></ol>
+          <p class="v-final__legal"><span data-brand-name="veriterra"></span> is part of <span data-brand-name="vitreeone"></span> · Working draft</p>
+        </div>
       </section>
-
-      <section class="l-cta page-grid" id="veriterra-contact" aria-labelledby="veriterra-cta-title">
-        <h2 class="l-cta__title" id="veriterra-cta-title" data-reveal>Tell us the crop. <em>We'll match the formula.</em></h2>
-        <a class="l-btn" href="#veriterra-contact" data-placeholder-action>Request a sample <span class="icon" data-icon="arrow-right"></span></a>
-      </section>
-
-      <footer class="l-footer page-grid">
-        <span><span data-brand-name="veriterra"></span> is part of <span data-brand-name="vitreeone"></span></span>
-        <span>Working draft · placeholder copy</span>
-      </footer>
     </article>
 
     <!-- ==================== VERDO ==================== -->

@@ -65,6 +65,8 @@
   --color-veriterra-glow: #E4F1C4;
   --color-veriterra-glow-2: #F4F1D6;
   --color-veriterra-logo: #2E1919;
+  --color-veriterra-moss: #6F8A3C;
+  --color-veriterra-sage: #C9D3AE;
   --color-veriterra-cream: #F3EEE7;
   --color-veriterra-terracotta: #B0512C;
   --color-veriterra-forest: #2C4126;
@@ -223,6 +225,8 @@
   --motion-shift-sm: 0.5rem;
   --motion-shift-lg: 3rem;
   --motion-blur: 12px;
+  --glow-blur: 4rem;
+  --duration-drift: 18s;
   --press-scale: 0.98;
 
   /* ---------- Layers & states ---------- */
@@ -233,6 +237,7 @@
   --z-toast: 300;
   --opacity-disabled: 0.45;
   --opacity-quiet: 0.85;
+  --opacity-grain: 0.35;
 }
 
 /* ---------- Brand themes ----------
@@ -263,6 +268,8 @@
   --brand-ornament: var(--color-veriterra-terracotta);
   --brand-deep: var(--color-veriterra-forest);
   --brand-logo: var(--color-veriterra-logo);
+  --brand-glow-deep: var(--color-veriterra-moss);
+  --brand-on-deep-muted: var(--color-veriterra-sage);
   --brand-glow-2: var(--color-veriterra-glow-2);
   --brand-bg:
     radial-gradient(120% 70% at 50% 0%, var(--color-veriterra-glow) 0%, transparent 65%),
@@ -327,6 +334,7 @@
     --motion-shift-sm: 0rem;
     --motion-shift-lg: 0rem;
     --motion-blur: 0px;
+    --duration-drift: 1ms;
     --press-scale: 1;
   }
 }

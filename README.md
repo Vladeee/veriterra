@@ -37,8 +37,9 @@ python3 -m http.server 8000
 │   ├── brands.js               brand registry (names live here)
 │   ├── brand-ui.js             icons, brand names
 │   ├── icons/                  app icons
+│   ├── textures/               self-made grain, paper and linen textures
 │   ├── logo/                   (empty for now)
-│   └── fonts/                  (empty until fonts are chosen)
+│   └── fonts/                  self-hosted trial fonts + licences
 ├── deck/index.html             redirect from the old URL
 ├── site/                       websites, later
 ├── tools/tokens.py             token sync and "tokens only" lint

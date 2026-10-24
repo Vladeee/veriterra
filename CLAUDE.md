@@ -6,13 +6,17 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 - **One link for everything: the root `index.html`.** It opens on an intro screen (logo, one paragraph, a **Welcome** button). Welcome leads to **five short landing pages**: VITREEONE (the holding) plus Veriterra, Verdo, Vaya and Viva. A fixed top menu of plain text links (a small dot under the current one) switches between them via the URL hash (`#verdo`, `#vaya-contact`; no hash or `#intro` = intro).
 - **Layout: a full-width 12-column page grid**, after paypath.ai: edge to edge with `--page-margin` on the sides, `--grid-gutter` between columns, `--grid-gap-tight` between cards, and sections topped by a hairline with a dot label.
 - **All five landings share one identical structure**, defined in `presentation/presentation.css`: hero (logo first → headline with one serif-italic `<em>` word → lead → button) → media (photo 7 cols + spec card 5 cols) → bento grid (facts + offer) → loop strip → centred call to action → footer. No e-mail fields and no details/photo split panels (removed at the user's request). Each landing paints its own soft gradient from `--brand-bg` (tokens). Each landing gets its own look later in `presentation/landings/<id>.css`, scoped to `.landing[data-brand="<id>"]`. Keep the structure identical across the five unless the user asks otherwise.
-- **Current focus: Veriterra.** Its landing diverges from the shared skeleton on purpose.
-  - **The first screen is the logo only**: the wordmark (`--text-logo`, colour `--brand-logo` = #2E1919) with a small caption, centred on the lime gradient background (the same style as Verdo's). Entrance: the whole word rises from below with a blur and a bottom-up fade mask (no per-letter animation), then the caption, the scroll cue and the **Logo typeface** bar fade in. It replays when the landing opens or the typeface changes. No line under the logo.
-  - **The trial fonts in `brand/fonts/` are for the logo only** (they swap `--font-logo`). Headings use **Hedvig Letters Serif** (`--font-hedvig`, OFL), a free stand-in for the user's choice Season Mix, which is commercial (Displaay). Body text is system sans. Site font pairs may still change.
-  - **Layout must be tight and orderly**: everything after the logo sits on the 12-column page grid with one rhythm (sections `--space-8` apart, blocks `--space-5`). Photo 6 cols + text 6 cols; three offer columns of 4 cols; ornament panel 6 + photo 6; the CTA band sits inside the page margins.
-  - **Menu has no background.** Once the page scrolls, it gets a blur only (`body.is-scrolled`).
-  - **Elements with `data-reveal` rise in on scroll** (IntersectionObserver in `presentation.js`, staggered by `--i`). Reduced motion shows everything at once.
-  - The rest follows the user's references, **Farm Minerals** and **Dix Hectares**: olive text, terracotta ornaments, deep forest green. Palette tokens: `--brand-paper`, `--brand-ornament`, `--brand-deep`, `--brand-logo`. Ornaments come from `brand-ui.js` (`data-ornament`).
+- **Current focus: Veriterra.** Its landing diverges from the shared skeleton on purpose, and it is a **presentation, not a website**. It has five full-screen slides (`.v-slide`, `min-height: 100dvh`) that snap on scroll (`data-slides` on the landing puts `html.has-slides` in place):
+  1. **Logo**: only the wordmark (`--text-logo`, colour `--brand-logo` = #2E1919) and a caption. The whole word rises with a blur and a bottom-up fade mask, then the caption, the scroll cue and the **Logo typeface** bar fade in. It replays on open and on typeface change.
+  2. **Statement + four figures** on a dark forest linen slide with slowly drifting, blurred light streaks (after paypath.ai).
+  3. **What we do**: a full-bleed photo next to a list over hairlines (after Farm Minerals).
+  4. **Ornaments**: a cream panel of terracotta ornaments next to a forest linen backdrop with a photo frame (after Dix Hectares).
+  5. **Call to action**, with the loop and a legal line at the bottom.
+  - **Textures** are self-made files in `brand/textures/` (`grain.png` over every slide, `paper-cream.jpg`, `linen-forest.jpg`). They can be swapped for photographed textures later.
+  - **Menu**: no background, blur only once scrolled. It turns light over slides with `data-tone="dark"` (`body.nav-on-dark`).
+  - **Fonts**: the trial fonts in `brand/fonts/` are for the logo only (`--font-logo`). Headings use **Hedvig Letters Serif** (`--font-hedvig`), a free stand-in for Season Mix, which is commercial. Body text is system sans.
+  - **Motion**: `data-reveal` elements rise in on scroll (staggered by `--i`). Reduced motion disables the drift and shows everything at once.
+  - **Palette**: olive text, terracotta ornaments, deep forest, lime glow. Tokens: `--brand-paper`, `--brand-ornament`, `--brand-deep`, `--brand-logo`, `--brand-glow-deep`, `--brand-on-deep-muted`. Ornaments come from `brand-ui.js` (`data-ornament`).
   - Leave the other four landings alone unless asked.
 - There is **no style guide** for now (removed at the user's request). Sections are added **one at a time, only when the user asks**.
 - Colours, typefaces and copy are placeholders. Read `brand/BRIEF.md` before any brand decision.
@@ -27,7 +31,7 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 | `brand/brands.js` | Brand registry (ids, names, descriptors). Menus, labels and generated blocks read names from here. Copy text may mention the companies |
 | `brand/brand-ui.js` | Shared behaviour: inline icons, brand names and descriptors |
 | `brand/BRIEF.md` | Positioning, audience, tone; facts and open questions |
-| `brand/logo/`, `brand/fonts/`, `brand/icons/` | Assets (logos and fonts not supplied yet) |
+| `brand/logo/`, `brand/fonts/`, `brand/icons/`, `brand/textures/` | Assets: logos (not supplied yet), self-hosted fonts with licences, app icons, self-made textures |
 | `index.html` | The one link: intro + five landings |
 | `presentation/` | `presentation.css` = intro, menu and shared landing skeleton; `presentation.js` = routing, menu, loop; `landings/<id>.css` = per-landing style |
 | `deck/index.html` | Redirect from the old presentation URL to the root (keeps the hash) |

@@ -53,6 +53,7 @@
   // ---------- routing ----------
   function showIntro() {
     current = intro;
+    root.classList.remove("has-slides");
     intro.hidden = false;
     landings.forEach(function (l) { l.hidden = true; });
     document.body.classList.add("is-intro");
@@ -80,6 +81,7 @@
       var active = menu.querySelector('[aria-current="page"]');
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
       document.title = BrandUI.brandById(landing.id).name;
+      root.classList.toggle("has-slides", landing.hasAttribute("data-slides"));
       playLogo(landing);
     }
 
@@ -186,8 +188,24 @@
     initReveal();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
-    var onScroll = function () { document.body.classList.toggle("is-scrolled", window.scrollY > 8); };
+    // Scrolled state + the tone of whatever sits under the menu (light or dark slide)
+    var nav = document.querySelector(".topnav");
+    var ticking = false;
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        document.body.classList.toggle("is-scrolled", window.scrollY > 8);
+        var y = nav.getBoundingClientRect().bottom - 2;
+        var stack = document.elementsFromPoint ? document.elementsFromPoint(window.innerWidth * 0.25, y) : [];
+        var toned = stack.filter(function (el) { return !nav.contains(el) && el.closest("[data-tone]"); })[0];
+        var tone = toned ? toned.closest("[data-tone]").getAttribute("data-tone") : "light";
+        document.body.classList.toggle("nav-on-dark", tone === "dark");
+      });
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("hashchange", onScroll);
     onScroll();
     // Tapping the menu item of the landing already open scrolls back to its top.
     document.querySelector(".topnav").addEventListener("click", function (e) {
