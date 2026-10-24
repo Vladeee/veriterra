@@ -145,7 +145,8 @@
         var b = e.target.closest("[data-font]");
         if (b) pick(b.getAttribute("data-font"));
       });
-      pick(saved && box.querySelector('[data-font="' + saved + '"]') ? saved : box.querySelector("[data-font]").getAttribute("data-font"));
+      var fallback = box.getAttribute("data-default") || box.querySelector("[data-font]").getAttribute("data-font");
+      pick(saved && box.querySelector('[data-font="' + saved + '"]') ? saved : fallback);
     });
   }
 

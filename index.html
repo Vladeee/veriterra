@@ -122,18 +122,44 @@
       </header>
 
 
-      <section class="l-section page-grid" id="veriterra-offer" aria-labelledby="veriterra-offer-title">
+      <section class="l-section page-grid v-offer" id="veriterra-offer" aria-labelledby="veriterra-offer-title">
         <h2 class="l-label" id="veriterra-offer-title">What we do</h2>
-        <div class="bento">
-          <div class="bento__tile bento__tile--fact bento__tile--hero bento__tile--accent"><span class="bento__value">1 formula</span><span class="bento__label">per crop, per growth stage</span></div>
-          <div class="bento__tile bento__tile--m"><span class="bento__title">Crop formulas</span><span class="bento__text">Water-soluble NPK and micronutrients, matched to crop and stage.</span></div>
-          <div class="bento__tile bento__tile--m"><span class="bento__title">Lab analysis</span><span class="bento__text">Water, soil and substrate tests before a formula is set.</span></div>
-          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Lab</span><span class="bento__label">water and substrate tested first</span></div>
-          <div class="bento__tile bento__tile--fact bento__tile--s"><span class="bento__value">Local</span><span class="bento__label">raw materials from Sri Lankan coconut</span></div>
-          <div class="bento__tile bento__tile--m"><span class="bento__title">Agronomy support</span><span class="bento__text">Monitoring and adjustments through the season.</span></div>
-        </div>
+        <ul class="v-offer__list">
+          <li><span class="ornament" data-ornament="wheat"></span><span class="v-offer__title">Crop formulas</span><span class="v-offer__text">Water-soluble NPK and micronutrients, matched to the crop and its growth stage.</span></li>
+          <li><span class="ornament" data-ornament="drop"></span><span class="v-offer__title">Lab analysis</span><span class="v-offer__text">Water, soil and substrate are tested before a formula is set.</span></li>
+          <li><span class="ornament" data-ornament="sprout"></span><span class="v-offer__title">Agronomy support</span><span class="v-offer__text">Monitoring and adjustments through the season, on the farm.</span></li>
+        </ul>
       </section>
 
+      <section class="v-split" aria-labelledby="veriterra-system-title">
+        <div class="v-split__panel">
+          <h2 class="v-split__title" id="veriterra-system-title">One system, <em>four stages</em>.</h2>
+          <div class="v-split__group">
+            <span class="v-split__label">Stages</span>
+            <ul class="v-glyphs">
+              <li><span class="ornament" data-ornament="seed"></span>Root</li>
+              <li><span class="ornament" data-ornament="sprout"></span>Grow</li>
+              <li><span class="ornament" data-ornament="flower"></span>Bloom</li>
+              <li><span class="ornament" data-ornament="quatrefoil"></span>Fruit</li>
+            </ul>
+          </div>
+          <div class="v-split__group">
+            <span class="v-split__label">Crops</span>
+            <p class="v-split__text">Tomato · Cucumber · Pepper · Leafy greens · Strawberry</p>
+          </div>
+          <div class="v-split__group">
+            <span class="v-split__label">Made with</span>
+            <ul class="v-glyphs v-glyphs--small">
+              <li><span class="ornament" data-ornament="leaf"></span>Coconut, local</li>
+              <li><span class="ornament" data-ornament="sun"></span>Solar power</li>
+              <li><span class="ornament" data-ornament="star"></span>Lab control</li>
+            </ul>
+          </div>
+        </div>
+        <div class="v-split__photo">
+          <div class="media-placeholder v-split__media">Real photo to come · the product on a deep green backdrop</div>
+        </div>
+      </section>
 
       <section class="l-section page-grid" aria-labelledby="veriterra-loop-title">
         <h2 class="l-label" id="veriterra-loop-title">Part of one loop</h2>
@@ -145,7 +171,7 @@
         <a class="l-btn" href="#veriterra-contact" data-placeholder-action>Request a sample <span class="icon" data-icon="arrow-right"></span></a>
       </section>
 
-      <div class="font-trial" data-font-switch role="group" aria-label="Try a typeface">
+      <div class="font-trial" data-font-switch data-default="accidenz" role="group" aria-label="Try a typeface">
         <span class="font-trial__label">Typeface</span>
         <button type="button" data-font="system" style="font-family: var(--font-serif-system)">System</button>
         <button type="button" data-font="asul" style="font-family: var(--font-asul)">Asul</button>

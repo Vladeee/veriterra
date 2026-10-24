@@ -155,6 +155,20 @@ p {
 
 .icon--lg { width: var(--icon-lg); height: var(--icon-lg); }
 
+/* ---------- Ornaments (filled botanical glyphs, see brand-ui.js) ---------- */
+.ornament {
+  display: inline-flex;
+  flex: none;
+  width: var(--icon-xl);
+  height: var(--icon-xl);
+  color: var(--brand-ornament, var(--brand-accent));
+}
+
+.ornament svg {
+  width: 100%;
+  height: 100%;
+}
+
 /* ---------- Links ---------- */
 .link {
   color: var(--brand-accent);

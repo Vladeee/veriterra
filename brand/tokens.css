@@ -56,11 +56,16 @@
   --color-vitreeone-glow: #EFE5D0;
   --color-vitreeone-glow-2: #E4E8DA;
 
-  --color-veriterra-100: #ECE8F4;
-  --color-veriterra-600: #5A4A8A;
-  --color-veriterra-700: #45386C;
-  --color-veriterra-glow: #E6DEF8;
-  --color-veriterra-glow-2: #EEF4D2;
+  /* Veriterra: olive on cream with terracotta ornaments and deep forest
+     (after the Farm Minerals and Dix Hectares references) */
+  --color-veriterra-100: #E3E5D1;
+  --color-veriterra-600: #56652F;
+  --color-veriterra-700: #3F4B22;
+  --color-veriterra-glow: #EDE9DC;
+  --color-veriterra-glow-2: #E3E5D1;
+  --color-veriterra-cream: #F3EEE7;
+  --color-veriterra-terracotta: #B0512C;
+  --color-veriterra-forest: #2C4126;
 
   --color-verdo-100: #E6EEE7;
   --color-verdo-600: #3E6247;
@@ -244,6 +249,9 @@
   --brand-accent-soft: var(--color-veriterra-100);
   --brand-on-accent: var(--color-white);
   --brand-glow: var(--color-veriterra-glow);
+  --brand-paper: var(--color-veriterra-cream);
+  --brand-ornament: var(--color-veriterra-terracotta);
+  --brand-deep: var(--color-veriterra-forest);
   --brand-glow-2: var(--color-veriterra-glow-2);
   --brand-bg:
     radial-gradient(120% 70% at 50% 0%, var(--color-veriterra-glow) 0%, transparent 65%),
