@@ -128,25 +128,7 @@
     });
   }
 
-  // ---------- logo hero: split the word into letters and play the entrance ----------
-  function splitLetters() {
-    document.querySelectorAll("[data-split-letters]").forEach(function (el) {
-      var text = el.textContent;
-      el.setAttribute("aria-label", text);
-      el.textContent = "";
-      Array.prototype.forEach.call(text, function (ch, i) {
-        var span = document.createElement("span");
-        span.className = "logo-hero__char";
-        span.setAttribute("aria-hidden", "true");
-        span.style.setProperty("--i", String(i));
-        span.textContent = ch === " " ? "\u00a0" : ch;
-        el.appendChild(span);
-      });
-      var hero = el.closest("[data-logo-hero]");
-      if (hero) hero.style.setProperty("--n", String(text.length));
-    });
-  }
-
+  // ---------- logo hero: replay the entrance (CSS) when the landing opens ----------
   function playLogo(scope) {
     (scope || document).querySelectorAll("[data-logo-hero]").forEach(function (hero) {
       hero.classList.remove("is-playing");
@@ -201,10 +183,12 @@
     buildLoops();
     initPlaceholders();
     initFontSwitches();
-    splitLetters();
     initReveal();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
+    var onScroll = function () { document.body.classList.toggle("is-scrolled", window.scrollY > 8); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     // Tapping the menu item of the landing already open scrolls back to its top.
     document.querySelector(".topnav").addEventListener("click", function (e) {
       var a = e.target.closest(".topnav__link");

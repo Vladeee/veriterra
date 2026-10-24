@@ -29,6 +29,7 @@
 @font-face { font-family: "Bona Nova"; src: url("fonts/bona-nova/bona-nova-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: "Bona Nova"; src: url("fonts/bona-nova/bona-nova-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Mynerve"; src: url("fonts/mynerve/mynerve-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Hedvig Letters Serif"; src: url("fonts/hedvig-serif/hedvig-letters-serif-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "CC Accidenz Commons"; src: url("fonts/accidenz-commons/accidenz-commons-500.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
 
 :root {
@@ -61,8 +62,9 @@
   --color-veriterra-100: #E3E5D1;
   --color-veriterra-600: #56652F;
   --color-veriterra-700: #3F4B22;
-  --color-veriterra-glow: #EDE9DC;
-  --color-veriterra-glow-2: #E3E5D1;
+  --color-veriterra-glow: #E4F1C4;
+  --color-veriterra-glow-2: #F4F1D6;
+  --color-veriterra-logo: #2E1919;
   --color-veriterra-cream: #F3EEE7;
   --color-veriterra-terracotta: #B0512C;
   --color-veriterra-forest: #2C4126;
@@ -115,6 +117,7 @@
   --font-bona-nova: "Bona Nova", Georgia, serif;
   --font-mynerve: "Mynerve", "Comic Sans MS", cursive;
   --font-accidenz: "CC Accidenz Commons", "Helvetica Neue", Arial, sans-serif;
+  --font-hedvig: "Hedvig Letters Serif", Georgia, serif;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -130,7 +133,7 @@
   --text-3xl: clamp(2.25rem, 1.6rem + 2.2vw, 3.25rem);
   --text-4xl: clamp(2.75rem, 1.8rem + 3.4vw, 4.5rem);
   --text-5xl: clamp(3.25rem, 1.8rem + 5vw, 6.5rem);
-  --text-logo: clamp(4rem, 1.5rem + 12vw, 15rem);
+  --text-logo: clamp(3rem, 1rem + 7vw, 8rem);
 
   --leading-tight: 1.05;
   --leading-snug: 1.2;
@@ -259,6 +262,7 @@
   --brand-paper: var(--color-veriterra-cream);
   --brand-ornament: var(--color-veriterra-terracotta);
   --brand-deep: var(--color-veriterra-forest);
+  --brand-logo: var(--color-veriterra-logo);
   --brand-glow-2: var(--color-veriterra-glow-2);
   --brand-bg:
     radial-gradient(120% 70% at 50% 0%, var(--color-veriterra-glow) 0%, transparent 65%),

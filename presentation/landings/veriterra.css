@@ -3,25 +3,23 @@
   .landing[data-brand="veriterra"]. Tokens only (see brand/tokens.css).
 
   References:
-  - Farm Minerals: olive type on cream, split hero (photo left, figures right),
-    big numbers over hairlines, no cards.
-  - Dix Hectares: a cream panel of terracotta botanical ornaments with spaced
-    caps labels, next to a photo on deep forest green.
+  - Farm Minerals: olive type, photo next to big figures over hairlines, no cards.
+  - Dix Hectares: a panel of terracotta botanical ornaments with spaced caps labels,
+    next to a photo on deep forest green.
 
   First screen is the logo only (animated, see presentation.css .logo-hero).
-  Flat throughout: hairlines instead of cards. The logo typeface bar sets data-font
-  on the landing, which swaps --font-logo; site text stays on placeholder fonts.
+  Everything after it sits on the 12-column page grid with one vertical rhythm:
+  sections are --space-8 apart, blocks inside them --space-5. The logo typeface
+  bar swaps --font-logo; headings use Hedvig Letters Serif (stand-in for Season Mix).
 */
 
 .landing[data-brand="veriterra"] {
-  /* Re-map the neutral roles to the olive/cream palette inside this landing only */
+  /* Re-map the neutral roles to the olive palette inside this landing only */
   --color-text: var(--brand-accent-strong);
   --color-text-muted: var(--brand-accent);
   --color-border: var(--brand-accent-soft);
   --color-border-strong: var(--brand-accent);
-  --brand-bg: var(--brand-paper);
-  /* Site text is a neutral grotesk placeholder; the trial fonts are for the logo only */
-  --font-display: var(--font-body);
+  --font-display: var(--font-hedvig);
   color: var(--color-text);
 }
 
@@ -33,43 +31,41 @@
 .landing[data-brand="veriterra"][data-font="mynerve"] { --font-logo: var(--font-mynerve); }
 .landing[data-brand="veriterra"][data-font="accidenz"] { --font-logo: var(--font-accidenz); }
 
-/* ---------- 1. Logo hero: olive word on cream ---------- */
-.landing[data-brand="veriterra"] .logo-hero__caption { color: var(--brand-accent); }
+/* ---------- Rhythm ---------- */
+.landing[data-brand="veriterra"] .logo-hero + section { padding-top: var(--space-0); }
 
-/* ---------- 2. Split: field photo + figures (Farm Minerals) ---------- */
-.v-hero {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-  min-height: calc(100dvh - var(--nav-height) - env(safe-area-inset-top));
+.landing[data-brand="veriterra"] .v-hero,
+.landing[data-brand="veriterra"] .v-offer,
+.landing[data-brand="veriterra"] .v-split,
+.landing[data-brand="veriterra"] .l-section,
+.landing[data-brand="veriterra"] .l-cta {
+  margin-top: var(--space-8);
+  padding-block: var(--space-0);
+  row-gap: var(--space-5);
 }
 
-@media (min-width: 64rem) {
-  .v-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-}
+.landing[data-brand="veriterra"] .logo-hero + .v-hero { margin-top: var(--space-6); }
 
+/* ---------- 2. Field: photo (6 cols) + headline and figures (6 cols) ---------- */
 .v-hero__photo {
-  min-height: 40dvh;
-  aspect-ratio: auto;
-  border-radius: var(--radius-none);
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
 }
 
 .v-hero__panel {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
-  padding: var(--space-7) max(var(--page-margin), env(safe-area-inset-right)) var(--space-7) var(--space-7);
+  justify-content: space-between;
+  gap: var(--space-5);
 }
 
-@media (max-width: 63.99rem) {
-  .v-hero__panel { padding-left: max(var(--page-margin), env(safe-area-inset-left)); }
-}
-
-@media (min-width: 64rem) {
-  .v-hero__panel { padding-top: var(--space-9); }
+@media (min-width: 48rem) {
+  .v-hero > .v-hero__photo { grid-column: 1 / span 6; }
+  .v-hero > .v-hero__panel { grid-column: 7 / -1; }
 }
 
 .v-hero__title {
+  margin: 0;
   max-width: var(--measure-headline);
   font-family: var(--font-display);
   font-size: var(--text-3xl);
@@ -79,34 +75,35 @@
   text-wrap: balance;
 }
 
-.v-hero__title em { font-style: italic; }
+.v-hero__title em,
+.v-split__title em { font-style: italic; }
 
 .v-stats {
-  margin: auto 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
+  border-top: var(--border-width) solid var(--color-border-strong);
 }
 
 .v-stats li {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: baseline;
   gap: var(--space-4);
-  padding-block: var(--space-4) var(--space-3);
+  padding-block: var(--space-3);
   border-bottom: var(--border-width) solid var(--color-border-strong);
 }
 
 .v-stats__value {
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
   color: var(--brand-accent);
 }
 
 .v-stats__label {
-  padding-bottom: var(--space-1);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
 }
@@ -121,13 +118,11 @@
 /* ---------- Section labels: olive hairline, terracotta dot ---------- */
 .landing[data-brand="veriterra"] .l-label::before { background: var(--brand-ornament); }
 
-/* ---------- 2. What we do: three flat columns with ornaments ---------- */
-.v-offer { padding-top: var(--space-8); }
-
+/* ---------- 3. What we do: three columns, each 4 grid columns wide ---------- */
 .v-offer__list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-6) var(--grid-gutter);
+  gap: var(--space-5) var(--grid-gutter);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -140,64 +135,58 @@
 .v-offer__list li {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
-.v-offer__list .ornament { margin-bottom: var(--space-3); }
+.v-offer__list .ornament {
+  width: var(--icon-xl);
+  height: var(--icon-xl);
+  margin-bottom: var(--space-2);
+}
 
 .v-offer__title {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   line-height: var(--leading-snug);
 }
 
 .v-offer__text {
-  max-width: var(--measure-headline);
-  font-size: var(--text-md);
-  line-height: var(--leading-relaxed);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
   color: var(--color-text-muted);
 }
 
-/* ---------- 3. Ornament panel + deep green photo (Dix Hectares) ---------- */
-.v-split {
-  display: grid;
-  grid-template-columns: 1fr;
-  margin-top: var(--space-9);
-}
-
+/* ---------- 4. Ornament panel (6 cols) + deep green photo (6 cols) ---------- */
 @media (min-width: 48rem) {
-  .v-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .v-split > .v-split__panel { grid-column: 1 / span 6; }
+  .v-split > .v-split__photo { grid-column: 7 / -1; }
 }
 
 .v-split__panel {
   display: flex;
   flex-direction: column;
-  gap: var(--space-7);
-  padding: var(--space-8) max(var(--page-margin), env(safe-area-inset-left));
-  background: var(--color-paper-2);
-}
-
-@media (min-width: 64rem) {
-  .v-split__panel { padding-inline: var(--space-8); }
+  gap: var(--space-5);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--brand-paper);
 }
 
 .v-split__title {
+  margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: var(--font-weight-regular);
   line-height: var(--leading-tight);
 }
 
-.v-split__title em { font-style: italic; }
-
 .v-split__group {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .v-split__label {
-  padding-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
   border-bottom: var(--border-width) solid var(--brand-ornament);
   font-size: var(--text-xs);
   letter-spacing: calc(var(--tracking-wide) * 3);
@@ -206,14 +195,14 @@
 }
 
 .v-split__text {
-  font-size: var(--text-md);
-  line-height: var(--leading-relaxed);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
 }
 
 .v-glyphs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-5) var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -228,19 +217,20 @@
 }
 
 .v-glyphs .ornament {
-  width: calc(var(--icon-xl) * 1.4);
-  height: calc(var(--icon-xl) * 1.4);
-}
-
-.v-glyphs--small .ornament {
   width: var(--icon-xl);
   height: var(--icon-xl);
 }
 
+.v-glyphs--small .ornament {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
 .v-split__photo {
   display: flex;
-  min-height: calc(var(--space-10) * 3.5);
-  padding: var(--space-6);
+  min-height: calc(var(--space-10) * 3);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
   background: var(--brand-deep);
 }
 
@@ -252,12 +242,12 @@
   color: var(--color-inverse-muted);
 }
 
-/* ---------- 4. Loop: flat, hairline-topped ---------- */
+/* ---------- 5. Loop: flat, hairline-topped ---------- */
 .landing[data-brand="veriterra"] .l-loop__step {
+  padding: var(--space-3) var(--space-0);
   border-top: var(--border-width) solid var(--color-border-strong);
   border-radius: var(--radius-none);
   background: transparent;
-  padding-inline: var(--space-0);
 }
 
 .landing[data-brand="veriterra"] .l-loop__step[aria-current="true"] {
@@ -266,17 +256,23 @@
   color: var(--brand-ornament);
 }
 
-.landing[data-brand="veriterra"] .l-loop__word { font-family: var(--font-display); }
+.landing[data-brand="veriterra"] .l-loop__word {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+}
 
-/* ---------- 5. Call to action: deep green band ---------- */
+/* ---------- 6. Call to action: deep green band inside the page margins ---------- */
 .landing[data-brand="veriterra"] .l-cta {
-  margin-top: var(--space-9);
+  margin-inline: max(var(--page-margin), env(safe-area-inset-left));
+  padding: var(--space-8) var(--space-6);
+  border-radius: var(--radius-lg);
   background: var(--brand-deep);
   color: var(--brand-paper);
 }
 
 .landing[data-brand="veriterra"] .l-cta__title {
   font-family: var(--font-display);
+  font-size: var(--text-3xl);
   font-weight: var(--font-weight-regular);
 }
 
@@ -284,6 +280,8 @@
   background: var(--brand-paper);
   color: var(--brand-deep);
 }
+
+.landing[data-brand="veriterra"] .l-footer { margin-top: var(--space-6); }
 
 /* ---------- Logo typeface bar (bottom of the logo hero) ---------- */
 .font-trial {

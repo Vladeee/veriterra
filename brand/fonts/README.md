@@ -1,9 +1,12 @@
 # Fonts
 
-Trial typefaces for Veriterra, self-hosted so they work offline on the iPad and on GitHub Pages.
-They are declared with `@font-face` at the top of `brand/tokens.css` and exposed as tokens
-(`--font-asul`, `--font-old-standard`, …). On the Veriterra landing, the **Typeface** bar at the
-bottom swaps `--font-display` between them. None is chosen yet.
+Self-hosted typefaces, so they work offline on the iPad and on GitHub Pages. They are declared
+with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--font-asul`, …).
+
+- **Logo trials:** Asul, Old Standard, Young Serif, Bona Nova, Mynerve, Accidenz Commons. The
+  **Logo typeface** bar on the Veriterra logo screen swaps `--font-logo` between them. None is chosen yet.
+- **Headings:** Hedvig Letters Serif (`--font-hedvig`). It is a free stand-in for **Season Mix**
+  (Displaay), which is commercial and would need a web licence.
 
 | Folder | Typeface | Licence | Source |
 |---|---|---|---|
@@ -13,6 +16,7 @@ bottom swaps `--font-display` between them. None is chosen yet.
 | `bona-nova/` | Bona Nova | SIL OFL 1.1 | github.com/kosmynkab/Bona-Nova |
 | `mynerve/` | Mynerve, Carolina Short | SIL OFL 1.1 | github.com/carolinashort/MyNerve |
 | `accidenz-commons/` | CC Accidenz Commons, Archetypo | CC BY-SA 4.0 | creativecommons.org |
+| `hedvig-serif/` | Hedvig Letters Serif, Kanon Foundry | SIL OFL 1.1 | Google Fonts |
 
 Not included:
 - **Oks** (Ilya Zherikov): free to use, but the licence forbids redistributing the font file, so it cannot live in a public repo.
