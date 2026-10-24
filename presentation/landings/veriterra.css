@@ -377,7 +377,7 @@
   color: var(--color-text-muted);
 }
 
-/* ---------- 4. Ornament panel + linen backdrop ---------- */
+/* ---------- 4. Ornament panel + green backdrop ---------- */
 .v-dix {
   display: grid;
   grid-template-columns: 1fr;
