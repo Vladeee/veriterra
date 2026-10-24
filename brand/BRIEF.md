@@ -1,6 +1,6 @@
 # Brief — Draft 0
 
-> **Current focus: Veriterra only, typography first.** The other companies are paused; sections get added one at a time.
+> **Current focus: one presentation link.** An intro, then five landing pages (the holding plus four companies) with one shared structure, styled one by one.
 >
 > **Status: not approved.** This file holds the facts collected so far and the questions still open.
 > The strategy interview is paused while the working setup is built. Nothing below is a final brand decision.

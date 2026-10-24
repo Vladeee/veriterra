@@ -1,7 +1,7 @@
 {
-  "name": "VITREEONE Brand System",
+  "name": "VITREEONE",
   "short_name": "VITREEONE",
-  "description": "VITREEONE brand system: presentation and style guide (working draft).",
+  "description": "VITREEONE and its four companies (working draft).",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

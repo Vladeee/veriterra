@@ -1,6 +1,6 @@
 /*
   Shared base + typography + the few components in use.
-  Used by the style guide, the deck and (later) the site.
+  Used by the presentation and (later) the sites.
   Every value comes from brand/tokens.css. Brand colour comes only from --brand-*.
   New components get added here one at a time, when a section needs them.
 */

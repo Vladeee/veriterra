@@ -1,5 +1,5 @@
 /*
-  Shared behaviour for the style guide, the deck and the sites.
+  Shared behaviour for the presentation and (later) the sites.
   - Icons:       <span class="icon" data-icon="arrow-right"></span>
   - Brand names: <span data-brand-name="veriterra"></span>, descriptors: data-brand-descriptor
   Needs brand/brands.js loaded first.

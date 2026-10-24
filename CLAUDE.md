@@ -1,11 +1,12 @@
 # Project rules
 
-Brand system for the holding company VITREEONE and its four companies: Veriterra (fertilizers), Verdo (farm and food), Vaya (eco-glamping) and Viva (construction). First we build a style guide and a brand deck. Then four websites (one per company) get built in this same repo, on top of them.
+Brand system for the holding company VITREEONE and its four companies: Veriterra (fertilizers), Verdo (farm and food), Vaya (eco-glamping) and Viva (construction). Right now it is one presentation link with five landing pages. Real websites come later, in this same repo.
 
 **Stage: working draft, skeleton.** The user wants it minimal and built step by step.
-- **The presentation (`deck/`) is five short landing pages**, not a slide deck: VITREEONE (the holding) plus Veriterra, Verdo, Vaya and Viva. A fixed top menu switches between them (`deck/#verdo`). All five share **one identical, centred structure**, defined in `deck/deck.css`: hero (logo first → headline with one serif-italic `<em>` word → lead → sign-up pill → photo + spec card) → bento grid (facts + offer) → split (labelled details panel + tall photo) → loop strip → centred call to action → footer. Each landing paints its own soft gradient background from `--brand-bg` (tokens). Each landing gets its own look later in `deck/landings/<id>.css`, scoped to `.landing[data-brand="<id>"]`. Keep the structure identical across the five unless the user asks otherwise.
-- **The style guide (`styleguide/`) holds typography only**, shown for Veriterra.
-- New sections are added **one at a time, only when the user asks**. Don't bring back removed style-guide sections (essence, logo, colour, spacing, components, imagery, motion) unprompted; they are in git history.
+- **One link for everything: the root `index.html`.** It opens on an intro screen (logo, one paragraph, a **Welcome** button). Welcome leads to **five short landing pages**: VITREEONE (the holding) plus Veriterra, Verdo, Vaya and Viva. A fixed top menu of plain text links (a small dot under the current one) switches between them via the URL hash (`#verdo`, `#vaya-contact`; no hash or `#intro` = intro).
+- **Layout: a full-width 12-column page grid**, after paypath.ai: edge to edge with `--page-margin` on the sides, `--grid-gutter` between columns, `--grid-gap-tight` between cards, and sections topped by a hairline with a dot label.
+- **All five landings share one identical structure**, defined in `presentation/presentation.css`: hero (logo first → headline with one serif-italic `<em>` word → lead → sign-up pill) → media (photo 7 cols + spec card 5 cols) → bento grid (facts + offer) → split (details 4 cols + tall photo 8 cols) → loop strip → centred call to action → footer. Each landing paints its own soft gradient from `--brand-bg` (tokens). Each landing gets its own look later in `presentation/landings/<id>.css`, scoped to `.landing[data-brand="<id>"]`. Keep the structure identical across the five unless the user asks otherwise.
+- There is **no style guide** for now (removed at the user's request). Sections are added **one at a time, only when the user asks**.
 - Colours, typefaces and copy are placeholders. Read `brand/BRIEF.md` before any brand decision.
 
 ## Where things live
@@ -14,13 +15,14 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 |---|---|
 | `brand/tokens.css` | **Single source of truth** for every visual value (colour, type, spacing, radii, shadows, motion, layers) |
 | `brand/tokens.json` | Mirror of tokens.css for tools and other platforms. Generated: `python3 tools/tokens.py sync` |
-| `brand/components.css` | Shared reset, base typography and the few components in use. Grows with each new section |
+| `brand/components.css` | Shared reset, base typography and the few components in use |
 | `brand/brands.js` | Brand registry (ids, names, descriptors). Menus, labels and generated blocks read names from here. Copy text may mention the companies |
-| `brand/brand-ui.js` | Shared behaviour: inline icons, brand names |
+| `brand/brand-ui.js` | Shared behaviour: inline icons, brand names and descriptors |
 | `brand/BRIEF.md` | Positioning, audience, tone; facts and open questions |
 | `brand/logo/`, `brand/fonts/`, `brand/icons/` | Assets (logos and fonts not supplied yet) |
-| `styleguide/` | One-page style guide |
-| `deck/` | Presentation: five landings behind one fixed menu. `deck.css` = shared skeleton, `landings/<id>.css` = per-landing style |
+| `index.html` | The one link: intro + five landings |
+| `presentation/` | `presentation.css` = intro, menu and shared landing skeleton; `presentation.js` = routing, menu, loop; `landings/<id>.css` = per-landing style |
+| `deck/index.html` | Redirect from the old presentation URL to the root (keeps the hash) |
 | `site/` | Websites (later) |
 | `tools/tokens.py` | Sync and lint for tokens |
 
@@ -47,6 +49,4 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 
 - Work in small logical steps. Run `python3 tools/tokens.py check`, commit with a clear message and push after each step.
 - Preview locally with `python3 -m http.server 8000` from the repo root, then open `http://localhost:8000/`.
-- The style guide picks up token changes automatically (type sizes and font stacks are read live from the CSS). Don't duplicate token values in HTML.
-- Adding a block to the landings: add it to all five in `deck/index.html` with the same classes, style it in `deck.css`, and add only the components and tokens it needs.
-- Adding a style-guide section: add only that section and the components and tokens it needs.
+- Adding a block to the landings: add it to all five in `index.html` with the same classes, place it on the page grid in `presentation/presentation.css`, and add only the components and tokens it needs.

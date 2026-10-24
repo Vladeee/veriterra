@@ -1,13 +1,15 @@
 /*
-  Presentation: five landings behind one fixed menu.
-  - The URL hash picks the landing: deck/#verdo. A hash pointing inside a
-    landing (#verdo-offer) opens that landing and scrolls to the block.
+  One link for everything: an intro screen with a Welcome button, then five
+  landings behind one fixed menu.
+  - No hash (or #intro) shows the intro. #verdo opens a landing. A hash inside
+    a landing (#verdo-offer) opens that landing and scrolls to the block.
   - The menu and the "loop" strip are built from brand/brands.js.
 */
 (function () {
   "use strict";
 
   var root = document.documentElement;
+  var intro = document.getElementById("intro");
   var landings = Array.prototype.slice.call(document.querySelectorAll(".landing"));
   var menu = document.getElementById("topnav-list");
   var fsBtn = document.getElementById("fullscreen");
@@ -15,14 +17,12 @@
 
   // ---------- built from the brand registry ----------
   function buildMenu() {
-    var home = document.getElementById("topnav-home");
     BRANDS.forEach(function (b) {
       var a = document.createElement("a");
-      a.className = "topnav__link" + (b.holding ? " topnav__link--holding" : "");
+      a.className = "topnav__link";
       a.href = "#" + b.id;
       a.setAttribute("data-brand", b.id);
       a.textContent = b.name;
-      if (b.holding) { home.appendChild(a); return; }
       var li = document.createElement("li");
       li.appendChild(a);
       menu.appendChild(li);
@@ -51,12 +51,25 @@
   }
 
   // ---------- routing ----------
+  function showIntro() {
+    current = intro;
+    intro.hidden = false;
+    landings.forEach(function (l) { l.hidden = true; });
+    document.body.classList.add("is-intro");
+    root.setAttribute("data-brand", "vitreeone");
+    document.title = BrandUI.brandById("vitreeone").name;
+    window.scrollTo(0, 0);
+  }
+
   function show(hash) {
-    var target = hash ? document.getElementById(hash) : null;
+    if (!hash || hash === "intro") { showIntro(); return; }
+    var target = document.getElementById(hash);
     var landing = target ? target.closest(".landing") : null;
-    if (!landing) landing = landings[0];
+    if (!landing) { showIntro(); return; }
 
     if (landing !== current) {
+      intro.hidden = true;
+      document.body.classList.remove("is-intro");
       landings.forEach(function (l) { l.hidden = l !== landing; });
       current = landing;
       root.setAttribute("data-brand", landing.id);
@@ -66,10 +79,10 @@
       });
       var active = menu.querySelector('[aria-current="page"]');
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
-      document.title = BrandUI.brandById(landing.id).name + " · Presentation";
+      document.title = BrandUI.brandById(landing.id).name;
     }
 
-    if (target && target !== landing) target.scrollIntoView({ block: "start" });
+    if (target !== landing) target.scrollIntoView({ block: "start" });
     else window.scrollTo(0, 0);
   }
 
