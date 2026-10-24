@@ -4,11 +4,13 @@
 
   Presentation, not a website: five full-screen slides that snap on scroll.
     1. Logo            light: lime gradient on cream paper
-    2. Statement       dark: forest linen with drifting light streaks (after paypath)
+    2. Statement       dark: flat main green with drifting light streaks (after paypath)
     3. What we do      photo + list over hairlines (after Farm Minerals)
-    4. Ornaments       cream panel + forest linen backdrop (after Dix Hectares)
+    4. Ornaments       beige panel + main green backdrop (after Dix Hectares)
     5. Call to action  light, with the loop and a legal line at the bottom
-  Textures are self-made files in brand/textures/ (grain, paper, linen).
+  Colours: the Farm Minerals library in tokens.css (--color-fm-*, OKLCH). The palette
+  strip on slide 1 switches data-palette between three variations (below).
+  Textures are self-made files in brand/textures/ (grain, paper).
   Headings: Hedvig Letters Serif. The logo bar on slide 1 swaps --font-logo.
 */
 
@@ -30,6 +32,115 @@
 .landing[data-brand="veriterra"][data-font="bona-nova"] { --font-logo: var(--font-bona-nova); }
 .landing[data-brand="veriterra"][data-font="mynerve"] { --font-logo: var(--font-mynerve); }
 .landing[data-brand="veriterra"][data-font="accidenz"] { --font-logo: var(--font-accidenz); }
+
+/* ---------- Palette variations (data-palette on the landing) ----------
+   field: Farm Minerals as is, olive on beige.
+   soil:  + terracotta ornaments and warm soft tints (hue 45-55 against olive 123).
+   bloom: + lime glow and highlights on the green slides (same hue, high chroma). */
+.landing[data-brand="veriterra"][data-palette="soil"] {
+  --brand-ornament: var(--color-fm-terracotta);
+  --brand-glow-2: var(--color-fm-terracotta-soft);
+  --brand-accent-soft: var(--color-fm-terracotta-soft);
+}
+
+.landing[data-brand="veriterra"][data-palette="bloom"] {
+  --brand-ornament: var(--color-fm-olive-500);
+  --brand-glow: var(--color-fm-lime-soft);
+  --brand-glow-deep: var(--color-fm-lime);
+  --brand-on-deep-muted: var(--color-fm-lime-soft);
+}
+
+/* ---------- Palette strip (slide 1, under the menu) ---------- */
+.palette {
+  position: absolute;
+  top: calc(var(--nav-height) + env(safe-area-inset-top) + var(--space-3));
+  inset-inline: 0;
+  z-index: var(--z-raised);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding-inline: var(--page-margin);
+}
+
+.palette__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-translucent);
+}
+
+.palette__label {
+  padding-inline: var(--space-3) var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.palette__row button {
+  min-height: var(--tap-min);
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.palette__row button[aria-pressed="true"] {
+  background: var(--brand-accent);
+  color: var(--brand-on-accent);
+}
+
+.palette__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Small square inside a full-size tap target */
+.palette__swatch {
+  display: grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  padding: var(--space-0);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.palette__swatch::before {
+  content: "";
+  width: var(--space-5);
+  height: var(--space-5);
+  border-radius: var(--radius-sm);
+  background: var(--sw);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.palette__swatch[aria-pressed="true"]::before {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 var(--border-width-strong) var(--color-text);
+}
+
+.palette__value {
+  min-height: var(--space-5);
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+}
 
 /* ---------- Slides ---------- */
 .v-slide {
@@ -61,7 +172,7 @@
 .v-slide[data-tone="dark"],
 .v-dix__backdrop {
   color: var(--brand-paper);
-  background: var(--brand-deep) url("../../brand/textures/linen-forest.jpg");
+  background: var(--brand-deep);
 }
 
 .v-kicker {

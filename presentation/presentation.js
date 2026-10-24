@@ -179,12 +179,52 @@
     });
   }
 
+  // ---------- palette trial: [data-palette-switch] sets data-palette on its landing ----------
+  var probe = document.createElement("canvas").getContext("2d");
+  function toHex(color) {
+    probe.clearRect(0, 0, 1, 1);
+    probe.fillStyle = color;
+    probe.fillRect(0, 0, 1, 1);
+    var d = probe.getImageData(0, 0, 1, 1).data;
+    return "#" + [d[0], d[1], d[2]].map(function (v) { return v.toString(16).padStart(2, "0"); }).join("").toUpperCase();
+  }
+
+  function initPaletteSwitches() {
+    document.querySelectorAll("[data-palette-switch]").forEach(function (box) {
+      var landing = box.closest(".landing");
+      var key = "palette-" + landing.id;
+      var out = box.querySelector(".palette__value");
+      var saved = null;
+      try { saved = window.localStorage.getItem(key); } catch (e) { /* storage unavailable */ }
+      function pick(name) {
+        landing.setAttribute("data-palette", name);
+        box.querySelectorAll("button[data-palette]").forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b.getAttribute("data-palette") === name));
+        });
+        try { window.localStorage.setItem(key, name); } catch (e) { /* storage unavailable */ }
+      }
+      box.addEventListener("click", function (e) {
+        var p = e.target.closest("button[data-palette]");
+        if (p && box.contains(p)) { pick(p.getAttribute("data-palette")); return; }
+        var sw = e.target.closest("[data-swatch]");
+        if (!sw) return;
+        box.querySelectorAll("[data-swatch]").forEach(function (b) { b.setAttribute("aria-pressed", String(b === sw)); });
+        var value = getComputedStyle(root).getPropertyValue(sw.getAttribute("data-swatch")).trim();
+        var source = sw.getAttribute("data-source");
+        out.textContent = sw.getAttribute("data-name") + " · " + toHex(value) + " · " + value +
+          " · " + (source === "site" ? "from farmminerals.com" : source === "derived" ? "derived" : source + " variation");
+      });
+      pick(saved && box.querySelector('[data-palette="' + saved + '"]') ? saved : box.getAttribute("data-default"));
+    });
+  }
+
   // ---------- init ----------
   function init() {
     buildMenu();
     buildLoops();
     initPlaceholders();
     initFontSwitches();
+    initPaletteSwitches();
     initReveal();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);

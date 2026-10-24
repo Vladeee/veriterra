@@ -107,6 +107,33 @@
 
       <!-- 1. Logo -->
       <header class="v-slide v-slide--light logo-hero" data-logo-hero data-tone="light">
+        <div class="palette" data-palette-switch data-default="field" role="group" aria-label="Colour palette (draft)">
+          <div class="palette__row">
+            <span class="palette__label">Palette</span>
+            <button type="button" data-palette="field">Field</button>
+            <button type="button" data-palette="soil">Soil</button>
+            <button type="button" data-palette="bloom">Bloom</button>
+          </div>
+          <ul class="palette__swatches">
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-beige" data-name="Beige" data-source="site" style="--sw: var(--color-fm-beige)" aria-label="Beige"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-beige-deep" data-name="Beige deep" data-source="derived" style="--sw: var(--color-fm-beige-deep)" aria-label="Beige deep"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-100" data-name="Olive 100" data-source="derived" style="--sw: var(--color-fm-olive-100)" aria-label="Olive 100"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-200" data-name="Olive 200" data-source="derived" style="--sw: var(--color-fm-olive-200)" aria-label="Olive 200"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-300" data-name="Olive 300" data-source="derived" style="--sw: var(--color-fm-olive-300)" aria-label="Olive 300"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-500" data-name="Light green" data-source="site" style="--sw: var(--color-fm-olive-500)" aria-label="Light green"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-600" data-name="Heading green" data-source="site" style="--sw: var(--color-fm-olive-600)" aria-label="Heading green"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-700" data-name="Mid green" data-source="site" style="--sw: var(--color-fm-olive-700)" aria-label="Mid green"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-800" data-name="Text green" data-source="site" style="--sw: var(--color-fm-olive-800)" aria-label="Text green"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-900" data-name="Main green" data-source="site" style="--sw: var(--color-fm-olive-900)" aria-label="Main green"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-olive-950" data-name="Dark overlay" data-source="site" style="--sw: var(--color-fm-olive-950)" aria-label="Dark overlay"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-ink" data-name="Ink (logo)" data-source="derived" style="--sw: var(--color-fm-ink)" aria-label="Ink (logo)"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-terracotta" data-name="Terracotta" data-source="soil" style="--sw: var(--color-fm-terracotta)" aria-label="Terracotta"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-terracotta-soft" data-name="Terracotta soft" data-source="soil" style="--sw: var(--color-fm-terracotta-soft)" aria-label="Terracotta soft"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-lime" data-name="Lime" data-source="bloom" style="--sw: var(--color-fm-lime)" aria-label="Lime"></button></li>
+            <li><button type="button" class="palette__swatch" data-swatch="--color-fm-lime-soft" data-name="Lime soft" data-source="bloom" style="--sw: var(--color-fm-lime-soft)" aria-label="Lime soft"></button></li>
+          </ul>
+          <p class="palette__value" aria-live="polite">From farmminerals.com, extended in OKLCH. Tap a colour.</p>
+        </div>
         <h1 class="logo-hero__word" id="veriterra-title" data-brand-name="veriterra"></h1>
         <p class="logo-hero__caption">Water-soluble fertilizers · Made in Sri Lanka</p>
         <a class="logo-hero__scroll" href="#veriterra-field" aria-label="Next slide"><span class="logo-hero__scroll-line" aria-hidden="true"></span></a>
@@ -175,7 +202,7 @@
           </div>
         </div>
         <div class="v-dix__backdrop" data-tone="dark">
-          <div class="media-placeholder v-dix__frame" data-reveal>Real photo to come · the product on linen</div>
+          <div class="media-placeholder v-dix__frame" data-reveal>Real photo to come · the product on green</div>
         </div>
       </section>
 

@@ -8,15 +8,18 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 - **All five landings share one identical structure**, defined in `presentation/presentation.css`: hero (logo first → headline with one serif-italic `<em>` word → lead → button) → media (photo 7 cols + spec card 5 cols) → bento grid (facts + offer) → loop strip → centred call to action → footer. No e-mail fields and no details/photo split panels (removed at the user's request). Each landing paints its own soft gradient from `--brand-bg` (tokens). Each landing gets its own look later in `presentation/landings/<id>.css`, scoped to `.landing[data-brand="<id>"]`. Keep the structure identical across the five unless the user asks otherwise.
 - **Current focus: Veriterra.** Its landing diverges from the shared skeleton on purpose, and it is a **presentation, not a website**. It has five full-screen slides (`.v-slide`, `min-height: 100dvh`) that snap on scroll (`data-slides` on the landing puts `html.has-slides` in place):
   1. **Logo**: only the wordmark (`--text-logo`, colour `--brand-logo` = #2E1919) and a caption. The whole word rises with a blur and a bottom-up fade mask, then the caption, the scroll cue and the **Logo typeface** bar fade in. It replays on open and on typeface change.
-  2. **Statement + four figures** on a dark forest linen slide with slowly drifting, blurred light streaks (after paypath.ai).
+  2. **Statement + four figures** on a flat main-green slide with slowly drifting, blurred light streaks (after paypath.ai).
   3. **What we do**: a full-bleed photo next to a list over hairlines (after Farm Minerals).
-  4. **Ornaments**: a cream panel of terracotta ornaments next to a forest linen backdrop with a photo frame (after Dix Hectares).
+  4. **Ornaments**: a beige panel of ornaments next to a main-green backdrop with a photo frame (after Dix Hectares).
   5. **Call to action**, with the loop and a legal line at the bottom.
-  - **Textures** are self-made files in `brand/textures/` (`grain.png` over every slide, `paper-cream.jpg`, `linen-forest.jpg`). They can be swapped for photographed textures later.
+  - **Textures** are self-made files in `brand/textures/` (`grain.png` over every slide, `paper-cream.jpg`). They can be swapped for photographed textures later.
   - **Menu**: no background, blur only once scrolled. It turns light over slides with `data-tone="dark"` (`body.nav-on-dark`).
   - **Fonts**: the trial fonts in `brand/fonts/` are for the logo only (`--font-logo`). Headings use **Hedvig Letters Serif** (`--font-hedvig`), a free stand-in for Season Mix, which is commercial. Body text is system sans.
   - **Motion**: `data-reveal` elements rise in on scroll (staggered by `--i`). Reduced motion disables the drift and shows everything at once.
-  - **Palette**: olive text, terracotta ornaments, deep forest, lime glow. Tokens: `--brand-paper`, `--brand-ornament`, `--brand-deep`, `--brand-logo`, `--brand-glow-deep`, `--brand-on-deep-muted`. Ornaments come from `brand-ui.js` (`data-ornament`).
+  - **Palette (draft): the Farm Minerals colour library**, read from farmminerals.com and extended in OKLCH: `--color-fm-*` in tokens.css. The source colours are beige #F4EDE6 and greens #394420 / #404F1D / #4C5B20 / #596A33 / #636F3D / #7C914C. Everything else is derived on the same hues (olive ≈123, beige ≈68).
+    - Slide 1 shows the library as small squares under the menu; tapping one shows its name, HEX, OKLCH and source.
+    - Three variations (`data-palette` on the landing, rules in `veriterra.css`): **field** (Farm Minerals as is), **soil** (+ terracotta, hue 45) and **bloom** (+ lime glow, hue 122).
+    - Brand tokens: `--brand-paper`, `--brand-ornament`, `--brand-deep`, `--brand-logo`, `--brand-glow-deep`, `--brand-on-deep-muted`. Ornaments come from `brand-ui.js` (`data-ornament`).
   - Leave the other four landings alone unless asked.
 - There is **no style guide** for now (removed at the user's request). Sections are added **one at a time, only when the user asks**.
 - Colours, typefaces and copy are placeholders. Read `brand/BRIEF.md` before any brand decision.
