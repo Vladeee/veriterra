@@ -1,5 +1,114 @@
 /*
-  vitreeone landing. Styles for this landing only, scoped to
-  .landing[data-brand="vitreeone"]. Tokens only (see brand/tokens.css).
-  Empty for now: the shared skeleton lives in presentation/presentation.css.
+  vitreeone landing: one screen only. Tokens only (see brand/tokens.css).
+  After the "Living Roots" reference: a dark, still-water background, a row of four
+  hand-drawn glyphs (one per company, each links to its landing), the wordmark in
+  Faculty Glyphic, a caption and a button. Glyphs appear first, one by one, then the
+  logo rises (shared .logo-hero animation), then the caption and the button.
 */
+
+.landing[data-brand="vitreeone"] {
+  --font-logo: var(--font-faculty);
+  --brand-logo: var(--color-vitreeone-foam);
+  --color-text: var(--color-vitreeone-foam);
+  --color-text-muted: var(--color-vitreeone-foam);
+  padding-top: var(--space-0);
+  color: var(--color-vitreeone-foam);
+  background:
+    radial-gradient(90% 60% at 50% 110%, var(--color-vitreeone-tide) 0%, transparent 70%),
+    radial-gradient(70% 50% at 15% 0%, var(--color-vitreeone-tide) 0%, transparent 70%),
+    var(--color-vitreeone-night);
+}
+
+.vo-hero {
+  min-height: 100dvh;
+  gap: var(--space-6);
+  padding-top: calc(var(--nav-height) + env(safe-area-inset-top));
+}
+
+.landing[data-brand="vitreeone"] .logo-hero__word {
+  letter-spacing: var(--tracking-wide);
+  animation-delay: calc(var(--stagger) * 8);
+}
+
+.landing[data-brand="vitreeone"] .logo-hero__caption {
+  color: var(--color-vitreeone-foam);
+  animation-delay: calc(var(--stagger) * 8 + var(--duration-logo) * 0.5);
+}
+
+.landing[data-brand="vitreeone"] .logo-hero__late {
+  animation-delay: calc(var(--stagger) * 8 + var(--duration-logo) * 0.8);
+}
+
+/* ---------- Four glyphs ---------- */
+.vo-glyphs {
+  display: flex;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vo-glyphs li { opacity: 0; }
+
+.logo-hero.is-playing .vo-glyphs li {
+  animation: logo-fade var(--duration-reveal) var(--ease-out-expo) forwards;
+  animation-delay: calc(var(--stagger) * 2 * var(--i));
+}
+
+.vo-glyph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: var(--tap-comfort);
+  color: inherit;
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.vo-glyph svg {
+  width: calc(var(--space-8) * 1.1);
+  height: auto;
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.vo-glyph__name {
+  font-size: var(--text-xs);
+  letter-spacing: calc(var(--tracking-wide) * 2);
+  text-transform: uppercase;
+  opacity: var(--opacity-quiet);
+}
+
+@media (hover: hover) {
+  .vo-glyph:hover svg { transform: translateY(calc(var(--space-1) * -1)); }
+}
+
+.vo-glyph:active svg { transform: scale(var(--press-scale)); }
+
+/* ---------- Button ---------- */
+.vo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--tap-comfort);
+  margin-top: var(--space-3);
+  padding-inline: var(--space-6);
+  border: var(--border-width) solid var(--color-vitreeone-foam);
+  border-radius: var(--radius-pill);
+  color: var(--color-vitreeone-foam);
+  font-size: var(--text-md);
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .vo-btn:hover { background: var(--color-vitreeone-foam); color: var(--color-vitreeone-night); }
+}
+
+.vo-btn:active { background: var(--color-vitreeone-foam); color: var(--color-vitreeone-night); }
+
+@media (max-width: 40rem) {
+  .vo-glyphs { gap: var(--space-3); }
+  .vo-glyph svg { width: var(--space-8); }
+}

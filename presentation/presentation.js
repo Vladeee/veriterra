@@ -218,6 +218,81 @@
     });
   }
 
+  // ---------- scroll colour: the slide in the middle of the screen sets the background ----------
+  // Each slide carries data-bg (a colour token). Its "Background" chip lets you pick another
+  // colour from the landing's palette swatches; the choice is remembered on this device.
+  function isDark(token) {
+    var hex = toHex(getComputedStyle(root).getPropertyValue(token).trim());
+    var c = [1, 3, 5].map(function (i) {
+      var v = parseInt(hex.substr(i, 2), 16) / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] < 0.18;
+  }
+
+  function initScrollColour() {
+    document.querySelectorAll(".landing[data-slides]").forEach(function (landing) {
+      var slides = Array.prototype.slice.call(landing.querySelectorAll("[data-bg]"));
+      var library = Array.prototype.map.call(landing.querySelectorAll("[data-swatch]"), function (b) {
+        return { token: b.getAttribute("data-swatch"), name: b.getAttribute("data-name") };
+      });
+      var active = null;
+
+      function apply(slide) {
+        active = slide;
+        landing.style.setProperty("--scroll-bg", "var(" + slide.getAttribute("data-bg") + ")");
+        landing.setAttribute("data-tone", slide.getAttribute("data-tone"));
+      }
+
+      function setBg(slide, token, save) {
+        slide.setAttribute("data-bg", token);
+        slide.setAttribute("data-tone", isDark(token) ? "dark" : "light");
+        var chip = slide.querySelector(".bg-pick");
+        if (chip) {
+          chip.style.setProperty("--current-bg", "var(" + token + ")");
+          chip.querySelectorAll("[data-bg-token]").forEach(function (b) {
+            b.setAttribute("aria-pressed", String(b.getAttribute("data-bg-token") === token));
+          });
+        }
+        if (save) { try { window.localStorage.setItem("bg-" + landing.id + "-" + slides.indexOf(slide), token); } catch (e) { /* storage unavailable */ } }
+        if (slide === active) apply(slide);
+      }
+
+      slides.forEach(function (slide, i) {
+        var chip = document.createElement("div");
+        chip.className = "bg-pick";
+        chip.innerHTML = '<button type="button" class="bg-pick__toggle" aria-expanded="false">Background</button><ul class="bg-pick__list"></ul>';
+        var list = chip.querySelector("ul");
+        library.forEach(function (c) {
+          var li = document.createElement("li");
+          li.innerHTML = '<button type="button" data-bg-token="' + c.token + '" style="--sw: var(' + c.token + ')" aria-label="' + c.name + '"></button>';
+          list.appendChild(li);
+        });
+        chip.addEventListener("click", function (e) {
+          var t = e.target.closest(".bg-pick__toggle");
+          if (t) {
+            var open = chip.classList.toggle("is-open");
+            t.setAttribute("aria-expanded", String(open));
+            return;
+          }
+          var b = e.target.closest("[data-bg-token]");
+          if (b) setBg(slide, b.getAttribute("data-bg-token"), true);
+        });
+        slide.appendChild(chip);
+        var saved = null;
+        try { saved = window.localStorage.getItem("bg-" + landing.id + "-" + i); } catch (e) { /* storage unavailable */ }
+        setBg(slide, saved || slide.getAttribute("data-bg"), false);
+      });
+
+      if (!("IntersectionObserver" in window)) { if (slides[0]) apply(slides[0]); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) apply(e.target); });
+      }, { rootMargin: "-50% 0px -50% 0px" });
+      slides.forEach(function (sl) { io.observe(sl); });
+      if (slides[0]) apply(slides[0]);
+    });
+  }
+
   // ---------- init ----------
   function init() {
     buildMenu();
@@ -225,6 +300,7 @@
     initPlaceholders();
     initFontSwitches();
     initPaletteSwitches();
+    initScrollColour();
     initReveal();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);

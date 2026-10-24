@@ -30,7 +30,7 @@ body {
   grid-column: 1 / -1;
 }
 
-/* ---------- Top menu: plain links, a dot under the current one ---------- */
+/* ---------- Top menu: centred plain links, a dot under the current one ---------- */
 .topnav {
   position: fixed;
   top: 0;
@@ -38,31 +38,55 @@ body {
   right: 0;
   z-index: var(--z-sticky);
   padding-top: env(safe-area-inset-top);
-  background: transparent;
-  transition: -webkit-backdrop-filter var(--duration-base) var(--ease-standard), backdrop-filter var(--duration-base) var(--ease-standard);
-}
-
-/* No fill, ever. Once the page scrolls, a blur keeps the links readable over content. */
-body.is-scrolled .topnav {
-  -webkit-backdrop-filter: blur(var(--space-4));
-  backdrop-filter: blur(var(--space-4));
+  color: var(--color-text);
+  transition: color var(--duration-base) var(--ease-standard);
 }
 
 body.is-intro .topnav { display: none; }
 
-/* Over a dark slide the menu turns light (presentation.js samples the slide under it) */
-.topnav { color: var(--color-text); transition: color var(--duration-base) var(--ease-standard); }
+/* Over a dark slide the menu turns light (presentation.js samples what is under it) */
 body.nav-on-dark .topnav { color: var(--color-paper-0); }
+
+/* Progressive blur (after wondersauce.com): stacked layers, each blurring more and
+   masked to a lower band, so the blur fades out instead of ending on a hard edge.
+   No fill colour. Shown only once the page has scrolled. */
+.topnav__blur {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: calc((var(--nav-height) + env(safe-area-inset-top)) * 1.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
+body.is-scrolled .topnav__blur { opacity: 1; }
+
+.topnav__blur i {
+  position: absolute;
+  inset: 0;
+  -webkit-backdrop-filter: blur(calc(var(--space-1) * var(--b)));
+  backdrop-filter: blur(calc(var(--space-1) * var(--b)));
+  -webkit-mask-image: linear-gradient(to bottom, black var(--from), transparent var(--to));
+  mask-image: linear-gradient(to bottom, black var(--from), transparent var(--to));
+}
+
+.topnav__blur i:nth-child(1) { --b: 0.25; --from: 60%; --to: 100%; }
+.topnav__blur i:nth-child(2) { --b: 0.5; --from: 50%; --to: 85%; }
+.topnav__blur i:nth-child(3) { --b: 1; --from: 40%; --to: 70%; }
+.topnav__blur i:nth-child(4) { --b: 2; --from: 30%; --to: 55%; }
+.topnav__blur i:nth-child(5) { --b: 4; --from: 20%; --to: 40%; }
 
 /* Landings built as slides snap one screen at a time */
 html.has-slides { scroll-snap-type: y proximity; }
 
 .topnav__inner {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  justify-content: center;
   height: var(--nav-height);
-  padding-inline: max(var(--page-margin), env(safe-area-inset-left)) max(var(--page-margin), env(safe-area-inset-right));
+  padding-inline: calc(var(--tap-min) + max(var(--page-margin), env(safe-area-inset-left))) calc(var(--tap-min) + max(var(--page-margin), env(safe-area-inset-right)));
 }
 
 .topnav__list {
@@ -121,7 +145,10 @@ html.has-slides { scroll-snap-type: y proximity; }
   place-items: center;
   width: var(--tap-min);
   height: var(--tap-min);
-  margin-left: auto;
+  position: absolute;
+  right: max(var(--page-margin), env(safe-area-inset-right));
+  top: 50%;
+  translate: 0 -50%;
   border: 0;
   border-radius: var(--radius-sm);
   background: transparent;
@@ -615,6 +642,7 @@ html.has-slides { scroll-snap-type: y proximity; }
 
 .logo-hero__caption,
 .logo-hero .font-trial,
+.logo-hero__late,
 .logo-hero__scroll {
   opacity: 0;
 }
@@ -632,6 +660,7 @@ html.has-slides { scroll-snap-type: y proximity; }
 }
 
 .logo-hero.is-playing .font-trial,
+.logo-hero.is-playing .logo-hero__late,
 .logo-hero.is-playing .logo-hero__scroll {
   animation: logo-fade var(--duration-reveal) var(--ease-out-expo) forwards;
   animation-delay: calc(var(--duration-logo) * 0.8);
@@ -705,6 +734,8 @@ html.has-slides { scroll-snap-type: y proximity; }
 @media (prefers-reduced-motion: reduce) {
   .logo-hero__scroll-line { animation: none; }
   .logo-hero__caption,
+  .logo-hero__late,
+  .vo-glyphs li,
   .logo-hero .font-trial,
   .logo-hero__scroll,
   [data-reveal] { opacity: 1; transform: none; }

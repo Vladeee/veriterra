@@ -30,6 +30,7 @@
 @font-face { font-family: "Bona Nova"; src: url("fonts/bona-nova/bona-nova-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Mynerve"; src: url("fonts/mynerve/mynerve-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Hedvig Letters Serif"; src: url("fonts/hedvig-serif/hedvig-letters-serif-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Faculty Glyphic"; src: url("fonts/faculty-glyphic/faculty-glyphic-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "CC Accidenz Commons"; src: url("fonts/accidenz-commons/accidenz-commons-500.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
 
 :root {
@@ -52,6 +53,9 @@
 
   /* ---------- Colour: brand accents (PLACEHOLDERS) ---------- */
   --color-vitreeone-100: #ECE8DF;
+  --color-vitreeone-night: oklch(22% 0.03 195);
+  --color-vitreeone-tide: oklch(36% 0.045 190);
+  --color-vitreeone-foam: oklch(94% 0.012 90);
   --color-vitreeone-600: #2E2C27;
   --color-vitreeone-700: #1A1916;
   --color-vitreeone-glow: #EFE5D0;
@@ -125,6 +129,7 @@
   --font-mynerve: "Mynerve", "Comic Sans MS", cursive;
   --font-accidenz: "CC Accidenz Commons", "Helvetica Neue", Arial, sans-serif;
   --font-hedvig: "Hedvig Letters Serif", Georgia, serif;
+  --font-faculty: "Faculty Glyphic", Georgia, serif;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -242,7 +247,7 @@
   --z-toast: 300;
   --opacity-disabled: 0.45;
   --opacity-quiet: 0.85;
-  --opacity-grain: 0.35;
+  --opacity-glow: 0.35;
 }
 
 /* ---------- Brand themes ----------

@@ -3,8 +3,9 @@
 Self-hosted typefaces, so they work offline on the iPad and on GitHub Pages. They are declared
 with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--font-asul`, …).
 
-- **Logo trials:** Asul, Old Standard, Young Serif, Bona Nova, Mynerve, Accidenz Commons. The
+- **Logo trials:** Asul, Old Standard, Young Serif, Bona Nova, Mynerve, Accidenz Commons, Faculty Glyphic. The
   **Logo typeface** bar on the Veriterra logo screen swaps `--font-logo` between them. None is chosen yet.
+- **VITREEONE wordmark:** Faculty Glyphic (`--font-faculty`).
 - **Headings:** Hedvig Letters Serif (`--font-hedvig`). It is a free stand-in for **Season Mix**
   (Displaay), which is commercial and would need a web licence.
 
@@ -16,6 +17,7 @@ with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--fon
 | `bona-nova/` | Bona Nova | SIL OFL 1.1 | github.com/kosmynkab/Bona-Nova |
 | `mynerve/` | Mynerve, Carolina Short | SIL OFL 1.1 | github.com/carolinashort/MyNerve |
 | `accidenz-commons/` | CC Accidenz Commons, Archetypo | CC BY-SA 4.0 | creativecommons.org |
+| `faculty-glyphic/` | Faculty Glyphic, Dylan Young Koto | SIL OFL 1.1 | supplied by the user (github.com/DylanYoungKoto/FacultyGlyphic) |
 | `hedvig-serif/` | Hedvig Letters Serif, Kanon Foundry | SIL OFL 1.1 | Google Fonts |
 
 Not included:
