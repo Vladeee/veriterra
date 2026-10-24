@@ -1,136 +1,103 @@
 /*
-  Brand deck controller.
-  - Swipe left/right, or tap the outer quarter of the screen (iPad)
-  - Arrow keys, Space / Shift+Space, Page Up/Down, Home/End, F for full screen
-  - Slide number lives in the URL: deck/#5 opens slide 5
+  Presentation: five landings behind one fixed menu.
+  - The URL hash picks the landing: deck/#verdo. A hash pointing inside a
+    landing (#verdo-offer) opens that landing and scrolls to the block.
+  - The menu, the "loop" strip and the holding's company cards are built
+    from brand/brands.js, so names live in one place.
 */
 (function () {
   "use strict";
 
-  var deck = document.getElementById("deck");
-  var slides = Array.prototype.slice.call(deck.querySelectorAll(".slide"));
-  var total = slides.length;
-  var current = -1;
-
-  var countEl = document.getElementById("count");
-  var progressEl = document.getElementById("progress");
-  var prevBtn = document.getElementById("prev");
-  var nextBtn = document.getElementById("next");
+  var root = document.documentElement;
+  var landings = Array.prototype.slice.call(document.querySelectorAll(".landing"));
+  var menu = document.getElementById("topnav-list");
   var fsBtn = document.getElementById("fullscreen");
+  var current = null;
 
-  function pad(n) { return (n < 10 ? "0" : "") + n; }
-
-  // ---------- navigation ----------
-  function go(index) {
-    index = Math.max(0, Math.min(total - 1, index));
-    if (index === current) return;
-    current = index;
-    slides.forEach(function (s, i) {
-      s.classList.toggle("is-active", i === index);
-      s.classList.toggle("is-past", i < index);
-      s.setAttribute("aria-hidden", String(i !== index));
+  // ---------- built from the brand registry ----------
+  function buildMenu() {
+    BRANDS.forEach(function (b) {
+      var li = document.createElement("li");
+      li.className = "topnav__item" + (b.holding ? " topnav__item--holding" : "");
+      var a = document.createElement("a");
+      a.className = "topnav__link" + (b.holding ? " topnav__link--holding" : "");
+      a.href = "#" + b.id;
+      a.setAttribute("data-brand", b.id);
+      a.textContent = b.name;
+      li.appendChild(a);
+      menu.appendChild(li);
     });
-    var active = slides[index];
-    active.scrollTop = 0;
-    deck.classList.toggle("is-inverse", active.classList.contains("slide--inverse"));
-    countEl.textContent = pad(index + 1) + " / " + pad(total);
-    progressEl.style.setProperty("--progress", String(total > 1 ? index / (total - 1) : 1));
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = index === total - 1;
-    if (location.hash !== "#" + (index + 1)) {
-      history.replaceState(null, "", "#" + (index + 1));
-    }
   }
 
-  function next() { go(current + 1); }
-  function prev() { go(current - 1); }
-
-  function indexFromHash() {
-    var n = parseInt(location.hash.replace("#", ""), 10);
-    return isNaN(n) ? 0 : n - 1;
+  function buildLoops() {
+    var companies = BRANDS.filter(function (b) { return !b.holding; });
+    landings.forEach(function (landing) {
+      var id = landing.id;
+      var isHolding = BrandUI.brandById(id).holding;
+      landing.querySelectorAll("[data-loop]").forEach(function (ol) {
+        companies.forEach(function (b) {
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          a.className = "l-loop__step";
+          a.href = "#" + b.id;
+          a.setAttribute("data-brand", b.id);
+          if (isHolding || b.id === id) a.setAttribute("aria-current", "true");
+          a.innerHTML = '<span class="l-loop__word">' + b.loop + "</span><span class=\"caption\">" + b.name + "</span>";
+          li.appendChild(a);
+          ol.appendChild(li);
+        });
+      });
+      landing.querySelectorAll("[data-companies]").forEach(function (box) {
+        companies.forEach(function (b) {
+          var a = document.createElement("a");
+          a.className = "card card--interactive l-card";
+          a.href = "#" + b.id;
+          a.setAttribute("data-brand", b.id);
+          a.innerHTML = '<span class="eyebrow">' + b.loop + '</span><span class="card__title">' + b.name +
+            '</span><span class="caption">' + b.descriptor + "</span>";
+          box.appendChild(a);
+        });
+      });
+    });
   }
 
-  // ---------- input: keys ----------
-  function isTyping(el) {
-    return el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName));
+  // ---------- routing ----------
+  function show(hash) {
+    var target = hash ? document.getElementById(hash) : null;
+    var landing = target ? target.closest(".landing") : null;
+    if (!landing) landing = landings[0];
+
+    if (landing !== current) {
+      landings.forEach(function (l) { l.hidden = l !== landing; });
+      current = landing;
+      root.setAttribute("data-brand", landing.id);
+      menu.querySelectorAll(".topnav__link").forEach(function (a) {
+        if (a.getAttribute("href") === "#" + landing.id) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
+      var active = menu.querySelector('[aria-current="page"]');
+      if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
+      document.title = BrandUI.brandById(landing.id).name + " · Presentation";
+    }
+
+    if (target && target !== landing) target.scrollIntoView({ block: "start" });
+    else window.scrollTo(0, 0);
   }
 
-  document.addEventListener("keydown", function (e) {
-    if (e.metaKey || e.ctrlKey || e.altKey || isTyping(e.target)) return;
-    switch (e.key) {
-      case "ArrowRight":
-      case "ArrowDown":
-      case "PageDown":
-        e.preventDefault(); next(); break;
-      case "ArrowLeft":
-      case "ArrowUp":
-      case "PageUp":
-        e.preventDefault(); prev(); break;
-      case " ":
-        // Let Space activate a focused button or link.
-        if (e.target.closest && e.target.closest("button, a")) return;
-        e.preventDefault(); e.shiftKey ? prev() : next(); break;
-      case "Home":
-        e.preventDefault(); go(0); break;
-      case "End":
-        e.preventDefault(); go(total - 1); break;
-      case "f":
-      case "F":
-        toggleFullscreen(); break;
-    }
-  });
+  function route() { show(decodeURIComponent(location.hash.slice(1))); }
 
-  // ---------- input: swipe + edge taps ----------
-  var INTERACTIVE = "a, button, input, textarea, select, label, [data-no-swipe]";
-  var start = null;
-  var suppressClick = false;
-
-  deck.addEventListener("pointerdown", function (e) {
-    if (!e.isPrimary || (e.target.closest && e.target.closest(INTERACTIVE))) { start = null; return; }
-    start = { x: e.clientX, y: e.clientY };
-  });
-
-  deck.addEventListener("pointerup", function (e) {
-    if (!start) return;
-    var dx = e.clientX - start.x;
-    var dy = e.clientY - start.y;
-    start = null;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      suppressClick = true;
-      setTimeout(function () { suppressClick = false; }, 300);
-      if (dx < 0) next(); else prev();
-    }
-  });
-
-  deck.addEventListener("pointercancel", function () { start = null; });
-
-  deck.addEventListener("click", function (e) {
-    if (suppressClick || (e.target.closest && e.target.closest(INTERACTIVE))) return;
-    var x = e.clientX / window.innerWidth;
-    if (x < 0.25) prev();
-    else if (x > 0.75) next();
-  });
-
-  prevBtn.addEventListener("click", prev);
-  nextBtn.addEventListener("click", next);
-  window.addEventListener("hashchange", function () { go(indexFromHash()); });
-
-  // ---------- full screen ----------
-  var docEl = document.documentElement;
-  var requestFs = docEl.requestFullscreen || docEl.webkitRequestFullscreen;
+  // ---------- full screen (hidden where unsupported or already an installed app) ----------
+  var requestFs = root.requestFullscreen || root.webkitRequestFullscreen;
   var exitFs = document.exitFullscreen || document.webkitExitFullscreen;
   var standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone;
 
-  function isFullscreen() {
-    return !!(document.fullscreenElement || document.webkitFullscreenElement);
-  }
+  function isFullscreen() { return !!(document.fullscreenElement || document.webkitFullscreenElement); }
 
   function toggleFullscreen() {
-    if (!requestFs || standalone) return;
     try {
-      var r = isFullscreen() ? exitFs.call(document) : requestFs.call(docEl);
-      if (r && r.catch) r.catch(function () { /* user gesture or policy refused */ });
-    } catch (err) { /* unsupported */ }
+      var r = isFullscreen() ? exitFs.call(document) : requestFs.call(root);
+      if (r && r.catch) r.catch(function () {});
+    } catch (e) { /* unsupported */ }
   }
 
   function syncFullscreen() {
@@ -149,7 +116,16 @@
 
   // ---------- init ----------
   function init() {
-    go(indexFromHash());
+    buildMenu();
+    buildLoops();
+    BrandUI.hydrateIcons();
+    window.addEventListener("hashchange", route);
+    // Tapping the menu item of the landing already open scrolls back to its top.
+    menu.addEventListener("click", function (e) {
+      var a = e.target.closest(".topnav__link");
+      if (a && a.getAttribute("href") === location.hash) { e.preventDefault(); window.scrollTo(0, 0); }
+    });
+    route();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

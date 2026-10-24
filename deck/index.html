@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" data-brand="veriterra">
+<html lang="en" data-brand="vitreeone">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Veriterra Brand Deck</title>
-  <meta name="description" content="Veriterra brand presentation. Working draft: typography.">
+  <title>VITREEONE Presentation</title>
+  <meta name="description" content="Five landing pages: VITREEONE and its four companies. Working draft skeleton.">
   <meta name="theme-color" content="#FBFAF7">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Brand Deck">
+  <meta name="apple-mobile-web-app-title" content="Presentation">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="../brand/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../brand/icons/favicon-32.png" sizes="32x32" type="image/png">
@@ -17,107 +17,261 @@
   <link rel="stylesheet" href="../brand/tokens.css">
   <link rel="stylesheet" href="../brand/components.css">
   <link rel="stylesheet" href="deck.css">
+  <!-- One stylesheet per landing, scoped to .landing[data-brand="…"]. Styled separately later. -->
+  <link rel="stylesheet" href="landings/vitreeone.css">
+  <link rel="stylesheet" href="landings/veriterra.css">
+  <link rel="stylesheet" href="landings/verdo.css">
+  <link rel="stylesheet" href="landings/vaya.css">
+  <link rel="stylesheet" href="landings/viva.css">
 </head>
 <body>
-  <div class="deck-progress" aria-hidden="true"><div class="deck-progress__fill" id="progress"></div></div>
-
-  <main class="deck" id="deck" aria-roledescription="presentation" aria-label="Brand deck">
-
-    <!-- 1 COVER -->
-    <section class="slide slide--inverse" aria-label="Cover">
-      <div class="slide__inner">
-        <div class="cluster" data-reveal style="--i: 0">
-          <span class="tag tag--warning">Working draft</span>
-          <span class="eyebrow">Brand system</span>
-        </div>
-        <h1 class="slide__title slide__title--xl" data-reveal style="--i: 1"><span data-brand-name="veriterra"></span>: typography</h1>
-        <p class="lead" data-reveal style="--i: 2">The first section of the system. The others get added one at a time.</p>
-        <div class="slide__foot" data-reveal style="--i: 3"><span>Swipe, or tap the screen edges</span></div>
-      </div>
-    </section>
-
-    <!-- 2 ROLES -->
-    <section class="slide" aria-label="Three roles">
-      <div class="slide__inner">
-        <div class="slide__head" data-reveal style="--i: 0">
-          <span class="eyebrow">Typefaces · system placeholders</span>
-          <h2 class="slide__title">Three roles, nothing more.</h2>
-        </div>
-        <div class="cols cols--3">
-          <div class="role" data-reveal style="--i: 1">
-            <span class="role__sample" style="font-family: var(--font-display)">Aa</span>
-            <strong>Display</strong>
-            <span class="caption">Headlines and large numbers.</span>
-          </div>
-          <div class="role" data-reveal style="--i: 2">
-            <span class="role__sample" style="font-family: var(--font-body)">Aa</span>
-            <strong>Body</strong>
-            <span class="caption">Reading text and interface.</span>
-          </div>
-          <div class="role" data-reveal style="--i: 3">
-            <span class="role__sample" style="font-family: var(--font-mono)">Aa</span>
-            <strong>Mono</strong>
-            <span class="caption">Labels, formulas, specs, data.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3 SCALE -->
-    <section class="slide" aria-label="Type scale">
-      <div class="slide__inner">
-        <span class="eyebrow" data-reveal style="--i: 0">Scale</span>
-        <div class="ladder">
-          <div class="ladder__row" data-reveal style="--i: 1"><span class="mono">5xl</span><span style="font-family: var(--font-display); font-size: var(--text-5xl); line-height: var(--leading-tight)">Per crop.</span></div>
-          <div class="ladder__row" data-reveal style="--i: 2"><span class="mono">3xl</span><span style="font-family: var(--font-display); font-size: var(--text-3xl); line-height: var(--leading-tight)">Per growth stage.</span></div>
-          <div class="ladder__row" data-reveal style="--i: 3"><span class="mono">xl</span><span style="font-family: var(--font-display); font-size: var(--text-xl)">Formulated for greenhouse and drip-irrigated crops.</span></div>
-          <div class="ladder__row" data-reveal style="--i: 4"><span class="mono">md</span><span style="font-size: var(--text-md)">Body text for reading, set for comfortable lines on iPad and desktop.</span></div>
-          <div class="ladder__row" data-reveal style="--i: 5"><span class="mono">xs</span><span class="eyebrow">Label · NPK 19-19-19 · 25 kg</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4 IN USE -->
-    <section class="slide" aria-label="Type in use">
-      <div class="slide__inner">
-        <div class="cols cols--split">
-          <div class="stack" data-reveal style="--i: 0">
-            <span class="eyebrow">Fertigation · Tomato</span>
-            <h2 class="slide__title">Nutrition formulated for the crop and its stage.</h2>
-          </div>
-          <div class="stack" data-reveal style="--i: 1">
-            <p class="lead">Water-soluble fertilizer for greenhouse and drip-irrigated crops, made in Sri Lanka.</p>
-            <p>One formula per crop and growth stage: root, grow, bloom and fruit. Growers send water and substrate samples, and the formula is adjusted to the results.</p>
-            <p class="mono data-line">NPK 19-19-19 · 25 kg bag · fully soluble</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5 RULES -->
-    <section class="slide slide--inverse" aria-label="Rules">
-      <div class="slide__inner">
-        <div class="slide__head" data-reveal style="--i: 0">
-          <span class="eyebrow">Rules</span>
-          <h2 class="slide__title">Facts, set plainly.</h2>
-        </div>
-        <ul class="list-plain" data-reveal style="--i: 1">
-          <li><strong>Sentence case.</strong> No all-caps headlines.</li>
-          <li><strong>Numerals for numbers.</strong> 25 kg, 4 stages, 3,000 m².</li>
-          <li><strong>Mono only for data.</strong> Labels, formulas, specs.</li>
-          <li><strong>Short lines.</strong> About 65 characters of body text.</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <nav class="deck-bar" aria-label="Slide controls">
-    <span class="deck-bar__count" id="count" aria-live="polite"></span>
-    <a class="deck-btn" href="../" aria-label="Back to hub"><span class="icon" data-icon="home"></span></a>
-    <button class="deck-btn" type="button" id="fullscreen" aria-label="Full screen" aria-pressed="false" hidden><span class="icon" data-icon="expand"></span></button>
-    <button class="deck-btn" type="button" id="prev" aria-label="Previous slide"><span class="icon" data-icon="arrow-left"></span></button>
-    <button class="deck-btn" type="button" id="next" aria-label="Next slide"><span class="icon" data-icon="arrow-right"></span></button>
+  <nav class="topnav" aria-label="Landings">
+    <div class="topnav__inner">
+      <ul class="topnav__list" id="topnav-list"></ul>
+      <button class="topnav__fs" type="button" id="fullscreen" aria-label="Full screen" aria-pressed="false" hidden><span class="icon" data-icon="expand"></span></button>
+    </div>
   </nav>
+
+  <main id="landings">
+
+    <!-- ==================== VITREEONE ==================== -->
+    <article class="landing" id="vitreeone" data-brand="vitreeone" aria-labelledby="vitreeone-title" hidden>
+      <header class="l-hero container">
+        <div class="l-hero__text">
+          <span class="eyebrow"><span data-brand-name="vitreeone"></span> · The group</span>
+          <h1 class="l-hero__title" id="vitreeone-title">Four companies. One loop.</h1>
+          <p class="lead">From the soil to the stay, in the south of Sri Lanka.</p>
+          <div class="cluster">
+            <a class="btn" href="#vitreeone-contact">Get in touch</a>
+            <a class="btn btn--secondary" href="#vitreeone-offer">See the companies</a>
+          </div>
+        </div>
+        <div class="media-placeholder l-hero__media">Real photo to come</div>
+      </header>
+
+      <section class="l-facts container" aria-label="Key facts">
+          <div class="l-fact"><span class="l-fact__value">4</span><span class="l-fact__label">companies, one group</span></div>
+          <div class="l-fact"><span class="l-fact__value">1</span><span class="l-fact__label">region: the south of Sri Lanka</span></div>
+          <div class="l-fact"><span class="l-fact__value">Soil → stay</span><span class="l-fact__label">every step in-house</span></div>
+      </section>
+
+      <section class="l-offer container" id="vitreeone-offer" aria-labelledby="vitreeone-offer-title">
+        <h2 class="l-section-title" id="vitreeone-offer-title">Four companies</h2>
+        <div class="l-cards" data-companies>
+          <!-- filled from brand/brands.js: one card per company, linking to its landing -->
+        </div>
+      </section>
+
+      <section class="l-loop container" aria-label="Part of the loop">
+        <span class="eyebrow">One loop</span>
+        <ol class="l-loop__steps" data-loop></ol>
+      </section>
+
+      <section class="l-cta" id="vitreeone-contact" aria-labelledby="vitreeone-cta-title">
+        <div class="container l-cta__inner">
+          <h2 class="l-cta__title" id="vitreeone-cta-title">Work with the group.</h2>
+          <a class="btn btn--inverse" href="#vitreeone-contact">Get in touch</a>
+        </div>
+      </section>
+
+      <footer class="l-footer container">
+        <span><span data-brand-name="vitreeone"></span> · South Sri Lanka</span>
+        <span>Working draft · placeholder copy</span>
+      </footer>
+    </article>
+
+    <!-- ==================== VERITERRA ==================== -->
+    <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="veriterra-title" hidden>
+      <header class="l-hero container">
+        <div class="l-hero__text">
+          <span class="eyebrow"><span data-brand-name="veriterra"></span> · Water-soluble fertilizers</span>
+          <h1 class="l-hero__title" id="veriterra-title">Nutrition formulated for the crop and its stage.</h1>
+          <p class="lead">Water-soluble fertilizers for greenhouse and drip-irrigated crops, made in Sri Lanka.</p>
+          <div class="cluster">
+            <a class="btn" href="#veriterra-contact">Request a sample</a>
+            <a class="btn btn--secondary" href="#veriterra-offer">What we make</a>
+          </div>
+        </div>
+        <div class="media-placeholder l-hero__media">Real photo to come</div>
+      </header>
+
+      <section class="l-facts container" aria-label="Key facts">
+          <div class="l-fact"><span class="l-fact__value">4</span><span class="l-fact__label">growth stages: root, grow, bloom, fruit</span></div>
+          <div class="l-fact"><span class="l-fact__value">Per crop</span><span class="l-fact__label">tomato, cucumber, pepper, greens, strawberry</span></div>
+          <div class="l-fact"><span class="l-fact__value">Local</span><span class="l-fact__label">raw materials from Sri Lankan coconut</span></div>
+      </section>
+
+      <section class="l-offer container" id="veriterra-offer" aria-labelledby="veriterra-offer-title">
+        <h2 class="l-section-title" id="veriterra-offer-title">What we make</h2>
+        <div class="l-cards">
+          <div class="card l-card"><span class="card__title">Crop formulas</span><span class="caption">Water-soluble NPK and micronutrients, matched to crop and stage.</span></div>
+          <div class="card l-card"><span class="card__title">Lab analysis</span><span class="caption">Water, soil and substrate tests before a formula is set.</span></div>
+          <div class="card l-card"><span class="card__title">Agronomy support</span><span class="caption">Monitoring and adjustments through the season.</span></div>
+        </div>
+      </section>
+
+      <section class="l-loop container" aria-label="Part of the loop">
+        <span class="eyebrow">Part of one loop</span>
+        <ol class="l-loop__steps" data-loop></ol>
+      </section>
+
+      <section class="l-cta" id="veriterra-contact" aria-labelledby="veriterra-cta-title">
+        <div class="container l-cta__inner">
+          <h2 class="l-cta__title" id="veriterra-cta-title">Tell us the crop. We'll match the formula.</h2>
+          <a class="btn btn--inverse" href="#veriterra-contact">Request a sample</a>
+        </div>
+      </section>
+
+      <footer class="l-footer container">
+        <span><span data-brand-name="veriterra"></span> is part of <span data-brand-name="vitreeone"></span></span>
+        <span>Working draft · placeholder copy</span>
+      </footer>
+    </article>
+
+    <!-- ==================== VERDO ==================== -->
+    <article class="landing" id="verdo" data-brand="verdo" aria-labelledby="verdo-title" hidden>
+      <header class="l-hero container">
+        <div class="l-hero__text">
+          <span class="eyebrow"><span data-brand-name="verdo"></span> · Farm and food</span>
+          <h1 class="l-hero__title" id="verdo-title">Picked in the morning, in the kitchen by evening.</h1>
+          <p class="lead">Greenhouse vegetables and greens for hotels and restaurants on the island.</p>
+          <div class="cluster">
+            <a class="btn" href="#verdo-contact">Request the price list</a>
+            <a class="btn btn--secondary" href="#verdo-offer">What we grow</a>
+          </div>
+        </div>
+        <div class="media-placeholder l-hero__media">Real photo to come</div>
+      </header>
+
+      <section class="l-facts container" aria-label="Key facts">
+          <div class="l-fact"><span class="l-fact__value">3,000 m²</span><span class="l-fact__label">of greenhouses in phase one</span></div>
+          <div class="l-fact"><span class="l-fact__value">Weekly</span><span class="l-fact__label">deliveries across the island</span></div>
+          <div class="l-fact"><span class="l-fact__value">Solar</span><span class="l-fact__label">power for the farm</span></div>
+      </section>
+
+      <section class="l-offer container" id="verdo-offer" aria-labelledby="verdo-offer-title">
+        <h2 class="l-section-title" id="verdo-offer-title">What we grow</h2>
+        <div class="l-cards">
+          <div class="card l-card"><span class="card__title">Greenhouse vegetables</span><span class="caption">Tomatoes, cucumbers, Ramiro peppers and greens.</span></div>
+          <div class="card l-card"><span class="card__title">Kitchen supply</span><span class="caption">Weekly deliveries to hotels and restaurants.</span></div>
+          <div class="card l-card"><span class="card__title">What's next</span><span class="caption">Sauces, bakery and dairy, once the greenhouses sell.</span></div>
+        </div>
+      </section>
+
+      <section class="l-loop container" aria-label="Part of the loop">
+        <span class="eyebrow">Part of one loop</span>
+        <ol class="l-loop__steps" data-loop></ol>
+      </section>
+
+      <section class="l-cta" id="verdo-contact" aria-labelledby="verdo-cta-title">
+        <div class="container l-cta__inner">
+          <h2 class="l-cta__title" id="verdo-cta-title">Supply for your kitchen, every week.</h2>
+          <a class="btn btn--inverse" href="#verdo-contact">Request the price list</a>
+        </div>
+      </section>
+
+      <footer class="l-footer container">
+        <span><span data-brand-name="verdo"></span> is part of <span data-brand-name="vitreeone"></span></span>
+        <span>Working draft · placeholder copy</span>
+      </footer>
+    </article>
+
+    <!-- ==================== VAYA ==================== -->
+    <article class="landing" id="vaya" data-brand="vaya" aria-labelledby="vaya-title" hidden>
+      <header class="l-hero container">
+        <div class="l-hero__text">
+          <span class="eyebrow"><span data-brand-name="vaya"></span> · Eco-glamping</span>
+          <h1 class="l-hero__title" id="vaya-title">Twenty units on the south coast.</h1>
+          <p class="lead">Private dome stays by the ocean, with food from our own farm.</p>
+          <div class="cluster">
+            <a class="btn" href="#vaya-contact">Join the waitlist</a>
+            <a class="btn btn--secondary" href="#vaya-offer">What's here</a>
+          </div>
+        </div>
+        <div class="media-placeholder l-hero__media">Real photo to come</div>
+      </header>
+
+      <section class="l-facts container" aria-label="Key facts">
+          <div class="l-fact"><span class="l-fact__value">20</span><span class="l-fact__label">units, out of sight of each other</span></div>
+          <div class="l-fact"><span class="l-fact__value">38 m²</span><span class="l-fact__label">per unit, with a private terrace</span></div>
+          <div class="l-fact"><span class="l-fact__value">Farm</span><span class="l-fact__label">food, from Verdo</span></div>
+      </section>
+
+      <section class="l-offer container" id="vaya-offer" aria-labelledby="vaya-offer-title">
+        <h2 class="l-section-title" id="vaya-offer-title">What's here</h2>
+        <div class="l-cards">
+          <div class="card l-card"><span class="card__title">Stay</span><span class="caption">Dome units with a bedroom, bathroom and private terrace.</span></div>
+          <div class="card l-card"><span class="card__title">Eat</span><span class="caption">Restaurant and bar, cooking with Verdo produce.</span></div>
+          <div class="card l-card"><span class="card__title">Move and rest</span><span class="caption">Surf, yoga, sport and quiet.</span></div>
+        </div>
+      </section>
+
+      <section class="l-loop container" aria-label="Part of the loop">
+        <span class="eyebrow">Part of one loop</span>
+        <ol class="l-loop__steps" data-loop></ol>
+      </section>
+
+      <section class="l-cta" id="vaya-contact" aria-labelledby="vaya-cta-title">
+        <div class="container l-cta__inner">
+          <h2 class="l-cta__title" id="vaya-cta-title">Opening soon. Be the first to know.</h2>
+          <a class="btn btn--inverse" href="#vaya-contact">Join the waitlist</a>
+        </div>
+      </section>
+
+      <footer class="l-footer container">
+        <span><span data-brand-name="vaya"></span> is part of <span data-brand-name="vitreeone"></span></span>
+        <span>Working draft · placeholder copy</span>
+      </footer>
+    </article>
+
+    <!-- ==================== VIVA ==================== -->
+    <article class="landing" id="viva" data-brand="viva" aria-labelledby="viva-title" hidden>
+      <header class="l-hero container">
+        <div class="l-hero__text">
+          <span class="eyebrow"><span data-brand-name="viva"></span> · Design and construction</span>
+          <h1 class="l-hero__title" id="viva-title">We build the places the group runs on.</h1>
+          <p class="lead">Design and construction with solar, water and low-impact materials built in.</p>
+          <div class="cluster">
+            <a class="btn" href="#viva-contact">Discuss a project</a>
+            <a class="btn btn--secondary" href="#viva-offer">What we do</a>
+          </div>
+        </div>
+        <div class="media-placeholder l-hero__media">Real photo to come</div>
+      </header>
+
+      <section class="l-facts container" aria-label="Key facts">
+          <div class="l-fact"><span class="l-fact__value">Design</span><span class="l-fact__label">architecture, planning, permits</span></div>
+          <div class="l-fact"><span class="l-fact__value">Build</span><span class="l-fact__label">construction and fit-out</span></div>
+          <div class="l-fact"><span class="l-fact__value">Systems</span><span class="l-fact__label">solar, water and waste</span></div>
+      </section>
+
+      <section class="l-offer container" id="viva-offer" aria-labelledby="viva-offer-title">
+        <h2 class="l-section-title" id="viva-offer-title">What we do</h2>
+        <div class="l-cards">
+          <div class="card l-card"><span class="card__title">Design</span><span class="caption">Architecture, planning and permits.</span></div>
+          <div class="card l-card"><span class="card__title">Build</span><span class="caption">Construction with low-impact materials.</span></div>
+          <div class="card l-card"><span class="card__title">Systems</span><span class="caption">Solar power, water and waste, designed in.</span></div>
+        </div>
+      </section>
+
+      <section class="l-loop container" aria-label="Part of the loop">
+        <span class="eyebrow">Part of one loop</span>
+        <ol class="l-loop__steps" data-loop></ol>
+      </section>
+
+      <section class="l-cta" id="viva-contact" aria-labelledby="viva-cta-title">
+        <div class="container l-cta__inner">
+          <h2 class="l-cta__title" id="viva-cta-title">Have a site? Let's talk.</h2>
+          <a class="btn btn--inverse" href="#viva-contact">Discuss a project</a>
+        </div>
+      </section>
+
+      <footer class="l-footer container">
+        <span><span data-brand-name="viva"></span> is part of <span data-brand-name="vitreeone"></span></span>
+        <span>Working draft · placeholder copy</span>
+      </footer>
+    </article>
+  </main>
 
   <script src="../brand/brands.js"></script>
   <script src="../brand/brand-ui.js"></script>

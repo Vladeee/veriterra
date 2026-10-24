@@ -1,7 +1,7 @@
 {
-  "name": "Veriterra Brand Deck",
-  "short_name": "Brand Deck",
-  "description": "Veriterra brand presentation (working draft).",
+  "name": "VITREEONE Presentation",
+  "short_name": "Presentation",
+  "description": "Five landing pages: VITREEONE and its four companies (working draft).",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

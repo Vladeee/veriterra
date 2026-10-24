@@ -1,9 +1,9 @@
-# Veriterra brand system (working draft)
+# VITREEONE brand system (working draft)
 
-Brand system for **Veriterra** (water-soluble fertilizers), built one section at a time.
-**Current scope: typography only.** Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
+Brand system for **VITREEONE** and its four companies: Veriterra, Verdo, Vaya and Viva.
+**Current scope:** a presentation of five short landing pages (one structure, styled one by one later) and a typography style guide. Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
 
-> Typefaces and colours are **placeholders** until they are chosen.
+> Copy, typefaces and colours are **placeholders**.
 
 ## Open it
 
@@ -11,18 +11,10 @@ Brand system for **Veriterra** (water-soluble fertilizers), built one section at
 |---|---|
 | Hub | https://vladeee.github.io/veriterra/ |
 | Style guide | https://vladeee.github.io/veriterra/styleguide/ |
-| Brand deck | https://vladeee.github.io/veriterra/deck/ (`#3` opens slide 3) |
+| Presentation | https://vladeee.github.io/veriterra/deck/ (`#verdo` opens the Verdo landing) |
 | Brief | [`brand/BRIEF.md`](brand/BRIEF.md) |
 
 On iPad, open the page in Safari, tap **Share**, then **Add to Home Screen**. It opens full screen, like an app.
-
-### Deck controls
-
-| iPad | Keyboard |
-|---|---|
-| Swipe left or right | ← → or Space / Shift+Space |
-| Tap the right or left edge of the screen | Page Up / Page Down, Home / End |
-| ⤢ button for full screen | F |
 
 ## Run locally
 
@@ -48,7 +40,9 @@ python3 -m http.server 8000
 │   ├── logo/               (empty for now)
 │   └── fonts/              (empty until fonts are chosen)
 ├── styleguide/             style guide (typography)
-├── deck/                   brand presentation (typography)
+├── deck/                   presentation: five landings, fixed menu
+│   ├── deck.css            shared landing skeleton
+│   └── landings/<id>.css   per-landing style (empty for now)
 ├── site/                   website, later
 ├── tools/tokens.py         token sync and "tokens only" lint
 └── CLAUDE.md               rules for future sessions

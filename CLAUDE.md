@@ -2,7 +2,11 @@
 
 Brand system for the holding company VITREEONE and its four companies: Veriterra (fertilizers), Verdo (farm and food), Vaya (eco-glamping) and Viva (construction). First we build a style guide and a brand deck. Then four websites (one per company) get built in this same repo, on top of them.
 
-**Stage: working draft, Veriterra only.** The user asked to keep it minimal. The style guide and deck currently contain **typography only**, and the other three companies are paused. New sections are added **one at a time, only when the user asks**, in the order they choose. Don't bring back removed sections (essence, logo, colour, spacing, components, imagery, motion) unprompted; they are in git history if needed. Colours and typefaces are placeholders. Read `brand/BRIEF.md` before any brand decision.
+**Stage: working draft, skeleton.** The user wants it minimal and built step by step.
+- **The presentation (`deck/`) is five short landing pages**, not a slide deck: VITREEONE (the holding) plus Veriterra, Verdo, Vaya and Viva. A fixed top menu switches between them (`deck/#verdo`). All five share **one identical structure**: hero → facts → offer → loop → call to action → footer, defined in `deck/deck.css`. Each landing gets its own look later in `deck/landings/<id>.css`, scoped to `.landing[data-brand="<id>"]`. Keep the structure identical across the five unless the user asks otherwise.
+- **The style guide (`styleguide/`) holds typography only**, shown for Veriterra.
+- New sections are added **one at a time, only when the user asks**. Don't bring back removed style-guide sections (essence, logo, colour, spacing, components, imagery, motion) unprompted; they are in git history.
+- Colours, typefaces and copy are placeholders. Read `brand/BRIEF.md` before any brand decision.
 
 ## Where things live
 
@@ -11,12 +15,12 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 | `brand/tokens.css` | **Single source of truth** for every visual value (colour, type, spacing, radii, shadows, motion, layers) |
 | `brand/tokens.json` | Mirror of tokens.css for tools and other platforms. Generated: `python3 tools/tokens.py sync` |
 | `brand/components.css` | Shared reset, base typography and the few components in use. Grows with each new section |
-| `brand/brands.js` | Brand registry (ids, names, descriptors). Brand names are written here, nowhere else in code |
+| `brand/brands.js` | Brand registry (ids, names, descriptors). Menus, labels and generated blocks read names from here. Copy text may mention the companies |
 | `brand/brand-ui.js` | Shared behaviour: inline icons, brand names |
 | `brand/BRIEF.md` | Positioning, audience, tone; facts and open questions |
 | `brand/logo/`, `brand/fonts/`, `brand/icons/` | Assets (logos and fonts not supplied yet) |
 | `styleguide/` | One-page style guide |
-| `deck/` | Interactive brand presentation |
+| `deck/` | Presentation: five landings behind one fixed menu. `deck.css` = shared skeleton, `landings/<id>.css` = per-landing style |
 | `site/` | Websites (later) |
 | `tools/tokens.py` | Sync and lint for tokens |
 
@@ -26,7 +30,7 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
    - Allowed exceptions: `@media` breakpoint values (sm 40rem, md 48rem, lg 64rem, xl 80rem), colours inside `*.webmanifest`, `<meta name="theme-color">`, SVG and PNG asset files.
    - Escape hatch: end a line with `/* lint-ok */`. Only for technical, non-visual values (for example the 1px of a visually-hidden helper), never to skip a design decision.
 2. **Change tokens in one commit:** edit `tokens.css`, then run `python3 tools/tokens.py sync`, then run `python3 tools/tokens.py check`. `check` must pass before every commit.
-3. **Theming goes through `data-brand`.** Components read only the `--brand-*` variables (`--brand-accent`, `--brand-accent-strong`, `--brand-accent-soft`, `--brand-on-accent`), never brand primitives like `--color-veriterra-600`. Only Veriterra exists now; another company becomes one more `[data-brand]` block later.
+3. **Theming goes through `data-brand`.** Ids: `vitreeone`, `veriterra`, `verdo`, `vaya`, `viva`. Components read only the `--brand-*` variables (`--brand-accent`, `--brand-accent-strong`, `--brand-accent-soft`, `--brand-on-accent`), never brand primitives like `--color-veriterra-600`. Each landing carries its own `data-brand`.
 4. **Static only:** HTML, CSS and vanilla JS. No npm, bundlers or frameworks. Everything must work on GitHub Pages and from a plain local server.
 5. **Relative paths everywhere** (`../brand/tokens.css`, never `/brand/...`). The site is served from `vladeee.github.io/veriterra/`.
 6. **iPad first:**
@@ -44,5 +48,5 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 - Work in small logical steps. Run `python3 tools/tokens.py check`, commit with a clear message and push after each step.
 - Preview locally with `python3 -m http.server 8000` from the repo root, then open `http://localhost:8000/`.
 - The style guide picks up token changes automatically (type sizes and font stacks are read live from the CSS). Don't duplicate token values in HTML.
-- Adding a company later: add primitives and a `[data-brand]` block to tokens.css, an entry in `brand/brands.js`, then sync.
-- Adding a section: add it to the style guide and, if the user wants, one or two deck slides; add only the components and tokens it needs.
+- Adding a block to the landings: add it to all five in `deck/index.html` with the same classes, style it in `deck.css`, and add only the components and tokens it needs.
+- Adding a style-guide section: add only that section and the components and tokens it needs.

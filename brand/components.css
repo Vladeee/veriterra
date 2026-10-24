@@ -161,6 +161,64 @@ p {
 
 .link:active { color: var(--brand-accent-strong); background: var(--brand-accent-soft); }
 
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-comfort);
+  padding: var(--space-2) var(--space-5);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--brand-accent);
+  color: var(--brand-on-accent);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-snug);
+  text-decoration: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-instant) var(--ease-standard);
+}
+
+.btn--secondary {
+  background: transparent;
+  border-color: var(--brand-accent);
+  color: var(--brand-accent);
+}
+
+.btn--inverse {
+  background: var(--brand-on-accent);
+  color: var(--brand-accent-strong);
+}
+
+@media (hover: hover) {
+  .btn:hover { background: var(--brand-accent-strong); }
+  .btn--secondary:hover { background: var(--brand-accent-soft); color: var(--brand-accent-strong); }
+  .btn--inverse:hover { background: var(--brand-accent-soft); }
+}
+
+.btn:active { transform: scale(var(--press-scale)); }
+
+/* ---------- Media placeholder (for photos that do not exist yet) ---------- */
+.media-placeholder {
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: repeating-linear-gradient(135deg, var(--color-paper-2) 0 var(--space-2), var(--color-paper-1) var(--space-2) var(--space-4));
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  aspect-ratio: 3 / 2;
+}
+
 /* ---------- Cards ---------- */
 .card {
   display: flex;
