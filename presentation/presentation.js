@@ -116,20 +116,13 @@
     document.addEventListener("webkitfullscreenchange", syncFullscreen);
   }
 
-  // ---------- sign-up forms (placeholders, not connected yet) ----------
-  function initForms() {
-    document.querySelectorAll("[data-signup]").forEach(function (form) {
-      form.addEventListener("submit", function (e) {
+  // ---------- placeholder actions (contact is not connected yet) ----------
+  function initPlaceholders() {
+    document.querySelectorAll("[data-placeholder-action]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
         e.preventDefault();
-        var btn = form.querySelector("button");
-        btn.textContent = "Thanks. Not connected yet";
-        btn.disabled = true;
-      });
-    });
-    document.querySelectorAll("[data-focus-signup]").forEach(function (link) {
-      link.addEventListener("click", function () {
-        var input = document.getElementById(link.getAttribute("href").slice(1));
-        if (input) setTimeout(function () { input.focus({ preventScroll: true }); }, 0);
+        btn.textContent = "Not connected yet";
+        btn.classList.add("is-done");
       });
     });
   }
@@ -138,7 +131,7 @@
   function init() {
     buildMenu();
     buildLoops();
-    initForms();
+    initPlaceholders();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
     // Tapping the menu item of the landing already open scrolls back to its top.

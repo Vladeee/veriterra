@@ -4,8 +4,8 @@
   edge-to-edge with --page-margin on the sides, --grid-gutter between columns,
   --grid-gap-tight between cards, hairline-topped sections with a dot label.
   Every landing uses the same structure and classes:
-    .l-hero (logo → headline → lead → sign-up) → .l-media (photo + spec card)
-    → .l-section bento → .l-section.l-split → .l-section loop → .l-cta → .l-footer
+    .l-hero (logo → headline → lead → button) → .l-media (photo + spec card)
+    → .l-section bento → .l-section loop → .l-cta → .l-footer
   Each landing paints its own background from --brand-bg (tokens.css).
   Per-landing styling goes in presentation/landings/<id>.css. Tokens only.
 */
@@ -273,37 +273,8 @@ body.is-intro .topnav { display: none; }
   color: var(--color-text-muted);
 }
 
-/* Sign-up: one pill with the field and the button */
-.l-signup {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  width: min(100%, calc(var(--container-narrow) * 0.75));
-  margin-top: var(--space-2);
-  padding: var(--space-1) var(--space-1) var(--space-1) var(--space-5);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-1);
-}
-
-.l-signup:focus-within { border-color: var(--brand-accent); }
-
-.l-signup__input {
-  flex: 1;
-  min-width: 0;
-  min-height: var(--tap-min);
-  border: 0;
-  background: transparent;
-  color: var(--color-text);
-  font: inherit;
-  font-size: var(--text-md);
-  outline: none;
-}
-
-.l-signup__input::placeholder { color: var(--color-text-muted); }
-
-.l-signup__btn {
+/* Primary button (pill) */
+.l-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -324,11 +295,11 @@ body.is-intro .topnav { display: none; }
 }
 
 @media (hover: hover) {
-  .l-signup__btn:hover { background: var(--brand-accent-strong); }
+  .l-btn:hover { background: var(--brand-accent-strong); }
 }
 
-.l-signup__btn:active { transform: scale(var(--press-scale)); }
-.l-signup__btn:disabled { opacity: var(--opacity-quiet); cursor: default; }
+.l-btn:active { transform: scale(var(--press-scale)); }
+.l-btn.is-done { opacity: var(--opacity-quiet); pointer-events: none; }
 
 /* ---------- 2. Media: photo (7 cols) + spec card (5 cols) ---------- */
 .l-media {
@@ -504,70 +475,7 @@ body.is-intro .topnav { display: none; }
   background: var(--brand-accent);
 }
 
-/* ---------- 4. Split: details (¼–⅖) + tall photo ---------- */
-@media (min-width: 48rem) {
-  .l-split > .details { grid-column: 1 / span 5; }
-  .l-split > .l-split__photo { grid-column: 6 / -1; }
-}
-
-@media (min-width: 64rem) {
-  .l-split > .details { grid-column: 1 / span 4; }
-  .l-split > .l-split__photo { grid-column: 5 / -1; }
-}
-
-.details {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.details__group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.details__label {
-  padding-bottom: var(--space-2);
-  border-bottom: var(--border-width) solid var(--color-border);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--brand-accent-strong);
-}
-
-.details__items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.details__items li {
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  font-size: var(--text-sm);
-}
-
-.l-split__photo {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  margin: 0;
-}
-
-.l-split__photo .media-placeholder {
-  flex: 1;
-  min-height: calc(var(--space-10) * 3);
-  aspect-ratio: auto;
-  border-radius: var(--radius-lg);
-}
-
-/* ---------- 5. Loop ---------- */
+/* ---------- 4. Loop ---------- */
 .l-loop__steps {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -612,7 +520,7 @@ body.is-intro .topnav { display: none; }
 .l-loop__step[aria-current="true"] .l-loop__word,
 .l-loop__step[aria-current="true"] .caption { color: inherit; }
 
-/* ---------- 6. Call to action (centred) ---------- */
+/* ---------- 5. Call to action (centred) ---------- */
 .l-cta {
   justify-items: center;
   row-gap: var(--space-5);
@@ -632,7 +540,7 @@ body.is-intro .topnav { display: none; }
   letter-spacing: var(--tracking-tight);
 }
 
-/* ---------- 7. Footer ---------- */
+/* ---------- 6. Footer ---------- */
 .l-footer {
   row-gap: var(--space-2);
   margin-top: auto;
