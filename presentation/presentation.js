@@ -80,6 +80,7 @@
       var active = menu.querySelector('[aria-current="page"]');
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
       document.title = BrandUI.brandById(landing.id).name;
+      playLogo(landing);
     }
 
     if (target !== landing) target.scrollIntoView({ block: "start" });
@@ -127,6 +128,50 @@
     });
   }
 
+  // ---------- logo hero: split the word into letters and play the entrance ----------
+  function splitLetters() {
+    document.querySelectorAll("[data-split-letters]").forEach(function (el) {
+      var text = el.textContent;
+      el.setAttribute("aria-label", text);
+      el.textContent = "";
+      Array.prototype.forEach.call(text, function (ch, i) {
+        var span = document.createElement("span");
+        span.className = "logo-hero__char";
+        span.setAttribute("aria-hidden", "true");
+        span.style.setProperty("--i", String(i));
+        span.textContent = ch === " " ? "\u00a0" : ch;
+        el.appendChild(span);
+      });
+      var hero = el.closest("[data-logo-hero]");
+      if (hero) hero.style.setProperty("--n", String(text.length));
+    });
+  }
+
+  function playLogo(scope) {
+    (scope || document).querySelectorAll("[data-logo-hero]").forEach(function (hero) {
+      hero.classList.remove("is-playing");
+      void hero.offsetWidth; // restart the CSS animations
+      hero.classList.add("is-playing");
+    });
+  }
+
+  // ---------- scroll reveal: [data-reveal] gets .is-in when it enters the screen ----------
+  function initReveal() {
+    var items = document.querySelectorAll("[data-reveal]");
+    if (!("IntersectionObserver" in window)) {
+      items.forEach(function (el) { el.classList.add("is-in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-in");
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
   // ---------- typeface trial: [data-font-switch] sets data-font on its landing ----------
   function initFontSwitches() {
     document.querySelectorAll("[data-font-switch]").forEach(function (box) {
@@ -143,7 +188,7 @@
       }
       box.addEventListener("click", function (e) {
         var b = e.target.closest("[data-font]");
-        if (b) pick(b.getAttribute("data-font"));
+        if (b) { pick(b.getAttribute("data-font")); playLogo(landing); }
       });
       var fallback = box.getAttribute("data-default") || box.querySelector("[data-font]").getAttribute("data-font");
       pick(saved && box.querySelector('[data-font="' + saved + '"]') ? saved : fallback);
@@ -156,6 +201,8 @@
     buildLoops();
     initPlaceholders();
     initFontSwitches();
+    splitLetters();
+    initReveal();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
     // Tapping the menu item of the landing already open scrolls back to its top.

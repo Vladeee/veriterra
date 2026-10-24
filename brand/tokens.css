@@ -104,6 +104,7 @@
   /* ---------- Typography (PLACEHOLDER: system faces until fonts are chosen) ---------- */
   --font-serif-system: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
   --font-display: var(--font-serif-system);
+  --font-logo: var(--font-serif-system);
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 
@@ -129,6 +130,7 @@
   --text-3xl: clamp(2.25rem, 1.6rem + 2.2vw, 3.25rem);
   --text-4xl: clamp(2.75rem, 1.8rem + 3.4vw, 4.5rem);
   --text-5xl: clamp(3.25rem, 1.8rem + 5vw, 6.5rem);
+  --text-logo: clamp(4rem, 1.5rem + 12vw, 15rem);
 
   --leading-tight: 1.05;
   --leading-snug: 1.2;
@@ -205,14 +207,19 @@
   --duration-slow: 420ms;
   --duration-slower: 640ms;
   --stagger: 60ms;
+  --duration-logo: 1200ms;
+  --duration-reveal: 900ms;
+  --stagger-logo: 70ms;
 
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-enter: cubic-bezier(0, 0, 0.2, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
   --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --motion-shift-sm: 0.5rem;
   --motion-shift-lg: 3rem;
+  --motion-blur: 12px;
   --press-scale: 0.98;
 
   /* ---------- Layers & states ---------- */
@@ -310,8 +317,12 @@
     --duration-slow: 1ms;
     --duration-slower: 1ms;
     --stagger: 0ms;
+    --duration-logo: 1ms;
+    --duration-reveal: 1ms;
+    --stagger-logo: 0ms;
     --motion-shift-sm: 0rem;
     --motion-shift-lg: 0rem;
+    --motion-blur: 0px;
     --press-scale: 1;
   }
 }

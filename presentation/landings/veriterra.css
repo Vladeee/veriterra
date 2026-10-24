@@ -8,8 +8,9 @@
   - Dix Hectares: a cream panel of terracotta botanical ornaments with spaced
     caps labels, next to a photo on deep forest green.
 
-  Flat throughout: hairlines instead of cards. The typeface bar sets data-font
-  on the landing; every display text here reads --font-display.
+  First screen is the logo only (animated, see presentation.css .logo-hero).
+  Flat throughout: hairlines instead of cards. The logo typeface bar sets data-font
+  on the landing, which swaps --font-logo; site text stays on placeholder fonts.
 */
 
 .landing[data-brand="veriterra"] {
@@ -19,19 +20,23 @@
   --color-border: var(--brand-accent-soft);
   --color-border-strong: var(--brand-accent);
   --brand-bg: var(--brand-paper);
+  /* Site text is a neutral grotesk placeholder; the trial fonts are for the logo only */
+  --font-display: var(--font-body);
   color: var(--color-text);
-  padding-bottom: calc(var(--tap-comfort) + var(--space-6));
 }
 
-/* ---------- Typeface trial ---------- */
-.landing[data-brand="veriterra"][data-font="asul"] { --font-display: var(--font-asul); }
-.landing[data-brand="veriterra"][data-font="old-standard"] { --font-display: var(--font-old-standard); }
-.landing[data-brand="veriterra"][data-font="young-serif"] { --font-display: var(--font-young-serif); }
-.landing[data-brand="veriterra"][data-font="bona-nova"] { --font-display: var(--font-bona-nova); }
-.landing[data-brand="veriterra"][data-font="mynerve"] { --font-display: var(--font-mynerve); }
-.landing[data-brand="veriterra"][data-font="accidenz"] { --font-display: var(--font-accidenz); }
+/* ---------- Logo typeface trial (the bar in the logo hero sets data-font) ---------- */
+.landing[data-brand="veriterra"][data-font="asul"] { --font-logo: var(--font-asul); }
+.landing[data-brand="veriterra"][data-font="old-standard"] { --font-logo: var(--font-old-standard); }
+.landing[data-brand="veriterra"][data-font="young-serif"] { --font-logo: var(--font-young-serif); }
+.landing[data-brand="veriterra"][data-font="bona-nova"] { --font-logo: var(--font-bona-nova); }
+.landing[data-brand="veriterra"][data-font="mynerve"] { --font-logo: var(--font-mynerve); }
+.landing[data-brand="veriterra"][data-font="accidenz"] { --font-logo: var(--font-accidenz); }
 
-/* ---------- 1. Split hero (Farm Minerals) ---------- */
+/* ---------- 1. Logo hero: olive word on cream ---------- */
+.landing[data-brand="veriterra"] .logo-hero__caption { color: var(--brand-accent); }
+
+/* ---------- 2. Split: field photo + figures (Farm Minerals) ---------- */
 .v-hero {
   position: relative;
   display: grid;
@@ -53,28 +58,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  padding: var(--space-7) max(var(--page-margin), env(safe-area-inset-right)) var(--space-10) var(--space-7);
+  padding: var(--space-7) max(var(--page-margin), env(safe-area-inset-right)) var(--space-7) var(--space-7);
 }
 
 @media (max-width: 63.99rem) {
   .v-hero__panel { padding-left: max(var(--page-margin), env(safe-area-inset-left)); }
 }
 
-/* Logo sits on the seam between photo and panel, like the reference */
-.v-hero__logo {
-  align-items: flex-start;
-  margin: 0;
-}
-
 @media (min-width: 64rem) {
-  .v-hero__logo {
-    position: absolute;
-    top: var(--space-5);
-    left: 50%;
-    z-index: var(--z-raised);
-    align-items: center;
-    transform: translateX(-50%);
-  }
   .v-hero__panel { padding-top: var(--space-9); }
 }
 
@@ -294,29 +285,28 @@
   color: var(--brand-deep);
 }
 
-/* ---------- Typeface switcher (fixed, bottom) ---------- */
+/* ---------- Logo typeface bar (bottom of the logo hero) ---------- */
 .font-trial {
-  position: fixed;
-  left: 50%;
-  bottom: max(var(--space-4), env(safe-area-inset-bottom));
-  z-index: var(--z-sticky);
+  position: absolute;
+  inset-inline: 0;
+  bottom: var(--space-6);
+  z-index: var(--z-raised);
   display: flex;
   align-items: center;
   gap: var(--space-1);
-  max-width: calc(100vw - var(--page-margin) * 2);
+  width: fit-content;
+  max-width: calc(100% - var(--page-margin) * 2);
+  margin-inline: auto;
   padding: var(--space-1);
   border-radius: var(--radius-pill);
   background: var(--color-inverse-bg);
   color: var(--color-inverse-text);
   box-shadow: var(--shadow-3);
-  transform: translateX(-50%);
   overflow-x: auto;
   scrollbar-width: none;
 }
 
 .font-trial::-webkit-scrollbar { display: none; }
-
-.landing[hidden] .font-trial { display: none; }
 
 .font-trial__label {
   flex: none;

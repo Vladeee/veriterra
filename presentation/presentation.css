@@ -563,3 +563,153 @@ body.is-intro .topnav { display: none; }
   .l-footer > span:first-of-type { grid-column: 1 / span 6; }
   .l-footer > span:last-of-type { grid-column: 7 / -1; text-align: right; }
 }
+
+/* ---------- Logo hero: the first screen is the logo ---------- */
+/* JS splits the word into .logo-hero__char spans (--i = index, --n = count on the hero)
+   and adds .is-playing to run the entrance; it replays when the landing opens again. */
+.logo-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  min-height: calc(100dvh - var(--nav-height) - env(safe-area-inset-top));
+  padding: var(--space-8) max(var(--page-margin), env(safe-area-inset-right)) calc(var(--space-10) + var(--tap-comfort)) max(var(--page-margin), env(safe-area-inset-left));
+  overflow: hidden;
+  text-align: center;
+}
+
+.logo-hero__word {
+  margin: 0;
+  font-family: var(--font-logo);
+  font-size: var(--text-logo);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+  color: var(--brand-accent);
+}
+
+.logo-hero__char {
+  display: inline-block;
+  opacity: 0;
+}
+
+.logo-hero.is-playing .logo-hero__word {
+  animation: logo-word calc(var(--duration-logo) * 1.8) var(--ease-out-expo) both;
+}
+
+.logo-hero.is-playing .logo-hero__char {
+  animation: logo-char var(--duration-logo) var(--ease-out-expo) forwards;
+  animation-delay: calc(var(--stagger-logo) * var(--i, 0));
+}
+
+.logo-hero__rule {
+  width: calc(var(--space-10) * 2.5);
+  height: var(--border-width);
+  background: currentColor;
+  color: var(--brand-accent);
+  transform: scaleX(0);
+}
+
+.logo-hero.is-playing .logo-hero__rule {
+  animation: logo-rule var(--duration-logo) var(--ease-out-expo) forwards;
+  animation-delay: calc(var(--stagger-logo) * var(--n, 8) + var(--duration-slow));
+}
+
+.logo-hero__caption,
+.logo-hero .font-trial,
+.logo-hero__scroll {
+  opacity: 0;
+}
+
+.logo-hero__caption {
+  font-size: var(--text-sm);
+  letter-spacing: calc(var(--tracking-wide) * 2.5);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.logo-hero.is-playing .logo-hero__caption,
+.logo-hero.is-playing .font-trial,
+.logo-hero.is-playing .logo-hero__scroll {
+  animation: logo-fade var(--duration-reveal) var(--ease-out-expo) forwards;
+  animation-delay: calc(var(--stagger-logo) * var(--n, 8) + var(--duration-slower));
+}
+
+.logo-hero.is-playing .font-trial,
+.logo-hero.is-playing .logo-hero__scroll {
+  animation-delay: calc(var(--stagger-logo) * var(--n, 8) + var(--duration-slower) * 1.6);
+}
+
+/* Scroll cue: a thin line that keeps drawing downwards */
+.logo-hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--tap-comfort) + var(--space-7));
+  display: grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-comfort);
+  translate: -50% 0;
+}
+
+.logo-hero__scroll-line {
+  width: var(--border-width);
+  height: 100%;
+  background: var(--brand-accent);
+  transform-origin: top;
+  animation: scroll-line calc(var(--duration-logo) * 1.5) var(--ease-standard) infinite;
+}
+
+@keyframes logo-word {
+  from { transform: scale(1.06); }
+  to { transform: none; }
+}
+
+@keyframes logo-char {
+  from { opacity: 0; transform: translateY(45%); filter: blur(var(--motion-blur)); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes logo-rule {
+  to { transform: scaleX(1); }
+}
+
+@keyframes logo-fade {
+  from { opacity: 0; transform: translateY(var(--motion-shift-sm)); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes scroll-line {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ---------- Scroll reveal: [data-reveal] rises in when it enters the screen ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--motion-shift-lg));
+  transition:
+    opacity var(--duration-reveal) var(--ease-out-expo),
+    transform var(--duration-reveal) var(--ease-out-expo);
+  transition-delay: calc(var(--stagger) * 2 * var(--i, 0));
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-hero__scroll-line { animation: none; }
+  .logo-hero__char,
+  .logo-hero__caption,
+  .logo-hero .font-trial,
+  .logo-hero__scroll,
+  [data-reveal] { opacity: 1; transform: none; }
+  .logo-hero__rule { transform: none; }
+}
