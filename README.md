@@ -1,6 +1,6 @@
 # VITREEONE brand system (working draft)
 
-One link for **VITREEONE** and its four companies: Veriterra, Verdo, Vaya and Viva.
+One link for **VITREEONE** and its four companies: Veriterra, Verdo, Vaya and Vita.
 It opens on an intro with a **Welcome** button, then five short landing pages behind a fixed top menu. They share one structure on a full-width 12-column grid, and each will be styled separately.
 Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
 

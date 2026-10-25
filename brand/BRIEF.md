@@ -15,7 +15,7 @@ A holding company, **VITREEONE** (replaces the working name "Veriterra Global"),
 | **Veriterra** | Water-soluble fertilizers, formulated by crop and growth stage | Greenhouse and fertigation growers, distributors; export focus (India, Middle East, Africa) | Name may change |
 | **Verdo** | Greenhouse farm and food products: vegetables first, processing later | Hotels and restaurants (HoReCa), retail | Supplies Vaya's kitchen |
 | **Vaya** | Small eco-glamping resort on the south coast | Travellers | Restaurant runs on Verdo produce |
-| **Viva** | Design and construction | The group's own projects, then outside clients | Builds for the other three |
+| **Vita** | Design and construction | The group's own projects, then outside clients | Builds for the other three |
 
 ## 2. What is established
 
@@ -29,7 +29,7 @@ A holding company, **VITREEONE** (replaces the working name "Veriterra Global"),
 
 ## 3. Working hypotheses (proposed, waiting for approval)
 
-1. **The loop is the idea.** Each company feeds the next: Veriterra feeds the soil, Verdo grows the food, Vaya serves it to guests and Viva builds the places. The existing decks summarise it as *Land → Product → Person → Space*. That loop is what makes four early-stage businesses read as one group rather than four small bets.
+1. **The loop is the idea.** Each company feeds the next: Veriterra feeds the soil, Verdo grows the food, Vaya serves it to guests and Vita builds the places. The existing decks summarise it as *Land → Product → Person → Space*. That loop is what makes four early-stage businesses read as one group rather than four small bets.
 2. **One system, five themes.** Typefaces, grid, components and motion are shared. Each company gets its own accent palette. Technically this means one `tokens.css` with a `data-brand` theme per company.
 3. **Endorsed architecture.** Each company leads on its own site. The holding appears as a quiet endorsement ("part of …"), not as the hero.
 
@@ -37,7 +37,7 @@ A holding company, **VITREEONE** (replaces the working name "Veriterra Global"),
 
 1. Holding name: VITREEONE. How is it pronounced, how is it written in running text (VITREEONE, Vitreeone, VitreeOne), and is the domain secured? No trademark check done yet.
 2. Does Veriterra keep its name now that the holding has its own?
-3. What is the one target action on each site (quote, order, booking, consultation)? Who is Viva's outside customer today?
+3. What is the one target action on each site (quote, order, booking, consultation)? Who is Vita's outside customer today?
 4. What is real today: signed land, built facilities, team, partners, first sales, real photographs?
 5. Brand personality and tone of voice (interview not finished).
 6. Real references, and what exactly is liked in each one.

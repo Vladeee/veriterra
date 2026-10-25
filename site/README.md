@@ -7,7 +7,7 @@ site/
 ├── veriterra/index.html   <html data-brand="veriterra">
 ├── verdo/index.html       <html data-brand="verdo">
 ├── vaya/index.html        <html data-brand="vaya">
-└── viva/index.html        <html data-brand="viva">
+└── vita/index.html        <html data-brand="vita">
 ```
 
 Whether the holding gets its own site is still open (see `brand/BRIEF.md`).
