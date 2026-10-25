@@ -3,6 +3,7 @@
   (figma.com/design/kijHOH1H9UUlT26sK0ccT1). Values live in brand/tokens.css as
   --fig-<brand>-<n>-<prop>; this file only lists them. Generated from the Figma
   frames; edit the tokens to tweak a variant, add an entry here to add one.
+  kern: true spaces the letters by their ink (for faces with monospaced Latin).
 */
 window.VARIANTS = {
   "vitreeone": [
@@ -38,11 +39,13 @@ window.VARIANTS = {
     },
     {
       "name": "Olive · Kosugi Maru",
-      "node": "75:254"
+      "node": "75:254",
+      "kern": true
     },
     {
       "name": "Black · gold caps",
-      "node": "75:261"
+      "node": "75:261",
+      "kern": true
     },
     {
       "name": "Moss · two-tone",

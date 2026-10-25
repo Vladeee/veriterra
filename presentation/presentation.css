@@ -1,7 +1,7 @@
 /*
   Presentation shell: intro screen, fixed top menu and the logo screen.
   Every landing is one screen for now: .logo-hero (the wordmark and a caption)
-  over soft drifting light streaks (.glow). Its colours, font and gradient come
+  over a faint wash of horizontal bands (.glow). Its colours, font and gradient come
   from the chosen Figma variant (presentation/variants.css). The 12-column page
   grid (after paypath.ai) stays for the sections to come.
   Per-landing styling goes in presentation/landings/<id>.css. Tokens only.
@@ -286,7 +286,7 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   animation: logo-rise var(--duration-logo) var(--ease-out-expo) both;
 }
 
-/* Caption: Inter bold, pinned to the bottom of the screen */
+/* Caption: one line of copy in Inter Bold, sentence case, pinned to the bottom */
 .logo-hero__caption {
   position: absolute;
   inset-inline: 0;
@@ -294,12 +294,12 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   max-width: 50%;
   margin: 0 auto;
   font-family: var(--font-inter);
-  font-size: var(--text-xs);
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-bold);
-  letter-spacing: calc(var(--tracking-wide) * 2);
-  text-transform: uppercase;
+  line-height: var(--leading-snug);
+  letter-spacing: calc(var(--tracking-tight) * 0.5);
   text-wrap: balance;
-  color: var(--color-text-muted);
+  color: var(--color-text);
   opacity: 0;
 }
 
@@ -308,6 +308,7 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   .logo-hero__caption {
     bottom: calc(var(--tap-min) * 2 + var(--space-2) + var(--space-6) * 2 + env(safe-area-inset-bottom));
     max-width: calc(100% - var(--page-margin) * 2);
+    font-size: var(--text-md);
   }
 }
 

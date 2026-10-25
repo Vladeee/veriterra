@@ -62,7 +62,7 @@
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
       document.title = BrandUI.brandById(landing.id).name;
       renderSwitch(landing);
-      centreInk(landing.querySelector(".logo-hero__word"));
+      centreCurrent();
       playLogo(landing);
     }
 
@@ -136,8 +136,34 @@
     word.style.setProperty("--ink-shift", (line / 2 - inkMid).toFixed(2) + "px");
   }
 
+  // Faces with monospaced Latin (Kosugi Maru) leave holes around narrow letters.
+  // Space each letter by its ink instead: the same side bearing on every glyph,
+  // the way a wordmark is kerned by hand. Tracking is added on top in CSS.
+  var KERN_BEARING = 0.045; // em, each side of every letter
+
+  function kernInk(word) {
+    var glyphs = word ? word.querySelectorAll(".logo-hero__g") : [];
+    if (!glyphs.length || !probe.measureText) return;
+    var cs = getComputedStyle(word);
+    var size = parseFloat(cs.fontSize);
+    probe.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+    glyphs.forEach(function (g) {
+      var c = g.textContent;
+      if (cs.textTransform === "uppercase") c = c.toUpperCase();
+      else if (cs.textTransform === "lowercase") c = c.toLowerCase();
+      var m = probe.measureText(c);
+      var left = -m.actualBoundingBoxLeft;
+      var right = m.width - m.actualBoundingBoxRight;
+      g.style.marginLeft = (KERN_BEARING * size - left).toFixed(2) + "px";
+      g.style.marginRight = (KERN_BEARING * size - right).toFixed(2) + "px";
+    });
+  }
+
   function centreCurrent() {
-    if (current && current !== intro) centreInk(current.querySelector(".logo-hero__word"));
+    if (!current || current === intro) return;
+    var word = current.querySelector(".logo-hero__word");
+    kernInk(word);
+    centreInk(word);
   }
 
   function isDark(token) {
@@ -154,11 +180,10 @@
   var switchTimer = null;
   var PROPS = ["bg", "page", "ink", "ink2", "accent", "font", "size", "tracking", "weight", "case"];
   var GRADIENTS = [
-    { id: "streaks", name: "Streaks" },
-    { id: "halo", name: "Halo" },
+    { id: "dawn", name: "Dawn" },
+    { id: "dusk", name: "Dusk" },
     { id: "horizon", name: "Horizon" },
-    { id: "radial", name: "Radial" },
-    { id: "linear", name: "Linear" },
+    { id: "mist", name: "Mist" },
     { id: "flat", name: "Flat" }
   ];
 
@@ -196,12 +221,14 @@
     var name = BrandUI.brandById(landing.id).name;
     if (word) {
       if (v.split) word.innerHTML = name.slice(0, v.split) + '<span class="logo-hero__b">' + name.slice(v.split) + "</span>";
+      else if (v.kern) word.innerHTML = name.split("").map(function (c) { return '<span class="logo-hero__g">' + c + "</span>"; }).join("");
       else word.textContent = name;
+      word.setAttribute("aria-label", name);
     }
     var hero = landing.querySelector("[data-logo-hero]");
     if (hero) hero.setAttribute("data-tone", landing.getAttribute("data-v-tone"));
     if (save) store("variant-" + landing.id, String(n));
-    if (landing === current) { renderSwitch(landing); centreInk(word); }
+    if (landing === current) { renderSwitch(landing); centreCurrent(); }
     if (save) { playLogo(landing); window.dispatchEvent(new Event("scroll")); }
   }
 

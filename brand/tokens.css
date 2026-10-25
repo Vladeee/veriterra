@@ -71,7 +71,7 @@
   --color-vitreeone-700: #1A1916;
   --color-vitreeone-glow: #EFE5D0;
   --color-vitreeone-glow-2: #E4E8DA;
-  --color-vitreeone-streak: #6FB3A5;   /* light streaks behind the logo (.glow) */
+  --color-vitreeone-streak: #6FB3A5;   /* tint of the background bands and the wordmark gradient */
 
   /* Veriterra colour library (draft), taken from farmminerals.com and
      extended in OKLCH. Olive hue ≈ 123, beige hue ≈ 68. */
@@ -97,21 +97,22 @@
   --color-verdo-700: #2F4C37;
   --color-verdo-glow: #E4F1C4;
   --color-verdo-glow-2: #F4F1D6;
-  --color-verdo-streak: #EFA463;   /* light streaks behind the logo (.glow) */
+  --color-verdo-streak: #EFA463;   /* tint of the background bands and the wordmark gradient */
 
   --color-vaya-100: #E3ECF2;
   --color-vaya-600: #34617F;
   --color-vaya-700: #274B63;
   --color-vaya-glow: #D6E9F3;
   --color-vaya-glow-2: #F5EAD8;
-  --color-vaya-streak: #F2A68C;   /* light streaks behind the logo (.glow) */
+  --color-vaya-streak: #F2A68C;   /* tint of the background bands and the wordmark gradient */
 
   --color-vita-100: #F2EADF;
   --color-vita-600: #7D5A2E;
   --color-vita-700: #604421;
   --color-vita-glow: #F3DFC8;
   --color-vita-glow-2: #EAE3D6;
-  --color-vita-streak: #D3A44C;   /* light streaks behind the logo (.glow) */
+  --color-vita-streak: #D3A44C;   /* tint of the background bands and the wordmark gradient */
+
 
 
   /* ---------- Figma style variants (one per frame in the Figma file) ----------
@@ -185,7 +186,7 @@
   --fig-veriterra-5-ink: #FFFFFF;
   --fig-veriterra-5-font: var(--font-kosugi);
   --fig-veriterra-5-size: clamp(2.5rem, 5.94vw, 7.12rem);
-  --fig-veriterra-5-tracking: -0.015em;
+  --fig-veriterra-5-tracking: 0em;
   --fig-veriterra-5-weight: 400;
   --fig-veriterra-5-case: none;
   /* veriterra 6: Black · gold caps (Figma 75:261) */
@@ -194,7 +195,7 @@
   --fig-veriterra-6-ink: #FEC81E;
   --fig-veriterra-6-font: var(--font-kosugi);
   --fig-veriterra-6-size: clamp(2.5rem, 4.48vw, 5.38rem);
-  --fig-veriterra-6-tracking: 0.18em;
+  --fig-veriterra-6-tracking: 0.16em;
   --fig-veriterra-6-weight: 400;
   --fig-veriterra-6-case: uppercase;
   /* veriterra 7: Moss · two-tone (Figma 75:265) */

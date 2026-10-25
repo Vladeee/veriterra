@@ -2,12 +2,12 @@
   Figma style variants. presentation.js copies the chosen variant's tokens
   (--fig-<brand>-<n>-*) onto the landing as --v-* and sets data-variant.
   Loaded last, so a variant wins over the landing defaults. Tokens only.
-  A second choice, data-gradient on the landing, lays a soft gradient over the
-  variant's background and gives the wordmark a faint gradient: streaks
-  (default), halo, horizon (drifting light, .glow spans), radial, linear, or
-  flat (the frame as is).
-  Streak colours mix --brand-streak into the variant's own colours, so each
-  landing and each variant gets its own light.
+  A second choice, data-gradient on the landing, lays a wash of horizontal
+  bands (.glow) over the variant's background: dawn (default), dusk, horizon,
+  mist, or flat (the frame as is). Many stops, each only a few percent away
+  over the background, mixed in OKLCH: the screen feels lit, but the logo
+  keeps all of its contrast. The tint is --brand-streak, so every landing and
+  variant gets its own. The wordmark gets the same kind of faint gradient.
 */
 
 /* ---------- Page and logo screen ---------- */
@@ -34,11 +34,13 @@
 /* Two-tone wordmark: the part after the split point takes the second colour */
 .logo-hero__b { color: var(--v-ink2, inherit); }
 
-.landing[data-variant] .logo-hero__caption { color: var(--v-ink); }
+/* Caption: dark on light pages (a deep shade of the logo colour), the logo colour on dark ones */
+.landing[data-variant] .logo-hero__caption { color: color-mix(in oklch, var(--v-ink) 12%, var(--color-ink-900)); }
+.landing[data-variant][data-v-tone="dark"] .logo-hero__caption { color: var(--v-ink); }
 
 /* Photo background (Vaya "Clouds") */
 .landing[data-variant-image="sky"] .logo-hero {
-  background: var(--v-bg) url("../brand/figma/vaya-sky.jpg") center / cover no-repeat;
+  background: var(--v-bg) url("../brand/figma/vaya-clouds.jpg") center / cover no-repeat;
 }
 
 /* Accent square, bottom right (Veriterra "Earth") */
@@ -52,10 +54,13 @@
   background: var(--v-accent);
 }
 
-/* ---------- Background gradient: soft drifting light behind the logo ---------- */
+/* ---------- Background gradient: faint horizontal bands ---------- */
 .landing[data-variant] {
-  --g-streak: color-mix(in oklch, var(--brand-streak) 60%, var(--v-page));
-  --g-core: color-mix(in oklch, var(--brand-streak) 70%, var(--color-white));
+  /* Translucent, so a Figma background that is itself a gradient shows through */
+  --w-light: color-mix(in oklch, var(--color-white) 14%, transparent);
+  --w-deep: color-mix(in oklch, var(--color-ink-900) 9%, transparent);
+  --w-tint: color-mix(in oklch, var(--brand-streak) 16%, transparent);
+  --w-tint-soft: color-mix(in oklch, var(--brand-streak) 8%, transparent);
 }
 
 .glow {
@@ -65,71 +70,51 @@
   pointer-events: none;
 }
 
-.glow span {
-  position: absolute;
-  border-radius: var(--radius-pill);
-  background: radial-gradient(closest-side, var(--g-streak), transparent);
-  filter: blur(var(--glow-blur));
-  opacity: var(--opacity-quiet);
-  animation: glow-drift var(--duration-drift) var(--ease-standard) infinite alternate;
+/* Dawn: light from above, a warm tint gathering at the bottom */
+.landing[data-gradient="dawn"] .glow {
+  background: linear-gradient(in oklch to bottom,
+    var(--w-light) 0%, transparent 34%, transparent 56%,
+    var(--w-tint-soft) 74%, var(--w-tint) 90%, var(--w-tint-soft) 100%);
 }
 
-.glow span:nth-child(2) { animation-delay: calc(var(--duration-drift) / -3); }
-
-.glow span:nth-child(3) {
-  background: radial-gradient(closest-side, var(--g-core), transparent);
-  opacity: var(--opacity-glow);
-  animation-delay: calc(var(--duration-drift) / -1.5);
+/* Dusk: the tint hangs at the top, the ground darkens a little */
+.landing[data-gradient="dusk"] .glow {
+  background: linear-gradient(in oklch to bottom,
+    var(--w-tint) 0%, var(--w-tint-soft) 20%, transparent 42%, transparent 64%,
+    var(--w-deep) 100%);
 }
 
-@keyframes glow-drift {
-  from { translate: -4% 0; }
-  to { translate: 6% -6%; }
+/* Horizon: a thin band of tint below the logo, light sky, deeper ground */
+.landing[data-gradient="horizon"] .glow {
+  background: linear-gradient(in oklch to bottom,
+    var(--w-light) 0%, transparent 30%, transparent 58%,
+    var(--w-tint-soft) 64%, var(--w-tint) 69%, var(--w-tint-soft) 75%,
+    transparent 86%, var(--w-deep) 100%);
 }
 
-/* Streaks (after paypath.ai): two long tilted bands and a brighter core */
-.landing[data-gradient="streaks"] .glow span:nth-child(1) { left: -15%; top: 34%; width: 95%; height: 22%; transform: rotate(-14deg); }
-.landing[data-gradient="streaks"] .glow span:nth-child(2) { right: -20%; top: 52%; width: 85%; height: 26%; transform: rotate(10deg); }
-.landing[data-gradient="streaks"] .glow span:nth-child(3) { left: 25%; top: 44%; width: 40%; height: 10%; transform: rotate(-6deg); }
-
-/* Halo: one wide light behind the logo and a faint one in the corner */
-.landing[data-gradient="halo"] .glow span:nth-child(1) { left: 10%; top: 18%; width: 80%; height: 64%; }
-.landing[data-gradient="halo"] .glow span:nth-child(2) { right: -15%; bottom: -20%; width: 55%; height: 45%; }
-.landing[data-gradient="halo"] .glow span:nth-child(3) { left: 30%; top: 38%; width: 40%; height: 24%; }
-
-/* Horizon: light rising from the bottom edge, a trace of it at the top */
-.landing[data-gradient="horizon"] .glow span:nth-child(1) { left: -20%; bottom: -30%; width: 140%; height: 60%; }
-.landing[data-gradient="horizon"] .glow span:nth-child(2) { right: -15%; top: -25%; width: 60%; height: 40%; }
-.landing[data-gradient="horizon"] .glow span:nth-child(3) { left: 15%; bottom: -8%; width: 70%; height: 18%; }
-
-/* Radial: one smooth light from the centre, no drift */
-.landing[data-gradient="radial"] .glow {
-  background: radial-gradient(ellipse 70% 60% at 50% 45%, var(--g-streak) 0%, transparent 100%);
+/* Mist: several soft bands, like layers of air over water */
+.landing[data-gradient="mist"] .glow {
+  background: linear-gradient(in oklch to bottom,
+    var(--w-light) 0%, transparent 16%, var(--w-tint-soft) 28%, transparent 40%,
+    transparent 58%, var(--w-tint-soft) 70%, var(--w-light) 80%,
+    var(--w-tint-soft) 90%, var(--w-deep) 100%);
 }
 
-/* Linear: the page colour fading into the light towards the bottom */
-.landing[data-gradient="linear"] .glow {
-  background: linear-gradient(to bottom, transparent 15%, var(--g-streak) 100%);
-}
-
-.landing[data-gradient="radial"] .glow span,
-.landing[data-gradient="linear"] .glow span,
 .landing[data-gradient="flat"] .glow { display: none; }
 
-/* Wordmark: a faint gradient towards the streak colour, barely there */
+/* Wordmark: a faint tint at the top of the letters, full colour from the middle down */
 .landing[data-variant] .logo-hero__word { --wm: var(--v-ink); }
 .landing[data-variant] .logo-hero__b { --wm: var(--v-ink2, var(--v-ink)); }
 
 .landing[data-variant]:not([data-gradient="flat"]) .logo-hero__word,
 .landing[data-variant]:not([data-gradient="flat"]) .logo-hero__b {
-  background-image: linear-gradient(105deg, var(--wm) 20%, color-mix(in oklch, var(--wm) 72%, var(--brand-streak)) 65%, var(--wm) 100%);
+  background-image: linear-gradient(in oklch to bottom,
+    color-mix(in oklch, var(--brand-streak) 14%, var(--wm)) 10%,
+    color-mix(in oklch, var(--brand-streak) 5%, var(--wm)) 40%,
+    var(--wm) 65%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .glow span { animation: none; }
 }
 
 /* ---------- Text tone ---------- */
