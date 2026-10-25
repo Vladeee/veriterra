@@ -14,6 +14,18 @@
   <link rel="icon" href="brand/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="brand/icons/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="brand/icons/apple-touch-icon.png">
+  <!-- Every wordmark font loads up front, so switching variants never waits for a download -->
+  <link rel="preload" href="brand/fonts/port-lligat-sans/port-lligat-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/poppins/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/kosugi-maru/kosugi-maru-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/comfortaa/comfortaa-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/hubballi/hubballi-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/varela-round/varela-round-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/madimi-one/madimi-one-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/braah-one/braah-one-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/momo-trust-display/momo-trust-display-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/inter/inter-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/faculty-glyphic/faculty-glyphic-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="brand/tokens.css">
   <link rel="stylesheet" href="brand/components.css">
   <link rel="stylesheet" href="presentation/presentation.css">
@@ -35,17 +47,18 @@
     </div>
   </nav>
 
-  <!-- Switcher, bottom left, nearly invisible: background gradient + style variant (Figma frames) -->
+  <!-- Switcher, bottom left: style variant (Figma frames) and background gradient -->
   <div class="variant-switch" id="variant-switch" hidden>
-    <div class="variant-switch__grads" role="group" aria-label="Background gradient">
-      <button type="button" data-gradient="streaks">Streaks</button>
-      <button type="button" data-gradient="halo">Halo</button>
-      <button type="button" data-gradient="horizon">Horizon</button>
-      <button type="button" data-gradient="flat">Flat</button>
+    <span class="variant-switch__name" aria-live="polite"></span>
+    <div class="variant-switch__pill" role="group" aria-label="Style variant">
+      <button type="button" data-step="variant" data-dir="-1" aria-label="Previous variant"><span class="icon" data-icon="arrow-left"></span></button>
+      <span class="variant-switch__value" data-value="variant"></span>
+      <button type="button" data-step="variant" data-dir="1" aria-label="Next variant"><span class="icon" data-icon="arrow-right"></span></button>
     </div>
-    <div class="variant-switch__row">
-      <div class="variant-switch__dots" role="group" aria-label="Style variant"></div>
-      <span class="variant-switch__name" aria-live="polite"></span>
+    <div class="variant-switch__pill" role="group" aria-label="Background gradient">
+      <button type="button" data-step="gradient" data-dir="-1" aria-label="Previous gradient"><span class="icon" data-icon="arrow-left"></span></button>
+      <span class="variant-switch__value" data-value="gradient"></span>
+      <button type="button" data-step="gradient" data-dir="1" aria-label="Next gradient"><span class="icon" data-icon="arrow-right"></span></button>
     </div>
   </div>
 
@@ -64,19 +77,11 @@
     </section>
 
     <!-- ==================== VITREEONE ==================== -->
-    <!-- One screen: four glyphs (one per company), the logo, a caption and a button. -->
     <article class="landing" id="vitreeone" data-brand="vitreeone" aria-labelledby="vitreeone-title" hidden>
-      <header class="vo-hero logo-hero" data-logo-hero>
+      <header class="logo-hero" data-logo-hero>
         <div class="glow" aria-hidden="true"><span></span><span></span><span></span></div>
-        <ul class="vo-glyphs" aria-label="The four companies">
-          <li style="--i: 0"><a class="vo-glyph" href="#veriterra" data-brand="veriterra"><svg viewBox="0 0 48 32" fill="currentColor" aria-hidden="true"><circle cx="15" cy="11" r="4.6"/><circle cx="28" cy="9.5" r="4.1"/><circle cx="21.5" cy="21.5" r="4.8"/></svg><span class="vo-glyph__name" data-brand-name="veriterra"></span></a></li>
-          <li style="--i: 1"><a class="vo-glyph" href="#verdo" data-brand="verdo"><svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 29.5c.3-5.6 0-11-1.2-17.5"/><path d="M23.2 18.5c-5.6.4-10-3-11.4-9.3 5.8-.2 10.2 3.4 11.4 9.3Z" fill="currentColor"/><path d="M23.6 13.6c4.8-.7 9.3-4.6 11.6-10.1-5.6-.5-10.3 3.5-11.6 10.1Z" fill="currentColor"/></svg><span class="vo-glyph__name" data-brand-name="verdo"></span></a></li>
-          <li style="--i: 2"><a class="vo-glyph" href="#vaya" data-brand="vaya"><svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5c3.4-4.4 7.4-4.6 10.6-.6s7.4 4.2 10.8.2 7.6-4.4 10.8-.4 5.4 3.4 6.8 2"/><path d="M5 22c3.4-4.4 7.4-4.6 10.6-.6s7.4 4.2 10.8.2 7.6-4.4 10.8-.4 5.4 3.4 6.8 2"/></svg><span class="vo-glyph__name" data-brand-name="vaya"></span></a></li>
-          <li style="--i: 3"><a class="vo-glyph" href="#vita" data-brand="vita"><svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 17.5 24 4.5l18 13"/><path d="M13.5 13v15.5M34.5 13v15.5"/><path d="M9 28.5h30"/></svg><span class="vo-glyph__name" data-brand-name="vita"></span></a></li>
-        </ul>
         <h1 class="logo-hero__word" id="vitreeone-title" data-brand-name="vitreeone"></h1>
         <p class="logo-hero__caption">Soil · Growth · Shore · Shelter — South Sri Lanka</p>
-        <a class="vo-btn logo-hero__late" href="#veriterra">Explore the companies <span class="icon" data-icon="arrow-right"></span></a>
       </header>
     </article>
 

@@ -245,9 +245,15 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-4);
-  min-height: calc(100dvh - var(--nav-height) - env(safe-area-inset-top));
-  padding: var(--space-8) max(var(--page-margin), env(safe-area-inset-right)) var(--space-8) max(var(--page-margin), env(safe-area-inset-left));
+  /* One full screen that runs under the menu. Equal room above and below,
+     so the wordmark sits on the true centre of the screen */
+  min-height: 100dvh;
+  margin-top: calc((var(--nav-height) + env(safe-area-inset-top)) * -1);
+  padding:
+    calc(var(--nav-height) + var(--space-8) + env(safe-area-inset-top))
+    max(var(--page-margin), env(safe-area-inset-right))
+    calc(var(--nav-height) + var(--space-8) + env(safe-area-inset-bottom))
+    max(var(--page-margin), env(safe-area-inset-left));
   overflow: hidden;
   isolation: isolate;
   text-align: center;
@@ -258,10 +264,16 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   font-family: var(--font-logo);
   font-size: var(--text-logo);
   font-weight: var(--font-weight-regular);
-  line-height: var(--leading-tight);
+  line-height: 1;
   letter-spacing: var(--tracking-tight);
   white-space: nowrap;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
   color: var(--brand-logo, var(--brand-accent));
+  /* Centre on the ink of the letters, not on the line box (presentation.js
+     measures the glyphs and sets --ink-shift), then lift to the optical centre,
+     a little above the geometric one */
+  translate: 0 calc(var(--ink-shift, 0px) - var(--logo-optical-lift));
   -webkit-mask-image: linear-gradient(to top, black 40%, transparent 60%);
   mask-image: linear-gradient(to top, black 40%, transparent 60%);
   -webkit-mask-size: 100% 250%;
@@ -274,26 +286,34 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   animation: logo-rise var(--duration-logo) var(--ease-out-expo) both;
 }
 
-.logo-hero__caption,
-.logo-hero__late {
+/* Caption: Inter bold, pinned to the bottom of the screen */
+.logo-hero__caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: calc(var(--space-6) + env(safe-area-inset-bottom));
+  max-width: 50%;
+  margin: 0 auto;
+  font-family: var(--font-inter);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: calc(var(--tracking-wide) * 2);
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--color-text-muted);
   opacity: 0;
 }
 
-.logo-hero__caption {
-  font-size: var(--text-xs);
-  letter-spacing: calc(var(--tracking-wide) * 2.5);
-  text-transform: uppercase;
-  color: var(--color-text-muted);
+/* Phones: the caption moves up above the switcher */
+@media (max-width: 47.99rem) {
+  .logo-hero__caption {
+    bottom: calc(var(--tap-min) * 2 + var(--space-2) + var(--space-6) * 2 + env(safe-area-inset-bottom));
+    max-width: calc(100% - var(--page-margin) * 2);
+  }
 }
 
 .logo-hero.is-playing .logo-hero__caption {
   animation: logo-fade var(--duration-reveal) var(--ease-out-expo) forwards;
   animation-delay: calc(var(--duration-logo) * 0.45);
-}
-
-.logo-hero.is-playing .logo-hero__late {
-  animation: logo-fade var(--duration-reveal) var(--ease-out-expo) forwards;
-  animation-delay: calc(var(--duration-logo) * 0.8);
 }
 
 @keyframes logo-rise {
@@ -320,7 +340,5 @@ body.is-scrolled .topnav__blur { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logo-hero__caption,
-  .logo-hero__late,
-  .vo-glyphs li { opacity: 1; transform: none; }
+  .logo-hero__caption { opacity: 1; transform: none; }
 }

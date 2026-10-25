@@ -23,7 +23,7 @@
       a.className = "topnav__link";
       a.href = "#" + b.id;
       a.setAttribute("data-brand", b.id);
-      a.textContent = b.name;
+      a.textContent = b.menu || b.name;
       var li = document.createElement("li");
       li.appendChild(a);
       menu.appendChild(li);
@@ -62,6 +62,7 @@
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
       document.title = BrandUI.brandById(landing.id).name;
       renderSwitch(landing);
+      centreInk(landing.querySelector(".logo-hero__word"));
       playLogo(landing);
     }
 
@@ -118,6 +119,27 @@
     return "#" + [d[0], d[1], d[2]].map(function (v) { return v.toString(16).padStart(2, "0"); }).join("").toUpperCase();
   }
 
+  // Vertical offset that puts the centre of the letters' ink (not the line box)
+  // on the centre of the box. Fonts place glyphs differently inside the line.
+  function centreInk(word) {
+    if (!word || !probe.measureText) return;
+    var cs = getComputedStyle(word);
+    var text = word.textContent;
+    if (cs.textTransform === "uppercase") text = text.toUpperCase();
+    else if (cs.textTransform === "lowercase") text = text.toLowerCase();
+    probe.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+    var m = probe.measureText(text);
+    if (!m.fontBoundingBoxAscent) return;
+    var line = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize);
+    var baseline = (line - m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) / 2 + m.fontBoundingBoxAscent;
+    var inkMid = baseline + (m.actualBoundingBoxDescent - m.actualBoundingBoxAscent) / 2;
+    word.style.setProperty("--ink-shift", (line / 2 - inkMid).toFixed(2) + "px");
+  }
+
+  function centreCurrent() {
+    if (current && current !== intro) centreInk(current.querySelector(".logo-hero__word"));
+  }
+
   function isDark(token) {
     var hex = toHex(getComputedStyle(root).getPropertyValue(token).trim());
     var c = [1, 3, 5].map(function (i) {
@@ -131,6 +153,22 @@
   var switchEl = document.getElementById("variant-switch");
   var switchTimer = null;
   var PROPS = ["bg", "page", "ink", "ink2", "accent", "font", "size", "tracking", "weight", "case"];
+  var GRADIENTS = [
+    { id: "streaks", name: "Streaks" },
+    { id: "halo", name: "Halo" },
+    { id: "horizon", name: "Horizon" },
+    { id: "radial", name: "Radial" },
+    { id: "linear", name: "Linear" },
+    { id: "flat", name: "Flat" }
+  ];
+
+  function store(key, value) {
+    try { window.localStorage.setItem(key, value); } catch (e) { /* storage unavailable */ }
+  }
+
+  function stored(key) {
+    try { return window.localStorage.getItem(key); } catch (e) { return null; }
+  }
 
   function flashSwitch() {
     switchEl.classList.add("is-active");
@@ -150,10 +188,9 @@
     });
     landing.setAttribute("data-variant", String(n));
     landing.setAttribute("data-v-tone", isDark(pre + "page") ? "dark" : "light");
-    ["align", "image", "accent"].forEach(function (k) {
-      var attr = k === "align" ? "data-logo-align" : "data-variant-" + k;
-      if (v[k]) landing.setAttribute(attr, v[k] === true ? "" : v[k]);
-      else landing.removeAttribute(attr);
+    ["image", "accent"].forEach(function (k) {
+      if (v[k]) landing.setAttribute("data-variant-" + k, v[k] === true ? "" : v[k]);
+      else landing.removeAttribute("data-variant-" + k);
     });
     var word = landing.querySelector(".logo-hero__word");
     var name = BrandUI.brandById(landing.id).name;
@@ -163,57 +200,87 @@
     }
     var hero = landing.querySelector("[data-logo-hero]");
     if (hero) hero.setAttribute("data-tone", landing.getAttribute("data-v-tone"));
-    if (save) { try { window.localStorage.setItem("variant-" + landing.id, String(n)); } catch (e) { /* storage unavailable */ } }
-    if (landing === current) renderSwitch(landing);
-    if (save) { playLogo(landing); flashSwitch(); window.dispatchEvent(new Event("scroll")); }
+    if (save) store("variant-" + landing.id, String(n));
+    if (landing === current) { renderSwitch(landing); centreInk(word); }
+    if (save) { playLogo(landing); window.dispatchEvent(new Event("scroll")); }
   }
 
+  function applyGradient(landing, id, save) {
+    landing.setAttribute("data-gradient", id);
+    if (save) store("gradient-" + landing.id, id);
+    if (landing === current) renderSwitch(landing);
+  }
+
+  // The switcher lives outside the landings, so it takes the open variant's colours
   function renderSwitch(landing) {
     var list = landing ? (window.VARIANTS || {})[landing.id] : null;
-    if (!list || list.length < 2) { switchEl.hidden = true; return; }
+    if (!list) { switchEl.hidden = true; return; }
     switchEl.hidden = false;
-    var dots = switchEl.querySelector(".variant-switch__dots");
-    var current = Number(landing.getAttribute("data-variant")) || 1;
-    dots.innerHTML = "";
-    list.forEach(function (v, i) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.setAttribute("aria-label", "Variant " + (i + 1) + ": " + v.name);
-      b.setAttribute("aria-pressed", String(i + 1 === current));
-      b.addEventListener("click", function () { applyVariant(landing, i + 1, true); });
-      dots.appendChild(b);
-    });
-    switchEl.querySelector(".variant-switch__name").textContent = current + " · " + list[current - 1].name;
-    var grad = landing.getAttribute("data-gradient");
-    switchEl.querySelectorAll("[data-gradient]").forEach(function (b) {
-      b.setAttribute("aria-pressed", String(b.getAttribute("data-gradient") === grad));
-    });
+    var n = Number(landing.getAttribute("data-variant")) || 1;
+    var pre = "--fig-" + landing.id + "-" + n + "-";
+    switchEl.style.setProperty("--sw-ink", "var(" + pre + "ink)");
+    switchEl.style.setProperty("--sw-page", "var(" + pre + "page)");
+    var grad = GRADIENTS.filter(function (g) { return g.id === landing.getAttribute("data-gradient"); })[0] || GRADIENTS[0];
+    switchEl.querySelector('[data-value="variant"]').textContent = n + " / " + list.length;
+    switchEl.querySelector('[data-value="gradient"]').textContent = grad.name;
+    switchEl.querySelector(".variant-switch__name").textContent = list[n - 1].name;
   }
 
-  // ---------- background gradient: data-gradient on the landing ----------
-  var GRADIENTS = ["streaks", "halo", "horizon", "flat"];
+  // Previous / next, wrapping around
+  function step(kind, dir) {
+    if (!current || current === intro) return;
+    var list = (window.VARIANTS || {})[current.id];
+    if (!list) return;
+    if (kind === "variant") {
+      var n = Number(current.getAttribute("data-variant")) || 1;
+      applyVariant(current, (n - 1 + dir + list.length) % list.length + 1, true);
+    } else {
+      var ids = GRADIENTS.map(function (g) { return g.id; });
+      var i = ids.indexOf(current.getAttribute("data-gradient"));
+      applyGradient(current, ids[(i + dir + ids.length) % ids.length], true);
+    }
+    flashSwitch();
+  }
 
-  function applyGradient(landing, name, save) {
-    landing.setAttribute("data-gradient", name);
-    if (save) { try { window.localStorage.setItem("gradient-" + landing.id, name); } catch (e) { /* storage unavailable */ } }
-    if (landing === current) renderSwitch(landing);
+  // Every wordmark font is preloaded in index.html; this also gets them decoded,
+  // so a variant shows its typeface at once
+  function loadFonts() {
+    if (!document.fonts || !document.fonts.load) return;
+    var style = getComputedStyle(root);
+    var loads = [];
+    Object.keys(window.VARIANTS || {}).forEach(function (id) {
+      window.VARIANTS[id].forEach(function (v, i) {
+        var pre = "--fig-" + id + "-" + (i + 1) + "-";
+        var family = style.getPropertyValue(pre + "font").trim();
+        if (family) loads.push(document.fonts.load(style.getPropertyValue(pre + "weight").trim() + " 1em " + family).catch(function () {}));
+      });
+    });
+    // Measurements need the real fonts
+    Promise.all(loads).then(centreCurrent);
   }
 
   function initVariants() {
-    switchEl.querySelectorAll("[data-gradient]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        if (current && current !== intro) { applyGradient(current, b.getAttribute("data-gradient"), true); flashSwitch(); }
-      });
+    loadFonts();
+    switchEl.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-step]");
+      if (b) step(b.getAttribute("data-step"), Number(b.getAttribute("data-dir")));
+    });
+    // Keyboard: left / right arrows change the variant, up / down the gradient
+    document.addEventListener("keydown", function (e) {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      var map = { ArrowLeft: ["variant", -1], ArrowRight: ["variant", 1], ArrowUp: ["gradient", -1], ArrowDown: ["gradient", 1] };
+      if (!map[e.key]) return;
+      e.preventDefault();
+      step(map[e.key][0], map[e.key][1]);
     });
     landings.forEach(function (landing) {
-      if (!(window.VARIANTS || {})[landing.id]) return;
-      var saved = null;
-      try { saved = Number(window.localStorage.getItem("variant-" + landing.id)); } catch (e) { /* storage unavailable */ }
-      var count = window.VARIANTS[landing.id].length;
-      applyVariant(landing, saved >= 1 && saved <= count ? saved : 1, false);
-      var grad = null;
-      try { grad = window.localStorage.getItem("gradient-" + landing.id); } catch (e) { /* storage unavailable */ }
-      applyGradient(landing, GRADIENTS.indexOf(grad) >= 0 ? grad : GRADIENTS[0], false);
+      var list = (window.VARIANTS || {})[landing.id];
+      if (!list) return;
+      var saved = Number(stored("variant-" + landing.id));
+      applyVariant(landing, saved >= 1 && saved <= list.length ? saved : 1, false);
+      var grad = stored("gradient-" + landing.id);
+      var known = GRADIENTS.some(function (g) { return g.id === grad; });
+      applyGradient(landing, known ? grad : GRADIENTS[0].id, false);
     });
   }
 
@@ -223,6 +290,7 @@
     initVariants();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
+    window.addEventListener("resize", centreCurrent);
     // Scrolled state + the tone of whatever sits under the menu (light or dark slide)
     var nav = document.querySelector(".topnav");
     var ticking = false;

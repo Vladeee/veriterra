@@ -112,23 +112,11 @@ window.VARIANTS = {
   "vita": [
     {
       "name": "Khaki · Braah One",
-      "node": "75:303",
-      "align": "corner"
+      "node": "75:303"
     },
     {
       "name": "Stone · Momo Trust",
-      "node": "75:305",
-      "align": "corner"
-    },
-    {
-      "name": "Graphite · Momo Trust",
-      "node": "75:328",
-      "align": "corner"
-    },
-    {
-      "name": "Earth · Momo Trust gold",
-      "node": "90:109",
-      "align": "corner"
+      "node": "75:305"
     },
     {
       "name": "Sage · Inter",
