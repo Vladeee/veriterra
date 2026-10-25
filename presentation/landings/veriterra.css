@@ -46,15 +46,6 @@
   --tone-button-text: var(--color-fm-olive-900);
 }
 
-/* ---------- Logo typeface trial ---------- */
-.landing[data-brand="veriterra"][data-font="asul"] { --font-logo: var(--font-asul); }
-.landing[data-brand="veriterra"][data-font="old-standard"] { --font-logo: var(--font-old-standard); }
-.landing[data-brand="veriterra"][data-font="young-serif"] { --font-logo: var(--font-young-serif); }
-.landing[data-brand="veriterra"][data-font="bona-nova"] { --font-logo: var(--font-bona-nova); }
-.landing[data-brand="veriterra"][data-font="mynerve"] { --font-logo: var(--font-mynerve); }
-.landing[data-brand="veriterra"][data-font="accidenz"] { --font-logo: var(--font-accidenz); }
-.landing[data-brand="veriterra"][data-font="faculty"] { --font-logo: var(--font-faculty); }
-
 /* ---------- Palette variations (data-palette on the landing) ----------
    field: Farm Minerals as is, olive on beige.
    soil:  + terracotta ornaments and warm soft tints (hue 45-55 against olive 123).
@@ -92,6 +83,9 @@
   padding: var(--space-1);
   border-radius: var(--radius-pill);
   background: var(--color-bg-translucent);
+  /* The pill is always light, so its text stays dark on dark slides too */
+  --color-text: var(--color-fm-olive-900);
+  --color-text-muted: var(--color-fm-olive-600);
 }
 
 .palette__label {
@@ -532,59 +526,6 @@
   font-size: var(--text-lg);
 }
 
-/* ---------- Logo typeface bar (bottom of slide 1) ---------- */
-.font-trial {
-  position: absolute;
-  inset-inline: 0;
-  bottom: var(--space-6);
-  z-index: var(--z-raised);
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  width: fit-content;
-  max-width: calc(100% - var(--page-margin) * 2);
-  margin-inline: auto;
-  padding: var(--space-1);
-  border-radius: var(--radius-pill);
-  background: var(--color-inverse-bg);
-  color: var(--color-inverse-text);
-  box-shadow: var(--shadow-3);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.font-trial::-webkit-scrollbar { display: none; }
-
-.font-trial__label {
-  flex: none;
-  padding-inline: var(--space-3) var(--space-1);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-inverse-muted);
-}
-
-.font-trial button {
-  flex: none;
-  min-height: var(--tap-min);
-  padding-inline: var(--space-4);
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: transparent;
-  color: inherit;
-  font-size: var(--text-md);
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.font-trial button[aria-pressed="true"] {
-  background: var(--color-inverse-text);
-  color: var(--color-inverse-bg);
-}
-
-.font-trial button:active { opacity: var(--opacity-quiet); }
-
 @media (prefers-reduced-motion: reduce) {
   .v-glow span { animation: none; }
 }
@@ -605,9 +546,6 @@
   color: var(--brand-accent-strong);
   box-shadow: var(--shadow-1);
 }
-
-/* On slide 1 the chip sits above the logo typeface bar */
-.logo-hero .bg-pick { bottom: calc(var(--space-6) + var(--tap-min) + var(--space-5)); }
 
 .bg-pick__toggle {
   display: inline-flex;

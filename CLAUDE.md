@@ -8,7 +8,7 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 - **VITREEONE is one screen only** (`presentation/landings/vitreeone.css`), after the user's "Living Roots" reference. It has a dark still-water gradient and four hand-drawn glyphs, one per company, each linking to its landing: granules = Veriterra, sprout = Verdo, waves = Vaya, shelter = Vita. Below them the wordmark in **Faculty Glyphic**, a caption and an "Explore the companies" button. Animation: glyphs one by one, then the logo rises, then the caption and the button.
 - **Verdo, Vaya and Vita share one identical structure**, defined in `presentation/presentation.css`: hero (logo first → headline with one serif-italic `<em>` word → lead → button) → media (photo 7 cols + spec card 5 cols) → bento grid (facts + offer) → loop strip → centred call to action → footer. No e-mail fields and no details/photo split panels (removed at the user's request). Each landing paints its own soft gradient from `--brand-bg` (tokens). Each landing gets its own look later in `presentation/landings/<id>.css`, scoped to `.landing[data-brand="<id>"]`. Keep the structure identical across them unless the user asks otherwise.
 - **Current focus: Veriterra.** Its landing diverges from the shared skeleton on purpose, and it is a **presentation, not a website**. It has five full-screen slides (`.v-slide`, `min-height: 100dvh`) that snap on scroll (`data-slides` on the landing puts `html.has-slides` in place):
-  1. **Logo**: only the wordmark (`--text-logo`, colour `--brand-logo` = #2E1919) and a caption. The whole word rises with a blur and a bottom-up fade mask, then the caption, the scroll cue and the **Logo typeface** bar fade in. It replays on open and on typeface change.
+  1. **Logo**: only the wordmark (`--text-logo`, colour `--brand-logo` = #2E1919) and a caption. The whole word rises with a blur and a bottom-up fade mask, then the caption and the scroll cue fade in. It replays on open and on variant change.
   2. **Statement + four figures** on a flat main-green slide with slowly drifting, blurred light streaks (after paypath.ai).
   3. **What we do**: a full-bleed photo next to a list over hairlines (after Farm Minerals).
   4. **Ornaments**: a beige panel of ornaments next to a main-green backdrop with a photo frame (after Dix Hectares).
@@ -23,6 +23,7 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
     - Three variations (`data-palette` on the landing, rules in `veriterra.css`): **field** (Farm Minerals as is), **soil** (+ terracotta, hue 45) and **bloom** (+ lime glow, hue 122).
     - Brand tokens: `--brand-paper`, `--brand-ornament`, `--brand-deep`, `--brand-logo`, `--brand-glow-deep`, `--brand-on-deep-muted`. Ornaments come from `brand-ui.js` (`data-ornament`).
   - Leave the other four landings alone unless asked.
+- **Figma style variants.** Every frame in the Figma file (figma.com/design/kijHOH1H9UUlT26sK0ccT1) is a style variant of one landing: VITREEONE 3, Veriterra 8, Verdo 6, Vaya 6, Vita 7. Values are tokens `--fig-<brand>-<n>-{bg,page,ink,ink2,accent,font,size,tracking,weight,case}` in `tokens.css`. `presentation/variants.js` lists them (name, Figma node, extras: `split`, `align: "corner"`, `image`, `accent`). `presentation.js` copies the chosen variant onto the landing as `--v-*` plus `data-variant`, and `presentation/variants.css` (loaded last) applies them to the logo screen. A near-invisible switcher (dots, bottom left, `mix-blend-mode: difference`) changes the variant; the choice is saved per device. On Veriterra the variant sets the first slide's scroll colour. Verdo, Vaya and Vita now also open on a logo screen (`.logo-hero`), followed by the statement (`.l-statement`).
 - There is **no style guide** for now (removed at the user's request). Sections are added **one at a time, only when the user asks**.
 - Colours, typefaces and copy are placeholders. Read `brand/BRIEF.md` before any brand decision.
 
@@ -38,6 +39,7 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 | `brand/BRIEF.md` | Positioning, audience, tone; facts and open questions |
 | `brand/logo/`, `brand/fonts/`, `brand/icons/` | Assets: logos (not supplied yet), self-hosted fonts with licences, app icons |
 | `index.html` | The one link: intro + five landings |
+| `presentation/variants.js`, `presentation/variants.css` | Figma style variants per landing and the switcher |
 | `presentation/` | `presentation.css` = intro, menu and shared landing skeleton; `presentation.js` = routing, menu, loop; `landings/<id>.css` = per-landing style |
 | `deck/index.html` | Redirect from the old presentation URL to the root (keeps the hash) |
 | `site/` | Websites (later) |

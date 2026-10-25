@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="presentation/landings/verdo.css">
   <link rel="stylesheet" href="presentation/landings/vaya.css">
   <link rel="stylesheet" href="presentation/landings/vita.css">
+  <!-- Figma style variants: loaded last so a variant wins over the landing defaults -->
+  <link rel="stylesheet" href="presentation/variants.css">
 </head>
 <body class="is-intro">
   <nav class="topnav" aria-label="Landings">
@@ -32,6 +34,12 @@
       <button class="topnav__fs" type="button" id="fullscreen" aria-label="Full screen" aria-pressed="false" hidden><span class="icon" data-icon="expand"></span></button>
     </div>
   </nav>
+
+  <!-- Style variant switcher (Figma frames): tiny dots, bottom left, nearly invisible -->
+  <div class="variant-switch" id="variant-switch" role="group" aria-label="Style variant" hidden>
+    <div class="variant-switch__dots"></div>
+    <span class="variant-switch__name" aria-live="polite"></span>
+  </div>
 
   <main id="landings">
     <!-- ==================== INTRO ==================== -->
@@ -99,17 +107,6 @@
         <h1 class="logo-hero__word" id="veriterra-title" data-brand-name="veriterra"></h1>
         <p class="logo-hero__caption">Water-soluble fertilizers · Made in Sri Lanka</p>
         <a class="logo-hero__scroll" href="#veriterra-field" aria-label="Next slide"><span class="logo-hero__scroll-line" aria-hidden="true"></span></a>
-        <div class="font-trial" data-font-switch data-default="accidenz" role="group" aria-label="Try a logo typeface">
-          <span class="font-trial__label">Logo typeface</span>
-          <button type="button" data-font="system" style="font-family: var(--font-serif-system)">System</button>
-          <button type="button" data-font="asul" style="font-family: var(--font-asul)">Asul</button>
-          <button type="button" data-font="old-standard" style="font-family: var(--font-old-standard)">Old Standard</button>
-          <button type="button" data-font="young-serif" style="font-family: var(--font-young-serif)">Young Serif</button>
-          <button type="button" data-font="bona-nova" style="font-family: var(--font-bona-nova)">Bona Nova</button>
-          <button type="button" data-font="mynerve" style="font-family: var(--font-mynerve)">Mynerve</button>
-          <button type="button" data-font="accidenz" style="font-family: var(--font-accidenz)">Accidenz Commons</button>
-          <button type="button" data-font="faculty" style="font-family: var(--font-faculty)">Faculty Glyphic</button>
-        </div>
       </header>
 
       <!-- 2. Statement + figures (paypath) -->
@@ -185,15 +182,17 @@
 
     <!-- ==================== VERDO ==================== -->
     <article class="landing" id="verdo" data-brand="verdo" aria-labelledby="verdo-title" hidden>
-      <header class="l-hero page-grid">
-        <div class="l-logo" aria-label="Logo placeholder">
-          <span class="l-logo__mark" aria-hidden="true"></span>
-          <span class="l-logo__word" data-brand-name="verdo"></span>
-        </div>
-        <h1 class="l-hero__title" id="verdo-title">Picked in the morning, in the kitchen by <em>evening</em>.</h1>
-        <p class="l-hero__lead">Greenhouse vegetables and greens for hotels and restaurants on the island.</p>
-        <a class="l-btn" href="#verdo-contact">Request the price list <span class="icon" data-icon="arrow-right"></span></a>
+      <header class="logo-hero" data-logo-hero>
+        <h1 class="logo-hero__word" id="verdo-title" data-brand-name="verdo"></h1>
+        <p class="logo-hero__caption">Farm and food · South Sri Lanka</p>
+        <a class="logo-hero__scroll" href="#verdo-statement" aria-label="Scroll down"><span class="logo-hero__scroll-line" aria-hidden="true"></span></a>
       </header>
+
+      <section class="l-hero l-statement page-grid" id="verdo-statement" aria-label="Statement">
+        <h2 class="l-hero__title" data-reveal>Picked in the morning, in the kitchen by <em>evening</em>.</h2>
+        <p class="l-hero__lead" data-reveal style="--i: 1">Greenhouse vegetables and greens for hotels and restaurants on the island.</p>
+        <a class="l-btn" data-reveal style="--i: 2" href="#verdo-contact">Request the price list <span class="icon" data-icon="arrow-right"></span></a>
+      </section>
 
       <section class="l-media page-grid" aria-label="Pictures">
         <div class="media-placeholder l-media__photo">Real photo to come</div>
@@ -239,15 +238,17 @@
 
     <!-- ==================== VAYA ==================== -->
     <article class="landing" id="vaya" data-brand="vaya" aria-labelledby="vaya-title" hidden>
-      <header class="l-hero page-grid">
-        <div class="l-logo" aria-label="Logo placeholder">
-          <span class="l-logo__mark" aria-hidden="true"></span>
-          <span class="l-logo__word" data-brand-name="vaya"></span>
-        </div>
-        <h1 class="l-hero__title" id="vaya-title">Twenty units on the <em>south coast</em>.</h1>
-        <p class="l-hero__lead">Private dome stays by the ocean, with food from our own farm.</p>
-        <a class="l-btn" href="#vaya-contact">Join the waitlist <span class="icon" data-icon="arrow-right"></span></a>
+      <header class="logo-hero" data-logo-hero>
+        <h1 class="logo-hero__word" id="vaya-title" data-brand-name="vaya"></h1>
+        <p class="logo-hero__caption">Eco-glamping · South coast of Sri Lanka</p>
+        <a class="logo-hero__scroll" href="#vaya-statement" aria-label="Scroll down"><span class="logo-hero__scroll-line" aria-hidden="true"></span></a>
       </header>
+
+      <section class="l-hero l-statement page-grid" id="vaya-statement" aria-label="Statement">
+        <h2 class="l-hero__title" data-reveal>Twenty units on the <em>south coast</em>.</h2>
+        <p class="l-hero__lead" data-reveal style="--i: 1">Private dome stays by the ocean, with food from our own farm.</p>
+        <a class="l-btn" data-reveal style="--i: 2" href="#vaya-contact">Join the waitlist <span class="icon" data-icon="arrow-right"></span></a>
+      </section>
 
       <section class="l-media page-grid" aria-label="Pictures">
         <div class="media-placeholder l-media__photo">Real photo to come</div>
@@ -293,15 +294,17 @@
 
     <!-- ==================== VITA ==================== -->
     <article class="landing" id="vita" data-brand="vita" aria-labelledby="vita-title" hidden>
-      <header class="l-hero page-grid">
-        <div class="l-logo" aria-label="Logo placeholder">
-          <span class="l-logo__mark" aria-hidden="true"></span>
-          <span class="l-logo__word" data-brand-name="vita"></span>
-        </div>
-        <h1 class="l-hero__title" id="vita-title">We <em>build</em> the places the group runs on.</h1>
-        <p class="l-hero__lead">Design and construction with solar, water and low-impact materials built in.</p>
-        <a class="l-btn" href="#vita-contact">Discuss a project <span class="icon" data-icon="arrow-right"></span></a>
+      <header class="logo-hero" data-logo-hero>
+        <h1 class="logo-hero__word" id="vita-title" data-brand-name="vita"></h1>
+        <p class="logo-hero__caption">Design and construction · South Sri Lanka</p>
+        <a class="logo-hero__scroll" href="#vita-statement" aria-label="Scroll down"><span class="logo-hero__scroll-line" aria-hidden="true"></span></a>
       </header>
+
+      <section class="l-hero l-statement page-grid" id="vita-statement" aria-label="Statement">
+        <h2 class="l-hero__title" data-reveal>We <em>build</em> the places the group runs on.</h2>
+        <p class="l-hero__lead" data-reveal style="--i: 1">Design and construction with solar, water and low-impact materials built in.</p>
+        <a class="l-btn" data-reveal style="--i: 2" href="#vita-contact">Discuss a project <span class="icon" data-icon="arrow-right"></span></a>
+      </section>
 
       <section class="l-media page-grid" aria-label="Pictures">
         <div class="media-placeholder l-media__photo">Real photo to come</div>
@@ -348,6 +351,7 @@
 
   <script src="brand/brands.js"></script>
   <script src="brand/brand-ui.js"></script>
+  <script src="presentation/variants.js"></script>
   <script src="presentation/presentation.js"></script>
 </body>
 </html>

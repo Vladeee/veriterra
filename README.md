@@ -2,6 +2,8 @@
 
 One link for **VITREEONE** and its four companies: Veriterra, Verdo, Vaya and Vita.
 It opens on an intro with a **Welcome** button, then five short landing pages behind a fixed top menu. They share one structure on a full-width 12-column grid, and each will be styled separately.
+
+Each landing has **style variants**, one per frame in the Figma file. Switch them with the faint dots in the bottom-left corner; the choice is remembered on the device.
 Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
 
 > Copy, typefaces, colours and logos are **placeholders**.
@@ -27,8 +29,10 @@ python3 -m http.server 8000
 ├── manifest.webmanifest        install manifest
 ├── presentation/
 │   ├── presentation.css        intro, menu, page grid, shared landing skeleton
-│   ├── presentation.js         routing, menu, loop strip, placeholder forms
-│   └── landings/<id>.css       per-landing style (empty for now)
+│   ├── presentation.js         routing, menu, loop strip, variant switcher
+│   ├── variants.js             list of Figma style variants per landing
+│   ├── variants.css            how a variant styles the logo screen + the switcher
+│   └── landings/<id>.css       per-landing style
 ├── brand/
 │   ├── BRIEF.md                facts, hypotheses, open questions
 │   ├── tokens.css              single source of truth for every visual value
@@ -38,7 +42,8 @@ python3 -m http.server 8000
 │   ├── brand-ui.js             icons, brand names
 │   ├── icons/                  app icons
 │   ├── logo/                   (empty for now)
-│   └── fonts/                  self-hosted trial fonts + licences
+│   ├── figma/                  images used by Figma variants
+│   └── fonts/                  self-hosted fonts + licences
 ├── deck/index.html             redirect from the old URL
 ├── site/                       websites, later
 ├── tools/tokens.py             token sync and "tokens only" lint

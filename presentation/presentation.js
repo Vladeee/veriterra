@@ -57,6 +57,7 @@
     intro.hidden = false;
     landings.forEach(function (l) { l.hidden = true; });
     document.body.classList.add("is-intro");
+    if (switchEl) switchEl.hidden = true;
     root.setAttribute("data-brand", "vitreeone");
     document.title = BrandUI.brandById("vitreeone").name;
     window.scrollTo(0, 0);
@@ -82,6 +83,7 @@
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
       document.title = BrandUI.brandById(landing.id).name;
       root.classList.toggle("has-slides", landing.hasAttribute("data-slides"));
+      renderSwitch(landing);
       playLogo(landing);
     }
 
@@ -154,29 +156,6 @@
       });
     }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
     items.forEach(function (el) { io.observe(el); });
-  }
-
-  // ---------- typeface trial: [data-font-switch] sets data-font on its landing ----------
-  function initFontSwitches() {
-    document.querySelectorAll("[data-font-switch]").forEach(function (box) {
-      var landing = box.closest(".landing");
-      var key = "font-" + landing.id;
-      var saved = null;
-      try { saved = window.localStorage.getItem(key); } catch (e) { /* storage unavailable */ }
-      function pick(font) {
-        landing.setAttribute("data-font", font);
-        box.querySelectorAll("[data-font]").forEach(function (b) {
-          b.setAttribute("aria-pressed", String(b.getAttribute("data-font") === font));
-        });
-        try { window.localStorage.setItem(key, font); } catch (e) { /* storage unavailable */ }
-      }
-      box.addEventListener("click", function (e) {
-        var b = e.target.closest("[data-font]");
-        if (b) { pick(b.getAttribute("data-font")); playLogo(landing); }
-      });
-      var fallback = box.getAttribute("data-default") || box.querySelector("[data-font]").getAttribute("data-font");
-      pick(saved && box.querySelector('[data-font="' + saved + '"]') ? saved : fallback);
-    });
   }
 
   // ---------- palette trial: [data-palette-switch] sets data-palette on its landing ----------
@@ -284,6 +263,11 @@
         setBg(slide, saved || slide.getAttribute("data-bg"), false);
       });
 
+      // The chosen Figma variant sets the colour of the first slide (the logo)
+      landing.addEventListener("variantchange", function (e) {
+        if (slides[0]) setBg(slides[0], e.detail.token, false);
+      });
+
       if (!("IntersectionObserver" in window)) { if (slides[0]) apply(slides[0]); return; }
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) apply(e.target); });
@@ -293,14 +277,84 @@
     });
   }
 
+  // ---------- Figma style variants (presentation/variants.js + --fig-* tokens) ----------
+  var switchEl = document.getElementById("variant-switch");
+  var switchTimer = null;
+  var PROPS = ["bg", "page", "ink", "ink2", "accent", "font", "size", "tracking", "weight", "case"];
+
+  function flashSwitch() {
+    switchEl.classList.add("is-active");
+    clearTimeout(switchTimer);
+    switchTimer = setTimeout(function () { switchEl.classList.remove("is-active"); }, 1800);
+  }
+
+  function applyVariant(landing, n, save) {
+    var list = (window.VARIANTS || {})[landing.id];
+    if (!list || !list[n - 1]) return;
+    var v = list[n - 1];
+    var pre = "--fig-" + landing.id + "-" + n + "-";
+    PROPS.forEach(function (prop) {
+      var has = getComputedStyle(root).getPropertyValue(pre + prop).trim() !== "";
+      if (has) landing.style.setProperty("--v-" + prop, "var(" + pre + prop + ")");
+      else landing.style.removeProperty("--v-" + prop);
+    });
+    landing.setAttribute("data-variant", String(n));
+    landing.setAttribute("data-v-tone", isDark(pre + "page") ? "dark" : "light");
+    ["align", "image", "accent"].forEach(function (k) {
+      var attr = k === "align" ? "data-logo-align" : "data-variant-" + k;
+      if (v[k]) landing.setAttribute(attr, v[k] === true ? "" : v[k]);
+      else landing.removeAttribute(attr);
+    });
+    var word = landing.querySelector(".logo-hero__word");
+    var name = BrandUI.brandById(landing.id).name;
+    if (word) {
+      if (v.split) word.innerHTML = name.slice(0, v.split) + '<span class="logo-hero__b">' + name.slice(v.split) + "</span>";
+      else word.textContent = name;
+    }
+    var hero = landing.querySelector("[data-logo-hero]");
+    if (hero && !landing.hasAttribute("data-slides")) hero.setAttribute("data-tone", landing.getAttribute("data-v-tone"));
+    if (save) { try { window.localStorage.setItem("variant-" + landing.id, String(n)); } catch (e) { /* storage unavailable */ } }
+    landing.dispatchEvent(new CustomEvent("variantchange", { detail: { token: pre + "bg", n: n } }));
+    if (landing === current) renderSwitch(landing);
+    if (save) { playLogo(landing); flashSwitch(); window.dispatchEvent(new Event("scroll")); }
+  }
+
+  function renderSwitch(landing) {
+    var list = landing ? (window.VARIANTS || {})[landing.id] : null;
+    if (!list || list.length < 2) { switchEl.hidden = true; return; }
+    switchEl.hidden = false;
+    var dots = switchEl.querySelector(".variant-switch__dots");
+    var current = Number(landing.getAttribute("data-variant")) || 1;
+    dots.innerHTML = "";
+    list.forEach(function (v, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Variant " + (i + 1) + ": " + v.name);
+      b.setAttribute("aria-pressed", String(i + 1 === current));
+      b.addEventListener("click", function () { applyVariant(landing, i + 1, true); });
+      dots.appendChild(b);
+    });
+    switchEl.querySelector(".variant-switch__name").textContent = current + " · " + list[current - 1].name;
+  }
+
+  function initVariants() {
+    landings.forEach(function (landing) {
+      if (!(window.VARIANTS || {})[landing.id]) return;
+      var saved = null;
+      try { saved = Number(window.localStorage.getItem("variant-" + landing.id)); } catch (e) { /* storage unavailable */ }
+      var count = window.VARIANTS[landing.id].length;
+      applyVariant(landing, saved >= 1 && saved <= count ? saved : 1, false);
+    });
+  }
+
   // ---------- init ----------
   function init() {
     buildMenu();
     buildLoops();
     initPlaceholders();
-    initFontSwitches();
     initPaletteSwitches();
     initScrollColour();
+    initVariants();
     initReveal();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);

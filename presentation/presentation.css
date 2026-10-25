@@ -256,6 +256,12 @@ html.has-slides { scroll-snap-type: y proximity; }
   .l-hero > .l-hero__title { grid-column: 2 / -2; }
 }
 
+/* The statement that follows the logo screen: same centred block, no full-screen height */
+.l-statement {
+  min-height: auto;
+  padding-block: var(--space-9);
+}
+
 .l-logo {
   display: flex;
   flex-direction: column;
@@ -641,7 +647,6 @@ html.has-slides { scroll-snap-type: y proximity; }
 }
 
 .logo-hero__caption,
-.logo-hero .font-trial,
 .logo-hero__late,
 .logo-hero__scroll {
   opacity: 0;
@@ -659,7 +664,6 @@ html.has-slides { scroll-snap-type: y proximity; }
   animation-delay: calc(var(--duration-logo) * 0.45);
 }
 
-.logo-hero.is-playing .font-trial,
 .logo-hero.is-playing .logo-hero__late,
 .logo-hero.is-playing .logo-hero__scroll {
   animation: logo-fade var(--duration-reveal) var(--ease-out-expo) forwards;
@@ -736,7 +740,6 @@ html.has-slides { scroll-snap-type: y proximity; }
   .logo-hero__caption,
   .logo-hero__late,
   .vo-glyphs li,
-  .logo-hero .font-trial,
   .logo-hero__scroll,
   [data-reveal] { opacity: 1; transform: none; }
 }

@@ -12,11 +12,8 @@
   --color-text: var(--color-vitreeone-foam);
   --color-text-muted: var(--color-vitreeone-foam);
   padding-top: var(--space-0);
-  color: var(--color-vitreeone-foam);
-  background:
-    radial-gradient(90% 60% at 50% 110%, var(--color-vitreeone-tide) 0%, transparent 70%),
-    radial-gradient(70% 50% at 15% 0%, var(--color-vitreeone-tide) 0%, transparent 70%),
-    var(--color-vitreeone-night);
+  /* Background, wordmark font and colour come from the Figma variant (variants.css) */
+  color: var(--v-ink, var(--color-vitreeone-foam));
 }
 
 .vo-hero {
@@ -26,12 +23,10 @@
 }
 
 .landing[data-brand="vitreeone"] .logo-hero__word {
-  letter-spacing: var(--tracking-wide);
   animation-delay: calc(var(--stagger) * 8);
 }
 
 .landing[data-brand="vitreeone"] .logo-hero__caption {
-  color: var(--color-vitreeone-foam);
   animation-delay: calc(var(--stagger) * 8 + var(--duration-logo) * 0.5);
 }
 
@@ -93,9 +88,9 @@
   min-height: var(--tap-comfort);
   margin-top: var(--space-3);
   padding-inline: var(--space-6);
-  border: var(--border-width) solid var(--color-vitreeone-foam);
+  border: var(--border-width) solid currentColor;
   border-radius: var(--radius-pill);
-  color: var(--color-vitreeone-foam);
+  color: inherit;
   font-size: var(--text-md);
   text-decoration: none;
   touch-action: manipulation;
@@ -103,10 +98,10 @@
 }
 
 @media (hover: hover) {
-  .vo-btn:hover { background: var(--color-vitreeone-foam); color: var(--color-vitreeone-night); }
+  .vo-btn:hover { background: var(--v-ink); color: var(--v-page); }
 }
 
-.vo-btn:active { background: var(--color-vitreeone-foam); color: var(--color-vitreeone-night); }
+.vo-btn:active { background: var(--v-ink); color: var(--v-page); }
 
 @media (max-width: 40rem) {
   .vo-glyphs { gap: var(--space-3); }

@@ -31,6 +31,17 @@
 @font-face { font-family: "Mynerve"; src: url("fonts/mynerve/mynerve-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Hedvig Letters Serif"; src: url("fonts/hedvig-serif/hedvig-letters-serif-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Faculty Glyphic"; src: url("fonts/faculty-glyphic/faculty-glyphic-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+/* Fonts used in the Figma variants (logo wordmarks) */
+@font-face { font-family: "Port Lligat Sans"; src: url("fonts/port-lligat-sans/port-lligat-sans-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("fonts/poppins/poppins-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Kosugi Maru"; src: url("fonts/kosugi-maru/kosugi-maru-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Comfortaa"; src: url("fonts/comfortaa/comfortaa-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Hubballi"; src: url("fonts/hubballi/hubballi-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Varela Round"; src: url("fonts/varela-round/varela-round-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Madimi One"; src: url("fonts/madimi-one/madimi-one-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Braah One"; src: url("fonts/braah-one/braah-one-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Momo Trust Display"; src: url("fonts/momo-trust-display/momo-trust-display-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/inter/inter-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "CC Accidenz Commons"; src: url("fonts/accidenz-commons/accidenz-commons-500.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
 
 :root {
@@ -98,6 +109,281 @@
   --color-vita-glow: #F3DFC8;
   --color-vita-glow-2: #EAE3D6;
 
+  /* ---------- Figma style variants (one per frame in the Figma file) ----------
+     --fig-<brand>-<n>-<prop>. Applied by presentation/variants.js. */
+  /* vitreeone 1: Water · Faculty Glyphic (Figma (current)) */
+  --fig-vitreeone-1-bg: var(--vo-water);
+  --fig-vitreeone-1-page: #0F2A2C;
+  --fig-vitreeone-1-ink: #F3EFE6;
+  --fig-vitreeone-1-font: var(--font-faculty);
+  --fig-vitreeone-1-size: var(--text-logo);
+  --fig-vitreeone-1-tracking: 0.08em;
+  --fig-vitreeone-1-weight: 400;
+  --fig-vitreeone-1-case: none;
+  /* vitreeone 2: Moss · Poppins (Figma 85:78) */
+  --fig-vitreeone-2-bg: #343A32;
+  --fig-vitreeone-2-page: #343A32;
+  --fig-vitreeone-2-ink: #ECF7BD;
+  --fig-vitreeone-2-font: var(--font-poppins);
+  --fig-vitreeone-2-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vitreeone-2-tracking: 0em;
+  --fig-vitreeone-2-weight: 700;
+  --fig-vitreeone-2-case: lowercase;
+  /* vitreeone 3: Moss · Inter (Figma 85:78) */
+  --fig-vitreeone-3-bg: #343A32;
+  --fig-vitreeone-3-page: #343A32;
+  --fig-vitreeone-3-ink: #EBE1D7;
+  --fig-vitreeone-3-font: var(--font-inter);
+  --fig-vitreeone-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vitreeone-3-tracking: 0em;
+  --fig-vitreeone-3-weight: 700;
+  --fig-vitreeone-3-case: none;
+  /* veriterra 1: Lime · Port Lligat (Figma 85:53) */
+  --fig-veriterra-1-bg: #ECF7BD;
+  --fig-veriterra-1-page: #ECF7BD;
+  --fig-veriterra-1-ink: #B54E2A;
+  --fig-veriterra-1-font: var(--font-port-lligat);
+  --fig-veriterra-1-size: clamp(2.5rem, 6.67vw, 8.0rem);
+  --fig-veriterra-1-tracking: -0.01em;
+  --fig-veriterra-1-weight: 400;
+  --fig-veriterra-1-case: lowercase;
+  /* veriterra 2: Beige · Port Lligat (Figma 85:60) */
+  --fig-veriterra-2-bg: #EEE5D6;
+  --fig-veriterra-2-page: #EEE5D6;
+  --fig-veriterra-2-ink: #7A8955;
+  --fig-veriterra-2-font: var(--font-port-lligat);
+  --fig-veriterra-2-size: clamp(2.5rem, 5.83vw, 7.0rem);
+  --fig-veriterra-2-tracking: -0.01em;
+  --fig-veriterra-2-weight: 400;
+  --fig-veriterra-2-case: lowercase;
+  /* veriterra 3: Beige · Poppins (Figma 85:71) */
+  --fig-veriterra-3-bg: #EEE5D6;
+  --fig-veriterra-3-page: #EEE5D6;
+  --fig-veriterra-3-ink: #B54E2A;
+  --fig-veriterra-3-font: var(--font-poppins);
+  --fig-veriterra-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-veriterra-3-tracking: 0em;
+  --fig-veriterra-3-weight: 700;
+  --fig-veriterra-3-case: lowercase;
+  /* veriterra 4: Night · Port Lligat (Figma 75:270) */
+  --fig-veriterra-4-bg: #151F19;
+  --fig-veriterra-4-page: #151F19;
+  --fig-veriterra-4-ink: #A1EC8D;
+  --fig-veriterra-4-font: var(--font-port-lligat);
+  --fig-veriterra-4-size: clamp(2.5rem, 6.67vw, 8.0rem);
+  --fig-veriterra-4-tracking: 0.03em;
+  --fig-veriterra-4-weight: 400;
+  --fig-veriterra-4-case: lowercase;
+  /* veriterra 5: Olive · Kosugi Maru (Figma 75:254) */
+  --fig-veriterra-5-bg: #7A8955;
+  --fig-veriterra-5-page: #7A8955;
+  --fig-veriterra-5-ink: #FFFFFF;
+  --fig-veriterra-5-font: var(--font-kosugi);
+  --fig-veriterra-5-size: clamp(2.5rem, 5.94vw, 7.12rem);
+  --fig-veriterra-5-tracking: -0.04em;
+  --fig-veriterra-5-weight: 400;
+  --fig-veriterra-5-case: none;
+  /* veriterra 6: Black · gold caps (Figma 75:261) */
+  --fig-veriterra-6-bg: #11170E;
+  --fig-veriterra-6-page: #11170E;
+  --fig-veriterra-6-ink: #FEC81E;
+  --fig-veriterra-6-font: var(--font-kosugi);
+  --fig-veriterra-6-size: clamp(2.5rem, 4.48vw, 5.38rem);
+  --fig-veriterra-6-tracking: 0.55em;
+  --fig-veriterra-6-weight: 400;
+  --fig-veriterra-6-case: uppercase;
+  /* veriterra 7: Moss · two-tone (Figma 75:265) */
+  --fig-veriterra-7-bg: #333A31;
+  --fig-veriterra-7-page: #333A31;
+  --fig-veriterra-7-ink: #ECF7BD;
+  --fig-veriterra-7-ink2: #7D8D56;
+  --fig-veriterra-7-font: var(--font-port-lligat);
+  --fig-veriterra-7-size: clamp(2.5rem, 5.83vw, 7.0rem);
+  --fig-veriterra-7-tracking: 0.07em;
+  --fig-veriterra-7-weight: 400;
+  --fig-veriterra-7-case: lowercase;
+  /* veriterra 8: Earth · Comfortaa (Figma 75:267) */
+  --fig-veriterra-8-bg: #2B2B1B;
+  --fig-veriterra-8-page: #2B2B1B;
+  --fig-veriterra-8-ink: #D87E27;
+  --fig-veriterra-8-accent: #D87E27;
+  --fig-veriterra-8-font: var(--font-comfortaa);
+  --fig-veriterra-8-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-veriterra-8-tracking: 0.02em;
+  --fig-veriterra-8-weight: 700;
+  --fig-veriterra-8-case: none;
+  /* verdo 1: Sand · Hubballi (Figma 85:33) */
+  --fig-verdo-1-bg: #C6B39B;
+  --fig-verdo-1-page: #C6B39B;
+  --fig-verdo-1-ink: #8E382A;
+  --fig-verdo-1-font: var(--font-hubballi);
+  --fig-verdo-1-size: clamp(2.5rem, 6.56vw, 7.88rem);
+  --fig-verdo-1-tracking: 0em;
+  --fig-verdo-1-weight: 400;
+  --fig-verdo-1-case: none;
+  /* verdo 2: Cream · Hubballi (Figma 85:34) */
+  --fig-verdo-2-bg: #F2E7C0;
+  --fig-verdo-2-page: #F2E7C0;
+  --fig-verdo-2-ink: #CE6B38;
+  --fig-verdo-2-font: var(--font-hubballi);
+  --fig-verdo-2-size: clamp(2.5rem, 6.56vw, 7.88rem);
+  --fig-verdo-2-tracking: -0.03em;
+  --fig-verdo-2-weight: 400;
+  --fig-verdo-2-case: none;
+  /* verdo 3: Sage · Hubballi (Figma 75:298) */
+  --fig-verdo-3-bg: #89957D;
+  --fig-verdo-3-page: #89957D;
+  --fig-verdo-3-ink: #000000;
+  --fig-verdo-3-font: var(--font-hubballi);
+  --fig-verdo-3-size: clamp(2.5rem, 6.56vw, 7.88rem);
+  --fig-verdo-3-tracking: 0em;
+  --fig-verdo-3-weight: 400;
+  --fig-verdo-3-case: none;
+  /* verdo 4: Mist · Hubballi (Figma 90:106) */
+  --fig-verdo-4-bg: radial-gradient(farthest-corner at 12% 100%, #729485 0%, #95AFA4 25%, #B9CAC2 50%, #DCE4E1 75%, #FFFFFF 100%);
+  --fig-verdo-4-page: #DCE4E1;
+  --fig-verdo-4-ink: #000000;
+  --fig-verdo-4-font: var(--font-hubballi);
+  --fig-verdo-4-size: clamp(2.5rem, 6.56vw, 7.88rem);
+  --fig-verdo-4-tracking: 0em;
+  --fig-verdo-4-weight: 400;
+  --fig-verdo-4-case: none;
+  /* verdo 5: Peach · Madimi One (Figma 75:326) */
+  --fig-verdo-5-bg: #EAC096;
+  --fig-verdo-5-page: #EAC096;
+  --fig-verdo-5-ink: #8E382A;
+  --fig-verdo-5-font: var(--font-madimi);
+  --fig-verdo-5-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-verdo-5-tracking: 0.04em;
+  --fig-verdo-5-weight: 400;
+  --fig-verdo-5-case: none;
+  /* verdo 6: Lime · Varela Round (Figma 90:154) */
+  --fig-verdo-6-bg: radial-gradient(ellipse at 50% 50%, #D6FFCA 46%, #A0EC8B 100%);
+  --fig-verdo-6-page: #D6FFCA;
+  --fig-verdo-6-ink: #000000;
+  --fig-verdo-6-font: var(--font-varela);
+  --fig-verdo-6-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-verdo-6-tracking: 0em;
+  --fig-verdo-6-weight: 400;
+  --fig-verdo-6-case: none;
+  /* vaya 1: Sunrise · Faculty Glyphic (Figma 75:291) */
+  --fig-vaya-1-bg: linear-gradient(to bottom, #FFC261 24.84%, #EBF7F3 100%);
+  --fig-vaya-1-page: #EBF7F3;
+  --fig-vaya-1-ink: #181F1F;
+  --fig-vaya-1-font: var(--font-faculty);
+  --fig-vaya-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vaya-1-tracking: 0.18em;
+  --fig-vaya-1-weight: 400;
+  --fig-vaya-1-case: uppercase;
+  /* vaya 2: Sky · Faculty Glyphic (Figma 75:294) */
+  --fig-vaya-2-bg: radial-gradient(farthest-corner at 63% 0%, #B7DDFC 0%, #E6F3FD 100%);
+  --fig-vaya-2-page: #E6F3FD;
+  --fig-vaya-2-ink: #181F1F;
+  --fig-vaya-2-font: var(--font-faculty);
+  --fig-vaya-2-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vaya-2-tracking: 0.18em;
+  --fig-vaya-2-weight: 400;
+  --fig-vaya-2-case: uppercase;
+  /* vaya 3: Clouds · Faculty Glyphic (Figma 85:27) */
+  --fig-vaya-3-bg: #F1E4D6;
+  --fig-vaya-3-page: #F1E4D6;
+  --fig-vaya-3-ink: #181F1F;
+  --fig-vaya-3-font: var(--font-faculty);
+  --fig-vaya-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vaya-3-tracking: 0.18em;
+  --fig-vaya-3-weight: 400;
+  --fig-vaya-3-case: uppercase;
+  /* vaya 4: Lavender · Faculty Glyphic (Figma 75:300) */
+  --fig-vaya-4-bg: linear-gradient(to bottom, #F6F6F6 0%, #D2BDF9 100%);
+  --fig-vaya-4-page: #F6F6F6;
+  --fig-vaya-4-ink: #181F1F;
+  --fig-vaya-4-font: var(--font-faculty);
+  --fig-vaya-4-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vaya-4-tracking: 0.18em;
+  --fig-vaya-4-weight: 400;
+  --fig-vaya-4-case: uppercase;
+  /* vaya 5: Mist · Madimi One (Figma 75:336) */
+  --fig-vaya-5-bg: radial-gradient(farthest-corner at 12% 100%, #729485 0%, #95AFA4 25%, #B9CAC2 50%, #DCE4E1 75%, #FFFFFF 100%);
+  --fig-vaya-5-page: #DCE4E1;
+  --fig-vaya-5-ink: #181F1F;
+  --fig-vaya-5-font: var(--font-madimi);
+  --fig-vaya-5-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vaya-5-tracking: 0.04em;
+  --fig-vaya-5-weight: 400;
+  --fig-vaya-5-case: uppercase;
+  /* vaya 6: Mist · Hubballi (Figma 75:336) */
+  --fig-vaya-6-bg: radial-gradient(farthest-corner at 12% 100%, #729485 0%, #95AFA4 25%, #B9CAC2 50%, #DCE4E1 75%, #FFFFFF 100%);
+  --fig-vaya-6-page: #DCE4E1;
+  --fig-vaya-6-ink: #000000;
+  --fig-vaya-6-font: var(--font-hubballi);
+  --fig-vaya-6-size: clamp(2.5rem, 6.56vw, 7.88rem);
+  --fig-vaya-6-tracking: 0em;
+  --fig-vaya-6-weight: 400;
+  --fig-vaya-6-case: uppercase;
+  /* vita 1: Khaki · Braah One (Figma 75:303) */
+  --fig-vita-1-bg: #918D62;
+  --fig-vita-1-page: #918D62;
+  --fig-vita-1-ink: #FFFFFF;
+  --fig-vita-1-font: var(--font-braah);
+  --fig-vita-1-size: clamp(2.5rem, 5.83vw, 7.0rem);
+  --fig-vita-1-tracking: -0.005em;
+  --fig-vita-1-weight: 400;
+  --fig-vita-1-case: uppercase;
+  /* vita 2: Stone · Momo Trust (Figma 75:305) */
+  --fig-vita-2-bg: #ACAA9F;
+  --fig-vita-2-page: #ACAA9F;
+  --fig-vita-2-ink: #1D1D1D;
+  --fig-vita-2-font: var(--font-momo);
+  --fig-vita-2-size: clamp(2.5rem, 5.83vw, 7.0rem);
+  --fig-vita-2-tracking: -0.008em;
+  --fig-vita-2-weight: 400;
+  --fig-vita-2-case: uppercase;
+  /* vita 3: Graphite · Momo Trust (Figma 75:328) */
+  --fig-vita-3-bg: #1D1D1D;
+  --fig-vita-3-page: #1D1D1D;
+  --fig-vita-3-ink: #ACAA9F;
+  --fig-vita-3-font: var(--font-momo);
+  --fig-vita-3-size: clamp(2.5rem, 5.83vw, 7.0rem);
+  --fig-vita-3-tracking: -0.008em;
+  --fig-vita-3-weight: 400;
+  --fig-vita-3-case: uppercase;
+  /* vita 4: Earth · Momo Trust gold (Figma 90:109) */
+  --fig-vita-4-bg: #565145;
+  --fig-vita-4-page: #565145;
+  --fig-vita-4-ink: #D1AF44;
+  --fig-vita-4-font: var(--font-momo);
+  --fig-vita-4-size: clamp(2.5rem, 5.83vw, 7.0rem);
+  --fig-vita-4-tracking: -0.008em;
+  --fig-vita-4-weight: 400;
+  --fig-vita-4-case: uppercase;
+  /* vita 5: Sage · Inter (Figma 75:338) */
+  --fig-vita-5-bg: #959A7D;
+  --fig-vita-5-page: #959A7D;
+  --fig-vita-5-ink: #EBE1D7;
+  --fig-vita-5-font: var(--font-inter);
+  --fig-vita-5-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vita-5-tracking: 0em;
+  --fig-vita-5-weight: 700;
+  --fig-vita-5-case: none;
+  /* vita 6: Sage · Poppins (Figma 75:338) */
+  --fig-vita-6-bg: #959A7D;
+  --fig-vita-6-page: #959A7D;
+  --fig-vita-6-ink: #1D1D1D;
+  --fig-vita-6-font: var(--font-poppins);
+  --fig-vita-6-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vita-6-tracking: 0em;
+  --fig-vita-6-weight: 700;
+  --fig-vita-6-case: none;
+  /* vita 7: Sage · Varela Round (Figma 75:338) */
+  --fig-vita-7-bg: #959A7D;
+  --fig-vita-7-page: #959A7D;
+  --fig-vita-7-ink: #1D1D1D;
+  --fig-vita-7-font: var(--font-varela);
+  --fig-vita-7-size: clamp(2.5rem, 5.0vw, 6.0rem);
+  --fig-vita-7-tracking: 0em;
+  --fig-vita-7-weight: 400;
+  --fig-vita-7-case: none;
+
   /* ---------- Colour: semantic roles ---------- */
   --color-bg: var(--color-paper-0);
   --color-surface: var(--color-white);
@@ -130,6 +416,16 @@
   --font-accidenz: "CC Accidenz Commons", "Helvetica Neue", Arial, sans-serif;
   --font-hedvig: "Hedvig Letters Serif", Georgia, serif;
   --font-faculty: "Faculty Glyphic", Georgia, serif;
+  --font-port-lligat: "Port Lligat Sans", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-kosugi: "Kosugi Maru", sans-serif;
+  --font-comfortaa: "Comfortaa", sans-serif;
+  --font-hubballi: "Hubballi", sans-serif;
+  --font-varela: "Varela Round", sans-serif;
+  --font-madimi: "Madimi One", sans-serif;
+  --font-braah: "Braah One", sans-serif;
+  --font-momo: "Momo Trust Display", sans-serif;
+  --font-inter: "Inter", sans-serif;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;

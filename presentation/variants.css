@@ -1,0 +1,137 @@
+/*
+  Figma style variants. presentation.js copies the chosen variant's tokens
+  (--fig-<brand>-<n>-*) onto the landing as --v-* and sets data-variant.
+  Loaded last, so a variant wins over the landing defaults. Tokens only.
+*/
+
+/* ---------- Page and logo screen ---------- */
+.landing[data-variant] {
+  background: var(--v-page);
+}
+
+/* Slide landings (Veriterra) get their colour from the scroll-colour system instead */
+.landing[data-variant]:not([data-slides]) .logo-hero {
+  /* Runs under the menu so the frame fills the whole first screen */
+  min-height: 100dvh;
+  margin-top: calc((var(--nav-height) + env(safe-area-inset-top)) * -1);
+  padding-top: calc(var(--space-8) + var(--nav-height) + env(safe-area-inset-top));
+  background: var(--v-bg);
+}
+
+.landing[data-variant] .logo-hero__word {
+  font-family: var(--v-font);
+  font-size: var(--v-size);
+  font-weight: var(--v-weight);
+  letter-spacing: var(--v-tracking);
+  text-transform: var(--v-case);
+  color: var(--v-ink);
+}
+
+/* Wide tracking adds space after the last letter; pull it back so the word stays centred */
+.landing[data-variant] .logo-hero__word { margin-right: calc(var(--v-tracking) * -1); }
+
+/* Two-tone wordmark: the part after the split point takes the second colour */
+.logo-hero__b { color: var(--v-ink2, inherit); }
+
+.landing[data-variant] .logo-hero__caption,
+.landing[data-variant] .logo-hero__late { color: var(--v-ink); }
+
+.landing[data-variant] .logo-hero__scroll-line { background: var(--v-ink); }
+
+/* Photo background (Vaya "Clouds") */
+.landing[data-variant-image="sky"] .logo-hero {
+  background: var(--v-bg) url("../brand/figma/vaya-sky.jpg") right center / cover no-repeat;
+}
+
+/* Accent square, bottom right (Veriterra "Earth") */
+.landing[data-variant-accent] .logo-hero::before {
+  content: "";
+  position: absolute;
+  right: var(--space-6);
+  bottom: var(--space-6);
+  width: var(--space-8);
+  height: var(--space-8);
+  background: var(--v-accent);
+}
+
+/* Wordmark in the top-left corner (Vita frames) */
+.landing[data-variant][data-logo-align="corner"]:not([data-slides]) .logo-hero {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: calc(var(--nav-height) + env(safe-area-inset-top) + var(--space-5));
+  text-align: left;
+}
+
+/* ---------- Text tone of the rest of the page ---------- */
+.landing[data-variant][data-v-tone="dark"]:not([data-slides]) {
+  --color-text: var(--color-paper-0);
+  --color-text-muted: var(--color-ink-300);
+  --color-border: var(--color-ink-700);
+  --color-border-strong: var(--color-ink-500);
+  color: var(--color-text);
+}
+
+/* ---------- Switcher: tiny dots, bottom left, nearly invisible until touched ---------- */
+.variant-switch {
+  position: fixed;
+  left: max(var(--space-2), env(safe-area-inset-left));
+  bottom: max(var(--space-2), env(safe-area-inset-bottom));
+  z-index: var(--z-toast);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-white);
+  mix-blend-mode: difference;
+  opacity: var(--opacity-disabled);
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.variant-switch[hidden] { display: none; }
+
+.variant-switch:focus-within,
+.variant-switch.is-active { opacity: 1; }
+
+@media (hover: hover) {
+  .variant-switch:hover { opacity: 1; }
+}
+
+.variant-switch__dots { display: flex; }
+
+.variant-switch button {
+  display: grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  margin-inline: calc(var(--space-3) * -0.5);
+  padding: var(--space-0);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.variant-switch button::before {
+  content: "";
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border: var(--border-width) solid currentColor;
+  border-radius: var(--radius-pill);
+  transition: background-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+}
+
+.variant-switch button[aria-pressed="true"]::before {
+  background: currentColor;
+  transform: scale(1.4);
+}
+
+.variant-switch__name {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.variant-switch.is-active .variant-switch__name { opacity: 1; }

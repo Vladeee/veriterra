@@ -46,6 +46,8 @@ GROUPS = [
     ("--press-", "motion"),
     ("--z-", "zIndex"),
     ("--opacity-", "opacity"),
+    ("--fig-", "figmaVariants"),
+    ("--vo-", "color"),
 ]
 
 BLOCK_RE = re.compile(r"([^{}]+)\{([^{}]*)\}", re.S)
