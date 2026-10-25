@@ -1,9 +1,9 @@
 # VITREEONE brand system (working draft)
 
 One link for **VITREEONE** and its four companies: Veriterra, Verdo, Vaya and Vita.
-It opens on an intro with a **Welcome** button, then five short landing pages behind a fixed top menu. They share one structure on a full-width 12-column grid, and each will be styled separately.
+It opens on an intro with a **Welcome** button, then five landings behind a fixed top menu. For now each landing is one screen: the logo.
 
-Each landing has **style variants**, one per frame in the Figma file. Switch them with the faint dots in the bottom-left corner; the choice is remembered on the device.
+Each landing has **style variants**, one per frame in the Figma file, and four **background gradients** (Streaks, Halo, Horizon, Flat). Switch them in the faint corner control at the bottom left (gradients on top, variant dots below). The choice is remembered on the device.
 Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
 
 > Copy, typefaces, colours and logos are **placeholders**.
@@ -28,10 +28,10 @@ python3 -m http.server 8000
 ├── index.html                  intro + five landings (the one link)
 ├── manifest.webmanifest        install manifest
 ├── presentation/
-│   ├── presentation.css        intro, menu, page grid, shared landing skeleton
-│   ├── presentation.js         routing, menu, loop strip, variant switcher
+│   ├── presentation.css        intro, menu, page grid, logo screen
+│   ├── presentation.js         routing, menu, variants, gradients, switcher
 │   ├── variants.js             list of Figma style variants per landing
-│   ├── variants.css            how a variant styles the logo screen + the switcher
+│   ├── variants.css            variant styling, gradients, the switcher
 │   └── landings/<id>.css       per-landing style
 ├── brand/
 │   ├── BRIEF.md                facts, hypotheses, open questions

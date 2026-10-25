@@ -1,5 +1,6 @@
 /*
   verdo landing. Styles for this landing only, scoped to
   .landing[data-brand="verdo"]. Tokens only (see brand/tokens.css).
-  Empty for now: the shared skeleton lives in presentation/presentation.css.
+  Empty for now: the landing is the logo screen only, styled by the Figma
+  variant (presentation/variants.css).
 */

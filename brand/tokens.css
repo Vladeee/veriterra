@@ -71,6 +71,7 @@
   --color-vitreeone-700: #1A1916;
   --color-vitreeone-glow: #EFE5D0;
   --color-vitreeone-glow-2: #E4E8DA;
+  --color-vitreeone-streak: #6FB3A5;   /* light streaks behind the logo (.glow) */
 
   /* Veriterra colour library (draft), taken from farmminerals.com and
      extended in OKLCH. Olive hue ≈ 123, beige hue ≈ 68. */
@@ -96,18 +97,21 @@
   --color-verdo-700: #2F4C37;
   --color-verdo-glow: #E4F1C4;
   --color-verdo-glow-2: #F4F1D6;
+  --color-verdo-streak: #EFA463;   /* light streaks behind the logo (.glow) */
 
   --color-vaya-100: #E3ECF2;
   --color-vaya-600: #34617F;
   --color-vaya-700: #274B63;
   --color-vaya-glow: #D6E9F3;
   --color-vaya-glow-2: #F5EAD8;
+  --color-vaya-streak: #F2A68C;   /* light streaks behind the logo (.glow) */
 
   --color-vita-100: #F2EADF;
   --color-vita-600: #7D5A2E;
   --color-vita-700: #604421;
   --color-vita-glow: #F3DFC8;
   --color-vita-glow-2: #EAE3D6;
+  --color-vita-streak: #D3A44C;   /* light streaks behind the logo (.glow) */
 
   /* ---------- Figma style variants (one per frame in the Figma file) ----------
      --fig-<brand>-<n>-<prop>. Applied by presentation/variants.js. */
@@ -557,6 +561,7 @@
   --brand-on-accent: var(--color-white);
   --brand-glow: var(--color-vitreeone-glow);
   --brand-glow-2: var(--color-vitreeone-glow-2);
+  --brand-streak: var(--color-vitreeone-streak);
   --brand-bg:
     radial-gradient(120% 70% at 50% 0%, var(--color-vitreeone-glow) 0%, transparent 65%),
     radial-gradient(70% 50% at 100% 55%, var(--color-vitreeone-glow-2) 0%, transparent 70%),
@@ -575,6 +580,7 @@
   --brand-logo: var(--color-fm-ink);
   --brand-glow: var(--color-fm-olive-100);
   --brand-glow-2: var(--color-fm-beige-deep);
+  --brand-streak: var(--color-fm-lime);
   --brand-glow-deep: var(--color-fm-olive-500);
   --brand-on-deep-muted: var(--color-fm-olive-200);
   --brand-bg:
@@ -590,6 +596,7 @@
   --brand-on-accent: var(--color-white);
   --brand-glow: var(--color-verdo-glow);
   --brand-glow-2: var(--color-verdo-glow-2);
+  --brand-streak: var(--color-verdo-streak);
   --brand-bg:
     radial-gradient(120% 70% at 50% 0%, var(--color-verdo-glow) 0%, transparent 65%),
     radial-gradient(70% 50% at 100% 55%, var(--color-verdo-glow-2) 0%, transparent 70%),
@@ -604,6 +611,7 @@
   --brand-on-accent: var(--color-white);
   --brand-glow: var(--color-vaya-glow);
   --brand-glow-2: var(--color-vaya-glow-2);
+  --brand-streak: var(--color-vaya-streak);
   --brand-bg:
     radial-gradient(120% 70% at 50% 0%, var(--color-vaya-glow) 0%, transparent 65%),
     radial-gradient(70% 50% at 100% 55%, var(--color-vaya-glow-2) 0%, transparent 70%),
@@ -618,6 +626,7 @@
   --brand-on-accent: var(--color-white);
   --brand-glow: var(--color-vita-glow);
   --brand-glow-2: var(--color-vita-glow-2);
+  --brand-streak: var(--color-vita-streak);
   --brand-bg:
     radial-gradient(120% 70% at 50% 0%, var(--color-vita-glow) 0%, transparent 65%),
     radial-gradient(70% 50% at 100% 55%, var(--color-vita-glow-2) 0%, transparent 70%),

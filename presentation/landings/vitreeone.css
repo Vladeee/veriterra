@@ -11,15 +11,12 @@
   --brand-logo: var(--color-vitreeone-foam);
   --color-text: var(--color-vitreeone-foam);
   --color-text-muted: var(--color-vitreeone-foam);
-  padding-top: var(--space-0);
   /* Background, wordmark font and colour come from the Figma variant (variants.css) */
   color: var(--v-ink, var(--color-vitreeone-foam));
 }
 
 .vo-hero {
-  min-height: 100dvh;
   gap: var(--space-6);
-  padding-top: calc(var(--nav-height) + env(safe-area-inset-top));
 }
 
 .landing[data-brand="vitreeone"] .logo-hero__word {

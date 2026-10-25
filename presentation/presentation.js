@@ -1,9 +1,10 @@
 /*
   One link for everything: an intro screen with a Welcome button, then five
   landings behind one fixed menu.
-  - No hash (or #intro) shows the intro. #verdo opens a landing. A hash inside
-    a landing (#verdo-offer) opens that landing and scrolls to the block.
-  - The menu and the "loop" strip are built from brand/brands.js.
+  - No hash (or #intro) shows the intro. #verdo opens a landing.
+  - Each landing is one logo screen. A nearly invisible switcher (bottom left)
+    picks its Figma style variant and its background gradient.
+  - The menu is built from brand/brands.js.
 */
 (function () {
   "use strict";
@@ -29,31 +30,9 @@
     });
   }
 
-  function buildLoops() {
-    var companies = BRANDS.filter(function (b) { return !b.holding; });
-    landings.forEach(function (landing) {
-      var id = landing.id;
-      var isHolding = BrandUI.brandById(id).holding;
-      landing.querySelectorAll("[data-loop]").forEach(function (ol) {
-        companies.forEach(function (b) {
-          var li = document.createElement("li");
-          var a = document.createElement("a");
-          a.className = "l-loop__step";
-          a.href = "#" + b.id;
-          a.setAttribute("data-brand", b.id);
-          if (isHolding || b.id === id) a.setAttribute("aria-current", "true");
-          a.innerHTML = '<span class="l-loop__word">' + b.loop + "</span><span class=\"caption\">" + b.name + "</span>";
-          li.appendChild(a);
-          ol.appendChild(li);
-        });
-      });
-    });
-  }
-
   // ---------- routing ----------
   function showIntro() {
     current = intro;
-    root.classList.remove("has-slides");
     intro.hidden = false;
     landings.forEach(function (l) { l.hidden = true; });
     document.body.classList.add("is-intro");
@@ -82,7 +61,6 @@
       var active = menu.querySelector('[aria-current="page"]');
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
       document.title = BrandUI.brandById(landing.id).name;
-      root.classList.toggle("has-slides", landing.hasAttribute("data-slides"));
       renderSwitch(landing);
       playLogo(landing);
     }
@@ -121,17 +99,6 @@
     document.addEventListener("webkitfullscreenchange", syncFullscreen);
   }
 
-  // ---------- placeholder actions (contact is not connected yet) ----------
-  function initPlaceholders() {
-    document.querySelectorAll("[data-placeholder-action]").forEach(function (btn) {
-      btn.addEventListener("click", function (e) {
-        e.preventDefault();
-        btn.textContent = "Not connected yet";
-        btn.classList.add("is-done");
-      });
-    });
-  }
-
   // ---------- logo hero: replay the entrance (CSS) when the landing opens ----------
   function playLogo(scope) {
     (scope || document).querySelectorAll("[data-logo-hero]").forEach(function (hero) {
@@ -141,24 +108,7 @@
     });
   }
 
-  // ---------- scroll reveal: [data-reveal] gets .is-in when it enters the screen ----------
-  function initReveal() {
-    var items = document.querySelectorAll("[data-reveal]");
-    if (!("IntersectionObserver" in window)) {
-      items.forEach(function (el) { el.classList.add("is-in"); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        e.target.classList.add("is-in");
-        io.unobserve(e.target);
-      });
-    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
-    items.forEach(function (el) { io.observe(el); });
-  }
-
-  // ---------- palette trial: [data-palette-switch] sets data-palette on its landing ----------
+  // ---------- colour helpers: resolve a colour token and tell light from dark ----------
   var probe = document.createElement("canvas").getContext("2d");
   function toHex(color) {
     probe.clearRect(0, 0, 1, 1);
@@ -168,38 +118,6 @@
     return "#" + [d[0], d[1], d[2]].map(function (v) { return v.toString(16).padStart(2, "0"); }).join("").toUpperCase();
   }
 
-  function initPaletteSwitches() {
-    document.querySelectorAll("[data-palette-switch]").forEach(function (box) {
-      var landing = box.closest(".landing");
-      var key = "palette-" + landing.id;
-      var out = box.querySelector(".palette__value");
-      var saved = null;
-      try { saved = window.localStorage.getItem(key); } catch (e) { /* storage unavailable */ }
-      function pick(name) {
-        landing.setAttribute("data-palette", name);
-        box.querySelectorAll("button[data-palette]").forEach(function (b) {
-          b.setAttribute("aria-pressed", String(b.getAttribute("data-palette") === name));
-        });
-        try { window.localStorage.setItem(key, name); } catch (e) { /* storage unavailable */ }
-      }
-      box.addEventListener("click", function (e) {
-        var p = e.target.closest("button[data-palette]");
-        if (p && box.contains(p)) { pick(p.getAttribute("data-palette")); return; }
-        var sw = e.target.closest("[data-swatch]");
-        if (!sw) return;
-        box.querySelectorAll("[data-swatch]").forEach(function (b) { b.setAttribute("aria-pressed", String(b === sw)); });
-        var value = getComputedStyle(root).getPropertyValue(sw.getAttribute("data-swatch")).trim();
-        var source = sw.getAttribute("data-source");
-        out.textContent = sw.getAttribute("data-name") + " · " + toHex(value) + " · " + value +
-          " · " + (source === "site" ? "from farmminerals.com" : source === "derived" ? "derived" : source + " variation");
-      });
-      pick(saved && box.querySelector('[data-palette="' + saved + '"]') ? saved : box.getAttribute("data-default"));
-    });
-  }
-
-  // ---------- scroll colour: the slide in the middle of the screen sets the background ----------
-  // Each slide carries data-bg (a colour token). Its "Background" chip lets you pick another
-  // colour from the landing's palette swatches; the choice is remembered on this device.
   function isDark(token) {
     var hex = toHex(getComputedStyle(root).getPropertyValue(token).trim());
     var c = [1, 3, 5].map(function (i) {
@@ -207,74 +125,6 @@
       return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
     });
     return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] < 0.18;
-  }
-
-  function initScrollColour() {
-    document.querySelectorAll(".landing[data-slides]").forEach(function (landing) {
-      var slides = Array.prototype.slice.call(landing.querySelectorAll("[data-bg]"));
-      var library = Array.prototype.map.call(landing.querySelectorAll("[data-swatch]"), function (b) {
-        return { token: b.getAttribute("data-swatch"), name: b.getAttribute("data-name") };
-      });
-      var active = null;
-
-      function apply(slide) {
-        active = slide;
-        landing.style.setProperty("--scroll-bg", "var(" + slide.getAttribute("data-bg") + ")");
-        landing.setAttribute("data-tone", slide.getAttribute("data-tone"));
-      }
-
-      function setBg(slide, token, save) {
-        slide.setAttribute("data-bg", token);
-        slide.setAttribute("data-tone", isDark(token) ? "dark" : "light");
-        var chip = slide.querySelector(".bg-pick");
-        if (chip) {
-          chip.style.setProperty("--current-bg", "var(" + token + ")");
-          chip.querySelectorAll("[data-bg-token]").forEach(function (b) {
-            b.setAttribute("aria-pressed", String(b.getAttribute("data-bg-token") === token));
-          });
-        }
-        if (save) { try { window.localStorage.setItem("bg-" + landing.id + "-" + slides.indexOf(slide), token); } catch (e) { /* storage unavailable */ } }
-        if (slide === active) apply(slide);
-      }
-
-      slides.forEach(function (slide, i) {
-        var chip = document.createElement("div");
-        chip.className = "bg-pick";
-        chip.innerHTML = '<button type="button" class="bg-pick__toggle" aria-expanded="false">Background</button><ul class="bg-pick__list"></ul>';
-        var list = chip.querySelector("ul");
-        library.forEach(function (c) {
-          var li = document.createElement("li");
-          li.innerHTML = '<button type="button" data-bg-token="' + c.token + '" style="--sw: var(' + c.token + ')" aria-label="' + c.name + '"></button>';
-          list.appendChild(li);
-        });
-        chip.addEventListener("click", function (e) {
-          var t = e.target.closest(".bg-pick__toggle");
-          if (t) {
-            var open = chip.classList.toggle("is-open");
-            t.setAttribute("aria-expanded", String(open));
-            return;
-          }
-          var b = e.target.closest("[data-bg-token]");
-          if (b) setBg(slide, b.getAttribute("data-bg-token"), true);
-        });
-        slide.appendChild(chip);
-        var saved = null;
-        try { saved = window.localStorage.getItem("bg-" + landing.id + "-" + i); } catch (e) { /* storage unavailable */ }
-        setBg(slide, saved || slide.getAttribute("data-bg"), false);
-      });
-
-      // The chosen Figma variant sets the colour of the first slide (the logo)
-      landing.addEventListener("variantchange", function (e) {
-        if (slides[0]) setBg(slides[0], e.detail.token, false);
-      });
-
-      if (!("IntersectionObserver" in window)) { if (slides[0]) apply(slides[0]); return; }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) apply(e.target); });
-      }, { rootMargin: "-50% 0px -50% 0px" });
-      slides.forEach(function (sl) { io.observe(sl); });
-      if (slides[0]) apply(slides[0]);
-    });
   }
 
   // ---------- Figma style variants (presentation/variants.js + --fig-* tokens) ----------
@@ -312,9 +162,8 @@
       else word.textContent = name;
     }
     var hero = landing.querySelector("[data-logo-hero]");
-    if (hero && !landing.hasAttribute("data-slides")) hero.setAttribute("data-tone", landing.getAttribute("data-v-tone"));
+    if (hero) hero.setAttribute("data-tone", landing.getAttribute("data-v-tone"));
     if (save) { try { window.localStorage.setItem("variant-" + landing.id, String(n)); } catch (e) { /* storage unavailable */ } }
-    landing.dispatchEvent(new CustomEvent("variantchange", { detail: { token: pre + "bg", n: n } }));
     if (landing === current) renderSwitch(landing);
     if (save) { playLogo(landing); flashSwitch(); window.dispatchEvent(new Event("scroll")); }
   }
@@ -335,27 +184,43 @@
       dots.appendChild(b);
     });
     switchEl.querySelector(".variant-switch__name").textContent = current + " · " + list[current - 1].name;
+    var grad = landing.getAttribute("data-gradient");
+    switchEl.querySelectorAll("[data-gradient]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-gradient") === grad));
+    });
+  }
+
+  // ---------- background gradient: data-gradient on the landing ----------
+  var GRADIENTS = ["streaks", "halo", "horizon", "flat"];
+
+  function applyGradient(landing, name, save) {
+    landing.setAttribute("data-gradient", name);
+    if (save) { try { window.localStorage.setItem("gradient-" + landing.id, name); } catch (e) { /* storage unavailable */ } }
+    if (landing === current) renderSwitch(landing);
   }
 
   function initVariants() {
+    switchEl.querySelectorAll("[data-gradient]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (current && current !== intro) { applyGradient(current, b.getAttribute("data-gradient"), true); flashSwitch(); }
+      });
+    });
     landings.forEach(function (landing) {
       if (!(window.VARIANTS || {})[landing.id]) return;
       var saved = null;
       try { saved = Number(window.localStorage.getItem("variant-" + landing.id)); } catch (e) { /* storage unavailable */ }
       var count = window.VARIANTS[landing.id].length;
       applyVariant(landing, saved >= 1 && saved <= count ? saved : 1, false);
+      var grad = null;
+      try { grad = window.localStorage.getItem("gradient-" + landing.id); } catch (e) { /* storage unavailable */ }
+      applyGradient(landing, GRADIENTS.indexOf(grad) >= 0 ? grad : GRADIENTS[0], false);
     });
   }
 
   // ---------- init ----------
   function init() {
     buildMenu();
-    buildLoops();
-    initPlaceholders();
-    initPaletteSwitches();
-    initScrollColour();
     initVariants();
-    initReveal();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
     // Scrolled state + the tone of whatever sits under the menu (light or dark slide)
