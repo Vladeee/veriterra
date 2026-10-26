@@ -1,7 +1,7 @@
 /*
-  One link for everything: an intro screen with a Welcome button, then five
+  One link for everything: it opens straight on the first of five
   landings behind one fixed menu.
-  - No hash (or #intro) shows the intro. #verdo opens a landing.
+  - No hash (or an unknown one) opens the first landing. #verdo opens a landing.
   - Each landing is one logo screen. A nearly invisible switcher (bottom left)
     picks its Figma style variant and its background gradient.
   - The menu is built from brand/brands.js.
@@ -10,7 +10,6 @@
   "use strict";
 
   var root = document.documentElement;
-  var intro = document.getElementById("intro");
   var landings = Array.prototype.slice.call(document.querySelectorAll(".landing"));
   var menu = document.getElementById("topnav-list");
   var fsBtn = document.getElementById("fullscreen");
@@ -43,7 +42,7 @@
   }
 
   function renderArrows(landing) {
-    if (!landing || landing === intro) { arrows.hidden = true; return; }
+    if (!landing) { arrows.hidden = true; return; }
     arrows.hidden = false;
     var i = landings.indexOf(landing);
     [["prev", -1], ["next", 1]].forEach(function (d) {
@@ -55,27 +54,12 @@
   }
 
   // ---------- routing ----------
-  function showIntro() {
-    current = intro;
-    intro.hidden = false;
-    landings.forEach(function (l) { l.hidden = true; });
-    document.body.classList.add("is-intro");
-    if (switchEl) switchEl.hidden = true;
-    renderArrows(null);
-    root.setAttribute("data-brand", "vitreeone");
-    document.title = BrandUI.brandById("vitreeone").name;
-    window.scrollTo(0, 0);
-  }
-
   function show(hash) {
-    if (!hash || hash === "intro") { showIntro(); return; }
-    var target = document.getElementById(hash);
+    var target = hash ? document.getElementById(hash) : null;
     var landing = target ? target.closest(".landing") : null;
-    if (!landing) { showIntro(); return; }
+    if (!landing) { landing = target = landings[0]; }
 
     if (landing !== current) {
-      intro.hidden = true;
-      document.body.classList.remove("is-intro");
       landings.forEach(function (l) { l.hidden = l !== landing; });
       current = landing;
       root.setAttribute("data-brand", landing.getAttribute("data-brand"));
@@ -231,7 +215,7 @@
   }
 
   function centreCurrent() {
-    if (!current || current === intro) return;
+    if (!current) return;
     if (current.id === "overview") {
       current.querySelectorAll(".overview__tile").forEach(function (tile) {
         fitWord(tile.querySelector(".overview__word"), tile, "--logo-tile-ink-height");
@@ -435,11 +419,11 @@
     var btn = switchEl.querySelector('[data-action="picker"]');
     box.hidden = !open;
     btn.setAttribute("aria-expanded", String(open));
-    if (open && current && current !== intro) renderPicker(current);
+    if (open && current) renderPicker(current);
   }
 
   function onSwitchAction(action, target) {
-    if (!current || current === intro) return;
+    if (!current) return;
     if (action === "invert") {
       var on = !current.hasAttribute("data-invert");
       setInvert(current, on, true);
@@ -461,7 +445,7 @@
 
   // Previous / next, wrapping around
   function step(kind, dir) {
-    if (!current || current === intro) return;
+    if (!current) return;
     var list = (window.VARIANTS || {})[current.id];
     if (!list) return;
     if (kind === "variant") {
