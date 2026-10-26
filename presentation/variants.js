@@ -18,6 +18,12 @@ window.VARIANTS = {
   ],
   "veriterra": [
     {
+      "name": "Moss · two-tone",
+      "node": "75:265",
+      "split": 4,
+      "ink2": true
+    },
+    {
       "name": "Lime · Port Lligat",
       "node": "85:53"
     },
@@ -44,12 +50,6 @@ window.VARIANTS = {
       "kern": true
     },
     {
-      "name": "Moss · two-tone",
-      "node": "75:265",
-      "split": 4,
-      "ink2": true
-    },
-    {
       "name": "Earth · Comfortaa",
       "node": "75:267",
       "accent": true
@@ -57,12 +57,12 @@ window.VARIANTS = {
   ],
   "verdo": [
     {
-      "name": "Sand · Hubballi",
-      "node": "85:33"
-    },
-    {
       "name": "Cream · Hubballi",
       "node": "85:34"
+    },
+    {
+      "name": "Sand · Hubballi",
+      "node": "85:33"
     },
     {
       "name": "Sage · Hubballi",
@@ -83,12 +83,12 @@ window.VARIANTS = {
   ],
   "vaya": [
     {
-      "name": "Sunrise · Faculty Glyphic",
-      "node": "75:291"
-    },
-    {
       "name": "Sky · Faculty Glyphic",
       "node": "75:294"
+    },
+    {
+      "name": "Sunrise · Faculty Glyphic",
+      "node": "75:291"
     },
     {
       "name": "Lavender · Faculty Glyphic",
@@ -105,12 +105,12 @@ window.VARIANTS = {
   ],
   "vita": [
     {
-      "name": "Khaki · Braah One",
-      "node": "75:303"
-    },
-    {
       "name": "Stone · Momo Trust",
       "node": "75:305"
+    },
+    {
+      "name": "Khaki · Braah One",
+      "node": "75:303"
     },
     {
       "name": "Sage · Poppins",

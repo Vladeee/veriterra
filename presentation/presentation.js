@@ -274,6 +274,9 @@
     { id: "mist", name: "Mist" },
     { id: "aurora", name: "Aurora" },
     { id: "silk", name: "Silk" },
+    { id: "tide", name: "Tide" },
+    { id: "veil", name: "Veil" },
+    { id: "prism", name: "Prism" },
     { id: "flat", name: "Flat" }
   ];
 
@@ -316,7 +319,8 @@
     else landing.removeAttribute("data-variant-accent");
     applyColours(landing);
     setWord(landing.querySelector(".logo-hero__word"), BrandUI.brandById(landing.id).name, v);
-    if (save) store("variant-" + landing.id, String(n));
+    // "variant2-": the variants were reordered, so numbers saved before are dropped
+    if (save) store("variant2-" + landing.id, String(n));
     if (landing === current) { renderSwitch(landing); centreCurrent(); }
     if (save) { playLogo(landing); window.dispatchEvent(new Event("scroll")); }
   }
@@ -350,6 +354,20 @@
     if (save) store("invert-" + landing.id, on ? "1" : "");
     applyColours(landing);
     if (landing === current) { renderSwitch(landing); window.dispatchEvent(new Event("scroll")); }
+    syncOverview();
+  }
+
+  // All variants: each tile shows its landing inverted or not; the header
+  // button inverts (or restores) every landing at once
+  function syncOverview() {
+    var all = true;
+    document.querySelectorAll(".overview__tile").forEach(function (tile) {
+      var on = document.getElementById(tile.getAttribute("data-landing")).hasAttribute("data-invert");
+      if (on) tile.setAttribute("data-invert", "");
+      else { tile.removeAttribute("data-invert"); all = false; }
+    });
+    var btn = document.querySelector("[data-invert-all]");
+    if (btn) btn.setAttribute("aria-pressed", String(all));
   }
 
   function setInk(landing, id, save) {
@@ -503,7 +521,7 @@
       if (stored("invert-" + landing.id)) landing.setAttribute("data-invert", "");
       var ink = stored("ink-" + landing.id);
       landing.setAttribute("data-ink", INKS.some(function (k) { return k.id === ink; }) ? ink : "auto");
-      var saved = Number(stored("variant-" + landing.id));
+      var saved = Number(stored("variant2-" + landing.id));
       applyVariant(landing, saved >= 1 && saved <= list.length ? saved : 1, false);
       var grad = stored("gradient-" + landing.id);
       var known = GRADIENTS.some(function (g) { return g.id === grad; });
@@ -529,6 +547,7 @@
         var tile = document.createElement("a");
         tile.className = "overview__tile";
         tile.href = "#" + id;
+        tile.setAttribute("data-landing", id);
         tile.setAttribute("aria-label", brand.name + ", variant " + n + ": " + v.name);
         ["bg", "page", "ink", "ink2", "accent", "font", "tracking", "weight", "case"].forEach(function (prop) {
           if (getComputedStyle(root).getPropertyValue(pre + prop).trim() !== "") tile.style.setProperty("--t-" + prop, "var(" + pre + prop + ")");
@@ -546,6 +565,11 @@
       group.appendChild(grid);
       box.appendChild(group);
     });
+    var btn = document.querySelector("[data-invert-all]");
+    if (btn) btn.addEventListener("click", function () {
+      var on = btn.getAttribute("aria-pressed") !== "true";
+      landings.forEach(function (l) { if ((window.VARIANTS || {})[l.id]) setInvert(l, on, true); });
+    });
   }
 
   // ---------- init ----------
@@ -553,6 +577,7 @@
     buildMenu();
     buildOverview();
     initVariants();
+    syncOverview();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
     window.addEventListener("resize", centreCurrent);

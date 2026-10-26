@@ -96,8 +96,9 @@
 }
 
 /* ---------- Complex gradients: soft ribbons of light (after paypath.ai) ----------
-   Each ribbon is a thin ring of a huge ellipse, so it curves across the screen;
-   blurred and drifting very slowly. Translucent brand tint: stronger on dark
+   aurora, silk, tide: thin rings of huge ellipses, so they curve across the
+   screen. veil: vertical curtains. prism: rays from below. All blurred and
+   drifting very slowly. Translucent brand tint: stronger on dark
    pages, gentler on light ones. */
 .landing[data-variant] {
   --a-band: color-mix(in oklch, var(--brand-streak) 30%, transparent);
@@ -112,7 +113,11 @@
 .landing[data-gradient="aurora"] .glow::before,
 .landing[data-gradient="aurora"] .glow::after,
 .landing[data-gradient="silk"] .glow::before,
-.landing[data-gradient="silk"] .glow::after {
+.landing[data-gradient="silk"] .glow::after,
+.landing[data-gradient="tide"] .glow::before,
+.landing[data-gradient="tide"] .glow::after,
+.landing[data-gradient="veil"] .glow::before,
+.landing[data-gradient="prism"] .glow::before {
   content: "";
   position: absolute;
   inset: -15%;
@@ -158,6 +163,47 @@
   background: radial-gradient(ellipse 105% 80% at 104% 112%,
     transparent 60%, var(--a-band) 65%, transparent 71%,
     transparent 74%, var(--a-core) 77%, transparent 82%);
+}
+
+/* Tide: long shallow waves of light rolling in from the bottom, a trace at the top */
+.landing[data-gradient="tide"] .glow::before,
+.landing[data-gradient="tide"] .glow::after { filter: blur(calc(var(--glow-blur) / 3)); }
+
+.landing[data-gradient="tide"] .glow::before {
+  background: radial-gradient(ellipse 150% 40% at 50% 120%,
+    transparent 50%, var(--a-band) 56%, transparent 62%,
+    transparent 66%, var(--a-core) 70%, transparent 75%,
+    transparent 79%, var(--a-band) 83%, transparent 89%);
+}
+
+.landing[data-gradient="tide"] .glow::after {
+  background: radial-gradient(ellipse 150% 32% at 50% -14%,
+    transparent 58%, var(--a-band) 68%, transparent 82%);
+}
+
+/* Veil: soft vertical curtains of light, fading out at the top and bottom */
+.landing[data-gradient="veil"] .glow::before {
+  background: linear-gradient(to right,
+    transparent 6%, var(--a-band) 13%, transparent 21%,
+    transparent 30%, var(--a-core) 37%, transparent 45%,
+    transparent 58%, var(--a-band) 66%, transparent 74%,
+    transparent 82%, var(--a-core) 88%, transparent 95%);
+  filter: blur(calc(var(--glow-blur) / 2));
+  -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 35%, black 65%, transparent 95%);
+  mask-image: linear-gradient(to bottom, transparent 5%, black 35%, black 65%, transparent 95%);
+}
+
+/* Prism: rays of light fanning up from below the screen */
+.landing[data-gradient="prism"] .glow::before {
+  background: conic-gradient(from 270deg at 50% 118%,
+    transparent 0deg, var(--a-band) 14deg, transparent 26deg,
+    transparent 40deg, var(--a-core) 52deg, transparent 64deg,
+    transparent 80deg, var(--a-band) 90deg, transparent 100deg,
+    transparent 116deg, var(--a-core) 128deg, transparent 140deg,
+    transparent 154deg, var(--a-band) 166deg, transparent 180deg);
+  filter: blur(calc(var(--glow-blur) / 2));
+  -webkit-mask-image: linear-gradient(to top, black 15%, transparent 85%);
+  mask-image: linear-gradient(to top, black 15%, transparent 85%);
 }
 
 .landing[data-gradient="flat"] .glow { display: none; }

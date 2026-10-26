@@ -3,7 +3,7 @@
 One link for **VITREEONE** and its four companies: Veriterra, Verdo, Vaya and Vita.
 It opens on an intro with a **Welcome** button, then five landings behind a fixed top menu, and a last page with every variant in one grid. For now each landing is one screen: the logo. Arrows at the screen edges go to the previous and next page.
 
-Each landing has **style variants**, one per frame in the Figma file, and seven **background gradients** (Dawn, Dusk, Horizon, Mist, Aurora, Silk, Flat). Switch them with the arrow buttons at the bottom left (or the arrow keys). The third button row inverts the colours, switches the logo between light and dark, and opens a logo colour picker with colours matched to the background. The choice is remembered on the device.
+Each landing has **style variants**, one per frame in the Figma file, and ten **background gradients** (Dawn, Dusk, Horizon, Mist, Aurora, Silk, Tide, Veil, Prism, Flat). Switch them with the arrow buttons at the bottom left (or the arrow keys). The third button row inverts the colours, switches the logo between light and dark, and opens a logo colour picker with colours matched to the background. The choice is remembered on the device.
 Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
 
 > Copy, typefaces, colours and logos are **placeholders**.

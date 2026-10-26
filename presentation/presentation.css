@@ -404,6 +404,32 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   color: var(--color-text-muted);
 }
 
+.overview__invert {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  margin-top: var(--space-5);
+  padding-inline: var(--space-4) var(--space-5);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-inter);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.overview__invert[aria-pressed="true"] {
+  border-color: var(--color-text);
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.overview__invert .icon svg { width: var(--space-5); height: var(--space-5); }
+
 .overview__group {
   padding: 0 calc(var(--tap-min) + var(--space-3) * 2) var(--space-7);
 }
@@ -449,6 +475,12 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   color: var(--t-ink);
   text-decoration: none;
   touch-action: manipulation;
+}
+
+/* Inverted: the logo colour becomes the background and the page colour the logo */
+.overview__tile[data-invert] {
+  background: var(--t-ink);
+  color: var(--t-page);
 }
 
 .overview__tile:active { scale: var(--press-scale); }
