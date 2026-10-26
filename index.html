@@ -47,7 +47,7 @@
     </div>
   </nav>
 
-  <!-- Switcher, bottom left: style variant (Figma frames) and background gradient -->
+  <!-- Switcher, bottom left: style variant (Figma frames), background gradient, colours -->
   <div class="variant-switch" id="variant-switch" hidden>
     <span class="variant-switch__name" aria-live="polite"></span>
     <div class="variant-switch__pill" role="group" aria-label="Style variant">
@@ -60,6 +60,12 @@
       <span class="variant-switch__value" data-value="gradient"></span>
       <button type="button" data-step="gradient" data-dir="1" aria-label="Next gradient"><span class="icon" data-icon="arrow-right"></span></button>
     </div>
+    <div class="variant-switch__pill" role="group" aria-label="Colours">
+      <button type="button" data-action="invert" aria-pressed="false" aria-label="Invert colours"><span class="icon" data-icon="contrast"></span></button>
+      <button type="button" class="variant-switch__text" data-action="ink" aria-label="Logo light or dark"><span data-value="ink">Auto</span></button>
+      <button type="button" data-action="picker" aria-expanded="false" aria-controls="logo-colours" aria-label="Logo colour"><span class="variant-switch__swatch"></span></button>
+    </div>
+    <div class="variant-switch__picker" id="logo-colours" role="group" aria-label="Logo colours" hidden></div>
   </div>
 
   <main id="landings">

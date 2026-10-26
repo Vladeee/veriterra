@@ -306,7 +306,7 @@ body.is-scrolled .topnav__blur { opacity: 1; }
 /* Phones: the caption moves up above the switcher */
 @media (max-width: 47.99rem) {
   .logo-hero__caption {
-    bottom: calc(var(--tap-min) * 2 + var(--space-2) + var(--space-6) * 2 + env(safe-area-inset-bottom));
+    bottom: calc(var(--tap-min) * 3 + var(--space-2) * 2 + var(--space-6) * 2 + env(safe-area-inset-bottom));
     max-width: calc(100% - var(--page-margin) * 2);
     font-size: var(--text-md);
   }

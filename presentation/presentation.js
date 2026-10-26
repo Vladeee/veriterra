@@ -119,16 +119,55 @@
     return "#" + [d[0], d[1], d[2]].map(function (v) { return v.toString(16).padStart(2, "0"); }).join("").toUpperCase();
   }
 
+  // The word as it is drawn (text-transform applied), for canvas measuring
+  function drawnText(word, cs) {
+    var text = word.textContent;
+    if (cs.textTransform === "uppercase") return text.toUpperCase();
+    if (cs.textTransform === "lowercase") return text.toLowerCase();
+    return text;
+  }
+
+  // Every wordmark gets the same letter height (--logo-ink-height), whatever its
+  // font: measure how tall the letters stand above the baseline and scale the size.
+  var inkProbe = null;
+  function inkTarget() {
+    if (!inkProbe) {
+      inkProbe = document.createElement("div");
+      inkProbe.setAttribute("aria-hidden", "true");
+      inkProbe.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;height:var(--logo-ink-height)";
+      document.body.appendChild(inkProbe);
+    }
+    return inkProbe.getBoundingClientRect().height;
+  }
+
+  function sizeInk(word) {
+    if (!word || !probe.measureText) return;
+    var cs = getComputedStyle(word);
+    probe.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+    var ascent = probe.measureText(drawnText(word, cs)).actualBoundingBoxAscent;
+    if (!ascent) return;
+    word.style.fontSize = (parseFloat(cs.fontSize) * inkTarget() / ascent).toFixed(2) + "px";
+  }
+
+  // A long word on a narrow screen scales down to fit between the margins
+  function fitWidth(word) {
+    var hero = word && word.closest(".logo-hero");
+    if (!hero) return false;
+    var hs = getComputedStyle(hero);
+    var room = hero.clientWidth - parseFloat(hs.paddingLeft) - parseFloat(hs.paddingRight);
+    var width = word.getBoundingClientRect().width;
+    if (!width || width <= room) return false;
+    word.style.fontSize = (parseFloat(getComputedStyle(word).fontSize) * room / width).toFixed(2) + "px";
+    return true;
+  }
+
   // Vertical offset that puts the centre of the letters' ink (not the line box)
   // on the centre of the box. Fonts place glyphs differently inside the line.
   function centreInk(word) {
     if (!word || !probe.measureText) return;
     var cs = getComputedStyle(word);
-    var text = word.textContent;
-    if (cs.textTransform === "uppercase") text = text.toUpperCase();
-    else if (cs.textTransform === "lowercase") text = text.toLowerCase();
     probe.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
-    var m = probe.measureText(text);
+    var m = probe.measureText(drawnText(word, cs));
     if (!m.fontBoundingBoxAscent) return;
     var line = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize);
     var baseline = (line - m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) / 2 + m.fontBoundingBoxAscent;
@@ -162,7 +201,9 @@
   function centreCurrent() {
     if (!current || current === intro) return;
     var word = current.querySelector(".logo-hero__word");
+    sizeInk(word);
     kernInk(word);
+    if (fitWidth(word)) kernInk(word);
     centreInk(word);
   }
 
@@ -178,7 +219,18 @@
   // ---------- Figma style variants (presentation/variants.js + --fig-* tokens) ----------
   var switchEl = document.getElementById("variant-switch");
   var switchTimer = null;
-  var PROPS = ["bg", "page", "ink", "ink2", "accent", "font", "size", "tracking", "weight", "case"];
+  // Colours (bg, page, ink, ink2) are set by applyColours: they depend on invert and the logo colour
+  var PROPS = ["accent", "font", "size", "tracking", "weight", "case"];
+  var INKS = [
+    { id: "auto", name: "Figma colour" },
+    { id: "light", name: "Light" },
+    { id: "dark", name: "Dark" },
+    { id: "pick-1", name: "Same hue" },
+    { id: "pick-2", name: "Complement" },
+    { id: "pick-3", name: "Split complement" },
+    { id: "pick-4", name: "Split complement" },
+    { id: "pick-5", name: "Brand tint" }
+  ];
   var GRADIENTS = [
     { id: "dawn", name: "Dawn" },
     { id: "dusk", name: "Dusk" },
@@ -195,7 +247,8 @@
     try { return window.localStorage.getItem(key); } catch (e) { return null; }
   }
 
-  function flashSwitch() {
+  function flashSwitch(text) {
+    if (text) switchEl.querySelector(".variant-switch__name").textContent = text;
     switchEl.classList.add("is-active");
     clearTimeout(switchTimer);
     switchTimer = setTimeout(function () { switchEl.classList.remove("is-active"); }, 1800);
@@ -212,11 +265,9 @@
       else landing.style.removeProperty("--v-" + prop);
     });
     landing.setAttribute("data-variant", String(n));
-    landing.setAttribute("data-v-tone", isDark(pre + "page") ? "dark" : "light");
-    ["image", "accent"].forEach(function (k) {
-      if (v[k]) landing.setAttribute("data-variant-" + k, v[k] === true ? "" : v[k]);
-      else landing.removeAttribute("data-variant-" + k);
-    });
+    if (v.accent) landing.setAttribute("data-variant-accent", "");
+    else landing.removeAttribute("data-variant-accent");
+    applyColours(landing);
     var word = landing.querySelector(".logo-hero__word");
     var name = BrandUI.brandById(landing.id).name;
     if (word) {
@@ -225,11 +276,50 @@
       else word.textContent = name;
       word.setAttribute("aria-label", name);
     }
-    var hero = landing.querySelector("[data-logo-hero]");
-    if (hero) hero.setAttribute("data-tone", landing.getAttribute("data-v-tone"));
     if (save) store("variant-" + landing.id, String(n));
     if (landing === current) { renderSwitch(landing); centreCurrent(); }
     if (save) { playLogo(landing); window.dispatchEvent(new Event("scroll")); }
+  }
+
+  // Page, background and logo colours of the open variant, after two choices:
+  // data-invert swaps page and ink; data-ink replaces the logo colour with
+  // light, dark or one of the suggestions derived from the page (tokens.css).
+  function applyColours(landing) {
+    var n = Number(landing.getAttribute("data-variant")) || 1;
+    var v = window.VARIANTS[landing.id][n - 1];
+    var pre = "--fig-" + landing.id + "-" + n + "-";
+    var has = function (prop) { return getComputedStyle(root).getPropertyValue(pre + prop).trim() !== ""; };
+    var inverted = landing.hasAttribute("data-invert");
+    var page = pre + (inverted ? "ink" : "page");
+    var ink = pre + (inverted ? "page" : "ink");
+    var bg = !inverted && has("bg") ? pre + "bg" : page;
+    landing.style.setProperty("--v-page", "var(" + page + ")");
+    landing.style.setProperty("--v-bg", "var(" + bg + ")");
+    var tone = isDark(page) ? "dark" : "light";
+    landing.setAttribute("data-v-tone", tone);
+    var hero = landing.querySelector("[data-logo-hero]");
+    if (hero) hero.setAttribute("data-tone", tone);
+    var choice = landing.getAttribute("data-ink") || "auto";
+    landing.style.setProperty("--v-ink", choice === "auto" ? "var(" + ink + ")" : "var(--logo-" + choice + ")");
+    if (choice === "auto" && has("ink2")) landing.style.setProperty("--v-ink2", "var(" + pre + "ink2)");
+    else landing.style.removeProperty("--v-ink2");
+    if (v.image && !inverted) landing.setAttribute("data-variant-image", v.image);
+    else landing.removeAttribute("data-variant-image");
+  }
+
+  function setInvert(landing, on, save) {
+    if (on) landing.setAttribute("data-invert", "");
+    else landing.removeAttribute("data-invert");
+    if (save) store("invert-" + landing.id, on ? "1" : "");
+    applyColours(landing);
+    if (landing === current) { renderSwitch(landing); window.dispatchEvent(new Event("scroll")); }
+  }
+
+  function setInk(landing, id, save) {
+    landing.setAttribute("data-ink", id);
+    if (save) store("ink-" + landing.id, id);
+    applyColours(landing);
+    if (landing === current) renderSwitch(landing);
   }
 
   function applyGradient(landing, id, save) {
@@ -244,13 +334,69 @@
     if (!list) { switchEl.hidden = true; return; }
     switchEl.hidden = false;
     var n = Number(landing.getAttribute("data-variant")) || 1;
-    var pre = "--fig-" + landing.id + "-" + n + "-";
-    switchEl.style.setProperty("--sw-ink", "var(" + pre + "ink)");
-    switchEl.style.setProperty("--sw-page", "var(" + pre + "page)");
+    var dark = landing.getAttribute("data-v-tone") === "dark";
+    switchEl.style.setProperty("--sw-page", landing.style.getPropertyValue("--v-page"));
+    switchEl.style.setProperty("--sw-ink", dark ? "var(--color-paper-0)" : "var(--color-ink-900)");
+    var ls = getComputedStyle(landing);
+    var choice = landing.getAttribute("data-ink") || "auto";
+    switchEl.style.setProperty("--sw-logo", ls.getPropertyValue("--v-ink").trim());
+    switchEl.querySelector('[data-action="invert"]').setAttribute("aria-pressed", String(landing.hasAttribute("data-invert")));
+    switchEl.querySelector('[data-value="ink"]').textContent = choice === "light" ? "Light" : choice === "dark" ? "Dark" : choice === "auto" ? "Auto" : "Custom";
+    renderPicker(landing);
     var grad = GRADIENTS.filter(function (g) { return g.id === landing.getAttribute("data-gradient"); })[0] || GRADIENTS[0];
     switchEl.querySelector('[data-value="variant"]').textContent = n + " / " + list.length;
     switchEl.querySelector('[data-value="gradient"]').textContent = grad.name;
     switchEl.querySelector(".variant-switch__name").textContent = list[n - 1].name;
+  }
+
+  // Logo colour swatches: the Figma colour, light, dark and five suggestions,
+  // each resolved from the landing so it shows the colour it will give
+  function renderPicker(landing) {
+    var box = document.getElementById("logo-colours");
+    if (box.hidden) return;
+    var n = Number(landing.getAttribute("data-variant")) || 1;
+    var auto = getComputedStyle(root).getPropertyValue("--fig-" + landing.id + "-" + n + "-" + (landing.hasAttribute("data-invert") ? "page" : "ink")).trim();
+    var ls = getComputedStyle(landing);
+    var choice = landing.getAttribute("data-ink") || "auto";
+    box.innerHTML = "";
+    INKS.forEach(function (ink) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("data-ink", ink.id);
+      b.setAttribute("aria-label", ink.name);
+      b.setAttribute("aria-pressed", String(ink.id === choice));
+      b.style.setProperty("--sw", ink.id === "auto" ? auto : ls.getPropertyValue("--logo-" + ink.id).trim());
+      box.appendChild(b);
+    });
+  }
+
+  function togglePicker(open) {
+    var box = document.getElementById("logo-colours");
+    var btn = switchEl.querySelector('[data-action="picker"]');
+    box.hidden = !open;
+    btn.setAttribute("aria-expanded", String(open));
+    if (open && current && current !== intro) renderPicker(current);
+  }
+
+  function onSwitchAction(action, target) {
+    if (!current || current === intro) return;
+    if (action === "invert") {
+      var on = !current.hasAttribute("data-invert");
+      setInvert(current, on, true);
+      flashSwitch(on ? "Inverted" : "Original colours");
+    } else if (action === "ink") {
+      var order = ["auto", "light", "dark"];
+      var i = order.indexOf(current.getAttribute("data-ink") || "auto");
+      var next = order[(i + 1) % order.length];
+      setInk(current, next, true);
+      flashSwitch("Logo · " + (next === "auto" ? "Figma colour" : next === "light" ? "Light" : "Dark"));
+    } else if (action === "picker") {
+      togglePicker(document.getElementById("logo-colours").hidden);
+    } else if (action === "pick") {
+      var id = target.getAttribute("data-ink");
+      setInk(current, id, true);
+      flashSwitch("Logo · " + INKS.filter(function (k) { return k.id === id; })[0].name);
+    }
   }
 
   // Previous / next, wrapping around
@@ -290,10 +436,19 @@
     loadFonts();
     switchEl.addEventListener("click", function (e) {
       var b = e.target.closest("[data-step]");
-      if (b) step(b.getAttribute("data-step"), Number(b.getAttribute("data-dir")));
+      if (b) { step(b.getAttribute("data-step"), Number(b.getAttribute("data-dir"))); return; }
+      var a = e.target.closest("[data-action]");
+      if (a) { onSwitchAction(a.getAttribute("data-action"), a); return; }
+      var pick = e.target.closest("#logo-colours [data-ink]");
+      if (pick) onSwitchAction("pick", pick);
+    });
+    // The colour list closes on a tap elsewhere or Escape
+    document.addEventListener("click", function (e) {
+      if (!switchEl.contains(e.target)) togglePicker(false);
     });
     // Keyboard: left / right arrows change the variant, up / down the gradient
     document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { togglePicker(false); return; }
       if (e.altKey || e.ctrlKey || e.metaKey) return;
       var map = { ArrowLeft: ["variant", -1], ArrowRight: ["variant", 1], ArrowUp: ["gradient", -1], ArrowDown: ["gradient", 1] };
       if (!map[e.key]) return;
@@ -303,6 +458,9 @@
     landings.forEach(function (landing) {
       var list = (window.VARIANTS || {})[landing.id];
       if (!list) return;
+      if (stored("invert-" + landing.id)) landing.setAttribute("data-invert", "");
+      var ink = stored("ink-" + landing.id);
+      landing.setAttribute("data-ink", INKS.some(function (k) { return k.id === ink; }) ? ink : "auto");
       var saved = Number(stored("variant-" + landing.id));
       applyVariant(landing, saved >= 1 && saved <= list.length ? saved : 1, false);
       var grad = stored("gradient-" + landing.id);
