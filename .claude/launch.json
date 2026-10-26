@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "autoVerify": true,
+  "configurations": [
+    {
+      "name": "veriterra",
+      "program": "tools/serve.js",
+      "args": ["5180"],
+      "port": 5180,
+      "autoPort": false
+    }
+  ]
+}

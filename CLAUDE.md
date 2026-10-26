@@ -40,6 +40,7 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 | `presentation/` | `presentation.css` = menu, arrows, logo screen, All variants page; `presentation.js` = routing, menu, variants, gradients, switcher; `landings/<id>.css` = per-landing style |
 | `deck/index.html` | Redirect from the old presentation URL to the root (keeps the hash) |
 | `site/` | Websites (later) |
+| `tools/serve.js`, `.claude/launch.json` | Local static server and the entry that puts it in Claude Desktop's preview panel |
 | `tools/preview.py` | Builds the Artifact copy of the site for the built-in preview |
 | `tools/tokens.py` | Sync and lint for tokens (lints `brand/`, `presentation/`, `deck/`, `site/` and the root `index.html`) |
 
@@ -64,7 +65,8 @@ Brand system for the holding company VITREEONE and its four companies: Veriterra
 
 ## Workflow
 
-- **Preview inside Claude, not on localhost or GitHub.** Run `python3 tools/preview.py OUT_DIR` (OUT_DIR in the scratchpad), then publish `OUT_DIR/index.html` with the Artifact tool, passing the printed file list as `files` and `root` = OUT_DIR. It is a private Artifact that opens in Claude's own viewer. To update it, rebuild with the same OUT_DIR and publish the same file path again (the URL stays). The Artifact page is built from the repository, which stays untouched.
+- **Claude Desktop (local session):** `.claude/launch.json` lists a `veriterra` server (`node tools/serve.js 5180`), so the preview panel shows it with a play button. Press it, or open http://localhost:5180/. Needs only Node. Work happens on the local files, nothing is pushed until the user says so.
+- **Cloud session: preview inside Claude, not on localhost or GitHub.** Run `python3 tools/preview.py OUT_DIR` (OUT_DIR in the scratchpad), then publish `OUT_DIR/index.html` with the Artifact tool, passing the printed file list as `files` and `root` = OUT_DIR. It is a private Artifact that opens in Claude's own viewer. To update it, rebuild with the same OUT_DIR and publish the same file path again (the URL stays). The Artifact page is built from the repository, which stays untouched.
 - **Do not push to GitHub until the user says the result is good** ("push", "залей"). Commit locally in small steps, run `python3 tools/tokens.py check` first, and push the branch only on that go-ahead. Never open a pull request unless asked.
 - Preview locally with `python3 -m http.server 8000` from the repo root only when the user is on their own machine.
 - Adding a block to the landings (only when the user asks): add it to all five in `index.html` with the same classes, place it on the page grid in `presentation/presentation.css`, and add only the components and tokens it needs.
