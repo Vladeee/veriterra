@@ -127,7 +127,7 @@ def sync():
 
 # ---------- hardcoded-value lint ----------
 
-LINT_DIRS = ["styleguide", "deck", "site", "brand"]
+LINT_DIRS = ["styleguide", "deck", "site", "brand", "presentation"]
 LINT_SKIP = {CSS}
 STYLE_TAG_RE = re.compile(r"<style[^>]*>(.*?)</style>", re.S | re.I)
 STYLE_ATTR_RE = re.compile(r'style="([^"]*)"', re.I)

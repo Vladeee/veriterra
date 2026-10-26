@@ -28,6 +28,30 @@
       li.appendChild(a);
       menu.appendChild(li);
     });
+    // The last page: every variant in one grid
+    var li = document.createElement("li");
+    li.innerHTML = '<a class="topnav__link" href="#overview">All</a>';
+    menu.appendChild(li);
+  }
+
+  // ---------- previous / next page: arrows at the screen edges ----------
+  var arrows = document.querySelector(".page-arrows");
+
+  function pageName(landing) {
+    var b = BrandUI.brandById(landing.id);
+    return b ? (b.menu || b.name) : "All variants";
+  }
+
+  function renderArrows(landing) {
+    if (!landing || landing === intro) { arrows.hidden = true; return; }
+    arrows.hidden = false;
+    var i = landings.indexOf(landing);
+    [["prev", -1], ["next", 1]].forEach(function (d) {
+      var to = landings[(i + d[1] + landings.length) % landings.length];
+      var a = arrows.querySelector(".page-arrow--" + d[0]);
+      a.href = "#" + to.id;
+      a.setAttribute("aria-label", (d[1] < 0 ? "Previous page: " : "Next page: ") + pageName(to));
+    });
   }
 
   // ---------- routing ----------
@@ -37,6 +61,7 @@
     landings.forEach(function (l) { l.hidden = true; });
     document.body.classList.add("is-intro");
     if (switchEl) switchEl.hidden = true;
+    renderArrows(null);
     root.setAttribute("data-brand", "vitreeone");
     document.title = BrandUI.brandById("vitreeone").name;
     window.scrollTo(0, 0);
@@ -53,15 +78,16 @@
       document.body.classList.remove("is-intro");
       landings.forEach(function (l) { l.hidden = l !== landing; });
       current = landing;
-      root.setAttribute("data-brand", landing.id);
+      root.setAttribute("data-brand", landing.getAttribute("data-brand"));
       document.querySelectorAll(".topnav__link").forEach(function (a) {
         if (a.getAttribute("href") === "#" + landing.id) a.setAttribute("aria-current", "page");
         else a.removeAttribute("aria-current");
       });
       var active = menu.querySelector('[aria-current="page"]');
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
-      document.title = BrandUI.brandById(landing.id).name;
+      document.title = landing.id === "overview" ? "All variants · " + BrandUI.brandById("vitreeone").name : BrandUI.brandById(landing.id).name;
       renderSwitch(landing);
+      renderArrows(landing);
       centreCurrent();
       playLogo(landing);
     }
@@ -129,32 +155,32 @@
 
   // Every wordmark gets the same letter height (--logo-ink-height), whatever its
   // font: measure how tall the letters stand above the baseline and scale the size.
-  var inkProbe = null;
-  function inkTarget() {
-    if (!inkProbe) {
-      inkProbe = document.createElement("div");
-      inkProbe.setAttribute("aria-hidden", "true");
-      inkProbe.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;height:var(--logo-ink-height)";
-      document.body.appendChild(inkProbe);
+  var lengthProbes = {};
+  function tokenLength(token) {
+    var el = lengthProbes[token];
+    if (!el) {
+      el = lengthProbes[token] = document.createElement("div");
+      el.setAttribute("aria-hidden", "true");
+      el.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;height:var(" + token + ")";
+      document.body.appendChild(el);
     }
-    return inkProbe.getBoundingClientRect().height;
+    return el.getBoundingClientRect().height;
   }
 
-  function sizeInk(word) {
+  function sizeInk(word, target) {
     if (!word || !probe.measureText) return;
     var cs = getComputedStyle(word);
     probe.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
     var ascent = probe.measureText(drawnText(word, cs)).actualBoundingBoxAscent;
     if (!ascent) return;
-    word.style.fontSize = (parseFloat(cs.fontSize) * inkTarget() / ascent).toFixed(2) + "px";
+    word.style.fontSize = (parseFloat(cs.fontSize) * target / ascent).toFixed(2) + "px";
   }
 
-  // A long word on a narrow screen scales down to fit between the margins
-  function fitWidth(word) {
-    var hero = word && word.closest(".logo-hero");
-    if (!hero) return false;
-    var hs = getComputedStyle(hero);
-    var room = hero.clientWidth - parseFloat(hs.paddingLeft) - parseFloat(hs.paddingRight);
+  // A long word on a narrow screen scales down to fit between the margins of its box
+  function fitWidth(word, box) {
+    if (!word || !box) return false;
+    var hs = getComputedStyle(box);
+    var room = box.clientWidth - parseFloat(hs.paddingLeft) - parseFloat(hs.paddingRight);
     var width = word.getBoundingClientRect().width;
     if (!width || width <= room) return false;
     word.style.fontSize = (parseFloat(getComputedStyle(word).fontSize) * room / width).toFixed(2) + "px";
@@ -198,12 +224,22 @@
     });
   }
 
+  function fitWord(word, box, token) {
+    sizeInk(word, tokenLength(token));
+    kernInk(word);
+    if (fitWidth(word, box)) kernInk(word);
+  }
+
   function centreCurrent() {
     if (!current || current === intro) return;
+    if (current.id === "overview") {
+      current.querySelectorAll(".overview__tile").forEach(function (tile) {
+        fitWord(tile.querySelector(".overview__word"), tile, "--logo-tile-ink-height");
+      });
+      return;
+    }
     var word = current.querySelector(".logo-hero__word");
-    sizeInk(word);
-    kernInk(word);
-    if (fitWidth(word)) kernInk(word);
+    fitWord(word, word && word.closest(".logo-hero"), "--logo-ink-height");
     centreInk(word);
   }
 
@@ -236,6 +272,8 @@
     { id: "dusk", name: "Dusk" },
     { id: "horizon", name: "Horizon" },
     { id: "mist", name: "Mist" },
+    { id: "aurora", name: "Aurora" },
+    { id: "silk", name: "Silk" },
     { id: "flat", name: "Flat" }
   ];
 
@@ -254,6 +292,15 @@
     switchTimer = setTimeout(function () { switchEl.classList.remove("is-active"); }, 1800);
   }
 
+  // The wordmark's markup for a variant: plain, two-tone (split) or letter by letter (kern)
+  function setWord(word, name, v) {
+    if (!word) return;
+    if (v.split) word.innerHTML = name.slice(0, v.split) + '<span class="logo-hero__b">' + name.slice(v.split) + "</span>";
+    else if (v.kern) word.innerHTML = name.split("").map(function (c) { return '<span class="logo-hero__g">' + c + "</span>"; }).join("");
+    else word.textContent = name;
+    word.setAttribute("aria-label", name);
+  }
+
   function applyVariant(landing, n, save) {
     var list = (window.VARIANTS || {})[landing.id];
     if (!list || !list[n - 1]) return;
@@ -268,14 +315,7 @@
     if (v.accent) landing.setAttribute("data-variant-accent", "");
     else landing.removeAttribute("data-variant-accent");
     applyColours(landing);
-    var word = landing.querySelector(".logo-hero__word");
-    var name = BrandUI.brandById(landing.id).name;
-    if (word) {
-      if (v.split) word.innerHTML = name.slice(0, v.split) + '<span class="logo-hero__b">' + name.slice(v.split) + "</span>";
-      else if (v.kern) word.innerHTML = name.split("").map(function (c) { return '<span class="logo-hero__g">' + c + "</span>"; }).join("");
-      else word.textContent = name;
-      word.setAttribute("aria-label", name);
-    }
+    setWord(landing.querySelector(".logo-hero__word"), BrandUI.brandById(landing.id).name, v);
     if (save) store("variant-" + landing.id, String(n));
     if (landing === current) { renderSwitch(landing); centreCurrent(); }
     if (save) { playLogo(landing); window.dispatchEvent(new Event("scroll")); }
@@ -286,7 +326,6 @@
   // light, dark or one of the suggestions derived from the page (tokens.css).
   function applyColours(landing) {
     var n = Number(landing.getAttribute("data-variant")) || 1;
-    var v = window.VARIANTS[landing.id][n - 1];
     var pre = "--fig-" + landing.id + "-" + n + "-";
     var has = function (prop) { return getComputedStyle(root).getPropertyValue(pre + prop).trim() !== ""; };
     var inverted = landing.hasAttribute("data-invert");
@@ -303,8 +342,6 @@
     landing.style.setProperty("--v-ink", choice === "auto" ? "var(" + ink + ")" : "var(--logo-" + choice + ")");
     if (choice === "auto" && has("ink2")) landing.style.setProperty("--v-ink2", "var(" + pre + "ink2)");
     else landing.style.removeProperty("--v-ink2");
-    if (v.image && !inverted) landing.setAttribute("data-variant-image", v.image);
-    else landing.removeAttribute("data-variant-image");
   }
 
   function setInvert(landing, on, save) {
@@ -331,15 +368,20 @@
   // The switcher lives outside the landings, so it takes the open variant's colours
   function renderSwitch(landing) {
     var list = landing ? (window.VARIANTS || {})[landing.id] : null;
-    if (!list) { switchEl.hidden = true; return; }
+    var body = document.body.style;
+    if (!list) {
+      switchEl.hidden = true;
+      ["--sw-page", "--sw-ink", "--sw-logo"].forEach(function (p) { body.removeProperty(p); });
+      return;
+    }
     switchEl.hidden = false;
     var n = Number(landing.getAttribute("data-variant")) || 1;
     var dark = landing.getAttribute("data-v-tone") === "dark";
-    switchEl.style.setProperty("--sw-page", landing.style.getPropertyValue("--v-page"));
-    switchEl.style.setProperty("--sw-ink", dark ? "var(--color-paper-0)" : "var(--color-ink-900)");
+    body.setProperty("--sw-page", landing.style.getPropertyValue("--v-page"));
+    body.setProperty("--sw-ink", dark ? "var(--color-paper-0)" : "var(--color-ink-900)");
     var ls = getComputedStyle(landing);
     var choice = landing.getAttribute("data-ink") || "auto";
-    switchEl.style.setProperty("--sw-logo", ls.getPropertyValue("--v-ink").trim());
+    body.setProperty("--sw-logo", ls.getPropertyValue("--v-ink").trim());
     switchEl.querySelector('[data-action="invert"]').setAttribute("aria-pressed", String(landing.hasAttribute("data-invert")));
     switchEl.querySelector('[data-value="ink"]').textContent = choice === "light" ? "Light" : choice === "dark" ? "Dark" : choice === "auto" ? "Auto" : "Custom";
     renderPicker(landing);
@@ -469,9 +511,47 @@
     });
   }
 
+  // ---------- All variants: one tile per Figma variant, grouped by landing ----------
+  function buildOverview() {
+    var box = document.querySelector("[data-overview]");
+    if (!box) return;
+    Object.keys(window.VARIANTS || {}).forEach(function (id) {
+      var brand = BrandUI.brandById(id);
+      var group = document.createElement("section");
+      group.className = "overview__group";
+      group.setAttribute("aria-label", brand.name);
+      group.innerHTML = '<h2 class="overview__label">' + (brand.menu || brand.name) + "</h2>";
+      var grid = document.createElement("div");
+      grid.className = "overview__grid";
+      window.VARIANTS[id].forEach(function (v, i) {
+        var n = i + 1;
+        var pre = "--fig-" + id + "-" + n + "-";
+        var tile = document.createElement("a");
+        tile.className = "overview__tile";
+        tile.href = "#" + id;
+        tile.setAttribute("aria-label", brand.name + ", variant " + n + ": " + v.name);
+        ["bg", "page", "ink", "ink2", "accent", "font", "tracking", "weight", "case"].forEach(function (prop) {
+          if (getComputedStyle(root).getPropertyValue(pre + prop).trim() !== "") tile.style.setProperty("--t-" + prop, "var(" + pre + prop + ")");
+        });
+        if (v.accent) tile.setAttribute("data-accent", "");
+        tile.innerHTML = '<span class="overview__word" aria-hidden="true"></span><span class="overview__name">' + n + " · " + v.name + "</span>";
+        setWord(tile.querySelector(".overview__word"), brand.name, v);
+        tile.querySelector(".overview__word").removeAttribute("aria-label");
+        tile.addEventListener("click", function () {
+          var landing = document.getElementById(id);
+          applyVariant(landing, n, true);
+        });
+        grid.appendChild(tile);
+      });
+      group.appendChild(grid);
+      box.appendChild(group);
+    });
+  }
+
   // ---------- init ----------
   function init() {
     buildMenu();
+    buildOverview();
     initVariants();
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);

@@ -115,6 +115,7 @@
 
 
 
+
   /* ---------- Figma style variants (one per frame in the Figma file) ----------
      --fig-<brand>-<n>-<prop>. Applied by presentation/variants.js. */
   /* vitreeone 1: Water · Faculty Glyphic (Figma (current)) */
@@ -135,15 +136,6 @@
   --fig-vitreeone-2-tracking: -0.02em;
   --fig-vitreeone-2-weight: 700;
   --fig-vitreeone-2-case: lowercase;
-  /* vitreeone 3: Moss · Inter (Figma 85:78) */
-  --fig-vitreeone-3-bg: #343A32;
-  --fig-vitreeone-3-page: #343A32;
-  --fig-vitreeone-3-ink: #EBE1D7;
-  --fig-vitreeone-3-font: var(--font-inter);
-  --fig-vitreeone-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vitreeone-3-tracking: 0.01em;
-  --fig-vitreeone-3-weight: 700;
-  --fig-vitreeone-3-case: none;
   /* veriterra 1: Lime · Port Lligat (Figma 85:53) */
   --fig-veriterra-1-bg: #ECF7BD;
   --fig-veriterra-1-page: #ECF7BD;
@@ -290,42 +282,33 @@
   --fig-vaya-2-tracking: 0.16em;
   --fig-vaya-2-weight: 400;
   --fig-vaya-2-case: uppercase;
-  /* vaya 3: Clouds · Faculty Glyphic (Figma 85:27) */
-  --fig-vaya-3-bg: #F1E4D6;
-  --fig-vaya-3-page: #F1E4D6;
+  /* vaya 3: Lavender · Faculty Glyphic (Figma 75:300) */
+  --fig-vaya-3-bg: linear-gradient(to bottom, #F6F6F6 0%, #D2BDF9 100%);
+  --fig-vaya-3-page: #F6F6F6;
   --fig-vaya-3-ink: #181F1F;
   --fig-vaya-3-font: var(--font-faculty);
   --fig-vaya-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
   --fig-vaya-3-tracking: 0.16em;
   --fig-vaya-3-weight: 400;
   --fig-vaya-3-case: uppercase;
-  /* vaya 4: Lavender · Faculty Glyphic (Figma 75:300) */
-  --fig-vaya-4-bg: linear-gradient(to bottom, #F6F6F6 0%, #D2BDF9 100%);
-  --fig-vaya-4-page: #F6F6F6;
+  /* vaya 4: Mist · Madimi One (Figma 75:336) */
+  --fig-vaya-4-bg: radial-gradient(farthest-corner at 12% 100%, #729485 0%, #95AFA4 25%, #B9CAC2 50%, #DCE4E1 75%, #FFFFFF 100%);
+  --fig-vaya-4-page: #DCE4E1;
   --fig-vaya-4-ink: #181F1F;
-  --fig-vaya-4-font: var(--font-faculty);
+  --fig-vaya-4-font: var(--font-madimi);
   --fig-vaya-4-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-4-tracking: 0.16em;
+  --fig-vaya-4-tracking: 0.06em;
   --fig-vaya-4-weight: 400;
   --fig-vaya-4-case: uppercase;
-  /* vaya 5: Mist · Madimi One (Figma 75:336) */
+  /* vaya 5: Mist · Hubballi (Figma 75:336) */
   --fig-vaya-5-bg: radial-gradient(farthest-corner at 12% 100%, #729485 0%, #95AFA4 25%, #B9CAC2 50%, #DCE4E1 75%, #FFFFFF 100%);
   --fig-vaya-5-page: #DCE4E1;
-  --fig-vaya-5-ink: #181F1F;
-  --fig-vaya-5-font: var(--font-madimi);
-  --fig-vaya-5-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-5-tracking: 0.06em;
+  --fig-vaya-5-ink: #000000;
+  --fig-vaya-5-font: var(--font-hubballi);
+  --fig-vaya-5-size: clamp(2.5rem, 6.56vw, 7.88rem);
+  --fig-vaya-5-tracking: 0.08em;
   --fig-vaya-5-weight: 400;
   --fig-vaya-5-case: uppercase;
-  /* vaya 6: Mist · Hubballi (Figma 75:336) */
-  --fig-vaya-6-bg: radial-gradient(farthest-corner at 12% 100%, #729485 0%, #95AFA4 25%, #B9CAC2 50%, #DCE4E1 75%, #FFFFFF 100%);
-  --fig-vaya-6-page: #DCE4E1;
-  --fig-vaya-6-ink: #000000;
-  --fig-vaya-6-font: var(--font-hubballi);
-  --fig-vaya-6-size: clamp(2.5rem, 6.56vw, 7.88rem);
-  --fig-vaya-6-tracking: 0.08em;
-  --fig-vaya-6-weight: 400;
-  --fig-vaya-6-case: uppercase;
   /* vita 1: Khaki · Braah One (Figma 75:303) */
   --fig-vita-1-bg: #918D62;
   --fig-vita-1-page: #918D62;
@@ -344,33 +327,24 @@
   --fig-vita-2-tracking: 0.03em;
   --fig-vita-2-weight: 400;
   --fig-vita-2-case: uppercase;
-  /* vita 3: Sage · Inter (Figma 75:338) */
+  /* vita 3: Sage · Poppins (Figma 75:338) */
   --fig-vita-3-bg: #959A7D;
   --fig-vita-3-page: #959A7D;
-  --fig-vita-3-ink: #EBE1D7;
-  --fig-vita-3-font: var(--font-inter);
+  --fig-vita-3-ink: #1D1D1D;
+  --fig-vita-3-font: var(--font-poppins);
   --fig-vita-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vita-3-tracking: -0.025em;
+  --fig-vita-3-tracking: -0.02em;
   --fig-vita-3-weight: 700;
   --fig-vita-3-case: none;
-  /* vita 4: Sage · Poppins (Figma 75:338) */
+  /* vita 4: Sage · Varela Round (Figma 75:338) */
   --fig-vita-4-bg: #959A7D;
   --fig-vita-4-page: #959A7D;
   --fig-vita-4-ink: #1D1D1D;
-  --fig-vita-4-font: var(--font-poppins);
+  --fig-vita-4-font: var(--font-varela);
   --fig-vita-4-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vita-4-tracking: -0.02em;
-  --fig-vita-4-weight: 700;
+  --fig-vita-4-tracking: -0.01em;
+  --fig-vita-4-weight: 400;
   --fig-vita-4-case: none;
-  /* vita 5: Sage · Varela Round (Figma 75:338) */
-  --fig-vita-5-bg: #959A7D;
-  --fig-vita-5-page: #959A7D;
-  --fig-vita-5-ink: #1D1D1D;
-  --fig-vita-5-font: var(--font-varela);
-  --fig-vita-5-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vita-5-tracking: -0.01em;
-  --fig-vita-5-weight: 400;
-  --fig-vita-5-case: none;
 
   /* ---------- Colour: semantic roles ---------- */
   --color-bg: var(--color-paper-0);
@@ -466,6 +440,7 @@
   --grid-columns: 12;
   --page-margin: clamp(1rem, 2vw, 1.5rem);
   --grid-gutter: 1.25rem;
+  --grid-tile-min: 15rem;   /* narrowest tile on the All variants grid */
   --grid-gap-tight: 0.5rem;
   --grid-gap: clamp(1rem, 2vw, 1.5rem);
   --grid-min: 16rem;
@@ -521,6 +496,7 @@
   --motion-blur: 12px;
   --logo-optical-lift: 3dvh;   /* the optical centre sits a little above the geometric one */
   --logo-ink-height: clamp(1.5rem, 3.1vw, 3.4rem);   /* every wordmark is sized so its letters stand this tall */
+  --logo-tile-ink-height: clamp(1rem, 1.5vw, 1.5rem);   /* the same, on the All variants tiles */
   --glow-blur: 4rem;
   --duration-drift: 18s;
   --press-scale: 0.98;

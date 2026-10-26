@@ -47,6 +47,12 @@
     </div>
   </nav>
 
+  <!-- Previous / next page, at the left and right edges -->
+  <nav class="page-arrows" aria-label="Pages" hidden>
+    <a class="page-arrow page-arrow--prev" href="#vitreeone" aria-label="Previous page"><span class="icon" data-icon="arrow-left"></span></a>
+    <a class="page-arrow page-arrow--next" href="#veriterra" aria-label="Next page"><span class="icon" data-icon="arrow-right"></span></a>
+  </nav>
+
   <!-- Switcher, bottom left: style variant (Figma frames), background gradient, colours -->
   <div class="variant-switch" id="variant-switch" hidden>
     <span class="variant-switch__name" aria-live="polite"></span>
@@ -125,6 +131,16 @@
         <h1 class="logo-hero__word" id="vita-title" data-brand-name="vita"></h1>
         <p class="logo-hero__caption">Built from the ground up, for the land it stands on.</p>
       </header>
+    </article>
+
+    <!-- ==================== ALL VARIANTS ==================== -->
+    <!-- Every Figma variant of every landing in one grid; a tile opens its landing in that variant. -->
+    <article class="landing overview" id="overview" data-brand="vitreeone" aria-labelledby="overview-title" hidden>
+      <header class="overview__head">
+        <h1 class="overview__title" id="overview-title">All variants</h1>
+        <p class="overview__lead">Every style from the Figma file, side by side. Tap one to open it.</p>
+      </header>
+      <div class="overview__groups" data-overview></div>
     </article>
   </main>
 

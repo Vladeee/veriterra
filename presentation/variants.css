@@ -38,11 +38,6 @@
 .landing[data-variant] .logo-hero__caption { color: color-mix(in oklch, var(--v-ink) 12%, var(--color-ink-900)); }
 .landing[data-variant][data-v-tone="dark"] .logo-hero__caption { color: var(--v-ink); }
 
-/* Photo background (Vaya "Clouds") */
-.landing[data-variant-image="sky"] .logo-hero {
-  background: var(--v-bg) url("../brand/figma/vaya-clouds.jpg") center / cover no-repeat;
-}
-
 /* Accent square, bottom right (Veriterra "Earth") */
 .landing[data-variant-accent] .logo-hero::before {
   content: "";
@@ -100,7 +95,77 @@
     var(--w-tint-soft) 90%, var(--w-deep) 100%);
 }
 
+/* ---------- Complex gradients: soft ribbons of light (after paypath.ai) ----------
+   Each ribbon is a thin ring of a huge ellipse, so it curves across the screen;
+   blurred and drifting very slowly. Translucent brand tint: stronger on dark
+   pages, gentler on light ones. */
+.landing[data-variant] {
+  --a-band: color-mix(in oklch, var(--brand-streak) 30%, transparent);
+  --a-core: color-mix(in oklch, var(--brand-streak) 46%, transparent);
+}
+
+.landing[data-variant][data-v-tone="dark"] {
+  --a-band: color-mix(in oklch, var(--brand-streak) 40%, transparent);
+  --a-core: color-mix(in oklch, var(--brand-streak) 58%, transparent);
+}
+
+.landing[data-gradient="aurora"] .glow::before,
+.landing[data-gradient="aurora"] .glow::after,
+.landing[data-gradient="silk"] .glow::before,
+.landing[data-gradient="silk"] .glow::after {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  filter: blur(var(--glow-blur));
+  animation: ribbon-drift var(--duration-drift) var(--ease-standard) infinite alternate;
+}
+
+.landing[data-gradient="aurora"] .glow::after,
+.landing[data-gradient="silk"] .glow::after { animation-delay: calc(var(--duration-drift) / -2); }
+
+@keyframes ribbon-drift {
+  from { translate: -3% 1%; rotate: -2deg; }
+  to { translate: 3% -2%; rotate: 2deg; }
+}
+
+/* Aurora: two broad ribbons crossing below the logo, darker sky above */
+.landing[data-gradient="aurora"] .glow {
+  background: linear-gradient(in oklch to bottom, var(--w-deep) 0%, transparent 45%, transparent 75%, var(--w-tint-soft) 100%);
+}
+
+.landing[data-gradient="aurora"] .glow::before {
+  background: radial-gradient(ellipse 80% 58% at 12% 112%,
+    transparent 56%, var(--a-band) 64%, var(--a-core) 68%, var(--a-band) 72%, transparent 84%);
+}
+
+.landing[data-gradient="aurora"] .glow::after {
+  background: radial-gradient(ellipse 78% 62% at 96% -6%,
+    transparent 58%, var(--a-band) 68%, var(--a-core) 71%, transparent 84%);
+}
+
+/* Silk: several fine ribbons sweeping up from the bottom corners */
+.landing[data-gradient="silk"] .glow::before,
+.landing[data-gradient="silk"] .glow::after { filter: blur(calc(var(--glow-blur) / 4)); }
+
+.landing[data-gradient="silk"] .glow::before {
+  background: radial-gradient(ellipse 115% 72% at 0% 104%,
+    transparent 58%, var(--a-band) 62%, transparent 67%,
+    transparent 69%, var(--a-core) 72%, transparent 76%,
+    transparent 78%, var(--a-band) 81%, transparent 86%);
+}
+
+.landing[data-gradient="silk"] .glow::after {
+  background: radial-gradient(ellipse 105% 80% at 104% 112%,
+    transparent 60%, var(--a-band) 65%, transparent 71%,
+    transparent 74%, var(--a-core) 77%, transparent 82%);
+}
+
 .landing[data-gradient="flat"] .glow { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glow::before,
+  .glow::after { animation: none; }
+}
 
 /* Wordmark: a faint tint at the top of the letters, full colour from the middle down */
 .landing[data-variant] .logo-hero__word { --wm: var(--v-ink); }

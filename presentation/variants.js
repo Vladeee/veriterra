@@ -14,10 +14,6 @@ window.VARIANTS = {
     {
       "name": "Moss · Poppins",
       "node": "85:78"
-    },
-    {
-      "name": "Moss · Inter",
-      "node": "85:78"
     }
   ],
   "veriterra": [
@@ -95,11 +91,6 @@ window.VARIANTS = {
       "node": "75:294"
     },
     {
-      "name": "Clouds · Faculty Glyphic",
-      "node": "85:27",
-      "image": "sky"
-    },
-    {
       "name": "Lavender · Faculty Glyphic",
       "node": "75:300"
     },
@@ -120,10 +111,6 @@ window.VARIANTS = {
     {
       "name": "Stone · Momo Trust",
       "node": "75:305"
-    },
-    {
-      "name": "Sage · Inter",
-      "node": "75:338"
     },
     {
       "name": "Sage · Poppins",
