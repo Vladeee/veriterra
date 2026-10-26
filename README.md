@@ -28,7 +28,7 @@ python3 -m http.server 8000
 ├── index.html                  five landings + All variants (the one link)
 ├── manifest.webmanifest        install manifest
 ├── presentation/
-│   ├── presentation.css        intro, menu, page grid, logo screen
+│   ├── presentation.css        menu, arrows, page grid, logo screen, All page
 │   ├── presentation.js         routing, menu, variants, gradients, switcher
 │   ├── variants.js             list of Figma style variants per landing
 │   ├── variants.css            variant styling, gradients, the switcher
