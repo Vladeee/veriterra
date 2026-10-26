@@ -120,7 +120,7 @@
   }
 
   // ---------- colour helpers: resolve a colour token and tell light from dark ----------
-  var probe = document.createElement("canvas").getContext("2d");
+  var probe = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
   function toHex(color) {
     probe.clearRect(0, 0, 1, 1);
     probe.fillStyle = color;
