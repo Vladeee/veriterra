@@ -495,6 +495,12 @@
   --motion-shift-sm: 0.5rem;
   --motion-shift-lg: 3rem;
   --motion-blur: 12px;
+  /* Background choices for Veriterra: purples around OKLCH hue 300, light to deep */
+  --bgpick-veriterra-lilac: oklch(91% 0.05 305);
+  --bgpick-veriterra-lavender: oklch(80% 0.09 300);
+  --bgpick-veriterra-violet: oklch(56% 0.17 295);
+  --bgpick-veriterra-plum: oklch(38% 0.13 315);
+  --bgpick-veriterra-aubergine: oklch(24% 0.07 305);
   --logo-optical-lift: 3dvh;   /* the optical centre sits a little above the geometric one */
   --logo-ink-height: clamp(1.5rem, 3.1vw, 3.4rem);   /* every wordmark is sized so its letters stand this tall */
   --logo-tile-ink-height: clamp(1rem, 1.5vw, 1.5rem);   /* the same, on the All variants tiles */

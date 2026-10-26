@@ -49,6 +49,7 @@ GROUPS = [
     ("--fig-", "figmaVariants"),
     ("--vo-", "color"),
     ("--logo-", "layout"),
+    ("--bgpick-", "color"),
 ]
 
 BLOCK_RE = re.compile(r"([^{}]+)\{([^{}]*)\}", re.S)

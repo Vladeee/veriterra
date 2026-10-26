@@ -205,7 +205,7 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   font-weight: var(--font-weight-regular);
   line-height: 1;
   letter-spacing: var(--tracking-tight);
-  white-space: nowrap;
+  white-space: pre;   /* spaces kept while typing */
   font-kerning: normal;
   text-rendering: optimizeLegibility;
   color: var(--brand-logo, var(--brand-accent));
@@ -455,4 +455,36 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   width: var(--space-4);
   height: var(--space-4);
   background: var(--t-accent);
+}
+
+/* ---------- Editable wordmark: tap the logo and type, like a font tester ---------- */
+.logo-hero__word[contenteditable] {
+  min-width: 1ch;
+  min-height: 1lh;
+  cursor: text;
+  caret-color: var(--v-ink, currentColor);
+  -webkit-user-select: text;
+  user-select: text;
+  touch-action: manipulation;
+  outline: none;
+}
+
+/* The mask only matters for the entrance; without it the focus outline can show */
+.logo-hero__word[contenteditable]:focus {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.logo-hero__word[contenteditable]:focus-visible {
+  outline: var(--border-width) dashed color-mix(in oklch, currentColor 45%, transparent);
+  outline-offset: var(--space-3);
+}
+
+@media (hover: hover) {
+  .logo-hero__word[contenteditable]:hover:not(:focus) {
+    outline: var(--border-width) dashed color-mix(in oklch, currentColor 25%, transparent);
+    outline-offset: var(--space-3);
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }

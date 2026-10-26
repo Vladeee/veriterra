@@ -131,7 +131,8 @@
 
   // The word as it is drawn (text-transform applied), for canvas measuring
   function drawnText(word, cs) {
-    var text = word.textContent;
+    // Size and vertical centre are measured on the brand name, so typing never changes them
+    var text = word.getAttribute("data-ref") || word.textContent;
     if (cs.textTransform === "uppercase") return text.toUpperCase();
     if (cs.textTransform === "lowercase") return text.toLowerCase();
     return text;
@@ -264,6 +265,28 @@
     { id: "flat", name: "Flat" }
   ];
 
+  // Background choices (tokens: --bgpick-<landing>-<id>); Veriterra offers purples
+  var BACKGROUNDS = {
+    veriterra: [
+      { id: "lilac", name: "Lilac" },
+      { id: "lavender", name: "Lavender" },
+      { id: "violet", name: "Violet" },
+      { id: "plum", name: "Plum" },
+      { id: "aubergine", name: "Aubergine" }
+    ]
+  };
+
+  // The text typed into a logo, per landing (the brand name until changed)
+  var MAX_TEXT = 20;
+  var texts = {};
+  function logoText(id) {
+    if (texts[id] == null) {
+      var saved = stored("text-" + id);
+      texts[id] = saved && saved.trim() ? saved.slice(0, MAX_TEXT) : BrandUI.brandById(id).name;
+    }
+    return texts[id];
+  }
+
   function store(key, value) {
     try { window.localStorage.setItem(key, value); } catch (e) { /* storage unavailable */ }
   }
@@ -280,12 +303,13 @@
   }
 
   // The wordmark's markup for a variant: plain, two-tone (split) or letter by letter (kern)
-  function setWord(word, name, v) {
+  function setWord(word, name, v, ref) {
     if (!word) return;
+    word.setAttribute("data-ref", ref);
     if (v.split) word.innerHTML = name.slice(0, v.split) + '<span class="logo-hero__b">' + name.slice(v.split) + "</span>";
     else if (v.kern) word.innerHTML = name.split("").map(function (c) { return '<span class="logo-hero__g">' + c + "</span>"; }).join("");
     else word.textContent = name;
-    word.setAttribute("aria-label", name);
+    if (!word.hasAttribute("contenteditable")) word.setAttribute("aria-label", name);
   }
 
   function applyVariant(landing, n, save) {
@@ -302,7 +326,7 @@
     if (v.accent) landing.setAttribute("data-variant-accent", "");
     else landing.removeAttribute("data-variant-accent");
     applyColours(landing);
-    setWord(landing.querySelector(".logo-hero__word"), BrandUI.brandById(landing.id).name, v);
+    setWord(landing.querySelector(".logo-hero__word"), logoText(landing.id), v, BrandUI.brandById(landing.id).name);
     // "variant2-": the variants were reordered, so numbers saved before are dropped
     if (save) store("variant2-" + landing.id, String(n));
     if (landing === current) { renderSwitch(landing); centreCurrent(); }
@@ -320,6 +344,9 @@
     var page = pre + (inverted ? "ink" : "page");
     var ink = pre + (inverted ? "page" : "ink");
     var bg = !inverted && has("bg") ? pre + "bg" : page;
+    // A chosen background replaces the variant's own (not while inverted)
+    var picked = landing.getAttribute("data-bgpick");
+    if (picked && !inverted) page = bg = "--bgpick-" + landing.id + "-" + picked;
     landing.style.setProperty("--v-page", "var(" + page + ")");
     landing.style.setProperty("--v-bg", "var(" + bg + ")");
     var tone = isDark(page) ? "dark" : "light";
@@ -327,8 +354,10 @@
     var hero = landing.querySelector("[data-logo-hero]");
     if (hero) hero.setAttribute("data-tone", tone);
     var choice = landing.getAttribute("data-ink") || "auto";
-    landing.style.setProperty("--v-ink", choice === "auto" ? "var(" + ink + ")" : "var(--logo-" + choice + ")");
-    if (choice === "auto" && has("ink2")) landing.style.setProperty("--v-ink2", "var(" + pre + "ink2)");
+    // On a chosen background the automatic logo colour is light or dark, by contrast
+    var auto = picked && !inverted ? "var(--logo-" + (tone === "dark" ? "light" : "dark") + ")" : "var(" + ink + ")";
+    landing.style.setProperty("--v-ink", choice === "auto" ? auto : "var(--logo-" + choice + ")");
+    if (choice === "auto" && !(picked && !inverted) && has("ink2")) landing.style.setProperty("--v-ink2", "var(" + pre + "ink2)");
     else landing.style.removeProperty("--v-ink2");
   }
 
@@ -359,6 +388,15 @@
     if (save) store("ink-" + landing.id, id);
     applyColours(landing);
     if (landing === current) renderSwitch(landing);
+  }
+
+  // id "auto" = the variant's own background
+  function setBackground(landing, id, save) {
+    if (id === "auto") landing.removeAttribute("data-bgpick");
+    else landing.setAttribute("data-bgpick", id);
+    if (save) store("bgpick-" + landing.id, id === "auto" ? "" : id);
+    applyColours(landing);
+    if (landing === current) { renderSwitch(landing); window.dispatchEvent(new Event("scroll")); }
   }
 
   function applyGradient(landing, id, save) {
@@ -393,25 +431,57 @@
     switchEl.querySelector(".variant-switch__name").textContent = list[n - 1].name;
   }
 
-  // Logo colour swatches: the Figma colour, light, dark and five suggestions,
-  // each resolved from the landing so it shows the colour it will give
+  // Colour panel: logo swatches (the Figma colour, light, dark, five suggestions) and,
+  // where the landing offers them, background swatches. Each shows the colour it gives.
+  function swatchGroup(label, buttons) {
+    var group = document.createElement("div");
+    group.className = "variant-switch__group";
+    var title = document.createElement("span");
+    title.className = "variant-switch__label";
+    title.textContent = label;
+    var row = document.createElement("div");
+    row.className = "variant-switch__swatches";
+    buttons.forEach(function (b) { row.appendChild(b); });
+    group.appendChild(title);
+    group.appendChild(row);
+    return group;
+  }
+
+  function swatch(attr, id, name, colour, pressed) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute(attr, id);
+    b.setAttribute("aria-label", name);
+    b.setAttribute("aria-pressed", String(pressed));
+    b.style.setProperty("--sw", colour);
+    return b;
+  }
+
   function renderPicker(landing) {
     var box = document.getElementById("logo-colours");
     if (box.hidden) return;
     var n = Number(landing.getAttribute("data-variant")) || 1;
-    var auto = getComputedStyle(root).getPropertyValue("--fig-" + landing.id + "-" + n + "-" + (landing.hasAttribute("data-invert") ? "page" : "ink")).trim();
+    var pre = "--fig-" + landing.id + "-" + n + "-";
+    var inverted = landing.hasAttribute("data-invert");
+    var rs = getComputedStyle(root);
     var ls = getComputedStyle(landing);
     var choice = landing.getAttribute("data-ink") || "auto";
+    var picked = landing.getAttribute("data-bgpick") || "auto";
     box.innerHTML = "";
-    INKS.forEach(function (ink) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.setAttribute("data-ink", ink.id);
-      b.setAttribute("aria-label", ink.name);
-      b.setAttribute("aria-pressed", String(ink.id === choice));
-      b.style.setProperty("--sw", ink.id === "auto" ? auto : ls.getPropertyValue("--logo-" + ink.id).trim());
-      box.appendChild(b);
-    });
+    var autoInk = ls.getPropertyValue("--v-ink").trim();
+    box.appendChild(swatchGroup("Logo", INKS.map(function (ink) {
+      var colour = ink.id === "auto" ? (picked !== "auto" && !inverted ? ls.getPropertyValue("--logo-" + (landing.getAttribute("data-v-tone") === "dark" ? "light" : "dark")).trim() : rs.getPropertyValue(pre + (inverted ? "page" : "ink")).trim()) : ls.getPropertyValue("--logo-" + ink.id).trim();
+      return swatch("data-ink", ink.id, ink.name, colour, ink.id === choice);
+    })));
+    var bgs = BACKGROUNDS[landing.id];
+    if (bgs) {
+      var own = rs.getPropertyValue(pre + "page").trim();
+      var list = [swatch("data-bgpick", "auto", "Figma background", own, picked === "auto")];
+      bgs.forEach(function (bg) {
+        list.push(swatch("data-bgpick", bg.id, bg.name, rs.getPropertyValue("--bgpick-" + landing.id + "-" + bg.id).trim(), picked === bg.id));
+      });
+      box.appendChild(swatchGroup("Background", list));
+    }
   }
 
   function togglePicker(open) {
@@ -440,7 +510,105 @@
       var id = target.getAttribute("data-ink");
       setInk(current, id, true);
       flashSwitch("Logo · " + INKS.filter(function (k) { return k.id === id; })[0].name);
+    } else if (action === "pick-bg") {
+      var bgId = target.getAttribute("data-bgpick");
+      // A background applies to the normal colours, so picking one turns invert off
+      if (bgId !== "auto" && current.hasAttribute("data-invert")) setInvert(current, false, true);
+      setBackground(current, bgId, true);
+      var found = (BACKGROUNDS[current.id] || []).filter(function (k) { return k.id === bgId; })[0];
+      flashSwitch("Background · " + (found ? found.name : "Figma"));
     }
+  }
+
+  // ---------- type into the logo, like a font tester ----------
+  function variantOf(landing) {
+    return window.VARIANTS[landing.id][(Number(landing.getAttribute("data-variant")) || 1) - 1];
+  }
+
+  // Where the caret is, as a count of characters from the start of the word
+  function caretOffset(word) {
+    var sel = window.getSelection();
+    if (!sel.rangeCount || !word.contains(sel.anchorNode)) return null;
+    var r = document.createRange();
+    r.selectNodeContents(word);
+    r.setEnd(sel.anchorNode, sel.anchorOffset);
+    return r.toString().length;
+  }
+
+  function placeCaret(word, offset) {
+    var walker = document.createTreeWalker(word, NodeFilter.SHOW_TEXT);
+    var node = null;
+    var left = offset;
+    while (walker.nextNode()) {
+      node = walker.currentNode;
+      if (left <= node.length) break;
+      left -= node.length;
+    }
+    var range = document.createRange();
+    if (node) range.setStart(node, Math.min(left, node.length));
+    else range.setStart(word, 0);
+    range.collapse(true);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+  // The overview tiles show the same text
+  function refreshTiles(id) {
+    document.querySelectorAll('.overview__tile[data-landing="' + id + '"]').forEach(function (tile, i) {
+      setWord(tile.querySelector(".overview__word"), logoText(id) || BrandUI.brandById(id).name, window.VARIANTS[id][i], BrandUI.brandById(id).name);
+    });
+  }
+
+  function setLogoText(landing, text, restoreCaret) {
+    var word = landing.querySelector(".logo-hero__word");
+    var v = variantOf(landing);
+    var offset = restoreCaret ? caretOffset(word) : null;
+    texts[landing.id] = text;
+    store("text-" + landing.id, text === BrandUI.brandById(landing.id).name ? "" : text);
+    // Plain words stay as typed; two-tone and letter-by-letter ones are rebuilt around the caret
+    if (v.split || v.kern || word.textContent !== text) {
+      setWord(word, text, v, BrandUI.brandById(landing.id).name);
+      if (offset != null) placeCaret(word, Math.min(offset, text.length));
+    }
+    refreshTiles(landing.id);
+    if (landing === current) centreCurrent();
+  }
+
+  function initEditable(landing) {
+    var word = landing.querySelector(".logo-hero__word");
+    if (!word) return;
+    var name = BrandUI.brandById(landing.id).name;
+    // plaintext-only keeps pasted formatting out; older engines fall back to "true"
+    word.setAttribute("contenteditable", "plaintext-only");
+    if (word.contentEditable !== "plaintext-only") word.setAttribute("contenteditable", "true");
+    word.setAttribute("spellcheck", "false");
+    word.setAttribute("autocapitalize", "off");
+    word.setAttribute("autocorrect", "off");
+    word.setAttribute("enterkeyhint", "done");
+    word.setAttribute("role", "textbox");
+    word.setAttribute("aria-label", name + " logo text");
+    var composing = false;
+    word.addEventListener("compositionstart", function () { composing = true; });
+    word.addEventListener("compositionend", function () {
+      composing = false;
+      setLogoText(landing, word.textContent.replace(/\s+/g, " ").slice(0, MAX_TEXT), true);
+    });
+    word.addEventListener("input", function () {
+      if (composing) return;
+      setLogoText(landing, word.textContent.replace(/[\r\n]+/g, " ").slice(0, MAX_TEXT), true);
+    });
+    word.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); word.blur(); }
+      else if (e.key === "Escape") { e.preventDefault(); setLogoText(landing, name, false); word.blur(); }
+    });
+    word.addEventListener("focus", function () {
+      flashSwitch("Type to change the logo · empty = " + name);
+    });
+    // An empty logo goes back to the brand name
+    word.addEventListener("blur", function () {
+      if (!word.textContent.trim()) setLogoText(landing, name, false);
+    });
   }
 
   // Previous / next, wrapping around
@@ -484,16 +652,20 @@
       var a = e.target.closest("[data-action]");
       if (a) { onSwitchAction(a.getAttribute("data-action"), a); return; }
       var pick = e.target.closest("#logo-colours [data-ink]");
-      if (pick) onSwitchAction("pick", pick);
+      if (pick) { onSwitchAction("pick", pick); return; }
+      var bgPick = e.target.closest("#logo-colours [data-bgpick]");
+      if (bgPick) onSwitchAction("pick-bg", bgPick);
     });
     // The colour list closes on a tap elsewhere or Escape
     document.addEventListener("click", function (e) {
-      if (!switchEl.contains(e.target)) togglePicker(false);
+      // composedPath: a swatch rebuilt by the click is already detached from the page
+      if (e.composedPath().indexOf(switchEl) < 0) togglePicker(false);
     });
     // Keyboard: left / right arrows change the variant, up / down the gradient
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") { togglePicker(false); return; }
       if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.target.isContentEditable) return;   // arrows belong to the text being typed
       var map = { ArrowLeft: ["variant", -1], ArrowRight: ["variant", 1], ArrowUp: ["gradient", -1], ArrowDown: ["gradient", 1] };
       if (!map[e.key]) return;
       e.preventDefault();
@@ -505,6 +677,9 @@
       if (stored("invert-" + landing.id)) landing.setAttribute("data-invert", "");
       var ink = stored("ink-" + landing.id);
       landing.setAttribute("data-ink", INKS.some(function (k) { return k.id === ink; }) ? ink : "auto");
+      initEditable(landing);
+      var bgSaved = stored("bgpick-" + landing.id);
+      if (bgSaved && (BACKGROUNDS[landing.id] || []).some(function (k) { return k.id === bgSaved; })) landing.setAttribute("data-bgpick", bgSaved);
       var saved = Number(stored("variant2-" + landing.id));
       applyVariant(landing, saved >= 1 && saved <= list.length ? saved : 1, false);
       var grad = stored("gradient-" + landing.id);
@@ -538,7 +713,7 @@
         });
         if (v.accent) tile.setAttribute("data-accent", "");
         tile.innerHTML = '<span class="overview__word" aria-hidden="true"></span><span class="overview__name">' + n + " · " + v.name + "</span>";
-        setWord(tile.querySelector(".overview__word"), brand.name, v);
+        setWord(tile.querySelector(".overview__word"), logoText(id), v, brand.name);
         tile.querySelector(".overview__word").removeAttribute("aria-label");
         tile.addEventListener("click", function () {
           var landing = document.getElementById(id);
