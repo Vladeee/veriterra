@@ -33,6 +33,15 @@
     menu.appendChild(li);
   }
 
+  // On narrow screens the menu scrolls: mark which edge hides more items, CSS fades it
+  function fadeMenu() {
+    var max = menu.scrollWidth - menu.clientWidth;
+    var more = [];
+    if (menu.scrollLeft > 1) more.push("start");
+    if (menu.scrollLeft < max - 1) more.push("end");
+    menu.setAttribute("data-more", more.join(" "));
+  }
+
   // ---------- previous / next page: arrows at the screen edges ----------
   var arrows = document.querySelector(".page-arrows");
 
@@ -120,7 +129,7 @@
   }
 
   // ---------- colour helpers: resolve a colour token and tell light from dark ----------
-  var probe = document.createElement("canvas").getContext("2d");
+  var probe = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
   function toHex(color) {
     probe.clearRect(0, 0, 1, 1);
     probe.fillStyle = color;
@@ -740,6 +749,8 @@
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
     window.addEventListener("resize", centreCurrent);
+    menu.addEventListener("scroll", fadeMenu, { passive: true });
+    window.addEventListener("resize", fadeMenu);
     // Scrolled state + the tone of whatever sits under the menu (light or dark slide)
     var nav = document.querySelector(".topnav");
     var ticking = false;
@@ -765,6 +776,7 @@
       if (a && a.getAttribute("href") === location.hash) { e.preventDefault(); window.scrollTo(0, 0); }
     });
     route();
+    fadeMenu();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

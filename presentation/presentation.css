@@ -91,10 +91,23 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   padding: 0;
   list-style: none;
   overflow-x: auto;
+  scroll-padding-inline: var(--space-6);   /* the current item stays clear of the edge fade */
   scrollbar-width: none;
 }
 
 .topnav__list::-webkit-scrollbar { display: none; }
+
+/* When the menu scrolls (phones), the cut edge fades so hidden items read as "more".
+   presentation.js sets data-more to start, end or both */
+.topnav__list {
+  --fade-start: 0px;
+  --fade-end: 0px;
+  -webkit-mask-image: linear-gradient(to right, transparent, black var(--fade-start), black calc(100% - var(--fade-end)), transparent);
+  mask-image: linear-gradient(to right, transparent, black var(--fade-start), black calc(100% - var(--fade-end)), transparent);
+}
+
+.topnav__list[data-more~="start"] { --fade-start: var(--space-6); }
+.topnav__list[data-more~="end"] { --fade-end: var(--space-6); }
 
 .topnav__link {
   position: relative;
@@ -459,6 +472,11 @@ body.is-scrolled .topnav__blur { opacity: 1; }
 
 /* ---------- Editable wordmark: tap the logo and type, like a font tester ---------- */
 .logo-hero__word[contenteditable] {
+  /* A short word on a phone is lower than a tap target: grow the box to
+     --tap-min, the negative margin keeps the letters where they were */
+  --tap-pad: max(0px, (var(--tap-min) - 1lh) / 2);
+  padding-block: var(--tap-pad);
+  margin-block: calc(var(--tap-pad) * -1);
   min-width: 1ch;
   min-height: 1lh;
   cursor: text;
