@@ -4,6 +4,7 @@
   --fig-<brand>-<n>-<prop>; this file only lists them. Generated from the Figma
   frames; edit the tokens to tweak a variant, add an entry here to add one.
   kern: true spaces the letters by their ink (for faces with monospaced Latin).
+  mesh: true lets the layered background drift slowly (Vaya "Blend").
   split: n draws the first n letters in ink and the rest in ink2 (Vi|bija).
   Keys are landing ids: vitreeone = TerraGroup, veriterra = Vibija, vita = Vivo.
 */
@@ -14,8 +15,8 @@ window.VARIANTS = {
       "node": "(current)"
     },
     {
-      "name": "Moss · Poppins",
-      "node": "85:78"
+      "name": "Mist · Faculty Glyphic",
+      "node": "90:106"
     }
   ],
   "veriterra": [
@@ -97,12 +98,9 @@ window.VARIANTS = {
       "node": "75:300"
     },
     {
-      "name": "Mist · Madimi One",
-      "node": "75:336"
-    },
-    {
-      "name": "Mist · Hubballi",
-      "node": "75:336"
+      "name": "Blend · Faculty Glyphic",
+      "node": "(new)",
+      "mesh": true
     }
   ],
   "vita": [

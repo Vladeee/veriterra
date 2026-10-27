@@ -128,15 +128,15 @@
   --fig-vitreeone-1-tracking: 0.02em;   /* mixed case, light on dark: a touch open */
   --fig-vitreeone-1-weight: 400;
   --fig-vitreeone-1-case: none;
-  /* vitreeone 2: Moss · Poppins (Figma 85:78) */
-  --fig-vitreeone-2-bg: #343A32;
-  --fig-vitreeone-2-page: #343A32;
-  --fig-vitreeone-2-ink: #ECF7BD;
-  --fig-vitreeone-2-font: var(--font-poppins);
-  --fig-vitreeone-2-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vitreeone-2-tracking: -0.02em;
-  --fig-vitreeone-2-weight: 700;
-  --fig-vitreeone-2-case: lowercase;
+  /* vitreeone 2 (TerraGroup): Mist · Faculty Glyphic (colours of Verdo 4, Figma 90:106) */
+  --fig-vitreeone-2-bg: var(--fig-verdo-4-bg);
+  --fig-vitreeone-2-page: var(--fig-verdo-4-page);
+  --fig-vitreeone-2-ink: var(--fig-verdo-4-ink);
+  --fig-vitreeone-2-font: var(--font-faculty);
+  --fig-vitreeone-2-size: var(--text-logo);
+  --fig-vitreeone-2-tracking: 0.01em;
+  --fig-vitreeone-2-weight: 400;
+  --fig-vitreeone-2-case: none;
   /* veriterra 1: Moss · two-tone (Figma 75:265) */
   --fig-veriterra-1-bg: #333A31;
   --fig-veriterra-1-page: #333A31;
@@ -146,7 +146,7 @@
   --fig-veriterra-1-size: clamp(2.5rem, 5.83vw, 7.0rem);
   --fig-veriterra-1-tracking: 0.005em;
   --fig-veriterra-1-weight: 400;
-  --fig-veriterra-1-case: lowercase;
+  --fig-veriterra-1-case: none;
   /* veriterra 2: Lime · Port Lligat (Figma 85:53) */
   --fig-veriterra-2-bg: #ECF7BD;
   --fig-veriterra-2-page: #ECF7BD;
@@ -155,7 +155,7 @@
   --fig-veriterra-2-size: clamp(2.5rem, 6.67vw, 8.0rem);
   --fig-veriterra-2-tracking: -0.01em;
   --fig-veriterra-2-weight: 400;
-  --fig-veriterra-2-case: lowercase;
+  --fig-veriterra-2-case: none;
   /* veriterra 3: Beige · Port Lligat (Figma 85:60) */
   --fig-veriterra-3-bg: #EEE5D6;
   --fig-veriterra-3-page: #EEE5D6;
@@ -164,7 +164,7 @@
   --fig-veriterra-3-size: clamp(2.5rem, 5.83vw, 7.0rem);
   --fig-veriterra-3-tracking: -0.01em;
   --fig-veriterra-3-weight: 400;
-  --fig-veriterra-3-case: lowercase;
+  --fig-veriterra-3-case: none;
   /* veriterra 4: Beige · Poppins (Figma 85:71) */
   --fig-veriterra-4-bg: #EEE5D6;
   --fig-veriterra-4-page: #EEE5D6;
@@ -173,7 +173,7 @@
   --fig-veriterra-4-size: clamp(2.5rem, 5.0vw, 6.0rem);
   --fig-veriterra-4-tracking: -0.025em;
   --fig-veriterra-4-weight: 700;
-  --fig-veriterra-4-case: lowercase;
+  --fig-veriterra-4-case: none;
   /* veriterra 5: Night · Port Lligat (Figma 75:270) */
   --fig-veriterra-5-bg: #151F19;
   --fig-veriterra-5-page: #151F19;
@@ -182,7 +182,7 @@
   --fig-veriterra-5-size: clamp(2.5rem, 6.67vw, 8.0rem);
   --fig-veriterra-5-tracking: 0em;
   --fig-veriterra-5-weight: 400;
-  --fig-veriterra-5-case: lowercase;
+  --fig-veriterra-5-case: none;
   /* veriterra 6: Olive · Kosugi Maru (Figma 75:254) */
   --fig-veriterra-6-bg: #7A8955;
   --fig-veriterra-6-page: #7A8955;
@@ -292,24 +292,21 @@
   --fig-vaya-3-tracking: 0.16em;
   --fig-vaya-3-weight: 400;
   --fig-vaya-3-case: uppercase;
-  /* vaya 4: Mist · Madimi One (Figma 75:336) */
-  --fig-vaya-4-bg: radial-gradient(farthest-corner at 12% 100%, #729485 0%, #95AFA4 25%, #B9CAC2 50%, #DCE4E1 75%, #FFFFFF 100%);
-  --fig-vaya-4-page: #DCE4E1;
+  /* vaya 4: Blend · Faculty Glyphic. The four colours of 1-3 (sky, sunrise
+     amber, mint, lavender) as soft overlapping light; it drifts slowly (mesh) */
+  --fig-vaya-4-bg:
+    radial-gradient(55% 50% at 16% 12%, #FFC261 0%, #FFC26100 100%),
+    radial-gradient(60% 55% at 88% 18%, #B7DDFC 0%, #B7DDFC00 100%),
+    radial-gradient(65% 60% at 80% 90%, #D2BDF9 0%, #D2BDF900 100%),
+    radial-gradient(55% 55% at 10% 92%, #B7DDFC 0%, #B7DDFC00 100%),
+    #EBF7F3;
+  --fig-vaya-4-page: #EBF7F3;
   --fig-vaya-4-ink: #181F1F;
-  --fig-vaya-4-font: var(--font-madimi);
+  --fig-vaya-4-font: var(--font-faculty);
   --fig-vaya-4-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-4-tracking: 0.06em;
+  --fig-vaya-4-tracking: 0.16em;
   --fig-vaya-4-weight: 400;
   --fig-vaya-4-case: uppercase;
-  /* vaya 5: Mist · Hubballi (Figma 75:336) */
-  --fig-vaya-5-bg: radial-gradient(farthest-corner at 12% 100%, #729485 0%, #95AFA4 25%, #B9CAC2 50%, #DCE4E1 75%, #FFFFFF 100%);
-  --fig-vaya-5-page: #DCE4E1;
-  --fig-vaya-5-ink: #000000;
-  --fig-vaya-5-font: var(--font-hubballi);
-  --fig-vaya-5-size: clamp(2.5rem, 6.56vw, 7.88rem);
-  --fig-vaya-5-tracking: 0.08em;
-  --fig-vaya-5-weight: 400;
-  --fig-vaya-5-case: uppercase;
   /* vita 1: Stone · Momo Trust (Figma 75:305) */
   --fig-vita-1-bg: #ACAA9F;
   --fig-vita-1-page: #ACAA9F;

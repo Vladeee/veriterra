@@ -49,6 +49,22 @@
   background: var(--v-accent);
 }
 
+/* Mesh background (Vaya "Blend"): the layers of light are larger than the screen
+   and each drifts its own way, so the colours slowly flow into one another */
+.landing[data-variant-mesh] .logo-hero {
+  background-size: 160% 160%;
+  animation: mesh-drift calc(var(--duration-drift) * 1.5) var(--ease-standard) infinite alternate;
+}
+
+@keyframes mesh-drift {
+  from { background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%; }
+  to { background-position: 60% 45%, 35% 70%, 25% 30%, 85% 25%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing[data-variant-mesh] .logo-hero { animation: none; }
+}
+
 /* ---------- Background gradient: faint horizontal bands ---------- */
 .landing[data-variant] {
   /* Translucent, so a Figma background that is itself a gradient shows through */

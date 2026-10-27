@@ -336,6 +336,8 @@
     landing.setAttribute("data-variant", String(n));
     if (v.accent) landing.setAttribute("data-variant-accent", "");
     else landing.removeAttribute("data-variant-accent");
+    if (v.mesh) landing.setAttribute("data-variant-mesh", "");
+    else landing.removeAttribute("data-variant-mesh");
     applyColours(landing);
     setWord(landing.querySelector(".logo-hero__word"), logoText(landing.id), v, BrandUI.brandById(landing.id).name);
     // "variant2-": the variants were reordered, so numbers saved before are dropped
