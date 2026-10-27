@@ -1,7 +1,7 @@
 {
-  "name": "VITREEONE",
-  "short_name": "VITREEONE",
-  "description": "VITREEONE and its four companies (working draft).",
+  "name": "TerraGroup",
+  "short_name": "TerraGroup",
+  "description": "TerraGroup and its four companies (working draft).",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -4,6 +4,8 @@
   --fig-<brand>-<n>-<prop>; this file only lists them. Generated from the Figma
   frames; edit the tokens to tweak a variant, add an entry here to add one.
   kern: true spaces the letters by their ink (for faces with monospaced Latin).
+  split: n draws the first n letters in ink and the rest in ink2 (Vi|bija).
+  Keys are landing ids: vitreeone = TerraGroup, veriterra = Vibija, vita = Vivo.
 */
 window.VARIANTS = {
   "vitreeone": [
@@ -20,7 +22,7 @@ window.VARIANTS = {
     {
       "name": "Moss · two-tone",
       "node": "75:265",
-      "split": 4,
+      "split": 2,
       "ink2": true
     },
     {
@@ -107,18 +109,6 @@ window.VARIANTS = {
     {
       "name": "Stone · Momo Trust",
       "node": "75:305"
-    },
-    {
-      "name": "Khaki · Braah One",
-      "node": "75:303"
-    },
-    {
-      "name": "Sage · Poppins",
-      "node": "75:338"
-    },
-    {
-      "name": "Sage · Varela Round",
-      "node": "75:338"
     }
   ]
 };

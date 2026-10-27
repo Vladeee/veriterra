@@ -7,7 +7,7 @@ theme colour) and copies the stylesheets, scripts and fonts next to it. The repo
 touched.
 
 Usage:
-  python3 tools/preview.py OUT_DIR [--title "Vitreeone Presentation"]
+  python3 tools/preview.py OUT_DIR [--title "TerraGroup Presentation"]
 
 Prints the published file list (relative paths, one per line) after the line "FILES:".
 No dependencies beyond the Python 3 standard library.
@@ -59,7 +59,7 @@ def build(out, title):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("out", type=Path)
-    ap.add_argument("--title", default="Vitreeone Presentation")
+    ap.add_argument("--title", default="TerraGroup Presentation")
     args = ap.parse_args()
     files = build(args.out.resolve(), args.title)
     print(f"built {args.out} ({len(files)} files + index.html)")

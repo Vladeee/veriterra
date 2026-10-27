@@ -4,10 +4,10 @@ Self-hosted typefaces, so they work offline on the iPad and on GitHub Pages. The
 with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--font-asul`, …).
 
 - **Figma variants (wordmarks):** Port Lligat Sans, Poppins, Kosugi Maru, Comfortaa, Hubballi, Varela Round,
-  Madimi One, Braah One, Momo Trust Display, Inter, Faculty Glyphic. Each style variant (`--fig-*` tokens,
+  Madimi One, Braah One (no variant uses it now), Momo Trust Display, Inter, Faculty Glyphic. Each style variant (`--fig-*` tokens,
   `presentation/variants.js`) names one of them. Only the weights the frames use are included.
 - **Earlier logo trials (not in use now):** Asul, Old Standard, Young Serif, Bona Nova, Mynerve, Accidenz Commons.
-- **VITREEONE wordmark:** Faculty Glyphic (`--font-faculty`).
+- **TerraGroup wordmark:** Faculty Glyphic (`--font-faculty`).
 - **Headings:** Hedvig Letters Serif (`--font-hedvig`). It is a free stand-in for **Season Mix**
   (Displaay), which is commercial and would need a web licence.
 

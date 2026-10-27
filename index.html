@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>VITREEONE</title>
-  <meta name="description" content="VITREEONE and its four companies: Veriterra, Verdo, Vaya and Vita. Working draft.">
+  <title>TerraGroup</title>
+  <meta name="description" content="TerraGroup and its four companies: Vibija, Verdo, Vaya and Vivo. Working draft.">
   <meta name="theme-color" content="#FBFAF7">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="VITREEONE">
+  <meta name="apple-mobile-web-app-title" content="TerraGroup">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="brand/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="brand/icons/favicon-32.png" sizes="32x32" type="image/png">
@@ -22,7 +22,6 @@
   <link rel="preload" href="brand/fonts/hubballi/hubballi-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/varela-round/varela-round-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/madimi-one/madimi-one-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="brand/fonts/braah-one/braah-one-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/momo-trust-display/momo-trust-display-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/inter/inter-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/faculty-glyphic/faculty-glyphic-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -53,10 +52,11 @@
     <a class="page-arrow page-arrow--next" href="#veriterra" aria-label="Next page"><span class="icon" data-icon="arrow-right"></span></a>
   </nav>
 
-  <!-- Switcher, bottom left: style variant (Figma frames), background gradient, colours -->
+  <!-- Switcher, bottom left: style variant (Figma frames), background gradient,
+       background colour (only where a landing offers them), colours -->
   <div class="variant-switch" id="variant-switch" hidden>
     <span class="variant-switch__name" aria-live="polite"></span>
-    <div class="variant-switch__pill" role="group" aria-label="Style variant">
+    <div class="variant-switch__pill" role="group" aria-label="Style variant" data-pill="variant">
       <button type="button" data-step="variant" data-dir="-1" aria-label="Previous variant"><span class="icon" data-icon="arrow-left"></span></button>
       <span class="variant-switch__value" data-value="variant"></span>
       <button type="button" data-step="variant" data-dir="1" aria-label="Next variant"><span class="icon" data-icon="arrow-right"></span></button>
@@ -65,6 +65,11 @@
       <button type="button" data-step="gradient" data-dir="-1" aria-label="Previous gradient"><span class="icon" data-icon="arrow-left"></span></button>
       <span class="variant-switch__value" data-value="gradient"></span>
       <button type="button" data-step="gradient" data-dir="1" aria-label="Next gradient"><span class="icon" data-icon="arrow-right"></span></button>
+    </div>
+    <div class="variant-switch__pill" role="group" aria-label="Background colour" data-pill="background" hidden>
+      <button type="button" data-step="background" data-dir="-1" aria-label="Previous background colour"><span class="icon" data-icon="arrow-left"></span></button>
+      <span class="variant-switch__value variant-switch__value--bg" data-value="background"></span>
+      <button type="button" data-step="background" data-dir="1" aria-label="Next background colour"><span class="icon" data-icon="arrow-right"></span></button>
     </div>
     <div class="variant-switch__pill" role="group" aria-label="Colours">
       <button type="button" data-action="invert" aria-pressed="false" aria-label="Invert colours"><span class="icon" data-icon="contrast"></span></button>
@@ -75,7 +80,7 @@
   </div>
 
   <main id="landings">
-    <!-- ==================== VITREEONE ==================== -->
+    <!-- ==================== TERRAGROUP (id vitreeone) ==================== -->
     <article class="landing" id="vitreeone" data-brand="vitreeone" aria-labelledby="vitreeone-title" hidden>
       <header class="logo-hero" data-logo-hero>
         <div class="glow" aria-hidden="true"></div>
@@ -84,7 +89,7 @@
       </header>
     </article>
 
-    <!-- ==================== VERITERRA ==================== -->
+    <!-- ==================== VIBIJA (id veriterra) ==================== -->
     <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="veriterra-title" hidden>
       <header class="logo-hero" data-logo-hero>
         <div class="glow" aria-hidden="true"></div>
@@ -111,7 +116,7 @@
       </header>
     </article>
 
-    <!-- ==================== VITA ==================== -->
+    <!-- ==================== VIVO (id vita) ==================== -->
     <article class="landing" id="vita" data-brand="vita" aria-labelledby="vita-title" hidden>
       <header class="logo-hero" data-logo-hero>
         <div class="glow" aria-hidden="true"></div>

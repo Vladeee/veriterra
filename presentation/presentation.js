@@ -274,11 +274,13 @@
     { id: "flat", name: "Flat" }
   ];
 
-  // Background choices (tokens: --bgpick-<landing>-<id>); Veriterra offers purples
+  // Background choices (tokens: --bgpick-<landing>-<id>); Vibija offers purples, pale to deep
   var BACKGROUNDS = {
     veriterra: [
       { id: "lilac", name: "Lilac" },
       { id: "lavender", name: "Lavender" },
+      { id: "mauve", name: "Mauve" },
+      { id: "iris", name: "Iris" },
       { id: "violet", name: "Violet" },
       { id: "plum", name: "Plum" },
       { id: "aubergine", name: "Aubergine" }
@@ -408,6 +410,18 @@
     if (landing === current) { renderSwitch(landing); window.dispatchEvent(new Event("scroll")); }
   }
 
+  // A background applies to the normal colours, so picking one turns invert off
+  function chooseBackground(landing, id) {
+    if (id !== "auto" && landing.hasAttribute("data-invert")) setInvert(landing, false, true);
+    setBackground(landing, id, true);
+    flashSwitch("Background · " + backgroundName(landing, id));
+  }
+
+  function backgroundName(landing, id) {
+    var found = (BACKGROUNDS[landing.id] || []).filter(function (k) { return k.id === id; })[0];
+    return found ? found.name : "Figma";
+  }
+
   function applyGradient(landing, id, save) {
     landing.setAttribute("data-gradient", id);
     if (save) store("gradient-" + landing.id, id);
@@ -420,7 +434,7 @@
     var body = document.body.style;
     if (!list) {
       switchEl.hidden = true;
-      ["--sw-page", "--sw-ink", "--sw-logo"].forEach(function (p) { body.removeProperty(p); });
+      ["--sw-page", "--sw-ink", "--sw-logo", "--sw-bgpick"].forEach(function (p) { body.removeProperty(p); });
       return;
     }
     switchEl.hidden = false;
@@ -436,7 +450,16 @@
     renderPicker(landing);
     var grad = GRADIENTS.filter(function (g) { return g.id === landing.getAttribute("data-gradient"); })[0] || GRADIENTS[0];
     switchEl.querySelector('[data-value="variant"]').textContent = n + " / " + list.length;
+    switchEl.querySelector('[data-pill="variant"]').hidden = list.length < 2;
     switchEl.querySelector('[data-value="gradient"]').textContent = grad.name;
+    var bgPill = switchEl.querySelector('[data-pill="background"]');
+    bgPill.hidden = !BACKGROUNDS[landing.id];
+    if (!bgPill.hidden) {
+      var bgId = landing.getAttribute("data-bgpick") || "auto";
+      var bgToken = bgId === "auto" ? "--fig-" + landing.id + "-" + n + "-page" : "--bgpick-" + landing.id + "-" + bgId;
+      bgPill.querySelector('[data-value="background"]').textContent = backgroundName(landing, bgId);
+      body.setProperty("--sw-bgpick", "var(" + bgToken + ")");
+    }
     switchEl.querySelector(".variant-switch__name").textContent = list[n - 1].name;
   }
 
@@ -520,12 +543,7 @@
       setInk(current, id, true);
       flashSwitch("Logo · " + INKS.filter(function (k) { return k.id === id; })[0].name);
     } else if (action === "pick-bg") {
-      var bgId = target.getAttribute("data-bgpick");
-      // A background applies to the normal colours, so picking one turns invert off
-      if (bgId !== "auto" && current.hasAttribute("data-invert")) setInvert(current, false, true);
-      setBackground(current, bgId, true);
-      var found = (BACKGROUNDS[current.id] || []).filter(function (k) { return k.id === bgId; })[0];
-      flashSwitch("Background · " + (found ? found.name : "Figma"));
+      chooseBackground(current, target.getAttribute("data-bgpick"));
     }
   }
 
@@ -626,8 +644,16 @@
     var list = (window.VARIANTS || {})[current.id];
     if (!list) return;
     if (kind === "variant") {
+      if (list.length < 2) return;
       var n = Number(current.getAttribute("data-variant")) || 1;
       applyVariant(current, (n - 1 + dir + list.length) % list.length + 1, true);
+    } else if (kind === "background") {
+      var bgs = BACKGROUNDS[current.id];
+      if (!bgs) return;
+      var order = ["auto"].concat(bgs.map(function (b) { return b.id; }));
+      var j = order.indexOf(current.getAttribute("data-bgpick") || "auto");
+      chooseBackground(current, order[(j + dir + order.length) % order.length]);
+      return;   // chooseBackground shows its own name
     } else {
       var ids = GRADIENTS.map(function (g) { return g.id; });
       var i = ids.indexOf(current.getAttribute("data-gradient"));

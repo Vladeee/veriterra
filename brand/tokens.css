@@ -16,7 +16,7 @@
 
 /*
   Trial typefaces, self-hosted in brand/fonts/ (licences next to each file).
-  Being compared on the Veriterra landing; none is chosen yet.
+  Being compared on the Vibija landing; none is chosen yet.
 */
 @font-face { font-family: "Asul"; src: url("fonts/asul/asul-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Asul"; src: url("fonts/asul/asul-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
@@ -73,7 +73,7 @@
   --color-vitreeone-glow-2: #E4E8DA;
   --color-vitreeone-streak: #6FB3A5;   /* tint of the background bands and the wordmark gradient */
 
-  /* Veriterra colour library (draft), taken from farmminerals.com and
+  /* Vibija (id veriterra) colour library (draft), taken from farmminerals.com and
      extended in OKLCH. Olive hue ≈ 123, beige hue ≈ 68. */
   --color-fm-beige: oklch(95% 0.012 68);        /* #F4EDE6  site background */
   --color-fm-beige-deep: oklch(90% 0.022 68);   /* derived  sunken beige */
@@ -119,13 +119,13 @@
 
   /* ---------- Figma style variants (one per frame in the Figma file) ----------
      --fig-<brand>-<n>-<prop>. Applied by presentation/variants.js. */
-  /* vitreeone 1: Water · Faculty Glyphic (Figma (current)) */
+  /* vitreeone 1 (TerraGroup): Water · Faculty Glyphic (Figma (current)) */
   --fig-vitreeone-1-bg: #0F2A2C;
   --fig-vitreeone-1-page: #0F2A2C;
   --fig-vitreeone-1-ink: #F3EFE6;
   --fig-vitreeone-1-font: var(--font-faculty);
   --fig-vitreeone-1-size: var(--text-logo);
-  --fig-vitreeone-1-tracking: 0.1em;
+  --fig-vitreeone-1-tracking: 0.02em;   /* mixed case, light on dark: a touch open */
   --fig-vitreeone-1-weight: 400;
   --fig-vitreeone-1-case: none;
   /* vitreeone 2: Moss · Poppins (Figma 85:78) */
@@ -319,33 +319,6 @@
   --fig-vita-1-tracking: 0.03em;
   --fig-vita-1-weight: 400;
   --fig-vita-1-case: uppercase;
-  /* vita 2: Khaki · Braah One (Figma 75:303) */
-  --fig-vita-2-bg: #918D62;
-  --fig-vita-2-page: #918D62;
-  --fig-vita-2-ink: #FFFFFF;
-  --fig-vita-2-font: var(--font-braah);
-  --fig-vita-2-size: clamp(2.5rem, 5.83vw, 7.0rem);
-  --fig-vita-2-tracking: 0.02em;
-  --fig-vita-2-weight: 400;
-  --fig-vita-2-case: uppercase;
-  /* vita 3: Sage · Poppins (Figma 75:338) */
-  --fig-vita-3-bg: #959A7D;
-  --fig-vita-3-page: #959A7D;
-  --fig-vita-3-ink: #1D1D1D;
-  --fig-vita-3-font: var(--font-poppins);
-  --fig-vita-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vita-3-tracking: -0.02em;
-  --fig-vita-3-weight: 700;
-  --fig-vita-3-case: none;
-  /* vita 4: Sage · Varela Round (Figma 75:338) */
-  --fig-vita-4-bg: #959A7D;
-  --fig-vita-4-page: #959A7D;
-  --fig-vita-4-ink: #1D1D1D;
-  --fig-vita-4-font: var(--font-varela);
-  --fig-vita-4-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vita-4-tracking: -0.01em;
-  --fig-vita-4-weight: 400;
-  --fig-vita-4-case: none;
 
   /* ---------- Colour: semantic roles ---------- */
   --color-bg: var(--color-paper-0);
@@ -495,10 +468,13 @@
   --motion-shift-sm: 0.5rem;
   --motion-shift-lg: 3rem;
   --motion-blur: 12px;
-  /* Background choices for Veriterra: purples around OKLCH hue 300, light to deep */
+  /* Background choices for Vibija (id veriterra): purples, pale to deep.
+     Hue swings from blue-violet (iris, 285) to red-violet (mauve, plum, 315-320) */
   --bgpick-veriterra-lilac: oklch(91% 0.05 305);
   --bgpick-veriterra-lavender: oklch(80% 0.09 300);
-  --bgpick-veriterra-violet: oklch(56% 0.17 295);
+  --bgpick-veriterra-mauve: oklch(70% 0.07 320);   /* dusty, greyed */
+  --bgpick-veriterra-iris: oklch(60% 0.15 285);
+  --bgpick-veriterra-violet: oklch(52% 0.18 295);
   --bgpick-veriterra-plum: oklch(38% 0.13 315);
   --bgpick-veriterra-aubergine: oklch(24% 0.07 305);
   --logo-optical-lift: 3dvh;   /* the optical centre sits a little above the geometric one */
@@ -520,7 +496,7 @@
 }
 
 /* ---------- Brand themes ----------
-   The holding (VITREEONE) and four companies. Components read only --brand-*
+   The holding (TerraGroup, id vitreeone) and four companies. Components read only --brand-*
    variables. Set data-brand on <html> or on any element (each landing). */
 :root,
 [data-brand="vitreeone"] {

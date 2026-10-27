@@ -237,9 +237,11 @@
   color: var(--color-text);
 }
 
-/* ---------- Switcher: bottom left, three pills of real buttons ----------
-   1. previous / next style variant  2. previous / next gradient
-   3. invert · logo light/dark · logo colour (opens a row of swatches above)
+/* ---------- Switcher: bottom left, pills of real buttons ----------
+   1. previous / next style variant (hidden when a landing has only one)
+   2. previous / next gradient
+   3. previous / next background colour (only where the landing offers them)
+   4. invert · logo light/dark · logo colour (opens a row of swatches above)
    Colours follow the open variant (presentation.js copies its page and tone). */
 .variant-switch {
   position: fixed;
@@ -304,6 +306,26 @@
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.variant-switch__pill[hidden] { display: none; }
+
+/* Background colour: the name with a dot of that colour */
+.variant-switch__value--bg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.variant-switch__value--bg::before {
+  content: "";
+  flex: none;
+  width: var(--space-3);
+  height: var(--space-3);
+  border: var(--border-width) solid color-mix(in oklch, currentColor 35%, transparent);
+  border-radius: var(--radius-pill);
+  background: var(--sw-bgpick, transparent);
 }
 
 .variant-switch__name {

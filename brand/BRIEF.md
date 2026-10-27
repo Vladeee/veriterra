@@ -8,19 +8,21 @@
 
 ## 1. The group
 
-A holding company, **VITREEONE** (replaces the working name "Veriterra Global"), with four companies, all operating in the south of Sri Lanka.
+A holding company, **TerraGroup** (earlier working names: "Veriterra Global", then VITREEONE), with four companies, all operating in the south of Sri Lanka.
+
+Renamed in October 2026: VITREEONE → **TerraGroup**, Veriterra → **Vibija**, Vita → **Vivo**. Verdo and Vaya keep their names. The old names stay as internal ids in the code.
 
 | Company | What it does | Who it sells to | Notes |
 |---|---|---|---|
-| **Veriterra** | Water-soluble fertilizers, formulated by crop and growth stage | Greenhouse and fertigation growers, distributors; export focus (India, Middle East, Africa) | Name may change |
+| **Vibija** | Water-soluble fertilizers, formulated by crop and growth stage | Greenhouse and fertigation growers, distributors; export focus (India, Middle East, Africa) | Was Veriterra |
 | **Verdo** | Greenhouse farm and food products: vegetables first, processing later | Hotels and restaurants (HoReCa), retail | Supplies Vaya's kitchen |
 | **Vaya** | Small eco-glamping resort on the south coast | Travellers | Restaurant runs on Verdo produce |
-| **Vita** | Design and construction | The group's own projects, then outside clients | Builds for the other three |
+| **Vivo** | Design and construction | The group's own projects, then outside clients | Builds for the other three. Was Vita |
 
 ## 2. What is established
 
 - **There will be four websites, one per company.** Whether the holding gets its own site is still open.
-- **The holding is called VITREEONE.** It is not a customer-facing brand, so it works as an endorsement ("part of VITREEONE"). Casing and pronunciation are still to be confirmed.
+- **The holding is called TerraGroup.** It is not a customer-facing brand, so it works as an endorsement ("part of TerraGroup").
 - **The visitors are potential customers**, not investors. Each site sells to a different buyer (see the table above). The exact target action for each site is still to be confirmed.
 - **Content language: English.**
 - **The existing presentations are context only.** Their colours, logos, typefaces and imagery are explicitly *not* a reference. New presentations will be made from this system.
@@ -29,15 +31,15 @@ A holding company, **VITREEONE** (replaces the working name "Veriterra Global"),
 
 ## 3. Working hypotheses (proposed, waiting for approval)
 
-1. **The loop is the idea.** Each company feeds the next: Veriterra feeds the soil, Verdo grows the food, Vaya serves it to guests and Vita builds the places. The existing decks summarise it as *Land → Product → Person → Space*. That loop is what makes four early-stage businesses read as one group rather than four small bets.
+1. **The loop is the idea.** Each company feeds the next: Vibija feeds the soil, Verdo grows the food, Vaya serves it to guests and Vivo builds the places. The existing decks summarise it as *Land → Product → Person → Space*. That loop is what makes four early-stage businesses read as one group rather than four small bets.
 2. **One system, five themes.** Typefaces, grid, components and motion are shared. Each company gets its own accent palette. Technically this means one `tokens.css` with a `data-brand` theme per company.
 3. **Endorsed architecture.** Each company leads on its own site. The holding appears as a quiet endorsement ("part of …"), not as the hero.
 
 ## 4. Open questions
 
-1. Holding name: VITREEONE. How is it pronounced, how is it written in running text (VITREEONE, Vitreeone, VitreeOne), and is the domain secured? No trademark check done yet.
-2. Does Veriterra keep its name now that the holding has its own?
-3. What is the one target action on each site (quote, order, booking, consultation)? Who is Vita's outside customer today?
+1. Names: TerraGroup, Vibija, Vivo. Are the domains secured? No trademark check done yet.
+2. Should the internal ids and the repository (still `veriterra`) follow the new names?
+3. What is the one target action on each site (quote, order, booking, consultation)? Who is Vivo's outside customer today?
 4. What is real today: signed land, built facilities, team, partners, first sales, real photographs?
 5. Brand personality and tone of voice (interview not finished).
 6. Real references, and what exactly is liked in each one.

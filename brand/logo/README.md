@@ -1,6 +1,6 @@
 # Logos
 
-Empty on purpose. The existing logos from the presentations are not being carried over, and the holding name (plus possibly Veriterra's) is still undecided.
+Empty on purpose. The existing logos from the presentations are not being carried over, and the names (TerraGroup, Vibija, Vivo) are new working names.
 
 When logos arrive, add one folder per brand with SVG masters:
 
