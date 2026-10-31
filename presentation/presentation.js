@@ -287,6 +287,15 @@
     ]
   };
 
+  // The look each landing opens with, until it is changed on the device (the user's picks)
+  var DEFAULTS = {
+    vitreeone: { gradient: "mist" },
+    veriterra: { gradient: "mist", bgpick: "aubergine", ink: "pick-5" },
+    verdo: { gradient: "flat", ink: "pick-1" },
+    vaya: { gradient: "flat", ink: "pick-1" },
+    vita: { gradient: "flat" }
+  };
+
   // The text typed into a logo, per landing (the brand name until changed)
   var MAX_TEXT = 20;
   var texts = {};
@@ -711,15 +720,18 @@
     landings.forEach(function (landing) {
       var list = (window.VARIANTS || {})[landing.id];
       if (!list) return;
+      var def = DEFAULTS[landing.id] || {};
       if (stored("invert-" + landing.id)) landing.setAttribute("data-invert", "");
-      var ink = stored("ink-" + landing.id);
+      var ink = stored("ink-" + landing.id) || def.ink;
       landing.setAttribute("data-ink", INKS.some(function (k) { return k.id === ink; }) ? ink : "auto");
       initEditable(landing);
+      // "" is saved when the Figma background was picked, so only a missing value takes the default
       var bgSaved = stored("bgpick-" + landing.id);
+      if (bgSaved === null) bgSaved = def.bgpick;
       if (bgSaved && (BACKGROUNDS[landing.id] || []).some(function (k) { return k.id === bgSaved; })) landing.setAttribute("data-bgpick", bgSaved);
       var saved = Number(stored("variant2-" + landing.id));
       applyVariant(landing, saved >= 1 && saved <= list.length ? saved : 1, false);
-      var grad = stored("gradient-" + landing.id);
+      var grad = stored("gradient-" + landing.id) || def.gradient;
       var known = GRADIENTS.some(function (g) { return g.id === grad; });
       applyGradient(landing, known ? grad : GRADIENTS[0].id, false);
     });
