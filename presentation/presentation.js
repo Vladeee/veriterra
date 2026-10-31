@@ -79,8 +79,11 @@
       var active = menu.querySelector('[aria-current="page"]');
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
       document.title = landing.id === "overview" ? "All variants · " + BrandUI.brandById("vitreeone").name : BrandUI.brandById(landing.id).name;
+      // A landing with slides scrolls and snaps slide by slide
+      root.classList.toggle("has-slides", !!landing.querySelector(".slide"));
       renderSwitch(landing);
       renderArrows(landing);
+      syncPageColour();
       centreCurrent();
       playLogo(landing);
     }
@@ -90,6 +93,58 @@
   }
 
   function route() { show(decodeURIComponent(location.hash.slice(1))); }
+
+  // The page behind the landing (overscroll on iPad, a window being resized) takes
+  // the landing's own colour, so the default paper never shows around it
+  function syncPageColour() {
+    var colour = current ? getComputedStyle(current).backgroundColor : "";
+    var none = !colour || colour === "transparent" || colour === "rgba(0, 0, 0, 0)";
+    root.style.backgroundColor = none ? "" : colour;
+    document.body.style.backgroundColor = none ? "" : colour;
+  }
+
+  // ---------- slides: numbers, colour swatches and measured contrast ----------
+  function luminance(hex) {
+    var c = [1, 3, 5].map(function (i) {
+      var v = parseInt(hex.substr(i, 2), 16) / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+
+  function initSlides() {
+    landings.forEach(function (landing) {
+      var nums = landing.querySelectorAll(".slide__num");
+      var total = landing.querySelectorAll(".slide").length;
+      var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+      Array.prototype.forEach.call(landing.querySelectorAll(".slide"), function (slide, i) {
+        var num = slide.querySelector(".slide__num");
+        if (num) num.textContent = pad(i + 1) + " / " + pad(total);
+      });
+      if (!nums.length) return;
+      // Swatches show the token's colour and its hex, so tokens.css stays the only source
+      landing.querySelectorAll("[data-swatch]").forEach(function (el) {
+        var token = el.getAttribute("data-swatch");
+        el.style.setProperty("--sw", "var(" + token + ")");
+        var hex = el.querySelector("[data-hex]");
+        if (hex) hex.textContent = toHex(getComputedStyle(root).getPropertyValue(token).trim());
+      });
+    });
+    measureContrast();
+  }
+
+  // Each colour combination states its contrast ratio, measured from the page itself
+  function measureContrast() {
+    document.querySelectorAll("[data-contrast]").forEach(function (el) {
+      var cs = getComputedStyle(el);
+      var a = luminance(toHex(cs.color));
+      var b = luminance(toHex(cs.backgroundColor));
+      var ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+      var grade = ratio >= 7 ? "AAA" : ratio >= 4.5 ? "AA" : ratio >= 3 ? "AA large" : "Fails";
+      var out = el.querySelector("[data-ratio]");
+      if (out) out.textContent = grade + " · " + ratio.toFixed(1) + ":1";
+    });
+  }
 
   // ---------- full screen (hidden where unsupported or already an installed app) ----------
   var requestFs = root.requestFullscreen || root.webkitRequestFullscreen;
@@ -381,6 +436,7 @@
     landing.style.setProperty("--v-ink", choice === "auto" ? auto : "var(--logo-" + choice + ")");
     if (choice === "auto" && !(picked && !inverted) && has("ink2")) landing.style.setProperty("--v-ink2", "var(" + pre + "ink2)");
     else landing.style.removeProperty("--v-ink2");
+    if (landing === current) syncPageColour();
   }
 
   function setInvert(landing, on, save) {
@@ -712,7 +768,9 @@
       if (e.key === "Escape") { togglePicker(false); return; }
       if (e.altKey || e.ctrlKey || e.metaKey) return;
       if (e.target.isContentEditable) return;   // arrows belong to the text being typed
-      var map = { ArrowLeft: ["variant", -1], ArrowRight: ["variant", 1], ArrowUp: ["gradient", -1], ArrowDown: ["gradient", 1] };
+      // On a landing with slides, up / down scroll the page as usual
+      if ((e.key === "ArrowUp" || e.key === "ArrowDown") && current && current.querySelector(".slide")) return;
+      var map ={ ArrowLeft: ["variant", -1], ArrowRight: ["variant", 1], ArrowUp: ["gradient", -1], ArrowDown: ["gradient", 1] };
       if (!map[e.key]) return;
       e.preventDefault();
       step(map[e.key][0], map[e.key][1]);
@@ -800,6 +858,9 @@
       window.requestAnimationFrame(function () {
         ticking = false;
         document.body.classList.toggle("is-scrolled", window.scrollY > 8);
+        // Past the logo screen (half of it scrolled away) the switcher and arrows step aside
+        var hero = current && current.querySelector(".logo-hero");
+        document.body.classList.toggle("past-hero", !!hero && hero.getBoundingClientRect().bottom < window.innerHeight / 2);
         var y = nav.getBoundingClientRect().bottom - 2;
         var stack = document.elementsFromPoint ? document.elementsFromPoint(window.innerWidth * 0.25, y) : [];
         var toned = stack.filter(function (el) { return !nav.contains(el) && el.closest("[data-tone]"); })[0];
@@ -815,6 +876,14 @@
       var a = e.target.closest(".topnav__link");
       if (a && a.getAttribute("href") === location.hash) { e.preventDefault(); window.scrollTo(0, 0); }
     });
+    // A link to the slide already in the hash (Index, contents) still scrolls to it
+    document.getElementById("landings").addEventListener("click", function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a || a.getAttribute("href") !== location.hash) return;
+      var target = document.getElementById(a.getAttribute("href").slice(1));
+      if (target) { e.preventDefault(); target.scrollIntoView({ block: "start" }); }
+    });
+    initSlides();
     route();
     fadeMenu();
   }

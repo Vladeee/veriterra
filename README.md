@@ -2,7 +2,7 @@
 
 One link for **GukoV Group** and its four companies: Vibija, Verdo, Vaya and Viva.
 (Internal ids keep the old working names: `vitreeone`, `veriterra`, `vita`.)
-It opens straight on the presentation: five landings behind a fixed top menu, and a last page with every variant in one grid. For now each landing is one screen: the logo. Arrows at the screen edges go to the previous and next page.
+It opens straight on the presentation: five landings behind a fixed top menu, and a last page with every variant in one grid. Each landing opens on its logo screen; **Vibija** continues below it as brand guidelines in 20 slides (logo, typography, colour, photo style, applications). Arrows at the screen edges go to the previous and next page.
 
 Each landing has **style variants**, one per frame in the Figma file, and ten **background gradients** (Dawn, Dusk, Horizon, Mist, Aurora, Silk, Tide, Veil, Prism, Flat). Switch them with the arrow buttons at the bottom left (or the arrow keys). On Vibija an extra row steps through seven purple backgrounds. The last button row inverts the colours, switches the logo between light and dark, and opens a colour panel: logo colours matched to the background (and, on Vibija, the backgrounds again as swatches). Tap the logo itself to type your own text in it. The choice is remembered on the device.
 Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.

@@ -242,6 +242,7 @@
   --text-4xl: clamp(2.75rem, 1.8rem + 3.4vw, 4.5rem);
   --text-5xl: clamp(3.25rem, 1.8rem + 5vw, 6.5rem);
   --text-logo: clamp(3rem, 1rem + 7vw, 8rem);
+  --text-display: clamp(4rem, 1rem + 10vw, 12rem);   /* the cropped headline on a slide */
 
   --leading-tight: 1.05;
   --leading-snug: 1.2;
@@ -341,9 +342,22 @@
   --bgpick-veriterra-violet: oklch(52% 0.18 295);
   --bgpick-veriterra-plum: oklch(38% 0.13 315);
   --bgpick-veriterra-aubergine: oklch(24% 0.07 305);
+  /* Vibija palette (guideline slides): the look of its logo screen, the Aubergine
+     background, the lime "brand tint" logo and the orange square of "Earth",
+     plus a paper, a muted text and a line for the light slides */
+  --color-vibija-aubergine: var(--bgpick-veriterra-aubergine);
+  --color-vibija-plum: var(--bgpick-veriterra-plum);
+  --color-vibija-lime: oklch(84% 0.13 122);
+  --color-vibija-orange: var(--fig-veriterra-1-accent);
+  --color-vibija-earth: var(--fig-veriterra-1-page);
+  --color-vibija-paper: oklch(97.5% 0.008 305);
+  --color-vibija-paper-deep: oklch(93% 0.018 305);
+  --color-vibija-muted: oklch(46% 0.05 305);
+  --color-vibija-line: oklch(86% 0.025 305);
   --logo-optical-lift: 3dvh;   /* the optical centre sits a little above the geometric one */
   --logo-ink-height: clamp(1.5rem, 3.1vw, 3.4rem);   /* every wordmark is sized so its letters stand this tall */
   --logo-tile-ink-height: clamp(1rem, 1.5vw, 1.5rem);   /* the same, on the All variants tiles */
+  --logo-clearspace: 1em;   /* clear space around a wordmark: its own cap height, roughly */
   --glow-blur: 4rem;
   --duration-drift: 18s;
   --press-scale: 0.98;
@@ -383,9 +397,19 @@
   --brand-accent-strong: var(--color-fm-olive-950);
   --brand-accent-soft: var(--color-fm-olive-100);
   --brand-on-accent: var(--color-fm-beige);
-  --brand-paper: var(--color-fm-beige);
+  /* Guideline slides (Vibija palette) */
+  --brand-paper: var(--color-vibija-paper);
+  --brand-paper-deep: var(--color-vibija-paper-deep);
+  --brand-ink: var(--color-vibija-aubergine);
+  --brand-muted: var(--color-vibija-muted);
+  --brand-line: var(--color-vibija-line);
+  --brand-on-deep: var(--color-vibija-lime);
+  --brand-highlight: var(--color-vibija-orange);
+  --brand-font-display: var(--font-comfortaa);
+  --brand-word-tracking: var(--fig-veriterra-1-tracking);
+  --brand-earth: var(--color-vibija-earth);
   --brand-ornament: var(--color-fm-olive-600);
-  --brand-deep: var(--color-fm-olive-900);
+  --brand-deep: var(--color-vibija-aubergine);
   --brand-logo: var(--color-fm-ink);
   --brand-glow: var(--color-fm-olive-100);
   --brand-glow-2: var(--color-fm-beige-deep);
