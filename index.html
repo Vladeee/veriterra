@@ -92,282 +92,64 @@
         <p class="logo-hero__caption">Formulated for the crop. Proven in the field.</p>
       </header>
 
-      <!-- Brand guidelines as slides (after a brand-book deck): contents, then five
-           chapters, each opened by a divider. Copy, colours and type are a working draft.
-           Shared slide styles: presentation.css (.slide); Vibija parts: landings/veriterra.css (.vb-*). -->
+      <!-- Brand guidelines in three bold slides (after farmminerals.com): Mark, Colour,
+           Typography. Behind them one fixed sky blends from scene to scene while the
+           page scrolls (presentation.js, scene tokens --color-vibija-scene-*).
+           Shared: presentation.css (.slide, .slide-sky); Vibija parts: landings/veriterra.css (.vb-*).
+           Copy is a working draft. -->
+      <div class="slide-sky" data-scene-prefix="--color-vibija-scene-" aria-hidden="true"></div>
 
-      <!-- Contents -->
-      <section class="slide" id="vibija-index" data-tone="light" aria-labelledby="vibija-index-title">
-        <header class="slide__head"><p><span data-brand-name="veriterra"></span> · Brand guidelines</p><span class="slide__num"></span></header>
-        <div class="slide__body slide__split">
-          <div class="slide__text">
-            <h2 class="slide__title" id="vibija-index-title">Brand guidelines</h2>
-            <p class="slide__lead">How <span data-brand-name="veriterra"></span> looks: logo, type, colour, photography and a first set of layouts. A working draft; every value can still change.</p>
-          </div>
-          <ol class="slide__visual vb-contents">
-            <li><a href="#vibija-logo"><span>01</span>Logo</a></li>
-            <li><a href="#vibija-type"><span>02</span>Typography</a></li>
-            <li><a href="#vibija-colour"><span>03</span>Colour</a></li>
-            <li><a href="#vibija-photo"><span>04</span>Photo style</a></li>
-            <li><a href="#vibija-apps"><span>05</span>Applications</a></li>
-          </ol>
-        </div>
-      </section>
-
-      <!-- 01 Logo -->
-      <section class="slide slide--divider" id="vibija-logo" data-tone="dark" aria-labelledby="vibija-logo-title">
-        <header class="slide__head"><p>Chapter 01</p><a class="slide__index" href="#vibija-index">Index</a></header>
-        <div class="slide__body"><h2 class="slide__chapter" id="vibija-logo-title">Logo</h2></div>
-        <footer class="slide__foot"><p><span data-brand-name="veriterra"></span> · Brand guidelines</p><p>Draft v0.1 · 2026</p></footer>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-wordmark-title">
-        <header class="slide__head"><p>Logo · Wordmark</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body slide__split">
-          <div class="slide__text">
-            <h3 class="slide__subtitle" id="vibija-wordmark-title">Wordmark</h3>
-            <p>The name in Comfortaa Bold, set in capitals with open tracking. Its companion is the orange square: one per layout, always in a corner.</p>
-            <p class="slide__note">A working wordmark, not a drawn logo yet.</p>
-          </div>
-          <div class="slide__visual vb-panel vb-panel--deep">
-            <span class="vb-word vb-word--xl" data-brand-name="veriterra"></span>
-            <span class="vb-square" aria-hidden="true"></span>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-logocolours-title">
-        <header class="slide__head"><p>Logo · Colours</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
+      <!-- 01 Mark -->
+      <section class="slide vb-mark" id="vibija-mark" data-scene="mark" data-tone="dark" aria-labelledby="vibija-mark-title">
+        <header class="slide__head"><p data-reveal>01 — Mark</p><p data-reveal>Comfortaa Bold · capitals</p></header>
         <div class="slide__body">
-          <h3 class="slide__subtitle" id="vibija-logocolours-title">Logo colours</h3>
-          <ul class="vb-tiles">
-            <li><div class="vb-panel vb-panel--deep"><span class="vb-word" data-brand-name="veriterra"></span></div><p>Lime on Aubergine. The main version.</p></li>
-            <li><div class="vb-panel vb-panel--paper"><span class="vb-word" data-brand-name="veriterra"></span></div><p>Aubergine on Paper, for light pages and print.</p></li>
-            <li><div class="vb-panel vb-panel--earth"><span class="vb-word" data-brand-name="veriterra"></span></div><p>Lime on Earth, the dark of the field.</p></li>
-            <li><div class="vb-panel vb-panel--lime"><span class="vb-word" data-brand-name="veriterra"></span></div><p>Aubergine on Lime, for small, loud moments.</p></li>
+          <h2 class="visually-hidden" id="vibija-mark-title">Mark</h2>
+          <p class="vb-mark__word" data-reveal><span data-brand-name="veriterra"></span><span class="vb-stop" aria-hidden="true"></span></p>
+        </div>
+        <footer class="vb-mark__foot">
+          <ul class="vb-versions">
+            <li data-reveal style="--i: 1"><span class="vb-version vb-version--deep"><span class="vb-word" data-brand-name="veriterra"></span><span class="vb-stop" aria-hidden="true"></span></span><p>Lime on Aubergine</p></li>
+            <li data-reveal style="--i: 2"><span class="vb-version vb-version--paper"><span class="vb-word" data-brand-name="veriterra"></span><span class="vb-stop" aria-hidden="true"></span></span><p>Aubergine on Paper</p></li>
+            <li data-reveal style="--i: 3"><span class="vb-version vb-version--lime"><span class="vb-word" data-brand-name="veriterra"></span><span class="vb-stop" aria-hidden="true"></span></span><p>Aubergine on Lime</p></li>
+          </ul>
+          <p class="vb-micro" data-reveal style="--i: 4">The name in Comfortaa Bold capitals. An orange square closes it, like a full stop.</p>
+        </footer>
+      </section>
+
+      <!-- 02 Colour -->
+      <section class="slide vb-colour" id="vibija-colour" data-scene="colour" data-tone="dark" aria-labelledby="vibija-colour-title">
+        <header class="slide__head"><p data-reveal>02 — Colour</p><p data-reveal>Four colours · seven purples</p></header>
+        <div class="slide__body">
+          <h2 class="vb-headline" id="vibija-colour-title" data-reveal>Aubergine ground, a lime voice and one orange square.</h2>
+          <ul class="vb-columns">
+            <li class="vb-column--on-deep" data-swatch="--color-vibija-aubergine" data-reveal style="--grow: 5; --i: 1"><strong>Aubergine</strong><span data-hex></span></li>
+            <li data-swatch="--color-vibija-lime" data-reveal style="--grow: 3; --i: 2"><strong>Lime</strong><span data-hex></span></li>
+            <li data-swatch="--color-vibija-paper" data-reveal style="--grow: 3; --i: 3"><strong>Paper</strong><span data-hex></span></li>
+            <li data-swatch="--color-vibija-orange" data-reveal style="--grow: 1; --i: 4"><strong>Orange</strong><span data-hex></span></li>
+          </ul>
+          <ul class="vb-purples" data-reveal style="--i: 5">
+            <li data-swatch="--bgpick-veriterra-lilac"><span>Lilac</span></li>
+            <li data-swatch="--bgpick-veriterra-lavender"><span>Lavender</span></li>
+            <li data-swatch="--bgpick-veriterra-mauve"><span>Mauve</span></li>
+            <li data-swatch="--bgpick-veriterra-iris"><span>Iris</span></li>
+            <li data-swatch="--bgpick-veriterra-violet"><span>Violet</span></li>
+            <li data-swatch="--bgpick-veriterra-plum"><span>Plum</span></li>
+            <li data-swatch="--bgpick-veriterra-aubergine"><span>Aubergine</span></li>
           </ul>
         </div>
       </section>
 
-      <section class="slide" data-tone="light" aria-labelledby="vibija-clearspace-title">
-        <header class="slide__head"><p>Logo · Clear space</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body slide__split">
-          <div class="slide__text">
-            <h3 class="slide__subtitle" id="vibija-clearspace-title">Clear space</h3>
-            <p>Keep the height of the capitals free on every side of the wordmark. Nothing else enters this frame: no text, no edges, no other logos.</p>
-          </div>
-          <div class="slide__visual vb-panel vb-panel--paper-deep">
-            <span class="vb-clear"><span class="vb-word vb-word--lg" data-brand-name="veriterra"></span></span>
-          </div>
-        </div>
-      </section>
-
-      <!-- 02 Typography -->
-      <section class="slide slide--divider" id="vibija-type" data-tone="dark" aria-labelledby="vibija-type-title">
-        <header class="slide__head"><p>Chapter 02</p><a class="slide__index" href="#vibija-index">Index</a></header>
-        <div class="slide__body"><h2 class="slide__chapter" id="vibija-type-title">Typography</h2></div>
-        <footer class="slide__foot"><p><span data-brand-name="veriterra"></span> · Brand guidelines</p><p>Draft v0.1 · 2026</p></footer>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-fonts-title">
-        <header class="slide__head"><p>Typography · Typefaces</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
+      <!-- 03 Typography -->
+      <section class="slide vb-type" id="vibija-type" data-scene="type" data-tone="light" aria-labelledby="vibija-type-title">
+        <header class="slide__head"><p data-reveal>03 — Typography</p><p data-reveal>Grotesk · Comfortaa · Inter</p></header>
         <div class="slide__body">
-          <h3 class="slide__subtitle" id="vibija-fonts-title">Typefaces</h3>
+          <h2 class="visually-hidden" id="vibija-type-title">Typography</h2>
+          <p class="vb-giant" data-reveal>Formulated for the crop.</p>
           <ul class="vb-faces">
-            <li><span class="vb-face vb-face--display" aria-hidden="true">Aa</span><strong>Comfortaa Bold</strong><p>The wordmark and headlines.</p></li>
-            <li><span class="vb-face vb-face--label" aria-hidden="true">Aa</span><strong>Inter Bold</strong><p>Labels, captions and buttons.</p></li>
-            <li><span class="vb-face vb-face--body" aria-hidden="true">Aa</span><strong>System sans</strong><p>Body text: San Francisco on Apple devices, Segoe on Windows.</p></li>
+            <li data-reveal style="--i: 1"><span class="vb-face vb-face--headline" aria-hidden="true">Aa</span><strong>Headlines and text</strong><p>The system grotesk, regular. San Francisco on iPad.</p></li>
+            <li data-reveal style="--i: 2"><span class="vb-face vb-face--mark" data-brand-name="veriterra"></span><strong>Wordmark</strong><p>Comfortaa Bold, capitals, a little open.</p></li>
+            <li data-reveal style="--i: 3"><span class="vb-face vb-face--label" aria-hidden="true">Aa</span><strong>Labels</strong><p>Inter Bold, capitals, wide.</p></li>
           </ul>
-        </div>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-hierarchy-title">
-        <header class="slide__head"><p>Typography · Hierarchy</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body slide__split">
-          <div class="slide__text">
-            <h3 class="slide__subtitle" id="vibija-hierarchy-title">Hierarchy</h3>
-            <dl class="vb-specs">
-              <div><dt>Label</dt><dd>Inter Bold, capitals, wide</dd></div>
-              <div><dt>Headline</dt><dd>Comfortaa Bold, tight</dd></div>
-              <div><dt>Lead</dt><dd>System sans, large</dd></div>
-              <div><dt>Body</dt><dd>System sans, regular</dd></div>
-            </dl>
-          </div>
-          <div class="slide__visual vb-sample">
-            <p class="vb-sample__label">Field note</p>
-            <p class="vb-sample__headline">Every crop needs a different feed.</p>
-            <p class="vb-sample__lead">Water-soluble fertilizers, formulated for the crop and its growth stage.</p>
-            <p>Placeholder body text. Short sentences in plain words, written for growers and agronomists rather than for a brochure.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-headlines-title">
-        <header class="slide__head"><p>Typography · Headlines</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body">
-          <h3 class="visually-hidden" id="vibija-headlines-title">Headlines</h3>
-          <p class="vb-giant" aria-hidden="true">Formulated for the crop.</p>
-          <p class="slide__note">Headlines are short and concrete. On a slide or a poster they may run off the edge.</p>
-        </div>
-      </section>
-
-      <!-- 03 Colour -->
-      <section class="slide slide--divider" id="vibija-colour" data-tone="dark" aria-labelledby="vibija-colour-title">
-        <header class="slide__head"><p>Chapter 03</p><a class="slide__index" href="#vibija-index">Index</a></header>
-        <div class="slide__body"><h2 class="slide__chapter" id="vibija-colour-title">Colour</h2></div>
-        <footer class="slide__foot"><p><span data-brand-name="veriterra"></span> · Brand guidelines</p><p>Draft v0.1 · 2026</p></footer>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-primary-title">
-        <header class="slide__head"><p>Colour · Primary</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body">
-          <h3 class="slide__subtitle" id="vibija-primary-title">Primary colours</h3>
-          <ul class="vb-swatches">
-            <li data-swatch="--color-vibija-aubergine"><strong>Aubergine</strong><span data-hex></span><p>Ground: backgrounds and text.</p></li>
-            <li data-swatch="--color-vibija-lime"><strong>Lime</strong><span data-hex></span><p>The wordmark and highlights.</p></li>
-            <li data-swatch="--color-vibija-orange"><strong>Orange</strong><span data-hex></span><p>One square per layout.</p></li>
-            <li data-swatch="--color-vibija-paper"><strong>Paper</strong><span data-hex></span><p>Light pages and print.</p></li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-purples-title">
-        <header class="slide__head"><p>Colour · Purples</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body">
-          <h3 class="slide__subtitle" id="vibija-purples-title">Background purples</h3>
-          <ul class="vb-swatches vb-swatches--strip">
-            <li data-swatch="--bgpick-veriterra-lilac"><strong>Lilac</strong><span data-hex></span></li>
-            <li data-swatch="--bgpick-veriterra-lavender"><strong>Lavender</strong><span data-hex></span></li>
-            <li data-swatch="--bgpick-veriterra-mauve"><strong>Mauve</strong><span data-hex></span></li>
-            <li data-swatch="--bgpick-veriterra-iris"><strong>Iris</strong><span data-hex></span></li>
-            <li data-swatch="--bgpick-veriterra-violet"><strong>Violet</strong><span data-hex></span></li>
-            <li data-swatch="--bgpick-veriterra-plum"><strong>Plum</strong><span data-hex></span></li>
-            <li data-swatch="--bgpick-veriterra-aubergine"><strong>Aubergine</strong><span data-hex></span></li>
-          </ul>
-          <p class="slide__note">Pale to deep. The same set as the background choice on the logo screen.</p>
-        </div>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-combos-title">
-        <header class="slide__head"><p>Colour · Combinations</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body">
-          <h3 class="slide__subtitle" id="vibija-combos-title">Combinations</h3>
-          <ul class="vb-tiles vb-tiles--pairs">
-            <li><div class="vb-panel vb-panel--deep vb-combo" data-contrast><p>Formulated for the crop.</p><span data-ratio></span></div></li>
-            <li><div class="vb-panel vb-panel--paper vb-combo" data-contrast><p>Formulated for the crop.</p><span data-ratio></span></div></li>
-            <li><div class="vb-panel vb-panel--lime vb-combo" data-contrast><p>Formulated for the crop.</p><span data-ratio></span></div></li>
-            <li><div class="vb-panel vb-panel--orange vb-combo" data-contrast><p>Formulated for the crop.</p><span data-ratio></span></div></li>
-          </ul>
-          <p class="slide__note">Contrast is measured on the page; text needs 4.5:1, large headlines 3:1.</p>
-        </div>
-      </section>
-
-      <!-- 04 Photo style -->
-      <section class="slide slide--divider" id="vibija-photo" data-tone="dark" aria-labelledby="vibija-photo-title">
-        <header class="slide__head"><p>Chapter 04</p><a class="slide__index" href="#vibija-index">Index</a></header>
-        <div class="slide__body"><h2 class="slide__chapter" id="vibija-photo-title">Photo style</h2></div>
-        <footer class="slide__foot"><p><span data-brand-name="veriterra"></span> · Brand guidelines</p><p>Draft v0.1 · 2026</p></footer>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-tips-title">
-        <header class="slide__head"><p>Photo style · Basics</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body slide__split">
-          <div class="slide__text">
-            <h3 class="slide__subtitle" id="vibija-tips-title">Basic rules</h3>
-            <p>Photography shows real work in real fields. Until it exists, layouts use marked placeholders.</p>
-          </div>
-          <ol class="slide__visual vb-rules">
-            <li>Real growers and real crops. No stock, no AI renders.</li>
-            <li>Daylight: early morning or late afternoon, no hard flash.</li>
-            <li>Close on the work: hands, drip lines, roots, leaves.</li>
-            <li>The crop is the hero; the bag plays a supporting part.</li>
-            <li>Honest colour: soil looks like soil, no heavy filters.</li>
-            <li>Calm backgrounds that leave room for type.</li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-approach-title">
-        <header class="slide__head"><p>Photo style · Approach</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body">
-          <h3 class="slide__subtitle" id="vibija-approach-title">Yes and no</h3>
-          <div class="vb-approach">
-            <p class="vb-approach__label">Yes</p>
-            <ul class="vb-photos">
-              <li><span class="vb-photo">Photo to come</span><p>Hands adjusting a drip line</p></li>
-              <li><span class="vb-photo">Photo to come</span><p>Roots and soil, close up</p></li>
-              <li><span class="vb-photo">Photo to come</span><p>A grower in their greenhouse</p></li>
-            </ul>
-            <p class="vb-approach__label">No</p>
-            <ul class="vb-photos vb-photos--no">
-              <li><span class="vb-photo">Photo to come</span><p>A stock farmer smiling at the camera</p></li>
-              <li><span class="vb-photo">Photo to come</span><p>Generated fields that do not exist</p></li>
-              <li><span class="vb-photo">Photo to come</span><p>A bag floating in a perfect sky</p></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- 05 Applications -->
-      <section class="slide slide--divider" id="vibija-apps" data-tone="dark" aria-labelledby="vibija-apps-title">
-        <header class="slide__head"><p>Chapter 05</p><a class="slide__index" href="#vibija-index">Index</a></header>
-        <div class="slide__body"><h2 class="slide__chapter" id="vibija-apps-title">Applications</h2></div>
-        <footer class="slide__foot"><p><span data-brand-name="veriterra"></span> · Brand guidelines</p><p>Draft v0.1 · 2026</p></footer>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-pack-title">
-        <header class="slide__head"><p>Applications · Packaging</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body slide__split">
-          <div class="slide__text">
-            <h3 class="slide__subtitle" id="vibija-pack-title">Packaging</h3>
-            <p>An aubergine band carries the wordmark; the paper below carries the product. The orange square marks the corner.</p>
-            <p class="slide__note">Mock-up. Every product detail on it is a placeholder.</p>
-          </div>
-          <div class="slide__visual vb-panel vb-panel--paper-deep">
-            <div class="vb-bag">
-              <div class="vb-bag__band"><span class="vb-word" data-brand-name="veriterra"></span></div>
-              <div class="vb-bag__body">
-                <p class="vb-bag__name">Product name</p>
-                <p class="vb-bag__kind" data-brand-descriptor="veriterra"></p>
-                <p class="vb-bag__spec">Grade 00-00-00 · Net 00 kg</p>
-              </div>
-              <span class="vb-square" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-social-title">
-        <header class="slide__head"><p>Applications · Social media</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body">
-          <h3 class="slide__subtitle" id="vibija-social-title">Social media posts</h3>
-          <ul class="vb-posts">
-            <li class="vb-panel vb-panel--deep vb-post"><p class="vb-post__headline">Every crop needs a different feed.</p><span class="vb-square" aria-hidden="true"></span></li>
-            <li class="vb-post vb-post--photo"><span class="vb-photo">Photo to come</span><p class="vb-post__caption">From the field · Placeholder</p></li>
-            <li class="vb-panel vb-panel--paper vb-post"><p class="vb-sample__label">Tip of the week</p><p class="vb-post__headline">Feed little and often.</p><span class="vb-word" data-brand-name="veriterra"></span></li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="slide" data-tone="light" aria-labelledby="vibija-banners-title">
-        <header class="slide__head"><p>Applications · Banners</p><span class="slide__meta"><span class="slide__num"></span><a class="slide__index" href="#vibija-index">Index</a></span></header>
-        <div class="slide__body">
-          <h3 class="slide__subtitle" id="vibija-banners-title">Banners</h3>
-          <div class="vb-banners">
-            <div class="vb-panel vb-panel--deep vb-banner">
-              <span class="vb-word" data-brand-name="veriterra"></span>
-              <p class="vb-post__headline">Formulated for the crop. Proven in the field.</p>
-              <span class="vb-pill">Get in touch</span>
-              <span class="vb-square" aria-hidden="true"></span>
-            </div>
-            <div class="vb-panel vb-panel--paper vb-banner vb-banner--photo">
-              <span class="vb-photo">Photo to come</span>
-              <div>
-                <p class="vb-post__headline">Feed by growth stage.</p>
-                <span class="vb-word" data-brand-name="veriterra"></span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </article>

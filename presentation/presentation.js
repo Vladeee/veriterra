@@ -85,6 +85,7 @@
       renderArrows(landing);
       syncPageColour();
       centreCurrent();
+      updateSky();
       playLogo(landing);
     }
 
@@ -103,47 +104,48 @@
     document.body.style.backgroundColor = none ? "" : colour;
   }
 
-  // ---------- slides: numbers, colour swatches and measured contrast ----------
-  function luminance(hex) {
-    var c = [1, 3, 5].map(function (i) {
-      var v = parseInt(hex.substr(i, 2), 16) / 255;
-      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-    });
-    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
-  }
-
+  // ---------- slides: colour swatches, the flowing sky, reveal on scroll ----------
   function initSlides() {
-    landings.forEach(function (landing) {
-      var nums = landing.querySelectorAll(".slide__num");
-      var total = landing.querySelectorAll(".slide").length;
-      var pad = function (n) { return (n < 10 ? "0" : "") + n; };
-      Array.prototype.forEach.call(landing.querySelectorAll(".slide"), function (slide, i) {
-        var num = slide.querySelector(".slide__num");
-        if (num) num.textContent = pad(i + 1) + " / " + pad(total);
-      });
-      if (!nums.length) return;
-      // Swatches show the token's colour and its hex, so tokens.css stays the only source
-      landing.querySelectorAll("[data-swatch]").forEach(function (el) {
-        var token = el.getAttribute("data-swatch");
-        el.style.setProperty("--sw", "var(" + token + ")");
-        var hex = el.querySelector("[data-hex]");
-        if (hex) hex.textContent = toHex(getComputedStyle(root).getPropertyValue(token).trim());
-      });
+    // Swatches show the token's colour and its hex, so tokens.css stays the only source
+    document.querySelectorAll("[data-swatch]").forEach(function (el) {
+      var token = el.getAttribute("data-swatch");
+      el.style.setProperty("--sw", "var(" + token + ")");
+      var hex = el.querySelector("[data-hex]");
+      if (hex) hex.textContent = toHex(getComputedStyle(root).getPropertyValue(token).trim());
     });
-    measureContrast();
+    // Parts of a slide rise into place as it comes into view
+    if (!("IntersectionObserver" in window)) return;
+    root.classList.add("reveal-ready");
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.classList.add("is-in");
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll(".slide").forEach(function (slide) { seen.observe(slide); });
   }
 
-  // Each colour combination states its contrast ratio, measured from the page itself
-  function measureContrast() {
-    document.querySelectorAll("[data-contrast]").forEach(function (el) {
-      var cs = getComputedStyle(el);
-      var a = luminance(toHex(cs.color));
-      var b = luminance(toHex(cs.backgroundColor));
-      var ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
-      var grade = ratio >= 7 ? "AAA" : ratio >= 4.5 ? "AA" : ratio >= 3 ? "AA large" : "Fails";
-      var out = el.querySelector("[data-ratio]");
-      if (out) out.textContent = grade + " · " + ratio.toFixed(1) + ":1";
+  // The sky behind the slides blends from the scene of one slide to the next:
+  // halfway between two slide centres it is half one scene, half the other
+  var SKY_PARTS = ["base", "glow", "glow-2"];
+  function updateSky() {
+    var sky = current && current.querySelector(".slide-sky");
+    if (!sky) return;
+    var slides = Array.prototype.slice.call(current.querySelectorAll("[data-scene]"));
+    if (!slides.length) return;
+    var middle = window.innerHeight / 2;
+    var centres = slides.map(function (s) { var r = s.getBoundingClientRect(); return r.top + r.height / 2; });
+    var i = 0;
+    while (i < slides.length - 1 && centres[i + 1] <= middle) i++;
+    var j = Math.min(i + 1, slides.length - 1);
+    var mix = j === i ? 0 : Math.min(1, Math.max(0, (middle - centres[i]) / (centres[j] - centres[i])));
+    var prefix = sky.getAttribute("data-scene-prefix");
+    SKY_PARTS.forEach(function (part) {
+      sky.style.setProperty("--from-" + part, "var(" + prefix + slides[i].getAttribute("data-scene") + "-" + part + ")");
+      sky.style.setProperty("--to-" + part, "var(" + prefix + slides[j].getAttribute("data-scene") + "-" + part + ")");
     });
+    sky.style.setProperty("--mix", (mix * 100).toFixed(1) + "%");
+    var room = document.documentElement.scrollHeight - window.innerHeight;
+    sky.style.setProperty("--p", room > 0 ? (window.scrollY / room).toFixed(3) : "0");
   }
 
   // ---------- full screen (hidden where unsupported or already an installed app) ----------
@@ -861,6 +863,7 @@
         // Past the logo screen (half of it scrolled away) the switcher and arrows step aside
         var hero = current && current.querySelector(".logo-hero");
         document.body.classList.toggle("past-hero", !!hero && hero.getBoundingClientRect().bottom < window.innerHeight / 2);
+        updateSky();
         var y = nav.getBoundingClientRect().bottom - 2;
         var stack = document.elementsFromPoint ? document.elementsFromPoint(window.innerWidth * 0.25, y) : [];
         var toned = stack.filter(function (el) { return !nav.contains(el) && el.closest("[data-tone]"); })[0];
