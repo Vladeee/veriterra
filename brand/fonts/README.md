@@ -7,7 +7,7 @@ with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--fon
   Madimi One, Braah One (no variant uses it now), Momo Trust Display, Inter, Faculty Glyphic. Each style variant (`--fig-*` tokens,
   `presentation/variants.js`) names one of them. Only the weights the frames use are included.
 - **Earlier logo trials (not in use now):** Asul, Old Standard, Young Serif, Bona Nova, Mynerve, Accidenz Commons.
-- **TerraGroup wordmark:** Faculty Glyphic (`--font-faculty`).
+- **GukoV Group wordmark:** Faculty Glyphic (`--font-faculty`).
 - **Headings:** Hedvig Letters Serif (`--font-hedvig`). It is a free stand-in for **Season Mix**
   (Displaay), which is commercial and would need a web licence.
 

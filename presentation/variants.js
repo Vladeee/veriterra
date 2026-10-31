@@ -8,7 +8,7 @@
   kern: true spaces the letters by their ink (for faces with monospaced Latin).
   mesh: true lets a layered background drift slowly.
   split: n draws the first n letters in ink and the rest in ink2.
-  Keys are landing ids: vitreeone = TerraGroup, veriterra = Vibija, vita = Vivo.
+  Keys are landing ids: vitreeone = GukoV Group, veriterra = Vibija, vita = Viva.
 */
 window.VARIANTS = {
   "vitreeone": [

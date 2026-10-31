@@ -1,6 +1,6 @@
 # Logos
 
-Empty on purpose. The existing logos from the presentations are not being carried over, and the names (TerraGroup, Vibija, Vivo) are new working names.
+Empty on purpose. The existing logos from the presentations are not being carried over, and the names (GukoV Group, Vibija, Viva) are new working names.
 
 When logos arrive, add one folder per brand with SVG masters:
 

@@ -1,6 +1,6 @@
-# TerraGroup brand system (working draft)
+# GukoV Group brand system (working draft)
 
-One link for **TerraGroup** and its four companies: Vibija, Verdo, Vaya and Vivo.
+One link for **GukoV Group** and its four companies: Vibija, Verdo, Vaya and Viva.
 (Internal ids keep the old working names: `vitreeone`, `veriterra`, `vita`.)
 It opens straight on the presentation: five landings behind a fixed top menu, and a last page with every variant in one grid. For now each landing is one screen: the logo. Arrows at the screen edges go to the previous and next page.
 
@@ -11,7 +11,7 @@ Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and ins
 
 ## Open it
 
-https://vladeee.github.io/veriterra/ (`#verdo` opens the Verdo landing directly; Vibija is `#veriterra`, Vivo is `#vita`)
+https://vladeee.github.io/veriterra/ (`#verdo` opens the Verdo landing directly; Vibija is `#veriterra`, Viva is `#vita`)
 
 On iPad, open it in Safari, tap **Share**, then **Add to Home Screen**. It opens full screen, like an app.
 
