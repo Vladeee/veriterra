@@ -332,7 +332,7 @@ body.is-scrolled .topnav__blur { opacity: 1; }
    so the whole slide scales as one and nothing ever reflows.
    The slides are transparent: behind them one fixed sky (.slide-sky) blends
    from the scene of the last slide to the new one; presentation.js sets
-   --from-*, --to-* (scene tokens), --mix and --p. */
+   --from-*, --to-* (scene tokens: edge, body, light), --mix and --p. */
 html.has-deck {
   overflow: hidden;
   font-size: var(--deck-rem);
@@ -354,14 +354,19 @@ html.has-deck .topnav__inner {
   pointer-events: none;
   --mix: 0%;
   --p: 0;
-  --base: color-mix(in oklch, var(--from-base) calc(100% - var(--mix)), var(--to-base));
-  --glow: color-mix(in oklch, var(--from-glow) calc(100% - var(--mix)), var(--to-glow));
-  --glow-2: color-mix(in oklch, var(--from-glow-2) calc(100% - var(--mix)), var(--to-glow-2));
-  /* The lights travel across the screen as the deck goes on */
+  --edge: color-mix(in oklch, var(--from-edge) calc(100% - var(--mix)), var(--to-edge));
+  --body: color-mix(in oklch, var(--from-body) calc(100% - var(--mix)), var(--to-body));
+  --light: color-mix(in oklch, var(--from-light) calc(100% - var(--mix)), var(--to-light));
+  /* After the reference: one horizontal structure, a dark edge on the left,
+     the body, a lighter edge on the right, and a soft shade rising from the
+     bottom. The body widens a little as the deck goes on. No radial shapes. */
   background:
-    radial-gradient(65% 60% at calc(82% - var(--p) * 55%) calc(18% + var(--p) * 25%), var(--glow), transparent 72%),
-    radial-gradient(60% 65% at calc(12% + var(--p) * 50%) calc(88% - var(--p) * 30%), var(--glow-2), transparent 70%),
-    var(--base);
+    linear-gradient(to top, color-mix(in oklch, var(--edge) 35%, transparent), transparent 55%),
+    linear-gradient(to right in oklch,
+      var(--edge) 0%,
+      var(--body) calc(30% + var(--p) * 8%),
+      var(--body) calc(58% + var(--p) * 6%),
+      var(--light) 100%);
 }
 
 .slide {
@@ -400,11 +405,12 @@ html.has-deck .topnav__inner {
   column-gap: var(--grid-gutter);
 }
 
-/* Section header: hairline, title (col 1), description (col 2), count (col 4) */
+/* Section header: hairline, title (col 1), description (col 2), count (col 4),
+   all on one baseline. It stays put while the slides change. */
 .slide__head {
-  align-items: start;
+  align-items: baseline;
   padding-top: var(--space-4);
-  border-top: var(--border-width) solid currentColor;
+  border-top: var(--border-width) solid var(--brand-rule, color-mix(in oklch, currentColor 25%, transparent));
 }
 
 .slide__title {

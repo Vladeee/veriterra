@@ -104,7 +104,7 @@
   flex-direction: column;
   gap: var(--space-3);
   padding-top: var(--space-4);
-  border-top: var(--border-width) solid color-mix(in oklch, currentColor 35%, transparent);
+  border-top: var(--border-width) solid var(--brand-rule);
 }
 
 /* ---------- 03 Logo: the wordmark, large, from column 1, centred in the space ---------- */
@@ -135,15 +135,17 @@
   letter-spacing: var(--tracking-display);
 }
 
-.vb-panel--paper { background: var(--brand-paper); color: var(--brand-deep); outline: var(--border-width) solid var(--brand-line); outline-offset: calc(var(--border-width) * -1); }
+.vb-panel--paper { background: var(--brand-paper); color: var(--brand-deep); outline: var(--border-width) solid var(--brand-rule); outline-offset: calc(var(--border-width) * -1); }
 .vb-panel--aubergine { background: var(--brand-deep); color: var(--brand-on-deep); }
 .vb-panel--lime { background: var(--brand-on-deep); color: var(--brand-deep); }
 .vb-panel--ink { background: var(--brand-night); color: var(--brand-paper); }
 
 /* ---------- 05 Primary typeface: name in column 1, the specimen in 2-4 ---------- */
+/* Where a column-1 text pairs with content (typeface, weights, hierarchy), the
+   row shares one first baseline, so the name reads on the line of its sample */
 .vb-typeface .slide__body,
 .vb-weights .slide__body,
-.vb-hierarchy .slide__body { align-items: start; }
+.vb-hierarchy .slide__body { align-items: baseline; }
 
 .vb-aside { grid-column: 1; }
 
@@ -156,8 +158,6 @@
 }
 
 /* ---------- 06 Weights: each weight, display size, running off the edge ---------- */
-.vb-weights .slide__body { align-items: center; }
-
 .vb-weight {
   grid-column: 2 / -1;
   white-space: nowrap;
@@ -202,6 +202,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: var(--space-4);
+  align-items: baseline;
   margin: 0;
   font-size: var(--text-body);
   line-height: var(--leading-body);
@@ -213,7 +214,7 @@
 /* The light swatches get a hairline so they hold their edge on paper */
 .vb-swatches [data-swatch="--color-vibija-paper"],
 .vb-shares [data-swatch="--color-vibija-paper"] {
-  outline: var(--border-width) solid var(--brand-line);
+  outline: var(--border-width) solid var(--brand-rule);
   outline-offset: calc(var(--border-width) * -1);
 }
 
@@ -258,7 +259,7 @@
   aspect-ratio: 1;
   margin-bottom: var(--space-3);
   background: var(--ground);
-  outline: var(--border-width) solid var(--brand-line);
+  outline: var(--border-width) solid var(--brand-rule);
   outline-offset: calc(var(--border-width) * -1);
 }
 

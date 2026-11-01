@@ -168,14 +168,16 @@
     if (location.hash !== "#" + slides[i].id) history.replaceState(null, "", "#" + slides[i].id);
     blendSky(from, slides[i], i / Math.max(1, slides.length - 1));
     renderArrows();
-    window.dispatchEvent(new Event("scroll"));   // the menu re-reads the tone under it
+    // The menu takes the tone of the slide at once (sampling would still see the
+    // outgoing slide while they cross-fade)
+    document.body.classList.toggle("nav-on-dark", slides[i].getAttribute("data-tone") === "dark");
   }
 
   function step(dir) { if (deck.slides.length) goTo(deck.index + dir); }
 
   // The sky behind the slides blends from the scene of the last slide to the new one
   // (--mix 0 → 100%) while its lights travel with the deck's progress (--p)
-  var SKY_PARTS = ["base", "glow", "glow-2"];
+  var SKY_PARTS = ["edge", "body", "light"];
   var skyTween = null;
   function blendSky(fromSlide, toSlide, progress) {
     var sky = current && current.querySelector(".slide-sky");
@@ -573,6 +575,7 @@
       window.requestAnimationFrame(function () {
         ticking = false;
         document.body.classList.toggle("is-scrolled", window.scrollY > 8);
+        if (deck.slides.length) return;   // a deck sets the menu tone in goTo()
         var y = nav.getBoundingClientRect().bottom - 2;
         var stack = document.elementsFromPoint ? document.elementsFromPoint(window.innerWidth * 0.25, y) : [];
         var toned = stack.filter(function (el) { return !nav.contains(el) && el.closest("[data-tone]"); })[0];
