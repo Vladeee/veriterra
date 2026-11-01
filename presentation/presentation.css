@@ -73,18 +73,18 @@ body.is-scrolled .topnav__blur { opacity: 1; }
 .topnav__blur i:nth-child(4) { --b: 2; --from: 30%; --to: 55%; }
 .topnav__blur i:nth-child(5) { --b: 4; --from: 20%; --to: 40%; }
 
+/* Compact bar on the grid: links from the left margin, full screen at the right */
 .topnav__inner {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
   height: var(--nav-height);
-  padding-inline: calc(var(--tap-min) + max(var(--page-margin), env(safe-area-inset-left))) calc(var(--tap-min) + max(var(--page-margin), env(safe-area-inset-right)));
+  padding-inline: max(var(--page-margin), env(safe-area-inset-left)) calc(var(--tap-min) + max(var(--page-margin), env(safe-area-inset-right)));
 }
 
 .topnav__list {
   display: flex;
-  gap: var(--space-6);
+  gap: var(--space-5);
   height: 100%;
   min-width: 0;
   margin: 0;
@@ -116,33 +116,23 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   height: 100%;
   min-width: var(--tap-min);
   color: inherit;
-  font-size: var(--text-body);
-  font-weight: var(--font-weight-regular);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-medium);
   text-decoration: none;
+  opacity: var(--opacity-muted);
+  transition: opacity var(--duration-base) var(--ease-standard);
   white-space: nowrap;
   touch-action: manipulation;
 }
 
-.topnav__link::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: var(--space-2);
-  width: var(--dot-size);
-  height: var(--dot-size);
-  border-radius: var(--radius-pill);
-  background: currentColor;
-  transform: translateX(-50%) scale(0);
-  transition: transform var(--duration-base) var(--ease-emphasized);
-}
-
-.topnav__link[aria-current="page"]::after { transform: translateX(-50%) scale(1); }
+/* The current page reads at full strength, the others quieter */
+.topnav__link[aria-current="page"] { opacity: 1; }
 
 @media (hover: hover) {
-  .topnav__link:hover { opacity: var(--opacity-quiet); }
+  .topnav__link:hover { opacity: 1; }
 }
 
-.topnav__link:active { opacity: var(--opacity-quiet); }
+.topnav__link:active { opacity: 1; }
 
 .topnav__fs {
   display: inline-grid;
@@ -317,8 +307,9 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   transition: opacity var(--duration-base) var(--ease-standard);
 }
 
-.page-arrow--prev { left: calc(var(--space-3) + env(safe-area-inset-left)); }
-.page-arrow--next { right: calc(var(--space-3) + env(safe-area-inset-right)); }
+/* Centred in the page margin, so they never touch the grid */
+.page-arrow--prev { left: calc((var(--page-margin) - var(--tap-min)) / 2 + env(safe-area-inset-left)); }
+.page-arrow--next { right: calc((var(--page-margin) - var(--tap-min)) / 2 + env(safe-area-inset-right)); }
 
 .page-arrow:active { scale: var(--press-scale); }
 
@@ -326,26 +317,17 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   .page-arrow:hover { opacity: 1; }
 }
 
-/* The page arrows belong to the logo screen: once the slides below it are in
-   view they step aside (presentation.js sets body.past-hero) */
-body.past-hero .page-arrows {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
+/* The arrows belong to the deck: none on a landing without slides, and none
+   past the first or last slide */
+.page-arrow[hidden] { display: none; }
 
-/* ---------- Slides: a landing as a presentation (Vibija for now) ----------
-   Full screens with a small running header, after farmminerals.com: big type,
-   lots of air. The slides are transparent: behind them one fixed sky
-   (.slide-sky) blends from the scene of one slide to the next while the page
-   scrolls. presentation.js sets --from-*, --to-* (scene tokens), --mix and --p. */
-html.has-slides {
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 0;
-}
-
-html.has-slides .logo-hero,
-.slide { scroll-snap-align: start; }
+/* ---------- Slides: a landing as a click-through presentation (Vibija) ----------
+   One slide per screen, after farmminerals.com: big type, lots of air. Arrow
+   keys, space, page up / down and the edge arrows step through them
+   (presentation.js, goTo). The slides are transparent: behind them one fixed
+   sky (.slide-sky) blends from the scene of the last slide to the new one;
+   presentation.js sets --from-*, --to-* (scene tokens), --mix and --p. */
+html.has-deck { overflow: hidden; }
 
 /* The sky sits behind the slides but above the landing's own background */
 .landing:has(.slide-sky) { isolation: isolate; }
@@ -368,16 +350,28 @@ html.has-slides .logo-hero,
 }
 
 .slide {
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  min-height: 100dvh;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity var(--duration-slow) var(--ease-standard),
+    visibility 0s linear var(--duration-slow);
   padding: calc(var(--nav-height) + env(safe-area-inset-top)) max(var(--page-margin), env(safe-area-inset-right)) calc(var(--space-7) + env(safe-area-inset-bottom)) max(var(--page-margin), env(safe-area-inset-left));
   overflow: hidden;
   color: var(--brand-paper, var(--color-paper-0));
 }
 
 .slide[data-tone="light"] { color: var(--brand-ink, var(--color-text)); }
+
+.slide.is-current {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
 
 /* Everything on a slide sits on the page grid: --grid-columns columns
    (four, for 1920x1080) with --grid-gutter between them */
@@ -553,41 +547,4 @@ html.reveal-ready .slide.is-in [data-reveal] {
   font-size: var(--text-label);
   font-weight: var(--font-weight-medium);
   opacity: var(--opacity-quiet);
-}
-
-/* ---------- Editable wordmark: tap the logo and type, like a font tester ---------- */
-.logo-hero__word[contenteditable] {
-  /* A short word on a phone is lower than a tap target: grow the box to
-     --tap-min, the negative margin keeps the letters where they were */
-  --tap-pad: max(0px, (var(--tap-min) - 1lh) / 2);
-  padding-block: var(--tap-pad);
-  margin-block: calc(var(--tap-pad) * -1);
-  min-width: 1ch;
-  min-height: 1lh;
-  cursor: text;
-  caret-color: var(--v-ink, currentColor);
-  -webkit-user-select: text;
-  user-select: text;
-  touch-action: manipulation;
-  outline: none;
-}
-
-/* The mask only matters for the entrance; without it the focus outline can show */
-.logo-hero__word[contenteditable]:focus {
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-
-.logo-hero__word[contenteditable]:focus-visible {
-  outline: var(--border-width) dashed color-mix(in oklch, currentColor 45%, transparent);
-  outline-offset: var(--space-3);
-}
-
-@media (hover: hover) {
-  .logo-hero__word[contenteditable]:hover:not(:focus) {
-    outline: var(--border-width) dashed color-mix(in oklch, currentColor 25%, transparent);
-    outline-offset: var(--space-3);
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
 }

@@ -42,24 +42,25 @@
     menu.setAttribute("data-more", more.join(" "));
   }
 
-  // ---------- previous / next page: arrows at the screen edges ----------
+  // ---------- arrows at the screen edges: previous / next slide of the deck ----------
   var arrows = document.querySelector(".page-arrows");
 
-  function pageName(landing) {
-    var b = BrandUI.brandById(landing.id);
-    return b ? (b.menu || b.name) : "All variants";
+  function renderArrows() {
+    if (!deck.slides.length) { arrows.hidden = true; return; }
+    arrows.hidden = false;
+    [["prev", -1], ["next", 1]].forEach(function (d) {
+      var to = deck.slides[deck.index + d[1]];
+      var a = arrows.querySelector(".page-arrow--" + d[0]);
+      a.hidden = !to;   // the deck stops at its first and last slide
+      if (!to) return;
+      a.href = "#" + to.id;
+      a.setAttribute("aria-label", (d[1] < 0 ? "Previous slide: " : "Next slide: ") + slideName(to));
+    });
   }
 
-  function renderArrows(landing) {
-    if (!landing) { arrows.hidden = true; return; }
-    arrows.hidden = false;
-    var i = landings.indexOf(landing);
-    [["prev", -1], ["next", 1]].forEach(function (d) {
-      var to = landings[(i + d[1] + landings.length) % landings.length];
-      var a = arrows.querySelector(".page-arrow--" + d[0]);
-      a.href = "#" + to.id;
-      a.setAttribute("aria-label", (d[1] < 0 ? "Previous page: " : "Next page: ") + pageName(to));
-    });
+  function slideName(slide) {
+    var title = slide.querySelector(".slide__head h2");
+    return title ? title.textContent : slide.id;
   }
 
   // ---------- routing ----------
@@ -79,18 +80,22 @@
       var active = menu.querySelector('[aria-current="page"]');
       if (active && active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "nearest" });
       document.title = landing.id === "overview" ? "All variants · " + BrandUI.brandById("vitreeone").name : BrandUI.brandById(landing.id).name;
-      // A landing with slides scrolls and snaps slide by slide
-      root.classList.toggle("has-slides", !!landing.querySelector(".slide"));
-      renderArrows(landing);
+      // A landing with slides is a click-through deck: one slide per screen
+      deck.slides = Array.prototype.slice.call(landing.querySelectorAll(".slide"));
+      deck.index = -1;
+      root.classList.toggle("has-deck", deck.slides.length > 0);
       tintChrome(landing);
       syncPageColour();
       centreCurrent();
-      updateSky();
       playLogo(landing);
     }
 
-    if (target !== landing) target.scrollIntoView({ block: "start" });
-    else window.scrollTo(0, 0);
+    if (deck.slides.length) goTo(Math.max(0, deck.slides.indexOf(target)));
+    else {
+      renderArrows();
+      if (target !== landing) target.scrollIntoView({ block: "start" });
+      else window.scrollTo(0, 0);
+    }
   }
 
   function route() { show(decodeURIComponent(location.hash.slice(1))); }
@@ -104,7 +109,9 @@
     document.body.style.backgroundColor = none ? "" : colour;
   }
 
-  // ---------- slides: colour swatches, the flowing sky, reveal on scroll ----------
+  // ---------- deck: slides shown one at a time, like a presentation ----------
+  var deck = { slides: [], index: -1 };
+
   function initSlides() {
     // Swatches show the token's colour and its hex, so tokens.css stays the only source
     document.querySelectorAll("[data-swatch]").forEach(function (el) {
@@ -113,39 +120,73 @@
       var hex = el.querySelector("[data-hex]");
       if (hex) hex.textContent = toHex(getComputedStyle(root).getPropertyValue(token).trim());
     });
-    // Parts of a slide rise into place as it comes into view
-    if (!("IntersectionObserver" in window)) return;
-    root.classList.add("reveal-ready");
-    var seen = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) entry.target.classList.add("is-in");
+    // Each slide numbers itself: 01 / 06
+    landings.forEach(function (landing) {
+      var slides = landing.querySelectorAll(".slide");
+      var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+      Array.prototype.forEach.call(slides, function (slide, i) {
+        var count = slide.querySelector("[data-count]");
+        if (count) count.textContent = pad(i + 1) + " / " + pad(slides.length);
+        slide.setAttribute("aria-hidden", "true");
+        slide.inert = true;
       });
-    }, { threshold: 0.25 });
-    document.querySelectorAll(".slide").forEach(function (slide) { seen.observe(slide); });
+    });
+    root.classList.add("reveal-ready");
   }
 
-  // The sky behind the slides blends from the scene of one slide to the next:
-  // halfway between two slide centres it is half one scene, half the other
+  // Show slide i of the open deck (it stops at the ends). The hash follows without re-routing.
+  function goTo(i) {
+    var slides = deck.slides;
+    if (!slides.length) return;
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    var from = slides[deck.index] || slides[i];
+    deck.index = i;
+    slides.forEach(function (slide, k) {
+      var on = k === i;
+      slide.classList.toggle("is-current", on);
+      slide.setAttribute("aria-hidden", String(!on));
+      slide.inert = !on;
+      if (!on) slide.classList.remove("is-in");
+    });
+    // Parts rise in again on every visit
+    void slides[i].offsetWidth;
+    slides[i].classList.add("is-in");
+    if (location.hash !== "#" + slides[i].id) history.replaceState(null, "", "#" + slides[i].id);
+    blendSky(from, slides[i], i / Math.max(1, slides.length - 1));
+    renderArrows();
+    window.dispatchEvent(new Event("scroll"));   // the menu re-reads the tone under it
+  }
+
+  function step(dir) { if (deck.slides.length) goTo(deck.index + dir); }
+
+  // The sky behind the slides blends from the scene of the last slide to the new one
+  // (--mix 0 → 100%) while its lights travel with the deck's progress (--p)
   var SKY_PARTS = ["base", "glow", "glow-2"];
-  function updateSky() {
+  var skyTween = null;
+  function blendSky(fromSlide, toSlide, progress) {
     var sky = current && current.querySelector(".slide-sky");
     if (!sky) return;
-    var slides = Array.prototype.slice.call(current.querySelectorAll("[data-scene]"));
-    if (!slides.length) return;
-    var middle = window.innerHeight / 2;
-    var centres = slides.map(function (s) { var r = s.getBoundingClientRect(); return r.top + r.height / 2; });
-    var i = 0;
-    while (i < slides.length - 1 && centres[i + 1] <= middle) i++;
-    var j = Math.min(i + 1, slides.length - 1);
-    var mix = j === i ? 0 : Math.min(1, Math.max(0, (middle - centres[i]) / (centres[j] - centres[i])));
     var prefix = sky.getAttribute("data-scene-prefix");
     SKY_PARTS.forEach(function (part) {
-      sky.style.setProperty("--from-" + part, "var(" + prefix + slides[i].getAttribute("data-scene") + "-" + part + ")");
-      sky.style.setProperty("--to-" + part, "var(" + prefix + slides[j].getAttribute("data-scene") + "-" + part + ")");
+      sky.style.setProperty("--from-" + part, "var(" + prefix + fromSlide.getAttribute("data-scene") + "-" + part + ")");
+      sky.style.setProperty("--to-" + part, "var(" + prefix + toSlide.getAttribute("data-scene") + "-" + part + ")");
     });
-    sky.style.setProperty("--mix", (mix * 100).toFixed(1) + "%");
-    var room = document.documentElement.scrollHeight - window.innerHeight;
-    sky.style.setProperty("--p", room > 0 ? (window.scrollY / room).toFixed(3) : "0");
+    var startP = parseFloat(sky.style.getPropertyValue("--p")) || 0;
+    var duration = parseFloat(getComputedStyle(root).getPropertyValue("--duration-reveal")) || 0;
+    if (skyTween) cancelAnimationFrame(skyTween);
+    var set = function (k) {
+      sky.style.setProperty("--mix", (k * 100).toFixed(1) + "%");
+      sky.style.setProperty("--p", (startP + (progress - startP) * k).toFixed(3));
+    };
+    if (fromSlide === toSlide || duration < 20 || document.hidden) { set(1); return; }
+    var start = null;
+    var frame = function (now) {
+      if (start === null) start = now;
+      var k = Math.min(1, (now - start) / duration);
+      set(1 - Math.pow(1 - k, 3));   // ease out
+      if (k < 1) skyTween = requestAnimationFrame(frame);
+    };
+    skyTween = requestAnimationFrame(frame);
   }
 
   // ---------- full screen (hidden where unsupported or already an installed app) ----------
@@ -317,17 +358,6 @@
     vita: { gradient: "flat" }
   };
 
-  // The text typed into a logo, per landing (the brand name until changed)
-  var MAX_TEXT = 20;
-  var texts = {};
-  function logoText(id) {
-    if (texts[id] == null) {
-      var saved = stored("text-" + id);
-      texts[id] = saved && saved.trim() ? saved.slice(0, MAX_TEXT) : BrandUI.brandById(id).name;
-    }
-    return texts[id];
-  }
-
   function store(key, value) {
     try { window.localStorage.setItem(key, value); } catch (e) { /* storage unavailable */ }
   }
@@ -343,7 +373,7 @@
     if (v.split) word.innerHTML = name.slice(0, v.split) + '<span class="logo-hero__b">' + name.slice(v.split) + "</span>";
     else if (v.kern) word.innerHTML = name.split("").map(function (c) { return '<span class="logo-hero__g">' + c + "</span>"; }).join("");
     else word.textContent = name;
-    if (!word.hasAttribute("contenteditable")) word.setAttribute("aria-label", name);
+    word.setAttribute("aria-label", name);
   }
 
   function applyVariant(landing, n, save) {
@@ -360,7 +390,7 @@
     if (v.mesh) landing.setAttribute("data-variant-mesh", "");
     else landing.removeAttribute("data-variant-mesh");
     applyColours(landing);
-    setWord(landing.querySelector(".logo-hero__word"), logoText(landing.id), v, BrandUI.brandById(landing.id).name);
+    setWord(landing.querySelector(".logo-hero__word"), BrandUI.brandById(landing.id).name, v, BrandUI.brandById(landing.id).name);
     // "variant2-": the variants were reordered, so numbers saved before are dropped
     if (save) store("variant2-" + landing.id, String(n));
     if (landing === current) centreCurrent();
@@ -430,94 +460,6 @@
     body.setProperty("--sw-ink", landing.getAttribute("data-v-tone") === "dark" ? "var(--color-paper-0)" : "var(--color-ink-900)");
   }
 
-  // ---------- type into the logo, like a font tester ----------
-  function variantOf(landing) {
-    return window.VARIANTS[landing.id][(Number(landing.getAttribute("data-variant")) || 1) - 1];
-  }
-
-  // Where the caret is, as a count of characters from the start of the word
-  function caretOffset(word) {
-    var sel = window.getSelection();
-    if (!sel.rangeCount || !word.contains(sel.anchorNode)) return null;
-    var r = document.createRange();
-    r.selectNodeContents(word);
-    r.setEnd(sel.anchorNode, sel.anchorOffset);
-    return r.toString().length;
-  }
-
-  function placeCaret(word, offset) {
-    var walker = document.createTreeWalker(word, NodeFilter.SHOW_TEXT);
-    var node = null;
-    var left = offset;
-    while (walker.nextNode()) {
-      node = walker.currentNode;
-      if (left <= node.length) break;
-      left -= node.length;
-    }
-    var range = document.createRange();
-    if (node) range.setStart(node, Math.min(left, node.length));
-    else range.setStart(word, 0);
-    range.collapse(true);
-    var sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
-
-  // The overview tiles show the same text
-  function refreshTiles(id) {
-    document.querySelectorAll('.overview__tile[data-landing="' + id + '"]').forEach(function (tile, i) {
-      setWord(tile.querySelector(".overview__word"), logoText(id) || BrandUI.brandById(id).name, window.VARIANTS[id][i], BrandUI.brandById(id).name);
-    });
-  }
-
-  function setLogoText(landing, text, restoreCaret) {
-    var word = landing.querySelector(".logo-hero__word");
-    var v = variantOf(landing);
-    var offset = restoreCaret ? caretOffset(word) : null;
-    texts[landing.id] = text;
-    store("text-" + landing.id, text === BrandUI.brandById(landing.id).name ? "" : text);
-    // Plain words stay as typed; two-tone and letter-by-letter ones are rebuilt around the caret
-    if (v.split || v.kern || word.textContent !== text) {
-      setWord(word, text, v, BrandUI.brandById(landing.id).name);
-      if (offset != null) placeCaret(word, Math.min(offset, text.length));
-    }
-    refreshTiles(landing.id);
-    if (landing === current) centreCurrent();
-  }
-
-  function initEditable(landing) {
-    var word = landing.querySelector(".logo-hero__word");
-    if (!word) return;
-    var name = BrandUI.brandById(landing.id).name;
-    // plaintext-only keeps pasted formatting out; older engines fall back to "true"
-    word.setAttribute("contenteditable", "plaintext-only");
-    if (word.contentEditable !== "plaintext-only") word.setAttribute("contenteditable", "true");
-    word.setAttribute("spellcheck", "false");
-    word.setAttribute("autocapitalize", "off");
-    word.setAttribute("autocorrect", "off");
-    word.setAttribute("enterkeyhint", "done");
-    word.setAttribute("role", "textbox");
-    word.setAttribute("aria-label", name + " logo text");
-    var composing = false;
-    word.addEventListener("compositionstart", function () { composing = true; });
-    word.addEventListener("compositionend", function () {
-      composing = false;
-      setLogoText(landing, word.textContent.replace(/\s+/g, " ").slice(0, MAX_TEXT), true);
-    });
-    word.addEventListener("input", function () {
-      if (composing) return;
-      setLogoText(landing, word.textContent.replace(/[\r\n]+/g, " ").slice(0, MAX_TEXT), true);
-    });
-    word.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") { e.preventDefault(); word.blur(); }
-      else if (e.key === "Escape") { e.preventDefault(); setLogoText(landing, name, false); word.blur(); }
-    });
-    // An empty logo goes back to the brand name
-    word.addEventListener("blur", function () {
-      if (!word.textContent.trim()) setLogoText(landing, name, false);
-    });
-  }
-
   // Every wordmark font is preloaded in index.html; this also gets them decoded,
   // so a variant shows its typeface at once
   function loadFonts() {
@@ -545,7 +487,6 @@
       if (stored("invert-" + landing.id)) landing.setAttribute("data-invert", "");
       landing.setAttribute("data-ink", def.ink || "auto");
       if (def.bgpick) landing.setAttribute("data-bgpick", def.bgpick);
-      initEditable(landing);
       var saved = Number(stored("variant2-" + landing.id));
       applyVariant(landing, saved >= 1 && saved <= list.length ? saved : 1, false);
       landing.setAttribute("data-gradient", def.gradient || "dawn");
@@ -576,7 +517,7 @@
           if (getComputedStyle(root).getPropertyValue(pre + prop).trim() !== "") tile.style.setProperty("--t-" + prop, "var(" + pre + prop + ")");
         });
         tile.innerHTML = '<span class="overview__word" aria-hidden="true"></span><span class="overview__name">' + n + " · " + v.name + "</span>";
-        setWord(tile.querySelector(".overview__word"), logoText(id), v, brand.name);
+        setWord(tile.querySelector(".overview__word"), brand.name, v, brand.name);
         tile.querySelector(".overview__word").removeAttribute("aria-label");
         tile.addEventListener("click", function () {
           var landing = document.getElementById(id);
@@ -614,10 +555,6 @@
       window.requestAnimationFrame(function () {
         ticking = false;
         document.body.classList.toggle("is-scrolled", window.scrollY > 8);
-        // Past the logo screen (half of it scrolled away) the switcher and arrows step aside
-        var hero = current && current.querySelector(".logo-hero");
-        document.body.classList.toggle("past-hero", !!hero && hero.getBoundingClientRect().bottom < window.innerHeight / 2);
-        updateSky();
         var y = nav.getBoundingClientRect().bottom - 2;
         var stack = document.elementsFromPoint ? document.elementsFromPoint(window.innerWidth * 0.25, y) : [];
         var toned = stack.filter(function (el) { return !nav.contains(el) && el.closest("[data-tone]"); })[0];
@@ -633,12 +570,17 @@
       var a = e.target.closest(".topnav__link");
       if (a && a.getAttribute("href") === location.hash) { e.preventDefault(); window.scrollTo(0, 0); }
     });
-    // A link to the slide already in the hash (Index, contents) still scrolls to it
-    document.getElementById("landings").addEventListener("click", function (e) {
-      var a = e.target.closest('a[href^="#"]');
-      if (!a || a.getAttribute("href") !== location.hash) return;
-      var target = document.getElementById(a.getAttribute("href").slice(1));
-      if (target) { e.preventDefault(); target.scrollIntoView({ block: "start" }); }
+    // Keyboard: the deck owns the arrows, space, page up / down, home and end
+    document.addEventListener("keydown", function (e) {
+      if (!deck.slides.length || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.target.closest && e.target.closest("input, textarea, select, [contenteditable]")) return;
+      var keys = { ArrowRight: 1, ArrowDown: 1, PageDown: 1, ArrowLeft: -1, ArrowUp: -1, PageUp: -1 };
+      if (e.key === " ") keys[" "] = e.shiftKey ? -1 : 1;
+      if (e.key === "Home") { e.preventDefault(); goTo(0); return; }
+      if (e.key === "End") { e.preventDefault(); goTo(deck.slides.length - 1); return; }
+      if (!keys[e.key]) return;
+      e.preventDefault();
+      step(keys[e.key]);
     });
     initSlides();
     route();

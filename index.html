@@ -54,14 +54,10 @@
     </article>
 
     <!-- ==================== VIBIJA (id veriterra) ==================== -->
-    <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="veriterra-title" hidden>
-      <header class="logo-hero" data-logo-hero>
-        <div class="glow" aria-hidden="true"></div>
-        <h1 class="logo-hero__word" id="veriterra-title" data-brand-name="veriterra"></h1>
-        <p class="logo-hero__caption">Formulated for the crop. Proven in the field.</p>
-      </header>
+    <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="vibija-why-title" hidden>
 
-      <!-- Brand guidelines in three slides: Mark, Colour, Typography. Built for
+      <!-- Brand book in six click-through slides (minimum viable brand): brand core
+           (Why we exist, Who for, Character) and visual base (Mark, Colour, Typography). Built for
            1920x1080 on a four-column grid; Inter only (regular for text, medium for
            the rest), no capitals. Behind them one fixed sky blends from scene to scene
            while the page scrolls (presentation.js, tokens --color-vibija-scene-*).
@@ -69,9 +65,47 @@
            Copy is a working draft. -->
       <div class="slide-sky" data-scene-prefix="--color-vibija-scene-" aria-hidden="true"></div>
 
-      <!-- 01 Mark -->
+      <!-- 01 Why we exist (brand core; copy comes from the interview) -->
+      <section class="slide vb-why" id="vibija-why" data-scene="mark" data-tone="dark" aria-labelledby="vibija-why-title">
+        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-why-title">Why we exist</h2><p>Purpose and promise</p></header>
+        <div class="slide__body">
+          <p class="vb-statement" data-reveal>[Purpose: why Vibija exists, in one sentence]</p>
+          <div class="vb-promise" data-reveal style="--i: 1">
+            <p class="vb-label">Our promise</p>
+            <p class="vb-promise__text">[One line the customer can hold us to]</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 Who for, how different (positioning, one idea per column) -->
+      <section class="slide vb-who" id="vibija-who" data-scene="colour" data-tone="dark" aria-labelledby="vibija-who-title">
+        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-who-title">Who for</h2><p>Positioning</p></header>
+        <div class="slide__body">
+          <ul class="vb-position">
+            <li data-reveal style="--i: 1"><p class="vb-label">Who</p><p class="vb-position__text">[The customer, concretely]</p></li>
+            <li data-reveal style="--i: 2"><p class="vb-label">What they need</p><p class="vb-position__text">[The problem they solve]</p></li>
+            <li data-reveal style="--i: 3"><p class="vb-label">What Vibija does</p><p class="vb-position__text">[What we offer]</p></li>
+            <li data-reveal style="--i: 4"><p class="vb-label">Why Vibija</p><p class="vb-position__text">[What makes us different]</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 03 Character (three traits: we are ..., not ...) -->
+      <section class="slide vb-character" id="vibija-character" data-scene="type" data-tone="light" aria-labelledby="vibija-character-title">
+        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-character-title">Character</h2><p>Three traits</p></header>
+        <div class="slide__body">
+          <p class="vb-character__intro" data-reveal>[How Vibija behaves, in one or two sentences]</p>
+          <ul class="vb-traits">
+            <li data-reveal style="--i: 1"><p class="vb-traits__name">[Trait one]</p><p class="vb-label">[not its opposite]</p><p class="vb-traits__example">[One line that shows it]</p></li>
+            <li data-reveal style="--i: 2"><p class="vb-traits__name">[Trait two]</p><p class="vb-label">[not its opposite]</p><p class="vb-traits__example">[One line that shows it]</p></li>
+            <li data-reveal style="--i: 3"><p class="vb-traits__name">[Trait three]</p><p class="vb-label">[not its opposite]</p><p class="vb-traits__example">[One line that shows it]</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 04 Mark -->
       <section class="slide vb-mark" id="vibija-mark" data-scene="mark" data-tone="dark" aria-labelledby="vibija-mark-title">
-        <header class="slide__head" data-reveal><p>01</p><h2 id="vibija-mark-title">Mark</h2><p>The name, set in Inter Medium</p></header>
+        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-mark-title">Mark</h2><p>The name, set in Inter Medium</p></header>
         <div class="slide__body">
           <p class="vb-mark__word" data-reveal><span data-brand-name="veriterra"></span></p>
           <ul class="vb-versions">
@@ -83,9 +117,9 @@
         </div>
       </section>
 
-      <!-- 02 Colour -->
+      <!-- 05 Colour -->
       <section class="slide vb-colour" id="vibija-colour" data-scene="colour" data-tone="dark" aria-labelledby="vibija-colour-title">
-        <header class="slide__head" data-reveal><p>02</p><h2 id="vibija-colour-title">Colour</h2><p>Four colours and seven purples</p></header>
+        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-colour-title">Colour</h2><p>Four colours and seven purples</p></header>
         <div class="slide__body">
           <p class="vb-headline" data-reveal>Aubergine ground, a lime voice.</p>
           <p class="vb-note" data-reveal style="--i: 1">Purples carry the backgrounds, from lilac to aubergine. Orange is kept for small accents.</p>
@@ -107,9 +141,9 @@
         </div>
       </section>
 
-      <!-- 03 Typography -->
+      <!-- 06 Typography -->
       <section class="slide vb-type" id="vibija-type" data-scene="type" data-tone="light" aria-labelledby="vibija-type-title">
-        <header class="slide__head" data-reveal><p>03</p><h2 id="vibija-type-title">Typography</h2><p>Inter, regular and medium</p></header>
+        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-type-title">Typography</h2><p>Inter, regular and medium</p></header>
         <div class="slide__body">
           <p class="vb-giant" data-reveal>Formulated for the crop.</p>
           <ul class="vb-scale">
