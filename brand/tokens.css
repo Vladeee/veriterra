@@ -41,7 +41,7 @@
 @font-face { font-family: "Madimi One"; src: url("fonts/madimi-one/madimi-one-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Braah One"; src: url("fonts/braah-one/braah-one-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Momo Trust Display"; src: url("fonts/momo-trust-display/momo-trust-display-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Inter"; src: url("fonts/inter/inter-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/inter/inter-variable-latin.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 @font-face { font-family: "CC Accidenz Commons"; src: url("fonts/accidenz-commons/accidenz-commons-500.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
 
 :root {
@@ -132,12 +132,11 @@
   --fig-veriterra-1-bg: #2B2B1B;
   --fig-veriterra-1-page: #2B2B1B;
   --fig-veriterra-1-ink: #D87E27;
-  --fig-veriterra-1-accent: #D87E27;
-  --fig-veriterra-1-font: var(--font-comfortaa);
+  --fig-veriterra-1-font: var(--font-inter);
   --fig-veriterra-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-veriterra-1-tracking: 0.04em;   /* caps */
-  --fig-veriterra-1-weight: 700;
-  --fig-veriterra-1-case: uppercase;
+  --fig-veriterra-1-tracking: var(--tracking-headline);
+  --fig-veriterra-1-weight: var(--font-weight-medium);
+  --fig-veriterra-1-case: none;
   /* verdo 1: Lime · Varela Round (Figma 90:154) */
   --fig-verdo-1-bg: radial-gradient(ellipse at 50% 50%, #D6FFCA 46%, #A0EC8B 100%);
   --fig-verdo-1-page: #D6FFCA;
@@ -202,9 +201,10 @@
 
   /* ---------- Typography (PLACEHOLDER: system faces until fonts are chosen) ---------- */
   --font-serif-system: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
-  --font-display: var(--font-serif-system);
-  --font-logo: var(--font-serif-system);
-  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* No typeface is chosen yet: Inter for everything (the Figma variants keep their own) */
+  --font-display: var(--font-inter);
+  --font-logo: var(--font-inter);
+  --font-body: var(--font-inter);
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Trial typefaces (see @font-face above) */
@@ -225,7 +225,7 @@
   --font-madimi: "Madimi One", sans-serif;
   --font-braah: "Braah One", sans-serif;
   --font-momo: "Momo Trust Display", sans-serif;
-  --font-inter: "Inter", sans-serif;
+  --font-inter: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -242,8 +242,14 @@
   --text-4xl: clamp(2.75rem, 1.8rem + 3.4vw, 4.5rem);
   --text-5xl: clamp(3.25rem, 1.8rem + 5vw, 6.5rem);
   --text-logo: clamp(3rem, 1rem + 7vw, 8rem);
-  --text-display: clamp(4rem, 1rem + 10vw, 12rem);   /* the cropped headline on a slide */
-  --text-mark: clamp(4rem, 18vw, 18rem);   /* a wordmark that spans the screen */
+  /* Slide type scale, for 1920x1080. Medium for display, headline, title and label;
+     regular for body */
+  --text-label: 0.9375rem;   /* 15 px: running headers, captions, specs */
+  --text-body: 1.25rem;      /* 20 px */
+  --text-title: 2rem;        /* 32 px */
+  --text-headline: 4.5rem;   /* 72 px */
+  --text-display: 11rem;     /* 176 px */
+  --text-mark: 35.75rem;     /* the wordmark across three columns (Inter Medium, 2.35 em wide) */
 
   --leading-tight: 1.05;
   --leading-snug: 1.2;
@@ -277,9 +283,9 @@
   --container-max: 72rem;
   --container-narrow: 42rem;
   --gutter: clamp(1rem, 4vw, 3rem);
-  --grid-columns: 12;
-  --page-margin: clamp(1rem, 2vw, 1.5rem);
-  --grid-gutter: 1.25rem;
+  --grid-columns: 4;          /* the page grid, for 1920x1080: four columns */
+  --page-margin: 3rem;        /* 48 px on each side */
+  --grid-gutter: 1.5rem;      /* 24 px between columns */
   --grid-tile-min: 15rem;   /* narrowest tile on the All variants grid */
   --grid-gap-tight: 0.5rem;
   --grid-gap: clamp(1rem, 2vw, 1.5rem);
@@ -349,7 +355,7 @@
   --color-vibija-aubergine: var(--bgpick-veriterra-aubergine);
   --color-vibija-plum: var(--bgpick-veriterra-plum);
   --color-vibija-lime: oklch(84% 0.13 122);
-  --color-vibija-orange: var(--fig-veriterra-1-accent);
+  --color-vibija-orange: #D87E27;
   --color-vibija-paper: oklch(97.5% 0.008 305);
   --color-vibija-muted: oklch(46% 0.05 305);
   --color-vibija-line: oklch(80% 0.04 305);
@@ -367,8 +373,10 @@
   --logo-optical-lift: 3dvh;   /* the optical centre sits a little above the geometric one */
   --logo-ink-height: clamp(1.5rem, 3.1vw, 3.4rem);   /* every wordmark is sized so its letters stand this tall */
   --logo-tile-ink-height: clamp(1rem, 1.5vw, 1.5rem);   /* the same, on the All variants tiles */
-  --logo-stop: 0.16em;   /* the orange square that closes the wordmark, like a full stop */
-  --leading-display: 0.95;   /* giant headlines sit tight */
+  --leading-display: 0.9;    /* display and the wordmark sit tight */
+  --leading-headline: 1;
+  --tracking-display: -0.05em;
+  --tracking-headline: -0.035em;
   --glow-blur: 4rem;
   --duration-drift: 18s;
   --press-scale: 0.98;
@@ -415,9 +423,9 @@
   --brand-line: var(--color-vibija-line);
   --brand-on-deep: var(--color-vibija-lime);
   --brand-highlight: var(--color-vibija-orange);
-  --brand-font-display: var(--font-comfortaa);
+  --brand-font-display: var(--font-inter);
   --brand-word-tracking: var(--fig-veriterra-1-tracking);
-  --brand-font-headline: var(--font-body);   /* headlines: the system grotesk (SF on iPad), regular */
+  --brand-font-headline: var(--font-inter);
   --brand-ornament: var(--color-fm-olive-600);
   --brand-deep: var(--color-vibija-aubergine);
   --brand-logo: var(--color-fm-ink);

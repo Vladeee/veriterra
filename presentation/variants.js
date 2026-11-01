@@ -4,7 +4,6 @@
   --fig-<brand>-<n>-<prop>; this file only lists them. Generated from the Figma
   frames; edit the tokens to tweak a variant, add an entry here to add one.
   Only the variants the user picked are kept (git history has the rest).
-  accent: true draws the accent square (Vibija "Earth").
   kern: true spaces the letters by their ink (for faces with monospaced Latin).
   mesh: true lets a layered background drift slowly.
   split: n draws the first n letters in ink and the rest in ink2.
@@ -19,9 +18,8 @@ window.VARIANTS = {
   ],
   "veriterra": [
     {
-      "name": "Earth · Comfortaa",
-      "node": "75:267",
-      "accent": true
+      "name": "Earth · Inter",
+      "node": "75:267"
     }
   ],
   "verdo": [

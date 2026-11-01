@@ -4,7 +4,7 @@ One link for **GukoV Group** and its four companies: Vibija, Verdo, Vaya and Viv
 (Internal ids keep the old working names: `vitreeone`, `veriterra`, `vita`.)
 It opens straight on the presentation: five landings behind a fixed top menu, and a last page with every variant in one grid. Each landing opens on its logo screen; **Vibija** continues below it with three bold slides, Mark, Colour and Typography, over a background that flows from one scene to the next as you scroll. Arrows at the screen edges go to the previous and next page.
 
-Each landing has **style variants**, one per frame in the Figma file, and ten **background gradients** (Dawn, Dusk, Horizon, Mist, Aurora, Silk, Tide, Veil, Prism, Flat). Switch them with the arrow buttons at the bottom left (or the arrow keys). On Vibija an extra row steps through seven purple backgrounds. The last button row inverts the colours, switches the logo between light and dark, and opens a colour panel: logo colours matched to the background (and, on Vibija, the backgrounds again as swatches). Tap the logo itself to type your own text in it. The choice is remembered on the device.
+Each landing has a fixed look: a style variant from the Figma file, a background gradient and a logo colour (set in `DEFAULTS`, `presentation/presentation.js`). The All variants page shows every variant; a tile opens its landing in that variant. Tap a logo to type your own text in it. Built for 1920×1080 for now, on a four-column grid, in Inter.
 Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
 
 > Copy, typefaces, colours and logos are **placeholders**.
@@ -30,9 +30,9 @@ python3 -m http.server 8000
 ├── manifest.webmanifest        install manifest
 ├── presentation/
 │   ├── presentation.css        menu, arrows, page grid, logo screen, All page
-│   ├── presentation.js         routing, menu, variants, gradients, switcher
+│   ├── presentation.js         routing, menu, variants, colours, slides
 │   ├── variants.js             list of Figma style variants per landing
-│   ├── variants.css            variant styling, gradients, the switcher
+│   ├── variants.css            variant styling, gradients
 │   └── landings/<id>.css       per-landing style
 ├── brand/
 │   ├── BRIEF.md                facts, hypotheses, open questions

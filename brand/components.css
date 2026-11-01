@@ -98,11 +98,9 @@ p {
 }
 
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-family: var(--font-inter);
+  font-size: var(--text-label);
   font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
   color: var(--color-text-muted);
 }
 
@@ -235,10 +233,9 @@ p {
   border-radius: var(--radius-md);
   background: repeating-linear-gradient(135deg, var(--color-paper-2) 0 var(--space-2), var(--color-paper-1) var(--space-2) var(--space-4));
   color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
+  font-family: var(--font-inter);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-medium);
   aspect-ratio: 3 / 2;
 }
 
@@ -298,10 +295,9 @@ p {
   border-radius: var(--radius-sm);
   background: var(--brand-accent-soft);
   color: var(--brand-accent-strong);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
+  font-family: var(--font-inter);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-medium);
 }
 
 .tag--warning {

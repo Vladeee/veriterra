@@ -18,7 +18,7 @@
   <link rel="preload" href="brand/fonts/comfortaa/comfortaa-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/varela-round/varela-round-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/momo-trust-display/momo-trust-display-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="brand/fonts/inter/inter-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="brand/fonts/inter/inter-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/faculty-glyphic/faculty-glyphic-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="brand/tokens.css">
   <link rel="stylesheet" href="brand/components.css">
@@ -47,33 +47,6 @@
     <a class="page-arrow page-arrow--next" href="#veriterra" aria-label="Next page"><span class="icon" data-icon="arrow-right"></span></a>
   </nav>
 
-  <!-- Switcher, bottom left: style variant (Figma frames), background gradient,
-       background colour (only where a landing offers them), colours -->
-  <div class="variant-switch" id="variant-switch" hidden>
-    <span class="variant-switch__name" aria-live="polite"></span>
-    <div class="variant-switch__pill" role="group" aria-label="Style variant" data-pill="variant">
-      <button type="button" data-step="variant" data-dir="-1" aria-label="Previous variant"><span class="icon" data-icon="arrow-left"></span></button>
-      <span class="variant-switch__value" data-value="variant"></span>
-      <button type="button" data-step="variant" data-dir="1" aria-label="Next variant"><span class="icon" data-icon="arrow-right"></span></button>
-    </div>
-    <div class="variant-switch__pill" role="group" aria-label="Background gradient">
-      <button type="button" data-step="gradient" data-dir="-1" aria-label="Previous gradient"><span class="icon" data-icon="arrow-left"></span></button>
-      <span class="variant-switch__value" data-value="gradient"></span>
-      <button type="button" data-step="gradient" data-dir="1" aria-label="Next gradient"><span class="icon" data-icon="arrow-right"></span></button>
-    </div>
-    <div class="variant-switch__pill" role="group" aria-label="Background colour" data-pill="background" hidden>
-      <button type="button" data-step="background" data-dir="-1" aria-label="Previous background colour"><span class="icon" data-icon="arrow-left"></span></button>
-      <span class="variant-switch__value variant-switch__value--bg" data-value="background"></span>
-      <button type="button" data-step="background" data-dir="1" aria-label="Next background colour"><span class="icon" data-icon="arrow-right"></span></button>
-    </div>
-    <div class="variant-switch__pill" role="group" aria-label="Colours">
-      <button type="button" data-action="invert" aria-pressed="false" aria-label="Invert colours"><span class="icon" data-icon="contrast"></span></button>
-      <button type="button" class="variant-switch__text" data-action="ink" aria-label="Logo light or dark"><span data-value="ink">Auto</span></button>
-      <button type="button" data-action="picker" aria-expanded="false" aria-controls="logo-colours" aria-label="Logo colour"><span class="variant-switch__swatch"></span></button>
-    </div>
-    <div class="variant-switch__picker" id="logo-colours" role="group" aria-label="Logo colours" hidden></div>
-  </div>
-
   <main id="landings">
     <!-- ==================== GUKOV GROUP (id vitreeone) ==================== -->
     <article class="landing" id="vitreeone" data-brand="vitreeone" aria-labelledby="vitreeone-title" hidden>
@@ -92,40 +65,39 @@
         <p class="logo-hero__caption">Formulated for the crop. Proven in the field.</p>
       </header>
 
-      <!-- Brand guidelines in three bold slides (after farmminerals.com): Mark, Colour,
-           Typography. Behind them one fixed sky blends from scene to scene while the
-           page scrolls (presentation.js, scene tokens --color-vibija-scene-*).
+      <!-- Brand guidelines in three slides: Mark, Colour, Typography. Built for
+           1920x1080 on a four-column grid; Inter only (regular for text, medium for
+           the rest), no capitals. Behind them one fixed sky blends from scene to scene
+           while the page scrolls (presentation.js, tokens --color-vibija-scene-*).
            Shared: presentation.css (.slide, .slide-sky); Vibija parts: landings/veriterra.css (.vb-*).
            Copy is a working draft. -->
       <div class="slide-sky" data-scene-prefix="--color-vibija-scene-" aria-hidden="true"></div>
 
       <!-- 01 Mark -->
       <section class="slide vb-mark" id="vibija-mark" data-scene="mark" data-tone="dark" aria-labelledby="vibija-mark-title">
-        <header class="slide__head"><p data-reveal>01 — Mark</p><p data-reveal>Comfortaa Bold · capitals</p></header>
+        <header class="slide__head" data-reveal><p>01</p><h2 id="vibija-mark-title">Mark</h2><p>The name, set in Inter Medium</p></header>
         <div class="slide__body">
-          <h2 class="visually-hidden" id="vibija-mark-title">Mark</h2>
-          <p class="vb-mark__word" data-reveal><span data-brand-name="veriterra"></span><span class="vb-stop" aria-hidden="true"></span></p>
-        </div>
-        <footer class="vb-mark__foot">
+          <p class="vb-mark__word" data-reveal><span data-brand-name="veriterra"></span></p>
           <ul class="vb-versions">
-            <li data-reveal style="--i: 1"><span class="vb-version vb-version--deep"><span class="vb-word" data-brand-name="veriterra"></span><span class="vb-stop" aria-hidden="true"></span></span><p>Lime on Aubergine</p></li>
-            <li data-reveal style="--i: 2"><span class="vb-version vb-version--paper"><span class="vb-word" data-brand-name="veriterra"></span><span class="vb-stop" aria-hidden="true"></span></span><p>Aubergine on Paper</p></li>
-            <li data-reveal style="--i: 3"><span class="vb-version vb-version--lime"><span class="vb-word" data-brand-name="veriterra"></span><span class="vb-stop" aria-hidden="true"></span></span><p>Aubergine on Lime</p></li>
+            <li data-reveal style="--i: 1"><span class="vb-version vb-version--deep" data-brand-name="veriterra"></span><p>Lime on aubergine</p></li>
+            <li data-reveal style="--i: 2"><span class="vb-version vb-version--paper" data-brand-name="veriterra"></span><p>Aubergine on paper</p></li>
+            <li data-reveal style="--i: 3"><span class="vb-version vb-version--lime" data-brand-name="veriterra"></span><p>Aubergine on lime</p></li>
           </ul>
-          <p class="vb-micro" data-reveal style="--i: 4">The name in Comfortaa Bold capitals. An orange square closes it, like a full stop.</p>
-        </footer>
+          <p class="vb-note" data-reveal style="--i: 4">A working wordmark: the name alone, in the text face, until a typeface is chosen.</p>
+        </div>
       </section>
 
       <!-- 02 Colour -->
       <section class="slide vb-colour" id="vibija-colour" data-scene="colour" data-tone="dark" aria-labelledby="vibija-colour-title">
-        <header class="slide__head"><p data-reveal>02 — Colour</p><p data-reveal>Four colours · seven purples</p></header>
+        <header class="slide__head" data-reveal><p>02</p><h2 id="vibija-colour-title">Colour</h2><p>Four colours and seven purples</p></header>
         <div class="slide__body">
-          <h2 class="vb-headline" id="vibija-colour-title" data-reveal>Aubergine ground, a lime voice and one orange square.</h2>
+          <p class="vb-headline" data-reveal>Aubergine ground, a lime voice.</p>
+          <p class="vb-note" data-reveal style="--i: 1">Purples carry the backgrounds, from lilac to aubergine. Orange is kept for small accents.</p>
           <ul class="vb-columns">
-            <li class="vb-column--on-deep" data-swatch="--color-vibija-aubergine" data-reveal style="--grow: 5; --i: 1"><strong>Aubergine</strong><span data-hex></span></li>
-            <li data-swatch="--color-vibija-lime" data-reveal style="--grow: 3; --i: 2"><strong>Lime</strong><span data-hex></span></li>
-            <li data-swatch="--color-vibija-paper" data-reveal style="--grow: 3; --i: 3"><strong>Paper</strong><span data-hex></span></li>
-            <li data-swatch="--color-vibija-orange" data-reveal style="--grow: 1; --i: 4"><strong>Orange</strong><span data-hex></span></li>
+            <li class="vb-column--on-deep" data-swatch="--color-vibija-aubergine" data-reveal style="--i: 1"><strong>Aubergine</strong><span data-hex></span></li>
+            <li data-swatch="--color-vibija-lime" data-reveal style="--i: 2"><strong>Lime</strong><span data-hex></span></li>
+            <li data-swatch="--color-vibija-paper" data-reveal style="--i: 3"><strong>Paper</strong><span data-hex></span></li>
+            <li data-swatch="--color-vibija-orange" data-reveal style="--i: 4"><strong>Orange</strong><span data-hex></span></li>
           </ul>
           <ul class="vb-purples" data-reveal style="--i: 5">
             <li data-swatch="--bgpick-veriterra-lilac"><span>Lilac</span></li>
@@ -141,14 +113,14 @@
 
       <!-- 03 Typography -->
       <section class="slide vb-type" id="vibija-type" data-scene="type" data-tone="light" aria-labelledby="vibija-type-title">
-        <header class="slide__head"><p data-reveal>03 — Typography</p><p data-reveal>Grotesk · Comfortaa · Inter</p></header>
+        <header class="slide__head" data-reveal><p>03</p><h2 id="vibija-type-title">Typography</h2><p>Inter, regular and medium</p></header>
         <div class="slide__body">
-          <h2 class="visually-hidden" id="vibija-type-title">Typography</h2>
           <p class="vb-giant" data-reveal>Formulated for the crop.</p>
-          <ul class="vb-faces">
-            <li data-reveal style="--i: 1"><span class="vb-face vb-face--headline" aria-hidden="true">Aa</span><strong>Headlines and text</strong><p>The system grotesk, regular. San Francisco on iPad.</p></li>
-            <li data-reveal style="--i: 2"><span class="vb-face vb-face--mark" data-brand-name="veriterra"></span><strong>Wordmark</strong><p>Comfortaa Bold, capitals, a little open.</p></li>
-            <li data-reveal style="--i: 3"><span class="vb-face vb-face--label" aria-hidden="true">Aa</span><strong>Labels</strong><p>Inter Bold, capitals, wide.</p></li>
+          <ul class="vb-scale">
+            <li data-reveal style="--i: 1"><span class="vb-scale__role">Headline</span><span class="vb-scale__sample vb-scale__sample--headline">Grow more.</span><span class="vb-scale__spec">Medium · 72 / 72</span></li>
+            <li data-reveal style="--i: 2"><span class="vb-scale__role">Title</span><span class="vb-scale__sample vb-scale__sample--title">Every crop needs a different feed.</span><span class="vb-scale__spec">Medium · 32 / 38</span></li>
+            <li data-reveal style="--i: 3"><span class="vb-scale__role">Body</span><span class="vb-scale__sample vb-scale__sample--body">Water-soluble fertilizers, formulated for the crop and its growth stage.</span><span class="vb-scale__spec">Regular · 20 / 30</span></li>
+            <li data-reveal style="--i: 4"><span class="vb-scale__role">Label</span><span class="vb-scale__sample vb-scale__sample--label">Field note, autumn</span><span class="vb-scale__spec">Medium · 15 / 18</span></li>
           </ul>
         </div>
       </section>
