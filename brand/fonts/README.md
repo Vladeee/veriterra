@@ -31,7 +31,7 @@ with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--fon
 | `madimi-one/` | Madimi One, The Madimi One Project Authors | SIL OFL 1.1 | Google Fonts |
 | `braah-one/` | Braah One, The Braah Project Authors | SIL OFL 1.1 | Google Fonts |
 | `momo-trust-display/` | Momo Trust Display, The Momo Trust Project Authors | SIL OFL 1.1 | Google Fonts |
-| `inter/` | Inter (variable, 100–900, latin subset: `inter-variable-latin.woff2`), The Inter Project Authors | SIL OFL 1.1 | Google Fonts |
+| `inter/` | Inter (variable: weight 100–900 and optical size 14–32, latin subset: `inter-variable-latin.woff2`), The Inter Project Authors | SIL OFL 1.1 | Google Fonts |
 
 Not included:
 - **Oks** (Ilya Zherikov): free to use, but the licence forbids redistributing the font file, so it cannot live in a public repo.

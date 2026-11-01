@@ -19,7 +19,7 @@ window.VARIANTS = {
   ],
   "veriterra": [
     {
-      "name": "Earth · Inter",
+      "name": "Aubergine · Inter",
       "node": "75:267"
     }
   ],

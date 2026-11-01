@@ -113,14 +113,28 @@
   var deck = { slides: [], index: -1 };
 
   function initSlides() {
-    // Swatches show the token's colour and its hex, so tokens.css stays the only source
+    // Swatches show the token's colour, its RGB and hex (tokens.css stays the only
+    // source), and take light text on dark colours
     document.querySelectorAll("[data-swatch]").forEach(function (el) {
       var token = el.getAttribute("data-swatch");
+      var hex = toHex(getComputedStyle(root).getPropertyValue(token).trim());
       el.style.setProperty("--sw", "var(" + token + ")");
-      var hex = el.querySelector("[data-hex]");
-      if (hex) hex.textContent = toHex(getComputedStyle(root).getPropertyValue(token).trim());
+      el.setAttribute("data-on", luminance(hex) < 0.18 ? "dark" : "light");
+      var hexOut = el.querySelector("[data-hex]");
+      if (hexOut) hexOut.textContent = hex;
+      var rgbOut = el.querySelector("[data-rgb]");
+      if (rgbOut) rgbOut.textContent = [1, 3, 5].map(function (i) { return parseInt(hex.substr(i, 2), 16); }).join("/");
     });
-    // Each slide numbers itself: 01 / 06
+    // Each colour pair states its contrast, measured from the page itself
+    document.querySelectorAll("[data-contrast]").forEach(function (el) {
+      var ground = luminance(toHex(getComputedStyle(el).backgroundColor));
+      var figure = luminance(toHex(getComputedStyle(el.firstElementChild).backgroundColor));
+      var ratio = (Math.max(ground, figure) + 0.05) / (Math.min(ground, figure) + 0.05);
+      var grade = ratio >= 7 ? "AAA" : ratio >= 4.5 ? "AA" : ratio >= 3 ? "AA large text" : "Below AA";
+      var out = el.parentNode.querySelector("[data-ratio]");
+      if (out) out.textContent = grade + " · " + ratio.toFixed(1) + ":1";
+    });
+    // Each slide numbers itself: 01 / 11
     landings.forEach(function (landing) {
       var slides = landing.querySelectorAll(".slide");
       var pad = function (n) { return (n < 10 ? "0" : "") + n; };
@@ -335,13 +349,17 @@
     centreInk(word);
   }
 
-  function isDark(token) {
-    var hex = toHex(getComputedStyle(root).getPropertyValue(token).trim());
+  // Relative luminance of a #RRGGBB colour (WCAG)
+  function luminance(hex) {
     var c = [1, 3, 5].map(function (i) {
       var v = parseInt(hex.substr(i, 2), 16) / 255;
       return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
     });
-    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] < 0.18;
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+
+  function isDark(token) {
+    return luminance(toHex(getComputedStyle(root).getPropertyValue(token).trim())) < 0.18;
   }
 
   // ---------- Figma style variants (presentation/variants.js + --fig-* tokens) ----------

@@ -54,103 +54,146 @@
     </article>
 
     <!-- ==================== VIBIJA (id veriterra) ==================== -->
-    <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="vibija-why-title" hidden>
+    <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="vibija-idea-title" hidden>
 
-      <!-- Brand book in six click-through slides (minimum viable brand): brand core
-           (Why we exist, Who for, Character) and visual base (Mark, Colour, Typography). Built for
-           1920x1080 on a four-column grid; Inter only (regular for text, medium for
-           the rest), no capitals. Behind them one fixed sky blends from scene to scene
-           while the page scrolls (presentation.js, tokens --color-vibija-scene-*).
-           Shared: presentation.css (.slide, .slide-sky); Vibija parts: landings/veriterra.css (.vb-*).
-           Copy is a working draft. -->
+      <!-- Brand book (minimum viable brand), eleven click-through slides on a 1920x1080
+           canvas: brand core (Idea, Who for) over the flowing sky, then the visual base
+           (logo, type, colour) on paper, laid out like a guideline template. Each slide
+           opens with a section header: hairline, title (col 1), description (col 2),
+           count (col 4). Shared: presentation.css (.slide, .slide-sky); Vibija parts:
+           landings/veriterra.css (.vb-*). Copy is a working draft from the interview. -->
       <div class="slide-sky" data-scene-prefix="--color-vibija-scene-" aria-hidden="true"></div>
 
-      <!-- 01 Why we exist (brand core; copy comes from the interview) -->
-      <section class="slide vb-why" id="vibija-why" data-scene="mark" data-tone="dark" aria-labelledby="vibija-why-title">
-        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-why-title">Why we exist</h2><p>Purpose and promise</p></header>
+      <!-- 01 Idea -->
+      <section class="slide vb-idea" id="vibija-idea" data-scene="mark" data-tone="dark" aria-labelledby="vibija-idea-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-idea-title">Idea</h2><p class="slide__desc">What Vibija stands for, in one line.</p><p class="slide__count" data-count></p></header>
         <div class="slide__body">
-          <p class="vb-statement" data-reveal>[Purpose: why Vibija exists, in one sentence]</p>
-          <div class="vb-promise" data-reveal style="--i: 1">
-            <p class="vb-label">Our promise</p>
-            <p class="vb-promise__text">[One line the customer can hold us to]</p>
-          </div>
+          <p class="vb-display" data-reveal style="--i: 1">Every greenhouse, its own formula.</p>
+          <p class="vb-term" data-reveal style="--i: 2">Our promise</p>
+          <p class="vb-promise" data-reveal style="--i: 2">Effective fertilizer, calculated for the context of each greenhouse.</p>
         </div>
       </section>
 
-      <!-- 02 Who for, how different (positioning, one idea per column) -->
+      <!-- 02 Who for -->
       <section class="slide vb-who" id="vibija-who" data-scene="colour" data-tone="dark" aria-labelledby="vibija-who-title">
-        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-who-title">Who for</h2><p>Positioning</p></header>
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-who-title">Who for</h2><p class="slide__desc">Who we serve, and why they choose us.</p><p class="slide__count" data-count></p></header>
         <div class="slide__body">
-          <ul class="vb-position">
-            <li data-reveal style="--i: 1"><p class="vb-label">Who</p><p class="vb-position__text">[The customer, concretely]</p></li>
-            <li data-reveal style="--i: 2"><p class="vb-label">What they need</p><p class="vb-position__text">[The problem they solve]</p></li>
-            <li data-reveal style="--i: 3"><p class="vb-label">What Vibija does</p><p class="vb-position__text">[What we offer]</p></li>
-            <li data-reveal style="--i: 4"><p class="vb-label">Why Vibija</p><p class="vb-position__text">[What makes us different]</p></li>
+          <p class="vb-headline" data-reveal style="--i: 1">Fertilizer for greenhouses, calculated one greenhouse at a time.</p>
+          <ul class="vb-four">
+            <li data-reveal style="--i: 2"><p class="vb-term">Who</p><p class="vb-subhead">Greenhouse growers.</p></li>
+            <li data-reveal style="--i: 3"><p class="vb-term">What they need</p><p class="vb-subhead">Fertilizer that works for their greenhouse, not for an average field.</p></li>
+            <li data-reveal style="--i: 4"><p class="vb-term">What Vibija does</p><p class="vb-subhead">Calculates the fertilizer for each greenhouse.</p></li>
+            <li data-reveal style="--i: 5"><p class="vb-term">Why Vibija</p><p class="vb-subhead">An individual approach, done the eco way.</p></li>
           </ul>
         </div>
       </section>
 
-      <!-- 03 Character (three traits: we are ..., not ...) -->
-      <section class="slide vb-character" id="vibija-character" data-scene="type" data-tone="light" aria-labelledby="vibija-character-title">
-        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-character-title">Character</h2><p>Three traits</p></header>
+      <!-- 03 Logo -->
+      <section class="slide vb-logo" id="vibija-logo" data-scene="paper" data-tone="light" aria-labelledby="vibija-logo-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-logo-title">Logo</h2><p class="slide__desc">A working logo: the name, set in Inter Medium. A drawn logo comes later.</p><p class="slide__count" data-count></p></header>
         <div class="slide__body">
-          <p class="vb-character__intro" data-reveal>[How Vibija behaves, in one or two sentences]</p>
-          <ul class="vb-traits">
-            <li data-reveal style="--i: 1"><p class="vb-traits__name">[Trait one]</p><p class="vb-label">[not its opposite]</p><p class="vb-traits__example">[One line that shows it]</p></li>
-            <li data-reveal style="--i: 2"><p class="vb-traits__name">[Trait two]</p><p class="vb-label">[not its opposite]</p><p class="vb-traits__example">[One line that shows it]</p></li>
-            <li data-reveal style="--i: 3"><p class="vb-traits__name">[Trait three]</p><p class="vb-label">[not its opposite]</p><p class="vb-traits__example">[One line that shows it]</p></li>
+          <p class="vb-wordmark" data-reveal style="--i: 1" data-brand-name="veriterra"></p>
+        </div>
+      </section>
+
+      <!-- 04 Logo on colour -->
+      <section class="slide vb-oncolour" id="vibija-on-colour" data-scene="paper" data-tone="light" aria-labelledby="vibija-on-colour-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-on-colour-title">On colour</h2><p class="slide__desc">The logo sits only on these pairings. Each keeps strong contrast.</p><p class="slide__count" data-count></p></header>
+        <div class="slide__body">
+          <ul class="vb-panels">
+            <li class="vb-panel vb-panel--paper" data-reveal style="--i: 1"><span data-brand-name="veriterra"></span></li>
+            <li class="vb-panel vb-panel--aubergine" data-reveal style="--i: 2"><span data-brand-name="veriterra"></span></li>
+            <li class="vb-panel vb-panel--lime" data-reveal style="--i: 3"><span data-brand-name="veriterra"></span></li>
+            <li class="vb-panel vb-panel--ink" data-reveal style="--i: 4"><span data-brand-name="veriterra"></span></li>
           </ul>
         </div>
       </section>
 
-      <!-- 04 Mark -->
-      <section class="slide vb-mark" id="vibija-mark" data-scene="mark" data-tone="dark" aria-labelledby="vibija-mark-title">
-        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-mark-title">Mark</h2><p>The name, set in Inter Medium</p></header>
+      <!-- 05 Primary typeface -->
+      <section class="slide vb-typeface" id="vibija-typeface" data-scene="paper" data-tone="light" aria-labelledby="vibija-typeface-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-typeface-title">Primary typeface</h2><p class="slide__desc">Inter, for now: open, clear and free under the SIL Open Font License.</p><p class="slide__count" data-count></p></header>
         <div class="slide__body">
-          <p class="vb-mark__word" data-reveal><span data-brand-name="veriterra"></span></p>
-          <ul class="vb-versions">
-            <li data-reveal style="--i: 1"><span class="vb-version vb-version--deep" data-brand-name="veriterra"></span><p>Lime on aubergine</p></li>
-            <li data-reveal style="--i: 2"><span class="vb-version vb-version--paper" data-brand-name="veriterra"></span><p>Aubergine on paper</p></li>
-            <li data-reveal style="--i: 3"><span class="vb-version vb-version--lime" data-brand-name="veriterra"></span><p>Aubergine on lime</p></li>
-          </ul>
-          <p class="vb-note" data-reveal style="--i: 4">A working wordmark: the name alone, in the text face, until a typeface is chosen.</p>
+          <p class="vb-aside" data-reveal style="--i: 1">Inter<br>Rasmus Andersson</p>
+          <p class="vb-specimen" data-reveal style="--i: 1" aria-label="Inter specimen: alphabet, figures and signs">Inter<br>ABCDEFGHIJKLM<br>NOPQRSTUVWXYZ<br>abcdefghijklmnopq<br>rstuvwxyz 0123456789<br>!@#$%&amp;*()?+</p>
         </div>
       </section>
 
-      <!-- 05 Colour -->
-      <section class="slide vb-colour" id="vibija-colour" data-scene="colour" data-tone="dark" aria-labelledby="vibija-colour-title">
-        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-colour-title">Colour</h2><p>Four colours and seven purples</p></header>
+      <!-- 06 Weights -->
+      <section class="slide vb-weights" id="vibija-weights" data-scene="paper" data-tone="light" aria-labelledby="vibija-weights-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-weights-title">Weights</h2><p class="slide__desc">Two weights build the hierarchy: Medium for headings and labels, Regular for text.</p><p class="slide__count" data-count></p></header>
         <div class="slide__body">
-          <p class="vb-headline" data-reveal>Aubergine ground, a lime voice.</p>
-          <p class="vb-note" data-reveal style="--i: 1">Purples carry the backgrounds, from lilac to aubergine. Orange is kept for small accents.</p>
-          <ul class="vb-columns">
-            <li class="vb-column--on-deep" data-swatch="--color-vibija-aubergine" data-reveal style="--i: 1"><strong>Aubergine</strong><span data-hex></span></li>
-            <li data-swatch="--color-vibija-lime" data-reveal style="--i: 2"><strong>Lime</strong><span data-hex></span></li>
-            <li data-swatch="--color-vibija-paper" data-reveal style="--i: 3"><strong>Paper</strong><span data-hex></span></li>
-            <li data-swatch="--color-vibija-orange" data-reveal style="--i: 4"><strong>Orange</strong><span data-hex></span></li>
-          </ul>
-          <ul class="vb-purples" data-reveal style="--i: 5">
-            <li data-swatch="--bgpick-veriterra-lilac"><span>Lilac</span></li>
-            <li data-swatch="--bgpick-veriterra-lavender"><span>Lavender</span></li>
-            <li data-swatch="--bgpick-veriterra-mauve"><span>Mauve</span></li>
-            <li data-swatch="--bgpick-veriterra-iris"><span>Iris</span></li>
-            <li data-swatch="--bgpick-veriterra-violet"><span>Violet</span></li>
-            <li data-swatch="--bgpick-veriterra-plum"><span>Plum</span></li>
-            <li data-swatch="--bgpick-veriterra-aubergine"><span>Aubergine</span></li>
+          <p class="vb-aside" data-reveal style="--i: 1">Inter Medium</p>
+          <p class="vb-weight vb-weight--medium" data-reveal style="--i: 1" aria-hidden="true">Inter Medium</p>
+          <p class="vb-aside" data-reveal style="--i: 2">Inter Regular</p>
+          <p class="vb-weight vb-weight--regular" data-reveal style="--i: 2" aria-hidden="true">Inter Regular</p>
+        </div>
+      </section>
+
+      <!-- 07 Hierarchy -->
+      <section class="slide vb-hierarchy" id="vibija-hierarchy" data-scene="paper" data-tone="light" aria-labelledby="vibija-hierarchy-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-hierarchy-title">Hierarchy</h2><p class="slide__desc">Five sizes, each with its own leading and tracking. Always sentence case.</p><p class="slide__count" data-count></p></header>
+        <div class="slide__body">
+          <p class="vb-spec" data-reveal style="--i: 1">Display<br>Inter Medium<br>160 / 152</p>
+          <p class="vb-display vb-sample" data-reveal style="--i: 1">Every greenhouse.</p>
+          <p class="vb-spec" data-reveal style="--i: 2">Headline<br>Inter Medium<br>80 / 88</p>
+          <p class="vb-headline vb-sample" data-reveal style="--i: 2">Its own formula, calculated for it.</p>
+          <p class="vb-spec" data-reveal style="--i: 3">Subhead<br>Inter Medium<br>32 / 40</p>
+          <p class="vb-subhead vb-sample" data-reveal style="--i: 3">Fertilizer calculated for what you grow and how you grow it.</p>
+          <p class="vb-spec" data-reveal style="--i: 4">Body<br>Inter Regular<br>20 / 30</p>
+          <p class="vb-body vb-sample" data-reveal style="--i: 4">Vibija starts from your greenhouse: the crop, the substrate, the water. From that we calculate a fertilizer for your conditions, not for an average field.</p>
+          <p class="vb-spec" data-reveal style="--i: 5">Label<br>Inter Medium<br>15 / 20</p>
+          <p class="vb-label vb-sample" data-reveal style="--i: 5">Section titles, captions and specs</p>
+        </div>
+      </section>
+
+      <!-- 08 Primary palette -->
+      <section class="slide vb-palette" id="vibija-palette" data-scene="paper" data-tone="light" aria-labelledby="vibija-palette-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-palette-title">Primary palette</h2><p class="slide__desc">Paper and ink carry the text, aubergine is the ground, lime is the voice.</p><p class="slide__count" data-count></p></header>
+        <div class="slide__body">
+          <ul class="vb-swatches">
+            <li data-swatch="--color-vibija-paper" data-reveal style="--i: 1"><dl><dt>Name</dt><dd>Paper</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
+            <li data-swatch="--color-vibija-ink" data-reveal style="--i: 2"><dl><dt>Name</dt><dd>Ink</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
+            <li data-swatch="--color-vibija-aubergine" data-reveal style="--i: 3"><dl><dt>Name</dt><dd>Aubergine</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
+            <li data-swatch="--color-vibija-lime" data-reveal style="--i: 4"><dl><dt>Name</dt><dd>Lime</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
           </ul>
         </div>
       </section>
 
-      <!-- 06 Typography -->
-      <section class="slide vb-type" id="vibija-type" data-scene="type" data-tone="light" aria-labelledby="vibija-type-title">
-        <header class="slide__head" data-reveal><p data-count></p><h2 id="vibija-type-title">Typography</h2><p>Inter, regular and medium</p></header>
+      <!-- 09 Secondary palette -->
+      <section class="slide vb-secondary" id="vibija-secondary" data-scene="paper" data-tone="light" aria-labelledby="vibija-secondary-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-secondary-title">Secondary palette</h2><p class="slide__desc">Purples for backgrounds and depth, from pale to deep.</p><p class="slide__count" data-count></p></header>
         <div class="slide__body">
-          <p class="vb-giant" data-reveal>Formulated for the crop.</p>
-          <ul class="vb-scale">
-            <li data-reveal style="--i: 1"><span class="vb-scale__role">Headline</span><span class="vb-scale__sample vb-scale__sample--headline">Grow more.</span><span class="vb-scale__spec">Medium · 72 / 72</span></li>
-            <li data-reveal style="--i: 2"><span class="vb-scale__role">Title</span><span class="vb-scale__sample vb-scale__sample--title">Every crop needs a different feed.</span><span class="vb-scale__spec">Medium · 32 / 38</span></li>
-            <li data-reveal style="--i: 3"><span class="vb-scale__role">Body</span><span class="vb-scale__sample vb-scale__sample--body">Water-soluble fertilizers, formulated for the crop and its growth stage.</span><span class="vb-scale__spec">Regular · 20 / 30</span></li>
-            <li data-reveal style="--i: 4"><span class="vb-scale__role">Label</span><span class="vb-scale__sample vb-scale__sample--label">Field note, autumn</span><span class="vb-scale__spec">Medium · 15 / 18</span></li>
+          <ul class="vb-swatches vb-swatches--wide">
+            <li data-swatch="--bgpick-veriterra-lavender" data-reveal style="--i: 1"><dl><dt>Name</dt><dd>Lavender</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
+            <li data-swatch="--bgpick-veriterra-violet" data-reveal style="--i: 2"><dl><dt>Name</dt><dd>Violet</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
+            <li data-swatch="--bgpick-veriterra-plum" data-reveal style="--i: 3"><dl><dt>Name</dt><dd>Plum</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
+          </ul>
+          <p class="vb-aside vb-aside--end" data-reveal style="--i: 4">The full range, lilac to aubergine, lives in the tokens.</p>
+        </div>
+      </section>
+
+      <!-- 10 Proportion -->
+      <section class="slide vb-proportion" id="vibija-proportion" data-scene="paper" data-tone="light" aria-labelledby="vibija-proportion-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-proportion-title">Proportion</h2><p class="slide__desc">How much of each colour a layout uses, so every page feels like Vibija.</p><p class="slide__count" data-count></p></header>
+        <div class="slide__body">
+          <ul class="vb-shares" data-reveal style="--i: 1">
+            <li data-swatch="--color-vibija-paper" style="--share: 50"><span>Paper</span><span>50%</span></li>
+            <li data-swatch="--color-vibija-aubergine" style="--share: 25"><span>Aubergine</span><span>25%</span></li>
+            <li data-swatch="--color-vibija-lime" style="--share: 15"><span>Lime</span><span>15%</span></li>
+            <li data-swatch="--color-vibija-ink" style="--share: 10"><span>Ink</span><span>10%</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 11 Combinations -->
+      <section class="slide vb-combos" id="vibija-combinations" data-scene="paper" data-tone="light" aria-labelledby="vibija-combinations-title">
+        <header class="slide__head" data-reveal><h2 class="slide__title" id="vibija-combinations-title">Combinations</h2><p class="slide__desc">Approved pairs of ground and figure. The contrast is measured on the page.</p><p class="slide__count" data-count></p></header>
+        <div class="slide__body">
+          <ul class="vb-combos__list">
+            <li data-reveal style="--i: 1"><span class="vb-combo" data-contrast style="--ground: var(--brand-on-deep); --figure: var(--brand-deep)"><span class="vb-combo__figure"></span></span><p>Aubergine on lime</p><p class="vb-combo__ratio" data-ratio></p></li>
+            <li data-reveal style="--i: 2"><span class="vb-combo" data-contrast style="--ground: var(--brand-deep); --figure: var(--brand-on-deep)"><span class="vb-combo__figure"></span></span><p>Lime on aubergine</p><p class="vb-combo__ratio" data-ratio></p></li>
+            <li data-reveal style="--i: 3"><span class="vb-combo" data-contrast style="--ground: var(--brand-paper); --figure: var(--brand-deep)"><span class="vb-combo__figure"></span></span><p>Aubergine on paper</p><p class="vb-combo__ratio" data-ratio></p></li>
+            <li data-reveal style="--i: 4"><span class="vb-combo" data-contrast style="--ground: var(--brand-night); --figure: var(--brand-paper)"><span class="vb-combo__figure"></span></span><p>Paper on ink</p><p class="vb-combo__ratio" data-ratio></p></li>
           </ul>
         </div>
       </section>

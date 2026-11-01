@@ -129,10 +129,10 @@
   --fig-vitreeone-1-tracking: var(--tracking-headline);
   --fig-vitreeone-1-weight: var(--font-weight-medium);
   --fig-vitreeone-1-case: none;
-  /* veriterra 1: Earth · Comfortaa (Figma 75:267) */
-  --fig-veriterra-1-bg: #2B2B1B;
-  --fig-veriterra-1-page: #2B2B1B;
-  --fig-veriterra-1-ink: #D87E27;
+  /* veriterra 1 (Vibija): lime on aubergine, its brand book colours (was Earth, Figma 75:267) */
+  --fig-veriterra-1-bg: var(--color-vibija-aubergine);
+  --fig-veriterra-1-page: var(--color-vibija-aubergine);
+  --fig-veriterra-1-ink: var(--color-vibija-lime);
   --fig-veriterra-1-font: var(--font-inter);
   --fig-veriterra-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
   --fig-veriterra-1-tracking: var(--tracking-headline);
@@ -243,14 +243,17 @@
   --text-4xl: clamp(2.75rem, 1.8rem + 3.4vw, 4.5rem);
   --text-5xl: clamp(3.25rem, 1.8rem + 5vw, 6.5rem);
   --text-logo: clamp(3rem, 1rem + 7vw, 8rem);
-  /* Slide type scale, for 1920x1080. Medium for display, headline, title and label;
-     regular for body */
-  --text-label: 0.9375rem;   /* 15 px: running headers, captions, specs */
-  --text-body: 1.25rem;      /* 20 px */
-  --text-title: 2rem;        /* 32 px */
-  --text-headline: 4.5rem;   /* 72 px */
-  --text-display: 11rem;     /* 176 px */
-  --text-mark: 35.75rem;     /* the wordmark across three columns (Inter Medium, 2.35 em wide) */
+  /* Slide type scale on the 1920x1080 canvas: each size has its own leading and
+     tracking (--leading-*, --tracking-*). Inter with optical sizes, so display
+     sizes take the Display cut. Medium for label, subhead, headline, display;
+     regular for body. */
+  --text-label: 0.9375rem;   /* 15 / 20 */
+  --text-body: 1.25rem;      /* 20 / 30 */
+  --text-subhead: 2rem;      /* 32 / 40 */
+  --text-headline: 5rem;     /* 80 / 88 */
+  --text-display: 10rem;     /* 160 / 152 */
+  --text-mark: 30rem;        /* the wordmark on the Logo slide */
+  --text-specimen: 7rem;     /* 112 / 118: the alphabet on the Primary typeface slide */
 
   --leading-tight: 1.05;
   --leading-snug: 1.2;
@@ -356,7 +359,7 @@
   --color-vibija-aubergine: var(--bgpick-veriterra-aubergine);
   --color-vibija-plum: var(--bgpick-veriterra-plum);
   --color-vibija-lime: oklch(84% 0.13 122);
-  --color-vibija-orange: #D87E27;
+  --color-vibija-ink: oklch(16% 0.035 305);   /* near-black aubergine */
   --color-vibija-paper: oklch(97.5% 0.008 305);
   --color-vibija-muted: oklch(46% 0.05 305);
   --color-vibija-line: oklch(80% 0.04 305);
@@ -367,17 +370,28 @@
   --color-vibija-scene-mark-glow-2: oklch(42% 0.09 122);
   --color-vibija-scene-colour-base: oklch(29% 0.12 295);
   --color-vibija-scene-colour-glow: oklch(55% 0.19 295);
-  --color-vibija-scene-colour-glow-2: oklch(62% 0.13 50);
-  --color-vibija-scene-type-base: oklch(95% 0.015 305);
-  --color-vibija-scene-type-glow: oklch(87% 0.07 300);
-  --color-vibija-scene-type-glow-2: oklch(93% 0.1 122);
+  --color-vibija-scene-colour-glow-2: oklch(60% 0.15 285);
+  /* paper: the flat light background of the visual-base slides */
+  --color-vibija-scene-paper-base: var(--color-vibija-paper);
+  --color-vibija-scene-paper-glow: var(--color-vibija-paper);
+  --color-vibija-scene-paper-glow-2: var(--color-vibija-paper);
   --logo-optical-lift: 3dvh;   /* the optical centre sits a little above the geometric one */
   --logo-ink-height: clamp(1.5rem, 3.1vw, 3.4rem);   /* every wordmark is sized so its letters stand this tall */
   --logo-tile-ink-height: clamp(1rem, 1.5vw, 1.5rem);   /* the same, on the All variants tiles */
-  --leading-display: 0.9;    /* display and the wordmark sit tight */
-  --leading-headline: 1;
-  --tracking-display: -0.05em;
-  --tracking-headline: -0.035em;
+  --leading-label: 1.334;    /* 15 / 20 */
+  --leading-body: 1.5;       /* 20 / 30 */
+  --leading-subhead: 1.25;   /* 32 / 40 */
+  --leading-headline: 1.1;   /* 80 / 88 */
+  --leading-display: 0.95;   /* 160 / 152 */
+  --leading-specimen: 1.05;  /* 112 / 118 */
+  --tracking-subhead: -0.01em;
+  --tracking-headline: -0.02em;
+  --tracking-display: -0.03em;
+  /* A deck is a 1920x1080 canvas (120 x 67.5 rem) scaled to the window: the root
+     font size follows the smaller side, so every slide scales as one picture */
+  --deck-rem: min(calc(100vw / 120), calc(100dvh / 67.5));
+  --deck-width: 120rem;
+  --deck-height: 67.5rem;
   --glow-blur: 4rem;
   --duration-drift: 18s;
   --press-scale: 0.98;
@@ -424,7 +438,7 @@
   --brand-muted: var(--color-vibija-muted);
   --brand-line: var(--color-vibija-line);
   --brand-on-deep: var(--color-vibija-lime);
-  --brand-highlight: var(--color-vibija-orange);
+  --brand-night: var(--color-vibija-ink);
   --brand-font-display: var(--font-inter);
   --brand-word-tracking: var(--fig-veriterra-1-tracking);
   --brand-font-headline: var(--font-inter);

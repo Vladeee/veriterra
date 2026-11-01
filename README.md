@@ -2,7 +2,7 @@
 
 One link for **GukoV Group** and its four companies: Vibija, Verdo, Vaya and Viva.
 (Internal ids keep the old working names: `vitreeone`, `veriterra`, `vita`.)
-It opens straight on the presentation: five landings behind a fixed top menu, and a last page with every variant in one grid. The other landings are one logo screen each; **Vibija** is a click-through brand book of six slides (why we exist, who for, character, mark, colour, typography): arrow keys, space or the arrows at the screen edges step through it, and the background flows from one scene to the next.
+It opens straight on the presentation: five landings behind a fixed top menu, and a last page with every variant in one grid. The other landings are one logo screen each; **Vibija** is a click-through brand book of eleven slides on a 1920×1080 canvas that scales to the window (idea, who for, logo, logo on colour, typeface, weights, hierarchy, primary and secondary palette, proportion, combinations): arrow keys, space or the arrows at the screen edges step through it.
 
 Each landing has a fixed look: a style variant from the Figma file, a background gradient and a logo colour (set in `DEFAULTS`, `presentation/presentation.js`). The All variants page shows every variant; a tile opens its landing in that variant. Tap a logo to type your own text in it. Built for 1920×1080 for now, on a four-column grid, in Inter.
 Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.

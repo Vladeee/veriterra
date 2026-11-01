@@ -322,12 +322,27 @@ body.is-scrolled .topnav__blur { opacity: 1; }
 .page-arrow[hidden] { display: none; }
 
 /* ---------- Slides: a landing as a click-through presentation (Vibija) ----------
-   One slide per screen, after farmminerals.com: big type, lots of air. Arrow
-   keys, space, page up / down and the edge arrows step through them
-   (presentation.js, goTo). The slides are transparent: behind them one fixed
-   sky (.slide-sky) blends from the scene of the last slide to the new one;
-   presentation.js sets --from-*, --to-* (scene tokens), --mix and --p. */
-html.has-deck { overflow: hidden; }
+   A brand book after a guideline template: each slide opens with a section
+   header (a hairline, the title in column 1, a description in column 2, the
+   count in column 4) and its content below, on the four-column grid. Arrow
+   keys, space, page up / down and the edge arrows step through the slides
+   (presentation.js, goTo).
+   Canvas: a deck is a 1920x1080 picture (--deck-width x --deck-height, rem)
+   centred in the window; the root font size follows the window (--deck-rem),
+   so the whole slide scales as one and nothing ever reflows.
+   The slides are transparent: behind them one fixed sky (.slide-sky) blends
+   from the scene of the last slide to the new one; presentation.js sets
+   --from-*, --to-* (scene tokens), --mix and --p. */
+html.has-deck {
+  overflow: hidden;
+  font-size: var(--deck-rem);
+}
+
+/* The menu keeps to the canvas, so it lines up with the slide grid */
+html.has-deck .topnav__inner {
+  max-width: var(--deck-width);
+  margin-inline: auto;
+}
 
 /* The sky sits behind the slides but above the landing's own background */
 .landing:has(.slide-sky) { isolation: isolate; }
@@ -342,7 +357,7 @@ html.has-deck { overflow: hidden; }
   --base: color-mix(in oklch, var(--from-base) calc(100% - var(--mix)), var(--to-base));
   --glow: color-mix(in oklch, var(--from-glow) calc(100% - var(--mix)), var(--to-glow));
   --glow-2: color-mix(in oklch, var(--from-glow-2) calc(100% - var(--mix)), var(--to-glow-2));
-  /* The lights travel across the screen as the page goes down */
+  /* The lights travel across the screen as the deck goes on */
   background:
     radial-gradient(65% 60% at calc(82% - var(--p) * 55%) calc(18% + var(--p) * 25%), var(--glow), transparent 72%),
     radial-gradient(60% 65% at calc(12% + var(--p) * 50%) calc(88% - var(--p) * 30%), var(--glow-2), transparent 70%),
@@ -352,16 +367,20 @@ html.has-deck { overflow: hidden; }
 .slide {
   position: fixed;
   inset: 0;
+  width: var(--deck-width);
+  height: var(--deck-height);
+  margin: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  padding: calc(var(--nav-height) + var(--space-5)) var(--page-margin) var(--space-8);
+  overflow: hidden;
   visibility: hidden;
   opacity: 0;
   transition:
     opacity var(--duration-slow) var(--ease-standard),
     visibility 0s linear var(--duration-slow);
-  padding: calc(var(--nav-height) + env(safe-area-inset-top)) max(var(--page-margin), env(safe-area-inset-right)) calc(var(--space-7) + env(safe-area-inset-bottom)) max(var(--page-margin), env(safe-area-inset-left));
-  overflow: hidden;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
   color: var(--brand-paper, var(--color-paper-0));
 }
 
@@ -373,8 +392,7 @@ html.has-deck { overflow: hidden; }
   transition-delay: 0s;
 }
 
-/* Everything on a slide sits on the page grid: --grid-columns columns
-   (four, for 1920x1080) with --grid-gutter between them */
+/* Everything on a slide sits on the page grid: four columns with gutters */
 .slide__head,
 .slide__body {
   display: grid;
@@ -382,28 +400,49 @@ html.has-deck { overflow: hidden; }
   column-gap: var(--grid-gutter);
 }
 
-/* Running header: number, title and a note, one per column */
+/* Section header: hairline, title (col 1), description (col 2), count (col 4) */
 .slide__head {
-  align-items: center;
-  min-height: var(--tap-min);
-  font-family: var(--font-inter);
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--leading-snug);
-  color: color-mix(in oklch, currentColor 70%, transparent);
+  align-items: start;
+  padding-top: var(--space-4);
+  border-top: var(--border-width) solid currentColor;
 }
 
-.slide__head > :nth-child(3) { grid-column: 3 / -1; }
+.slide__title {
+  grid-column: 1;
+  font-family: var(--font-inter);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-body);
+  letter-spacing: normal;
+  color: inherit;
+}
+
+.slide__desc {
+  grid-column: 2;
+  font-weight: var(--font-weight-regular);
+  text-wrap: pretty;
+}
+
+.slide__count {
+  grid-column: 4;
+  justify-self: end;
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-label);
+  font-variant-numeric: tabular-nums;
+  opacity: var(--opacity-muted);
+}
 
 .slide__body {
   flex: 1;
   row-gap: var(--space-7);
-  align-content: center;
+  align-content: end;
+  padding-top: var(--space-8);
 }
 
 .slide__body > * { grid-column: 1 / -1; }
 
-/* Reveal: parts of a slide rise into place when it comes into view
+/* Reveal: parts of a slide rise into place when it is shown
    (presentation.js adds .is-in; html.reveal-ready only when that works) */
 html.reveal-ready .slide [data-reveal] {
   opacity: 0;
