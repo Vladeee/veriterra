@@ -42,6 +42,8 @@
 @font-face { font-family: "Braah One"; src: url("fonts/braah-one/braah-one-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Momo Trust Display"; src: url("fonts/momo-trust-display/momo-trust-display-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Inter"; src: url("fonts/inter/inter-variable-latin.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Andika"; src: url("fonts/andika/andika-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Andika"; src: url("fonts/andika/andika-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "CC Accidenz Commons"; src: url("fonts/accidenz-commons/accidenz-commons-500.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
 
 :root {
@@ -118,70 +120,70 @@
 
 
   /* ---------- Figma style variants (one per frame in the Figma file) ----------
-     Every logo is set in Inter Medium, as written, until a typeface is chosen.
+     Every logo is set in the logo face (--font-logo), as written.
      --fig-<brand>-<n>-<prop>. Applied by presentation/variants.js. */
   /* vitreeone 1 (GukoV Group): Water · Faculty Glyphic (Figma (current)) */
   --fig-vitreeone-1-bg: #0F2A2C;
   --fig-vitreeone-1-page: #0F2A2C;
   --fig-vitreeone-1-ink: #F3EFE6;
-  --fig-vitreeone-1-font: var(--font-inter);
+  --fig-vitreeone-1-font: var(--font-logo);
   --fig-vitreeone-1-size: var(--text-logo);
   --fig-vitreeone-1-tracking: var(--tracking-headline);
-  --fig-vitreeone-1-weight: var(--font-weight-medium);
+  --fig-vitreeone-1-weight: var(--weight-heading);
   --fig-vitreeone-1-case: none;
   /* veriterra 1 (Vibija): lime on aubergine, its brand book colours (was Earth, Figma 75:267) */
   --fig-veriterra-1-bg: var(--color-vibija-aubergine);
   --fig-veriterra-1-page: var(--color-vibija-aubergine);
   --fig-veriterra-1-ink: var(--color-vibija-lime);
-  --fig-veriterra-1-font: var(--font-inter);
+  --fig-veriterra-1-font: var(--font-logo);
   --fig-veriterra-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
   --fig-veriterra-1-tracking: var(--tracking-headline);
-  --fig-veriterra-1-weight: var(--font-weight-medium);
+  --fig-veriterra-1-weight: var(--weight-heading);
   --fig-veriterra-1-case: none;
   /* verdo 1: Lime · Varela Round (Figma 90:154) */
   --fig-verdo-1-bg: radial-gradient(ellipse at 50% 50%, #D6FFCA 46%, #A0EC8B 100%);
   --fig-verdo-1-page: #D6FFCA;
   --fig-verdo-1-ink: #000000;
-  --fig-verdo-1-font: var(--font-inter);
+  --fig-verdo-1-font: var(--font-logo);
   --fig-verdo-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
   --fig-verdo-1-tracking: var(--tracking-headline);
-  --fig-verdo-1-weight: var(--font-weight-medium);
+  --fig-verdo-1-weight: var(--weight-heading);
   --fig-verdo-1-case: none;
   /* vaya 1: Sky · Faculty Glyphic (Figma 75:294) */
   --fig-vaya-1-bg: radial-gradient(farthest-corner at 63% 0%, #B7DDFC 0%, #E6F3FD 100%);
   --fig-vaya-1-page: #E6F3FD;
   --fig-vaya-1-ink: #181F1F;
-  --fig-vaya-1-font: var(--font-inter);
+  --fig-vaya-1-font: var(--font-logo);
   --fig-vaya-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
   --fig-vaya-1-tracking: var(--tracking-headline);
-  --fig-vaya-1-weight: var(--font-weight-medium);
+  --fig-vaya-1-weight: var(--weight-heading);
   --fig-vaya-1-case: none;
   /* vaya 2: Sunrise · Faculty Glyphic (Figma 75:291) */
   --fig-vaya-2-bg: linear-gradient(to bottom, #FFC261 24.84%, #EBF7F3 100%);
   --fig-vaya-2-page: #EBF7F3;
   --fig-vaya-2-ink: #181F1F;
-  --fig-vaya-2-font: var(--font-inter);
+  --fig-vaya-2-font: var(--font-logo);
   --fig-vaya-2-size: clamp(2.5rem, 5.0vw, 6.0rem);
   --fig-vaya-2-tracking: var(--tracking-headline);
-  --fig-vaya-2-weight: var(--font-weight-medium);
+  --fig-vaya-2-weight: var(--weight-heading);
   --fig-vaya-2-case: none;
   /* vaya 3: Lavender · Faculty Glyphic (Figma 75:300) */
   --fig-vaya-3-bg: linear-gradient(to bottom, #F6F6F6 0%, #D2BDF9 100%);
   --fig-vaya-3-page: #F6F6F6;
   --fig-vaya-3-ink: #181F1F;
-  --fig-vaya-3-font: var(--font-inter);
+  --fig-vaya-3-font: var(--font-logo);
   --fig-vaya-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
   --fig-vaya-3-tracking: var(--tracking-headline);
-  --fig-vaya-3-weight: var(--font-weight-medium);
+  --fig-vaya-3-weight: var(--weight-heading);
   --fig-vaya-3-case: none;
   /* vita 1: Stone · Momo Trust (Figma 75:305) */
   --fig-vita-1-bg: #ACAA9F;
   --fig-vita-1-page: #ACAA9F;
   --fig-vita-1-ink: #1D1D1D;
-  --fig-vita-1-font: var(--font-inter);
+  --fig-vita-1-font: var(--font-logo);
   --fig-vita-1-size: clamp(2.5rem, 5.83vw, 7.0rem);
   --fig-vita-1-tracking: var(--tracking-headline);
-  --fig-vita-1-weight: var(--font-weight-medium);
+  --fig-vita-1-weight: var(--weight-heading);
   --fig-vita-1-case: none;
 
   /* ---------- Colour: semantic roles ---------- */
@@ -202,10 +204,11 @@
 
   /* ---------- Typography (PLACEHOLDER: system faces until fonts are chosen) ---------- */
   --font-serif-system: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
-  /* No typeface is chosen yet: Inter for everything (the Figma variants keep their own) */
-  --font-display: var(--font-inter);
-  --font-logo: var(--font-inter);
-  --font-body: var(--font-inter);
+  /* Font roles: the main face is Andika (SIL, Google Fonts). Everything reads
+     these roles, so changing the face is one line here */
+  --font-display: var(--font-andika);
+  --font-logo: var(--font-andika);
+  --font-body: var(--font-andika);
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Trial typefaces (see @font-face above) */
@@ -227,11 +230,16 @@
   --font-braah: "Braah One", sans-serif;
   --font-momo: "Momo Trust Display", sans-serif;
   --font-inter: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-andika: "Andika", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  /* Weight roles. Andika has Regular and Bold: headings and text in Regular,
+     labels and section titles in Bold */
+  --weight-heading: var(--font-weight-regular);
+  --weight-strong: var(--font-weight-bold);
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -437,9 +445,9 @@
   --brand-rule: color-mix(in oklch, currentColor var(--rule-opacity), transparent);   /* hairlines take the text colour */
   --brand-on-deep: var(--color-vibija-lime);
   --brand-night: var(--color-vibija-ink);
-  --brand-font-display: var(--font-inter);
+  --brand-font-display: var(--font-display);
   --brand-word-tracking: var(--fig-veriterra-1-tracking);
-  --brand-font-headline: var(--font-inter);
+  --brand-font-headline: var(--font-display);
   --brand-ornament: var(--color-fm-olive-600);
   --brand-deep: var(--color-vibija-aubergine);
   --brand-logo: var(--color-fm-ink);

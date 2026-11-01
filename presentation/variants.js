@@ -4,7 +4,7 @@
   --fig-<brand>-<n>-<prop>; this file only lists them. Generated from the Figma
   frames; edit the tokens to tweak a variant, add an entry here to add one.
   Only the variants the user picked are kept (git history has the rest). Every
-  logo is set in Inter Medium for now; a variant keeps the colours of its frame.
+  logo is set in the logo face (Andika for now); a variant keeps the colours of its frame.
   kern: true spaces the letters by their ink (for faces with monospaced Latin).
   mesh: true lets a layered background drift slowly.
   split: n draws the first n letters in ink and the rest in ink2.
@@ -13,39 +13,39 @@
 window.VARIANTS = {
   "vitreeone": [
     {
-      "name": "Water · Inter",
+      "name": "Water · Andika",
       "node": "(current)"
     }
   ],
   "veriterra": [
     {
-      "name": "Aubergine · Inter",
+      "name": "Aubergine · Andika",
       "node": "75:267"
     }
   ],
   "verdo": [
     {
-      "name": "Lime · Inter",
+      "name": "Lime · Andika",
       "node": "90:154"
     }
   ],
   "vaya": [
     {
-      "name": "Sky · Inter",
+      "name": "Sky · Andika",
       "node": "75:294"
     },
     {
-      "name": "Sunrise · Inter",
+      "name": "Sunrise · Andika",
       "node": "75:291"
     },
     {
-      "name": "Lavender · Inter",
+      "name": "Lavender · Andika",
       "node": "75:300"
     }
   ],
   "vita": [
     {
-      "name": "Stone · Inter",
+      "name": "Stone · Andika",
       "node": "75:305"
     }
   ]

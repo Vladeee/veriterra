@@ -6,9 +6,10 @@
   in presentation.css): Idea, Who for, Logo, On colour, Primary typeface,
   Weights, Hierarchy, Primary palette, Secondary palette, Proportion,
   Combinations. These are the Vibija parts, prefixed .vb-.
-  Typography: Inter with optical sizes. Every role has its own size, leading
-  and tracking (tokens --text-*, --leading-*, --tracking-*); medium (500) for
-  display, headline, subhead and labels, regular (400) for body. Sentence case.
+  Typography: the main face (--font-display / --font-body, Andika for now).
+  Every role has its own size, leading and tracking (tokens --text-*,
+  --leading-*, --tracking-*); --weight-heading (Regular) for display, headline,
+  subhead and text, --weight-strong (Bold) for labels. Sentence case.
 */
 
 .landing[data-brand="veriterra"] ul {
@@ -29,7 +30,7 @@
 .vb-weight,
 .vb-panel {
   font-family: var(--brand-font-display);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
   font-kerning: normal;
   font-optical-sizing: auto;
 }
@@ -69,7 +70,7 @@
 .vb-label,
 .vb-term {
   font-size: var(--text-label);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-strong);
   line-height: var(--leading-label);
 }
 
@@ -83,7 +84,7 @@
 .vb-idea .vb-promise {
   grid-column: 2 / span 2;
   font-size: var(--text-subhead);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
   line-height: var(--leading-subhead);
   letter-spacing: var(--tracking-subhead);
   text-wrap: balance;
@@ -163,8 +164,8 @@
   white-space: nowrap;
 }
 
-.vb-weight--medium { font-weight: var(--font-weight-medium); }
-.vb-weight--regular { font-weight: var(--font-weight-regular); }
+.vb-weight--regular { font-weight: var(--weight-heading); }
+.vb-weight--bold { font-weight: var(--weight-strong); }
 
 /* ---------- 07 Hierarchy: the spec in column 1, the sample in 2-4 ---------- */
 .vb-hierarchy .slide__body { row-gap: var(--space-6); }
@@ -237,7 +238,7 @@
   padding: var(--space-4);
   background: var(--sw);
   color: var(--brand-ink);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-strong);
   font-variant-numeric: tabular-nums;
 }
 
@@ -271,7 +272,7 @@
 
 .vb-combo__ratio {
   font-size: var(--text-label);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-strong);
   line-height: var(--leading-label);
   font-variant-numeric: tabular-nums;
   opacity: var(--opacity-muted);

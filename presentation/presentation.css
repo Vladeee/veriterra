@@ -117,7 +117,7 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   min-width: var(--tap-min);
   color: inherit;
   font-size: var(--text-label);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
   text-decoration: none;
   opacity: var(--opacity-muted);
   transition: opacity var(--duration-base) var(--ease-standard);
@@ -234,9 +234,9 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   bottom: calc(var(--space-6) + env(safe-area-inset-bottom));
   max-width: 50%;
   margin: 0 auto;
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-body);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
   line-height: var(--leading-snug);
   text-wrap: balance;
   color: var(--color-text);
@@ -415,9 +415,9 @@ html.has-deck .topnav__inner {
 
 .slide__title {
   grid-column: 1;
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-body);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-strong);
   line-height: var(--leading-body);
   letter-spacing: normal;
   color: inherit;
@@ -433,7 +433,7 @@ html.has-deck .topnav__inner {
   grid-column: 4;
   justify-self: end;
   font-size: var(--text-label);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
   line-height: var(--leading-label);
   font-variant-numeric: tabular-nums;
   opacity: var(--opacity-muted);
@@ -477,16 +477,16 @@ html.reveal-ready .slide.is-in [data-reveal] {
 
 .overview__title {
   margin: 0;
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-headline);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
   line-height: var(--leading-headline);
   letter-spacing: var(--tracking-headline);
 }
 
 .overview__lead {
   margin: var(--space-3) auto 0;
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-body);
   font-weight: var(--font-weight-regular);
   color: var(--color-text-muted);
@@ -503,9 +503,9 @@ html.reveal-ready .slide.is-in [data-reveal] {
   border-radius: var(--radius-pill);
   background: transparent;
   color: var(--color-text);
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-label);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
   cursor: pointer;
   touch-action: manipulation;
 }
@@ -530,9 +530,9 @@ html.reveal-ready .slide.is-in [data-reveal] {
   margin: 0 0 var(--space-3);
   padding-top: var(--space-3);
   border-top: var(--border-width) solid var(--color-border);
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-label);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
 }
 
 .overview__label::before {
@@ -588,8 +588,8 @@ html.reveal-ready .slide.is-in [data-reveal] {
   position: absolute;
   left: var(--space-3);
   bottom: var(--space-2);
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-label);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--weight-heading);
   opacity: var(--opacity-quiet);
 }

@@ -3,7 +3,7 @@
 Self-hosted typefaces, so they work offline on the iPad and on GitHub Pages. They are declared
 with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--font-asul`, …).
 
-- **In use: Inter only** (every logo and all text, until a typeface is chosen). The faces below stay for later.
+- **In use: Andika only** (every logo and all text; the user's choice). Inter and the faces below stay for later.
 - **Figma variants (wordmarks), not in use now:** Port Lligat Sans, Poppins, Kosugi Maru, Comfortaa, Hubballi, Varela Round,
   Madimi One, Braah One (no variant uses it now), Momo Trust Display, Faculty Glyphic. Each style variant (`--fig-*` tokens,
   `presentation/variants.js`) names one of them. Only the weights the frames use are included.
@@ -31,6 +31,7 @@ with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--fon
 | `madimi-one/` | Madimi One, The Madimi One Project Authors | SIL OFL 1.1 | Google Fonts |
 | `braah-one/` | Braah One, The Braah Project Authors | SIL OFL 1.1 | Google Fonts |
 | `momo-trust-display/` | Momo Trust Display, The Momo Trust Project Authors | SIL OFL 1.1 | Google Fonts |
+| `andika/` | Andika (Regular 400, Bold 700, latin subset), SIL International | SIL OFL 1.1 | Google Fonts |
 | `inter/` | Inter (variable: weight 100–900 and optical size 14–32, latin subset: `inter-variable-latin.woff2`), The Inter Project Authors | SIL OFL 1.1 | Google Fonts |
 
 Not included:
