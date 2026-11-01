@@ -282,13 +282,21 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   .logo-hero__caption { opacity: 1; transform: none; }
 }
 
-/* ---------- Page arrows: previous / next page at the screen edges ---------- */
+/* ---------- Page arrows: previous / next slide, a pair in the bottom right ----------
+   They sit on the canvas, not the window: right edge on the grid, centred in
+   the room under the slide (--deck-pad-bottom), so they never touch an edge. */
+.page-arrows {
+  position: fixed;
+  z-index: var(--z-toast);
+  right: calc((100vw - var(--deck-width)) / 2 + var(--page-margin));
+  bottom: calc((100dvh - var(--deck-height)) / 2 + (var(--deck-pad-bottom) - var(--tap-min)) / 2);
+  display: flex;
+  gap: var(--space-3);
+}
+
 .page-arrows[hidden] { display: none; }
 
 .page-arrow {
-  position: fixed;
-  top: 50%;
-  z-index: var(--z-toast);
   display: grid;
   place-items: center;
   width: var(--tap-min);
@@ -300,14 +308,9 @@ body.is-scrolled .topnav__blur { opacity: 1; }
   backdrop-filter: blur(var(--space-3));
   color: var(--sw-ink, var(--color-text));
   opacity: var(--opacity-quiet);
-  translate: 0 -50%;
   touch-action: manipulation;
   transition: opacity var(--duration-base) var(--ease-standard);
 }
-
-/* Centred in the page margin, so they never touch the grid */
-.page-arrow--prev { left: calc((var(--page-margin) - var(--tap-min)) / 2 + env(safe-area-inset-left)); }
-.page-arrow--next { right: calc((var(--page-margin) - var(--tap-min)) / 2 + env(safe-area-inset-right)); }
 
 .page-arrow:active { scale: var(--press-scale); }
 
@@ -401,7 +404,7 @@ html.has-deck .topnav__inner {
   margin: auto;
   display: flex;
   flex-direction: column;
-  padding: calc(var(--nav-height) + var(--space-5)) var(--page-margin) var(--space-8);
+  padding: calc(var(--nav-height) + var(--space-5)) var(--page-margin) var(--deck-pad-bottom);
   overflow: hidden;
   visibility: hidden;
   opacity: 0;

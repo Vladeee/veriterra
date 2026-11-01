@@ -59,7 +59,7 @@
     <!-- ==================== VIBIJA (id veriterra) ==================== -->
     <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="vibija-idea-title" hidden>
 
-      <!-- Brand book (minimum viable brand), twelve click-through slides on a 1920x1080
+      <!-- Brand book (minimum viable brand), ten click-through slides on a 1920x1080
            canvas: brand core (Idea, Who for) on the dark scene, then the visual base
            (logo, type, colour) on paper, laid out like a guideline template. Each slide
            opens with a section header: hairline, title (col 1), description (col 2),
@@ -67,13 +67,18 @@
            landings/veriterra.css (.vb-*). Copy is a working draft from the interview. -->
       <div class="slide-sky" data-scene-prefix="--color-vibija-scene-" aria-hidden="true"></div>
 
-      <!-- 01 Idea -->
+      <!-- 01 Idea: the cover, with the logo -->
       <section class="slide vb-idea" id="vibija-idea" data-scene="core" data-tone="dark" aria-labelledby="vibija-idea-title">
         <header class="slide__head"><h2 class="slide__title anno" id="vibija-idea-title">Idea</h2><p class="slide__desc anno anno--quiet">What Vibija stands for, in one line.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
-          <p class="vb-display" data-reveal style="--i: 1">Every greenhouse, its own formula.</p>
-          <p class="vb-term anno anno--quiet" data-reveal style="--i: 2">Our promise</p>
-          <p class="vb-promise" data-reveal style="--i: 2">Effective fertilizer, calculated for the context of each greenhouse.</p>
+          <p class="vb-idea__logo" data-reveal style="--i: 1"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></p>
+          <div class="vb-dots" data-reveal style="--i: 2" aria-hidden="true"></div>
+          <p class="vb-display" data-reveal style="--i: 2">Every greenhouse, its own formula.</p>
+          <div class="vb-idea__foot" data-reveal style="--i: 3">
+            <p class="vb-term anno anno--quiet">Our promise</p>
+            <p class="vb-promise">Effective fertilizer, calculated for the context of each greenhouse.</p>
+            <p class="vb-idea__note anno anno--quiet">Fertilizer for greenhouses<br>Brand book, working draft</p>
+          </div>
         </div>
       </section>
 
@@ -93,56 +98,80 @@
 
       <!-- 03 Logo -->
       <section class="slide vb-logo" id="vibija-logo" data-scene="paper" data-tone="light" aria-labelledby="vibija-logo-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-logo-title">Logo</h2><p class="slide__desc anno anno--quiet">A working logo: the name, set in Andika. A drawn logo comes later.</p><p class="slide__count anno anno--quiet" data-count></p></header>
+        <header class="slide__head"><h2 class="slide__title anno" id="vibija-logo-title">Logo</h2><p class="slide__desc anno anno--quiet">A working logo: a sign and the name in Andika. The circle holds the place of the sign until it is drawn.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
-          <p class="vb-wordmark" data-reveal style="--i: 1" data-brand-name="veriterra"></p>
+          <p class="vb-logo__mark" data-reveal style="--i: 1"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></p>
+          <ul class="vb-logo__notes" data-reveal style="--i: 2">
+            <li><p class="anno">Sign</p><p class="anno anno--quiet">As tall as a round capital, sitting on the baseline.</p></li>
+            <li><p class="anno">Space</p><p class="anno anno--quiet">A fifth of the type size between the sign and the name.</p></li>
+            <li><p class="anno">Name</p><p class="anno anno--quiet">Andika Regular, sentence case, tracking −2%.</p></li>
+            <li><p class="anno">Colour</p><p class="anno anno--quiet">The sign always takes another colour than the name, unless the logo is monochrome.</p></li>
+          </ul>
         </div>
       </section>
 
       <!-- 04 Logo on colour -->
       <section class="slide vb-oncolour" id="vibija-on-colour" data-scene="paper" data-tone="light" aria-labelledby="vibija-on-colour-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-on-colour-title">On colour</h2><p class="slide__desc anno anno--quiet">The logo sits only on these pairings. Each keeps strong contrast.</p><p class="slide__count anno anno--quiet" data-count></p></header>
+        <header class="slide__head"><h2 class="slide__title anno" id="vibija-on-colour-title">On colour</h2><p class="slide__desc anno anno--quiet">The logo sits only on these grounds. Above, the primary pairings; below, quieter ones from the same palette.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
-          <ul class="vb-panels">
-            <li class="vb-panel vb-panel--paper" data-reveal style="--i: 1"><span data-brand-name="veriterra"></span></li>
-            <li class="vb-panel vb-panel--aubergine" data-reveal style="--i: 2"><span data-brand-name="veriterra"></span></li>
-            <li class="vb-panel vb-panel--lime" data-reveal style="--i: 3"><span data-brand-name="veriterra"></span></li>
-            <li class="vb-panel vb-panel--ink" data-reveal style="--i: 4"><span data-brand-name="veriterra"></span></li>
+          <ul class="vb-pairs">
+            <li class="vb-pair vb-pair--edge" data-reveal style="--i: 1; --ground: var(--color-vibija-paper); --word: var(--color-vibija-aubergine); --sign: var(--color-vibija-lime)">
+              <div class="vb-pair__panel"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></div>
+              <p class="anno">Paper, the primary pairing<span class="anno--quiet"> · name aubergine, sign lime</span></p>
+            </li>
+            <li class="vb-pair" data-reveal style="--i: 2; --ground: var(--color-vibija-aubergine); --word: var(--color-vibija-paper); --sign: var(--color-vibija-lime)">
+              <div class="vb-pair__panel"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></div>
+              <p class="anno">Aubergine<span class="anno--quiet"> · name paper, sign lime</span></p>
+            </li>
+            <li class="vb-pair" data-reveal style="--i: 3; --ground: var(--color-vibija-lime); --word: var(--color-vibija-aubergine); --sign: var(--color-vibija-paper)">
+              <div class="vb-pair__panel"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></div>
+              <p class="anno">Lime<span class="anno--quiet"> · name aubergine, sign paper</span></p>
+            </li>
+            <li class="vb-pair" data-reveal style="--i: 4; --ground: var(--color-vibija-ink); --word: var(--color-vibija-paper); --sign: var(--color-vibija-lime)">
+              <div class="vb-pair__panel"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></div>
+              <p class="anno">Ink<span class="anno--quiet"> · name paper, sign lime</span></p>
+            </li>
+            <li class="vb-pair" data-reveal style="--i: 1; --ground: var(--color-vibija-neutral-100); --word: var(--color-vibija-aubergine); --sign: var(--color-vibija-aubergine-40)">
+              <div class="vb-pair__panel"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></div>
+              <p class="anno">Neutral 100<span class="anno--quiet"> · name aubergine, sign aubergine 40</span></p>
+            </li>
+            <li class="vb-pair vb-pair--edge" data-reveal style="--i: 2; --ground: var(--color-vibija-paper); --word: var(--color-vibija-lime-deep); --sign: var(--color-vibija-lime)">
+              <div class="vb-pair__panel"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></div>
+              <p class="anno">Paper, green name<span class="anno--quiet"> · name lime deep, sign lime</span></p>
+            </li>
+            <li class="vb-pair" data-reveal style="--i: 3; --ground: var(--color-vibija-lime-20); --word: var(--color-vibija-aubergine); --sign: var(--color-vibija-lime-deep)">
+              <div class="vb-pair__panel"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></div>
+              <p class="anno">Lime 20<span class="anno--quiet"> · name aubergine, sign lime deep</span></p>
+            </li>
+            <li class="vb-pair" data-reveal style="--i: 4; --ground: var(--color-vibija-aubergine-10); --word: var(--color-vibija-aubergine); --sign: var(--color-vibija-aubergine)">
+              <div class="vb-pair__panel"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></div>
+              <p class="anno">Monochrome<span class="anno--quiet"> · aubergine on aubergine 10</span></p>
+            </li>
           </ul>
         </div>
       </section>
 
-      <!-- 05 Primary typeface -->
+      <!-- 05 Typography -->
       <section class="slide vb-typeface" id="vibija-typeface" data-scene="paper" data-tone="light" aria-labelledby="vibija-typeface-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-typeface-title">Primary typeface</h2><p class="slide__desc anno anno--quiet">Andika, for now: made by SIL for clear, easy reading, free under the SIL Open Font License.</p><p class="slide__count anno anno--quiet" data-count></p></header>
+        <header class="slide__head"><h2 class="slide__title anno" id="vibija-typeface-title">Typography</h2><p class="slide__desc anno anno--quiet">Two faces by role, both in Regular and free under the SIL Open Font License.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
-          <p class="vb-aside anno" data-reveal style="--i: 1">Andika<br>SIL International</p>
-          <p class="vb-specimen" data-reveal style="--i: 1" aria-label="Andika specimen: alphabet, figures and signs">Andika<br>ABCDEFGHIJKLM<br>NOPQRSTUVWXYZ<br>abcdefghijklmnopq<br>rstuvwxyz 0123456789<br>!@#$%&amp;*()?+</p>
+          <div class="vb-face vb-face--display" data-reveal style="--i: 1">
+            <p class="anno">Andika<br><span class="anno--quiet">Primary: headings and the logo</span></p>
+            <p class="vb-face__glyph" aria-hidden="true">Aa</p>
+            <p class="vb-face__set" aria-label="Andika: alphabet, figures and signs">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !@#$%&amp;*()?+</p>
+            <p class="anno anno--quiet">SIL International</p>
+          </div>
+          <div class="vb-face vb-face--text" data-reveal style="--i: 2">
+            <p class="anno">Lexend Deca<br><span class="anno--quiet">Secondary: text and subheads</span></p>
+            <p class="vb-face__glyph" aria-hidden="true">Aa</p>
+            <p class="vb-face__set" aria-label="Lexend Deca: alphabet, figures and signs">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !@#$%&amp;*()?+</p>
+            <p class="anno anno--quiet">Bonnie Shaver-Troup, Thomas Jockin</p>
+          </div>
         </div>
       </section>
 
-      <!-- 06 Secondary typeface -->
-      <section class="slide vb-typeface" id="vibija-typeface-text" data-scene="paper" data-tone="light" aria-labelledby="vibija-typeface-text-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-typeface-text-title">Secondary typeface</h2><p class="slide__desc anno anno--quiet">Lexend Deca, for text and subheads: wide, calm and easy to read. Free under the SIL Open Font License.</p><p class="slide__count anno anno--quiet" data-count></p></header>
-        <div class="slide__body">
-          <p class="vb-aside anno" data-reveal style="--i: 1">Lexend Deca<br>Bonnie Shaver-Troup, Thomas Jockin</p>
-          <p class="vb-specimen vb-specimen--text" data-reveal style="--i: 1" aria-label="Lexend Deca specimen: alphabet, figures and signs">Lexend Deca<br>ABCDEFGHIJKLM<br>NOPQRSTUVWXYZ<br>abcdefghijklm<br>nopqrstuvwxyz<br>0123456789 !@#$%&amp;*()?+</p>
-        </div>
-      </section>
-
-      <!-- 07 Pairing -->
-      <section class="slide vb-weights" id="vibija-pairing" data-scene="paper" data-tone="light" aria-labelledby="vibija-pairing-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-pairing-title">Pairing</h2><p class="slide__desc anno anno--quiet">Andika for headings and the logo, Lexend Deca for text and subheads. Both in Regular.</p><p class="slide__count anno anno--quiet" data-count></p></header>
-        <div class="slide__body">
-          <p class="vb-aside anno" data-reveal style="--i: 1">Andika Regular<br>Headings, logo</p>
-          <p class="vb-weight vb-weight--display" data-reveal style="--i: 1" aria-hidden="true">Andika</p>
-          <p class="vb-aside anno" data-reveal style="--i: 2">Lexend Deca Regular<br>Text, subheads</p>
-          <p class="vb-weight vb-weight--text" data-reveal style="--i: 2" aria-hidden="true">Lexend Deca</p>
-        </div>
-      </section>
-
-      <!-- 08 Hierarchy -->
-      <section class="slide vb-hierarchy" id="vibija-hierarchy" data-scene="paper" data-tone="light" aria-labelledby="vibija-hierarchy-title">
+      <!-- 06 Hierarchy -->
+      <section class="slide vb-hierarchy" id="vibija-hierarchy" data-scene="core" data-tone="dark" aria-labelledby="vibija-hierarchy-title">
         <header class="slide__head"><h2 class="slide__title anno" id="vibija-hierarchy-title">Hierarchy</h2><p class="slide__desc anno anno--quiet">Four sizes, each with its own leading and tracking. Always sentence case.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
           <p class="vb-spec anno anno--quiet" data-reveal style="--i: 1">Display<br>Andika Regular<br>160 / 152</p>
@@ -156,7 +185,7 @@
         </div>
       </section>
 
-      <!-- 09 Primary palette -->
+      <!-- 07 Primary palette -->
       <section class="slide vb-palette" id="vibija-palette" data-scene="paper" data-tone="light" aria-labelledby="vibija-palette-title">
         <header class="slide__head"><h2 class="slide__title anno" id="vibija-palette-title">Primary palette</h2><p class="slide__desc anno anno--quiet">Aubergine is the base, lime the accent, paper and ink carry the text. Tones mix each colour toward paper in OKLab.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
@@ -201,7 +230,7 @@
         </div>
       </section>
 
-      <!-- 10 Neutrals -->
+      <!-- 08 Neutrals -->
       <section class="slide vb-neutrals" id="vibija-neutrals" data-scene="paper" data-tone="light" aria-labelledby="vibija-neutrals-title">
         <header class="slide__head"><h2 class="slide__title anno" id="vibija-neutrals-title">Neutrals</h2><p class="slide__desc anno anno--quiet">Eleven greys from paper to ink, mixed in OKLab, so each keeps a trace of aubergine. Contrast on paper and on ink.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
@@ -227,7 +256,7 @@
         </div>
       </section>
 
-      <!-- 11 Status -->
+      <!-- 09 Status -->
       <section class="slide vb-statuses" id="vibija-status" data-scene="paper" data-tone="light" aria-labelledby="vibija-status-title">
         <header class="slide__head"><h2 class="slide__title anno" id="vibija-status-title">Status</h2><p class="slide__desc anno anno--quiet">One lightness for every status, hues around the pair. Base on light, soft behind base, bright on dark.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
@@ -280,7 +309,7 @@
         </div>
       </section>
 
-      <!-- 12 Themes -->
+      <!-- 10 Themes -->
       <section class="slide vb-themes" id="vibija-themes" data-scene="paper" data-tone="light" aria-labelledby="vibija-themes-title">
         <header class="slide__head"><h2 class="slide__title anno" id="vibija-themes-title">Themes</h2><p class="slide__desc anno anno--quiet">Light for most pages, dark for brand blocks and dark mode. A site reads only these roles.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
