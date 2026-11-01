@@ -14,6 +14,108 @@
   (tokens --text-*, --leading-*, --tracking-*). Sentence case.
 */
 
+/* ---------- The deck on its own colour system (slide 12, Themes) ----------
+   Light slides read the light roles, dark slides the dark ones, like pages of
+   the site. The menu and the arrows sit outside the slides, so body carries
+   the roles of the current slide (presentation.js sets body.nav-on-dark from
+   its data-tone). Everything below reads only --ui-*. */
+html[data-brand="veriterra"].has-deck body,
+.landing[data-brand="veriterra"] .slide[data-tone="light"],
+.vb-theme--light .vb-theme__page {
+  --ui-bg: var(--color-vibija-light-bg);
+  --ui-surface: var(--color-vibija-light-surface);
+  --ui-raised: var(--color-vibija-light-raised);
+  --ui-text: var(--color-vibija-light-text);
+  --ui-muted: var(--color-vibija-light-muted);
+  --ui-border: var(--color-vibija-light-border);
+  --ui-primary: var(--color-vibija-light-primary);
+  --ui-on-primary: var(--color-vibija-light-on-primary);
+  --ui-primary-hover: var(--color-vibija-light-primary-hover);
+  --ui-accent: var(--color-vibija-light-accent);
+  --ui-on-accent: var(--color-vibija-light-on-accent);
+  --ui-link: var(--color-vibija-light-link);
+  --ui-focus: var(--color-vibija-light-focus);
+  --ui-success: var(--color-vibija-success);
+}
+
+html[data-brand="veriterra"].has-deck body.nav-on-dark,
+.landing[data-brand="veriterra"] .slide[data-tone="dark"],
+.vb-theme--dark .vb-theme__page {
+  --ui-bg: var(--color-vibija-dark-bg);
+  --ui-surface: var(--color-vibija-dark-surface);
+  --ui-raised: var(--color-vibija-dark-raised);
+  --ui-text: var(--color-vibija-dark-text);
+  --ui-muted: var(--color-vibija-dark-muted);
+  --ui-border: var(--color-vibija-dark-border);
+  --ui-primary: var(--color-vibija-dark-primary);
+  --ui-on-primary: var(--color-vibija-dark-on-primary);
+  --ui-primary-hover: var(--color-vibija-dark-primary-hover);
+  --ui-accent: var(--color-vibija-dark-accent);
+  --ui-on-accent: var(--color-vibija-dark-on-accent);
+  --ui-link: var(--color-vibija-dark-link);
+  --ui-focus: var(--color-vibija-dark-focus);
+  --ui-success: var(--color-vibija-success-bright);
+}
+
+/* Text in the text role, quiet text in the muted role (not a fainter copy of
+   the text colour), every hairline in the border role */
+.landing[data-brand="veriterra"] .slide {
+  --brand-rule: var(--ui-border);
+  color: var(--ui-text);
+}
+
+.landing[data-brand="veriterra"] .anno--quiet {
+  opacity: 1;
+  color: var(--ui-muted);
+}
+
+html[data-brand="veriterra"].has-deck :focus-visible { outline-color: var(--ui-focus); }
+
+/* Menu: the current page in the text role, the others muted */
+html[data-brand="veriterra"].has-deck .topnav { color: var(--ui-text); }
+
+html[data-brand="veriterra"].has-deck .topnav__link {
+  opacity: 1;
+  color: var(--ui-muted);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+html[data-brand="veriterra"].has-deck .topnav__link[aria-current="page"],
+html[data-brand="veriterra"].has-deck .topnav__link:active { color: var(--ui-text); }
+
+html[data-brand="veriterra"].has-deck .topnav__fs:active { background: var(--ui-surface); }
+
+/* Arrows: the deck's two buttons, drawn like the site's. Next is the primary
+   button (aubergine on light, lime on dark), previous the secondary one
+   (an outline in the text colour). */
+html[data-brand="veriterra"].has-deck .page-arrow {
+  border: var(--border-width) solid var(--ui-text);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  color: var(--ui-text);
+  opacity: 1;
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    color var(--duration-base) var(--ease-standard);
+}
+
+html[data-brand="veriterra"].has-deck .page-arrow--next {
+  border-color: var(--ui-primary);
+  background: var(--ui-primary);
+  color: var(--ui-on-primary);
+}
+
+@media (hover: hover) {
+  html[data-brand="veriterra"].has-deck .topnav__link:hover { color: var(--ui-text); }
+  html[data-brand="veriterra"].has-deck .page-arrow:hover { background: var(--ui-surface); }
+  html[data-brand="veriterra"].has-deck .page-arrow--next:hover {
+    border-color: var(--ui-primary-hover);
+    background: var(--ui-primary-hover);
+  }
+}
+
 .landing[data-brand="veriterra"] ul {
   margin: 0;
   padding: 0;
@@ -177,11 +279,11 @@
 /* Text on a measured colour: light on dark colours */
 .vb-anchor__swatch,
 .vb-tones li,
-.vb-ramp li { color: var(--brand-ink); }
+.vb-ramp li { color: var(--color-vibija-light-text); }
 
 .vb-anchor__swatch[data-on="dark"],
 .vb-tones li[data-on="dark"],
-.vb-ramp li[data-on="dark"] { color: var(--brand-paper); }
+.vb-ramp li[data-on="dark"] { color: var(--color-vibija-dark-text); }
 
 /* Light colours get a hairline so they hold their edge on paper */
 .vb-anchor__swatch,
@@ -336,34 +438,8 @@
   color: inherit;
 }
 
-/* ---------- 12 Themes: a fragment of the site in each theme ---------- */
-.vb-theme--light {
-  --t-bg: var(--color-vibija-light-bg);
-  --t-text: var(--color-vibija-light-text);
-  --t-muted: var(--color-vibija-light-muted);
-  --t-border: var(--color-vibija-light-border);
-  --t-primary: var(--color-vibija-light-primary);
-  --t-on-primary: var(--color-vibija-light-on-primary);
-  --t-accent: var(--color-vibija-light-accent);
-  --t-on-accent: var(--color-vibija-light-on-accent);
-  --t-link: var(--color-vibija-light-link);
-  --t-focus: var(--color-vibija-light-focus);
-  --t-success: var(--color-vibija-success);
-}
-
-.vb-theme--dark {
-  --t-bg: var(--color-vibija-dark-bg);
-  --t-text: var(--color-vibija-dark-text);
-  --t-muted: var(--color-vibija-dark-muted);
-  --t-border: var(--color-vibija-dark-border);
-  --t-primary: var(--color-vibija-dark-primary);
-  --t-on-primary: var(--color-vibija-dark-on-primary);
-  --t-accent: var(--color-vibija-dark-accent);
-  --t-on-accent: var(--color-vibija-dark-on-accent);
-  --t-link: var(--color-vibija-dark-link);
-  --t-focus: var(--color-vibija-dark-focus);
-  --t-success: var(--color-vibija-success-bright);
-}
+/* ---------- 12 Themes: a fragment of the site in each theme ----------
+   The panels take the theme roles (--ui-*) set at the top of this file. */
 
 .vb-theme {
   grid-column: span 2;
@@ -379,8 +455,8 @@
   align-items: flex-start;
   gap: var(--space-5);
   padding: var(--space-7);
-  background: var(--t-bg);
-  color: var(--t-text);
+  background: var(--ui-bg);
+  color: var(--ui-text);
   font-family: var(--brand-font-text);
   font-weight: var(--weight-text);
   font-size: var(--text-body);
@@ -404,15 +480,15 @@
 .vb-theme__muted {
   width: 100%;
   padding-bottom: var(--space-5);
-  border-bottom: var(--border-width) solid var(--t-border);
-  color: var(--t-muted);
+  border-bottom: var(--border-width) solid var(--ui-border);
+  color: var(--ui-muted);
 }
 
 .vb-theme__tag {
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-pill);
-  background: var(--t-accent);
-  color: var(--t-on-accent);
+  background: var(--ui-accent);
+  color: var(--ui-on-accent);
   font-size: var(--text-label);
   line-height: var(--leading-label);
 }
@@ -428,23 +504,23 @@
   align-items: center;
   min-height: var(--tap-min);
   padding: 0 var(--space-5);
-  border: var(--border-width) solid var(--t-primary);
+  border: var(--border-width) solid var(--ui-primary);
   border-radius: var(--radius-pill);
-  background: var(--t-primary);
-  color: var(--t-on-primary);
+  background: var(--ui-primary);
+  color: var(--ui-on-primary);
 }
 
 /* The secondary button is drawn focused, to show the focus ring */
 .vb-theme__button--secondary {
-  border-color: var(--t-text);
+  border-color: var(--ui-text);
   background: none;
-  color: var(--t-text);
-  outline: var(--focus-ring-width) solid var(--t-focus);
+  color: var(--ui-text);
+  outline: var(--focus-ring-width) solid var(--ui-focus);
   outline-offset: var(--focus-ring-offset);
 }
 
 .vb-theme__link {
-  color: var(--t-link);
+  color: var(--ui-link);
   text-decoration: underline;
   text-underline-offset: var(--underline-offset);
 }
@@ -453,7 +529,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--t-success);
+  color: var(--ui-success);
 }
 
 .vb-theme__status::before {

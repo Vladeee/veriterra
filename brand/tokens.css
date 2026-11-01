@@ -444,16 +444,20 @@
   --color-vibija-dark-on-accent: var(--color-vibija-aubergine);
   --color-vibija-dark-link: var(--color-vibija-lime);
   --color-vibija-dark-focus: var(--color-vibija-lime);
+  /* Hover: a primary button steps one tone toward Paper; a secondary one takes the surface */
+  --color-vibija-light-primary-hover: var(--color-vibija-aubergine-70);
+  --color-vibija-dark-primary-hover: var(--color-vibija-lime-50);
   /* Scenes of the background behind the slides, after the reference: one
      horizontal structure, a dark edge on the left, the body, a lighter edge on
-     the right. Built from the palette only. core: slides 01-02; paper: the
-     visual-base slides, barely tinted. */
+     the right. Built from the theme roles only, like a page of the site:
+     core (dark theme, slides 01-02) = Ink, the dark ground, the raised surface;
+     paper (light theme, the visual base) = the light ground, a breath of Neutral 50. */
   --color-vibija-scene-core-edge: var(--color-vibija-ink);
-  --color-vibija-scene-core-body: var(--color-vibija-aubergine);
-  --color-vibija-scene-core-light: color-mix(in oklch, var(--color-vibija-aubergine) 45%, var(--color-vibija-plum));
-  --color-vibija-scene-paper-edge: var(--color-vibija-paper);
-  --color-vibija-scene-paper-body: var(--color-vibija-paper);
-  --color-vibija-scene-paper-light: color-mix(in oklch, var(--color-vibija-paper) 78%, var(--color-vibija-lavender));
+  --color-vibija-scene-core-body: var(--color-vibija-dark-bg);
+  --color-vibija-scene-core-light: var(--color-vibija-dark-raised);
+  --color-vibija-scene-paper-edge: var(--color-vibija-light-bg);
+  --color-vibija-scene-paper-body: var(--color-vibija-light-bg);
+  --color-vibija-scene-paper-light: var(--color-vibija-neutral-50);
   --logo-optical-lift: 3dvh;   /* the optical centre sits a little above the geometric one */
   --logo-ink-height: clamp(1.5rem, 3.1vw, 3.4rem);   /* every wordmark is sized so its letters stand this tall */
   --logo-tile-ink-height: clamp(1rem, 1.5vw, 1.5rem);   /* the same, on the All variants tiles */
