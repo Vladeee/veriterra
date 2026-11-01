@@ -3,7 +3,8 @@
 Self-hosted typefaces, so they work offline on the iPad and on GitHub Pages. They are declared
 with `@font-face` at the top of `brand/tokens.css` and exposed as tokens (`--font-asul`, …).
 
-- **Figma variants (wordmarks):** Port Lligat Sans, Poppins, Kosugi Maru, Comfortaa, Hubballi, Varela Round,
+- **In use: Inter only** (every logo and all text, until a typeface is chosen). The faces below stay for later.
+- **Figma variants (wordmarks), not in use now:** Port Lligat Sans, Poppins, Kosugi Maru, Comfortaa, Hubballi, Varela Round,
   Madimi One, Braah One (no variant uses it now), Momo Trust Display, Faculty Glyphic. Each style variant (`--fig-*` tokens,
   `presentation/variants.js`) names one of them. Only the weights the frames use are included.
 - **Earlier logo trials (not in use now):** Asul, Old Standard, Young Serif, Bona Nova, Mynerve, Accidenz Commons.

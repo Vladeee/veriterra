@@ -118,15 +118,16 @@
 
 
   /* ---------- Figma style variants (one per frame in the Figma file) ----------
+     Every logo is set in Inter Medium, as written, until a typeface is chosen.
      --fig-<brand>-<n>-<prop>. Applied by presentation/variants.js. */
   /* vitreeone 1 (GukoV Group): Water · Faculty Glyphic (Figma (current)) */
   --fig-vitreeone-1-bg: #0F2A2C;
   --fig-vitreeone-1-page: #0F2A2C;
   --fig-vitreeone-1-ink: #F3EFE6;
-  --fig-vitreeone-1-font: var(--font-faculty);
+  --fig-vitreeone-1-font: var(--font-inter);
   --fig-vitreeone-1-size: var(--text-logo);
-  --fig-vitreeone-1-tracking: 0.02em;   /* mixed case, light on dark: a touch open */
-  --fig-vitreeone-1-weight: 400;
+  --fig-vitreeone-1-tracking: var(--tracking-headline);
+  --fig-vitreeone-1-weight: var(--font-weight-medium);
   --fig-vitreeone-1-case: none;
   /* veriterra 1: Earth · Comfortaa (Figma 75:267) */
   --fig-veriterra-1-bg: #2B2B1B;
@@ -141,47 +142,47 @@
   --fig-verdo-1-bg: radial-gradient(ellipse at 50% 50%, #D6FFCA 46%, #A0EC8B 100%);
   --fig-verdo-1-page: #D6FFCA;
   --fig-verdo-1-ink: #000000;
-  --fig-verdo-1-font: var(--font-varela);
+  --fig-verdo-1-font: var(--font-inter);
   --fig-verdo-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-verdo-1-tracking: 0.04em;   /* caps */
-  --fig-verdo-1-weight: 400;
-  --fig-verdo-1-case: uppercase;
+  --fig-verdo-1-tracking: var(--tracking-headline);
+  --fig-verdo-1-weight: var(--font-weight-medium);
+  --fig-verdo-1-case: none;
   /* vaya 1: Sky · Faculty Glyphic (Figma 75:294) */
   --fig-vaya-1-bg: radial-gradient(farthest-corner at 63% 0%, #B7DDFC 0%, #E6F3FD 100%);
   --fig-vaya-1-page: #E6F3FD;
   --fig-vaya-1-ink: #181F1F;
-  --fig-vaya-1-font: var(--font-faculty);
+  --fig-vaya-1-font: var(--font-inter);
   --fig-vaya-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-1-tracking: 0.16em;
-  --fig-vaya-1-weight: 400;
-  --fig-vaya-1-case: uppercase;
+  --fig-vaya-1-tracking: var(--tracking-headline);
+  --fig-vaya-1-weight: var(--font-weight-medium);
+  --fig-vaya-1-case: none;
   /* vaya 2: Sunrise · Faculty Glyphic (Figma 75:291) */
   --fig-vaya-2-bg: linear-gradient(to bottom, #FFC261 24.84%, #EBF7F3 100%);
   --fig-vaya-2-page: #EBF7F3;
   --fig-vaya-2-ink: #181F1F;
-  --fig-vaya-2-font: var(--font-faculty);
+  --fig-vaya-2-font: var(--font-inter);
   --fig-vaya-2-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-2-tracking: 0.16em;
-  --fig-vaya-2-weight: 400;
-  --fig-vaya-2-case: uppercase;
+  --fig-vaya-2-tracking: var(--tracking-headline);
+  --fig-vaya-2-weight: var(--font-weight-medium);
+  --fig-vaya-2-case: none;
   /* vaya 3: Lavender · Faculty Glyphic (Figma 75:300) */
   --fig-vaya-3-bg: linear-gradient(to bottom, #F6F6F6 0%, #D2BDF9 100%);
   --fig-vaya-3-page: #F6F6F6;
   --fig-vaya-3-ink: #181F1F;
-  --fig-vaya-3-font: var(--font-faculty);
+  --fig-vaya-3-font: var(--font-inter);
   --fig-vaya-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-3-tracking: 0.16em;
-  --fig-vaya-3-weight: 400;
-  --fig-vaya-3-case: uppercase;
+  --fig-vaya-3-tracking: var(--tracking-headline);
+  --fig-vaya-3-weight: var(--font-weight-medium);
+  --fig-vaya-3-case: none;
   /* vita 1: Stone · Momo Trust (Figma 75:305) */
   --fig-vita-1-bg: #ACAA9F;
   --fig-vita-1-page: #ACAA9F;
   --fig-vita-1-ink: #1D1D1D;
-  --fig-vita-1-font: var(--font-momo);
+  --fig-vita-1-font: var(--font-inter);
   --fig-vita-1-size: clamp(2.5rem, 5.83vw, 7.0rem);
-  --fig-vita-1-tracking: 0.03em;
-  --fig-vita-1-weight: 400;
-  --fig-vita-1-case: uppercase;
+  --fig-vita-1-tracking: var(--tracking-headline);
+  --fig-vita-1-weight: var(--font-weight-medium);
+  --fig-vita-1-case: none;
 
   /* ---------- Colour: semantic roles ---------- */
   --color-bg: var(--color-paper-0);
