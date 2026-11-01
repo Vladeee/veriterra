@@ -2,9 +2,9 @@
 
 One link for **GukoV Group** and its four companies: Vibija, Verdo, Vaya and Viva.
 (Internal ids keep the old working names: `vitreeone`, `veriterra`, `vita`.)
-It opens straight on the presentation: five landings behind a fixed top menu, and a last page with every variant in one grid. The other landings are one logo screen each; **Vibija** is a click-through brand book of eleven slides on a 1920×1080 canvas that scales to the window (idea, who for, logo, logo on colour, typeface, weights, hierarchy, primary and secondary palette, proportion, combinations): arrow keys, space or the arrows at the screen edges step through it.
+It opens straight on the presentation: five landings behind a fixed top menu, and a last page with every variant in one grid. The other landings are one logo screen each; **Vibija** is a click-through brand book of twelve slides on a 1920×1080 canvas that scales to the window (idea, who for, logo, logo on colour, primary and secondary typeface, pairing, hierarchy, primary and secondary palette, proportion, combinations): arrow keys, space or the arrows at the screen edges step through it.
 
-Each landing has a fixed look: a style variant from the Figma file, a background gradient and a logo colour (set in `DEFAULTS`, `presentation/presentation.js`). The All variants page shows every variant; a tile opens its landing in that variant. Tap a logo to type your own text in it. Built for 1920×1080 for now, on a four-column grid, in Andika.
+Each landing has a fixed look: a style variant from the Figma file, a background gradient and a logo colour (set in `DEFAULTS`, `presentation/presentation.js`). The All variants page shows every variant; a tile opens its landing in that variant. Tap a logo to type your own text in it. Built for 1920×1080 for now, on a four-column grid: Andika for headings, Lexend Deca for text, Inter for the presentation's own captions.
 Static HTML, CSS and vanilla JS with no build step. Runs on GitHub Pages and installs on an iPad home screen.
 
 > Copy, typefaces, colours and logos are **placeholders**.

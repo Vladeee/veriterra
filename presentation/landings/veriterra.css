@@ -1,15 +1,17 @@
 /*
   Vibija (id veriterra) landing. Styles for this landing only, scoped to
   .landing[data-brand="veriterra"]. Tokens only (see brand/tokens.css).
-  There is no logo screen: the landing is a click-through brand book of eleven
+  There is no logo screen: the landing is a click-through brand book of twelve
   slides on a 1920x1080 canvas and the four-column grid (shared .slide styles
   in presentation.css): Idea, Who for, Logo, On colour, Primary typeface,
-  Weights, Hierarchy, Primary palette, Secondary palette, Proportion,
-  Combinations. These are the Vibija parts, prefixed .vb-.
-  Typography: the main face (--font-display / --font-body, Andika for now).
-  Every role has its own size, leading and tracking (tokens --text-*,
-  --leading-*, --tracking-*); --weight-heading (Regular) for display, headline,
-  subhead and text, --weight-strong (Bold) for labels. Sentence case.
+  Secondary typeface, Pairing, Hierarchy, Primary palette, Secondary palette,
+  Proportion, Combinations. These are the Vibija parts, prefixed .vb-.
+  Typography: three faces by role. Display, headline and logos in the main
+  face (--brand-font-display, Andika); subhead and body in the secondary face
+  (--brand-font-text, Lexend Deca); the presentation's own captions (names,
+  specs, terms, tables) carry .anno from presentation.css (Inter), so they
+  have no font rules here. Every role has its own size, leading and tracking
+  (tokens --text-*, --leading-*, --tracking-*). Sentence case.
 */
 
 .landing[data-brand="veriterra"] ul {
@@ -22,9 +24,9 @@
 .landing[data-brand="veriterra"] .slide p { max-width: none; }
 
 /* ---------- Type roles ---------- */
+/* Main face: display, headline, logos */
 .vb-display,
 .vb-headline,
-.vb-subhead,
 .vb-wordmark,
 .vb-specimen,
 .vb-weight,
@@ -32,7 +34,17 @@
   font-family: var(--brand-font-display);
   font-weight: var(--weight-heading);
   font-kerning: normal;
-  font-optical-sizing: auto;
+}
+
+/* Secondary face: subhead and body */
+.vb-subhead,
+.vb-promise,
+.vb-body,
+.vb-specimen--text,
+.vb-weight--text {
+  font-family: var(--brand-font-text);
+  font-weight: var(--weight-text);
+  font-kerning: normal;
 }
 
 .vb-display,
@@ -58,25 +70,11 @@
 .vb-headline,
 .vb-subhead { text-wrap: balance; }
 
-.vb-body,
-.vb-aside,
-.vb-spec {
+.vb-body {
   font-size: var(--text-body);
-  font-weight: var(--font-weight-regular);
   line-height: var(--leading-body);
   text-wrap: pretty;
 }
-
-.vb-label,
-.vb-term {
-  font-size: var(--text-label);
-  font-weight: var(--weight-strong);
-  line-height: var(--leading-label);
-}
-
-/* Quieter text: the same colour, less strong */
-.vb-term,
-.vb-spec { opacity: var(--opacity-muted); }
 
 /* ---------- 01 Idea: the line across the grid, the promise below ---------- */
 .vb-idea .slide__body { align-items: baseline; }
@@ -84,7 +82,6 @@
 .vb-idea .vb-promise {
   grid-column: 2 / span 2;
   font-size: var(--text-subhead);
-  font-weight: var(--weight-heading);
   line-height: var(--leading-subhead);
   letter-spacing: var(--tracking-subhead);
   text-wrap: balance;
@@ -141,7 +138,7 @@
 .vb-panel--lime { background: var(--brand-on-deep); color: var(--brand-deep); }
 .vb-panel--ink { background: var(--brand-night); color: var(--brand-paper); }
 
-/* ---------- 05 Primary typeface: name in column 1, the specimen in 2-4 ---------- */
+/* ---------- 05 and 06 Typefaces: name in column 1, the specimen in 2-4 ---------- */
 /* Where a column-1 text pairs with content (typeface, weights, hierarchy), the
    row shares one first baseline, so the name reads on the line of its sample */
 .vb-typeface .slide__body,
@@ -158,24 +155,22 @@
   font-variant-numeric: lining-nums;
 }
 
-/* ---------- 06 Weights: each weight, display size, running off the edge ---------- */
+/* ---------- 07 Pairing: each face at display size, its name and role in column 1 ---------- */
 .vb-weight {
   grid-column: 2 / -1;
   white-space: nowrap;
 }
 
-.vb-weight--regular { font-weight: var(--weight-heading); }
-.vb-weight--bold { font-weight: var(--weight-strong); }
+/* .vb-weight--display: the main face; .vb-weight--text: the secondary face (type roles above) */
 
-/* ---------- 07 Hierarchy: the spec in column 1, the sample in 2-4 ---------- */
+/* ---------- 08 Hierarchy: the spec in column 1, the sample in 2-4 ---------- */
 .vb-hierarchy .slide__body { row-gap: var(--space-6); }
 
 .vb-spec { grid-column: 1; }
 .vb-sample { grid-column: 2 / -1; }
-.vb-sample.vb-body,
-.vb-sample.vb-label { grid-column: 2; }
+.vb-sample.vb-body { grid-column: 2; }
 
-/* ---------- 08 and 09 Palettes: one swatch per column ---------- */
+/* ---------- 09 and 10 Palettes: one swatch per column ---------- */
 .vb-swatches {
   display: grid;
   grid-template-columns: subgrid;
@@ -205,9 +200,6 @@
   column-gap: var(--space-4);
   align-items: baseline;
   margin: 0;
-  font-size: var(--text-body);
-  line-height: var(--leading-body);
-  font-variant-numeric: tabular-nums;
 }
 
 .vb-swatches dd { margin: 0; }
@@ -223,7 +215,7 @@
 .vb-swatches li[data-on="dark"],
 .vb-shares li[data-on="dark"] { color: var(--brand-paper); }
 
-/* ---------- 10 Proportion: one bar, split by each colour's share ---------- */
+/* ---------- 11 Proportion: one bar, split by each colour's share ---------- */
 .vb-shares {
   display: flex;
   height: calc(var(--space-10) * 5);
@@ -238,11 +230,9 @@
   padding: var(--space-4);
   background: var(--sw);
   color: var(--brand-ink);
-  font-weight: var(--weight-strong);
-  font-variant-numeric: tabular-nums;
 }
 
-/* ---------- 11 Combinations: a figure on its ground, the contrast below ---------- */
+/* ---------- 12 Combinations: a figure on its ground, the contrast below ---------- */
 .vb-combos__list {
   display: grid;
   grid-template-columns: subgrid;
@@ -270,10 +260,3 @@
   background: var(--figure);
 }
 
-.vb-combo__ratio {
-  font-size: var(--text-label);
-  font-weight: var(--weight-strong);
-  line-height: var(--leading-label);
-  font-variant-numeric: tabular-nums;
-  opacity: var(--opacity-muted);
-}
