@@ -4,8 +4,8 @@
   There is no logo screen: the landing is a click-through brand book of twelve
   slides on a 1920x1080 canvas and the four-column grid (shared .slide styles
   in presentation.css): Idea, Who for, Logo, On colour, Primary typeface,
-  Secondary typeface, Pairing, Hierarchy, Primary palette, Secondary palette,
-  Proportion, Combinations. These are the Vibija parts, prefixed .vb-.
+  Secondary typeface, Pairing, Hierarchy, Primary palette, Neutrals, Status,
+  Themes. These are the Vibija parts, prefixed .vb-.
   Typography: three faces by role. Display, headline and logos in the main
   face (--brand-font-display, Andika); subhead and body in the secondary face
   (--brand-font-text, Lexend Deca); the presentation's own captions (names,
@@ -170,31 +170,49 @@
 .vb-sample { grid-column: 2 / -1; }
 .vb-sample.vb-body { grid-column: 2; }
 
-/* ---------- 09 and 10 Palettes: one swatch per column ---------- */
-.vb-swatches {
+/* ---------- Colour slides (09-12): the colour system for the site ----------
+   Every colour is a token (--color-vibija-*); presentation.js fills the hex,
+   RGB, light or dark text (data-on) and every contrast from the page itself. */
+
+/* Text on a measured colour: light on dark colours */
+.vb-anchor__swatch,
+.vb-tones li,
+.vb-ramp li { color: var(--brand-ink); }
+
+.vb-anchor__swatch[data-on="dark"],
+.vb-tones li[data-on="dark"],
+.vb-ramp li[data-on="dark"] { color: var(--brand-paper); }
+
+/* Light colours get a hairline so they hold their edge on paper */
+.vb-anchor__swatch,
+.vb-tones li,
+.vb-ramp,
+.vb-theme--light .vb-theme__page {
+  outline: var(--border-width) solid var(--brand-rule);
+  outline-offset: calc(var(--border-width) * -1);
+}
+
+/* ---------- 09 Primary palette: the anchor, then its tones ---------- */
+.vb-anchors {
   display: grid;
   grid-template-columns: subgrid;
 }
 
-.vb-swatches li {
+.vb-anchor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.vb-anchor__swatch {
   display: flex;
   align-items: flex-end;
   aspect-ratio: 1;
   padding: var(--space-5);
   background: var(--sw);
-  color: var(--brand-ink);
 }
 
-.vb-swatches--wide { grid-column: 1 / span 3; }
-.vb-swatches--wide li { aspect-ratio: 4 / 3; }
-
-.vb-aside--end {
-  grid-column: 4;
-  grid-row: 1;
-  align-self: end;
-}
-
-.vb-swatches dl {
+.vb-anchor dl {
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: var(--space-4);
@@ -202,61 +220,261 @@
   margin: 0;
 }
 
-.vb-swatches dd { margin: 0; }
+.vb-anchor dd { margin: 0; }
 
-/* The light swatches get a hairline so they hold their edge on paper */
-.vb-swatches [data-swatch="--color-vibija-paper"],
-.vb-shares [data-swatch="--color-vibija-paper"] {
-  outline: var(--border-width) solid var(--brand-rule);
-  outline-offset: calc(var(--border-width) * -1);
+.vb-tones {
+  display: grid;
 }
 
-/* Text on a swatch: light on dark colours (presentation.js measures them) */
-.vb-swatches li[data-on="dark"],
-.vb-shares li[data-on="dark"] { color: var(--brand-paper); }
-
-/* ---------- 11 Proportion: one bar, split by each colour's share ---------- */
-.vb-shares {
+.vb-tones li {
   display: flex;
-  height: calc(var(--space-10) * 5);
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-3) var(--space-5);
+  background: var(--sw);
 }
 
-.vb-shares li {
-  flex: var(--share) 1 0;
+/* ---------- 10 Neutrals: one ramp, then what each part of it is for ---------- */
+.vb-ramp {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  height: calc(var(--space-10) * 4);
+}
+
+.vb-ramp li {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  min-width: 0;
-  padding: var(--space-4);
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-3);
   background: var(--sw);
-  color: var(--brand-ink);
 }
 
-/* ---------- 12 Combinations: a figure on its ground, the contrast below ---------- */
-.vb-combos__list {
+.vb-ramp dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-2);
+  align-items: baseline;
+  margin: 0;
+}
+
+.vb-ramp dd {
+  margin: 0;
+  text-align: end;
+}
+
+.vb-ramp dd[data-hex] {
+  grid-column: 1 / -1;
+  text-align: start;
+}
+
+.vb-uses {
   display: grid;
   grid-template-columns: subgrid;
 }
 
-.vb-combos__list li {
+/* ---------- 11 Status: soft, solid and on dark, with their contrast ---------- */
+.vb-status-list {
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.vb-status {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
-.vb-combo {
+.vb-status > .anno:first-child { margin-bottom: var(--space-2); }
+
+.vb-status__soft,
+.vb-status__dark {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: calc(var(--space-10) * 2);
+  padding: var(--space-5);
+}
+
+.vb-status__soft {
+  background: var(--soft);
+  color: var(--base);
+}
+
+.vb-status__dark {
+  background: var(--color-vibija-aubergine);
+  color: var(--bright);
+}
+
+.vb-status__solid {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-3) var(--space-5);
+  background: var(--base);
+  color: var(--color-vibija-paper);
+}
+
+.vb-status__text,
+.vb-status__tag {
+  font-family: var(--brand-font-text);
+  font-weight: var(--weight-text);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+.vb-status dl {
   display: grid;
-  place-items: center;
-  aspect-ratio: 1;
-  margin-bottom: var(--space-3);
-  background: var(--ground);
-  outline: var(--border-width) solid var(--brand-rule);
-  outline-offset: calc(var(--border-width) * -1);
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-4);
+  margin: var(--space-2) 0 0;
 }
 
-.vb-combo__figure {
-  width: 50%;
-  height: 44%;
-  background: var(--figure);
+.vb-status dd {
+  margin: 0;
+  color: inherit;
 }
 
+/* ---------- 12 Themes: a fragment of the site in each theme ---------- */
+.vb-theme--light {
+  --t-bg: var(--color-vibija-light-bg);
+  --t-text: var(--color-vibija-light-text);
+  --t-muted: var(--color-vibija-light-muted);
+  --t-border: var(--color-vibija-light-border);
+  --t-primary: var(--color-vibija-light-primary);
+  --t-on-primary: var(--color-vibija-light-on-primary);
+  --t-accent: var(--color-vibija-light-accent);
+  --t-on-accent: var(--color-vibija-light-on-accent);
+  --t-link: var(--color-vibija-light-link);
+  --t-focus: var(--color-vibija-light-focus);
+  --t-success: var(--color-vibija-success);
+}
+
+.vb-theme--dark {
+  --t-bg: var(--color-vibija-dark-bg);
+  --t-text: var(--color-vibija-dark-text);
+  --t-muted: var(--color-vibija-dark-muted);
+  --t-border: var(--color-vibija-dark-border);
+  --t-primary: var(--color-vibija-dark-primary);
+  --t-on-primary: var(--color-vibija-dark-on-primary);
+  --t-accent: var(--color-vibija-dark-accent);
+  --t-on-accent: var(--color-vibija-dark-on-accent);
+  --t-link: var(--color-vibija-dark-link);
+  --t-focus: var(--color-vibija-dark-focus);
+  --t-success: var(--color-vibija-success-bright);
+}
+
+.vb-theme {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--space-5);
+}
+
+.vb-theme__page {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  padding: var(--space-7);
+  background: var(--t-bg);
+  color: var(--t-text);
+  font-family: var(--brand-font-text);
+  font-weight: var(--weight-text);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.vb-theme__title {
+  font-family: var(--brand-font-display);
+  font-weight: var(--weight-heading);
+  font-size: var(--text-headline);
+  line-height: var(--leading-headline);
+  letter-spacing: var(--tracking-headline);
+  text-wrap: balance;
+}
+
+.vb-theme__text {
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+.vb-theme__muted {
+  width: 100%;
+  padding-bottom: var(--space-5);
+  border-bottom: var(--border-width) solid var(--t-border);
+  color: var(--t-muted);
+}
+
+.vb-theme__tag {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--t-accent);
+  color: var(--t-on-accent);
+  font-size: var(--text-label);
+  line-height: var(--leading-label);
+}
+
+.vb-theme__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.vb-theme__button {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-5);
+  border: var(--border-width) solid var(--t-primary);
+  border-radius: var(--radius-pill);
+  background: var(--t-primary);
+  color: var(--t-on-primary);
+}
+
+/* The secondary button is drawn focused, to show the focus ring */
+.vb-theme__button--secondary {
+  border-color: var(--t-text);
+  background: none;
+  color: var(--t-text);
+  outline: var(--focus-ring-width) solid var(--t-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.vb-theme__link {
+  color: var(--t-link);
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
+}
+
+.vb-theme__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--t-success);
+}
+
+.vb-theme__status::before {
+  content: "";
+  width: var(--space-2);
+  height: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: currentColor;
+}
+
+/* Roles: name in the first column, token and measured contrast in the second */
+.vb-roles {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--space-1);
+  margin: 0;
+}
+
+.vb-roles dd {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}

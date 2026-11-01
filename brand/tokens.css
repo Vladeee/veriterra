@@ -377,6 +377,73 @@
   --color-vibija-lavender: var(--bgpick-veriterra-lavender);
   --color-vibija-violet: var(--bgpick-veriterra-violet);
   --color-vibija-plum: var(--bgpick-veriterra-plum);
+  /* ---------- Vibija colour system (for the site; the deck shows it on slides 09-12) ----------
+     Anchors: Paper, Ink, Aubergine (base), Lime (accent). Their hues are near
+     complements, so a mix of the two is muddy: tones always mix an anchor
+     toward Paper or Ink in OKLab, and follow the anchors when they change. */
+  /* Aubergine tones: the share of Aubergine in a Paper mix */
+  --color-vibija-aubergine-10: color-mix(in oklab, var(--color-vibija-aubergine) 10%, var(--color-vibija-paper));
+  --color-vibija-aubergine-20: color-mix(in oklab, var(--color-vibija-aubergine) 20%, var(--color-vibija-paper));
+  --color-vibija-aubergine-40: color-mix(in oklab, var(--color-vibija-aubergine) 40%, var(--color-vibija-paper));
+  --color-vibija-aubergine-70: color-mix(in oklab, var(--color-vibija-aubergine) 70%, var(--color-vibija-paper));
+  /* Lime tones: tints for soft highlights; deep = the same hue and chroma, darker
+     (mixing with Ink would grey it: Ink sits on the opposite hue), for text and icons on light */
+  --color-vibija-lime-10: color-mix(in oklab, var(--color-vibija-lime) 10%, var(--color-vibija-paper));
+  --color-vibija-lime-20: color-mix(in oklab, var(--color-vibija-lime) 20%, var(--color-vibija-paper));
+  --color-vibija-lime-50: color-mix(in oklab, var(--color-vibija-lime) 50%, var(--color-vibija-paper));
+  --color-vibija-lime-deep: oklch(from var(--color-vibija-lime) 48% c h);
+  /* Neutrals 50-950: Paper toward Ink in OKLab, so every grey keeps a trace of aubergine */
+  --color-vibija-neutral-50: color-mix(in oklab, var(--color-vibija-ink) 4%, var(--color-vibija-paper));
+  --color-vibija-neutral-100: color-mix(in oklab, var(--color-vibija-ink) 8%, var(--color-vibija-paper));
+  --color-vibija-neutral-200: color-mix(in oklab, var(--color-vibija-ink) 16%, var(--color-vibija-paper));
+  --color-vibija-neutral-300: color-mix(in oklab, var(--color-vibija-ink) 28%, var(--color-vibija-paper));
+  --color-vibija-neutral-400: color-mix(in oklab, var(--color-vibija-ink) 40%, var(--color-vibija-paper));
+  --color-vibija-neutral-500: color-mix(in oklab, var(--color-vibija-ink) 52%, var(--color-vibija-paper));
+  --color-vibija-neutral-600: color-mix(in oklab, var(--color-vibija-ink) 64%, var(--color-vibija-paper));
+  --color-vibija-neutral-700: color-mix(in oklab, var(--color-vibija-ink) 74%, var(--color-vibija-paper));
+  --color-vibija-neutral-800: color-mix(in oklab, var(--color-vibija-ink) 84%, var(--color-vibija-paper));
+  --color-vibija-neutral-900: color-mix(in oklab, var(--color-vibija-ink) 92%, var(--color-vibija-paper));
+  --color-vibija-neutral-950: color-mix(in oklab, var(--color-vibija-ink) 97%, var(--color-vibija-paper));
+  /* Status colours: one lightness and chroma per role, hues around the pair
+     (success cooler than Lime, so it never reads as the accent). base: text and
+     icons on light; soft: a background for base text; bright: text and icons on dark */
+  --color-vibija-success: oklch(50% 0.12 150);
+  --color-vibija-success-soft: oklch(95% 0.035 150);
+  --color-vibija-success-bright: oklch(80% 0.13 150);
+  --color-vibija-warning: oklch(52% 0.11 70);
+  --color-vibija-warning-soft: oklch(95% 0.04 80);
+  --color-vibija-warning-bright: oklch(83% 0.13 80);
+  --color-vibija-danger: oklch(52% 0.17 25);
+  --color-vibija-danger-soft: oklch(95% 0.03 25);
+  --color-vibija-danger-bright: oklch(76% 0.13 25);
+  --color-vibija-info: oklch(50% 0.14 255);
+  --color-vibija-info-soft: oklch(95% 0.03 255);
+  --color-vibija-info-bright: oklch(78% 0.1 255);
+  /* Roles for the site, light and dark: what a page reads (built only from the above) */
+  --color-vibija-light-bg: var(--color-vibija-paper);
+  --color-vibija-light-surface: var(--color-vibija-neutral-100);
+  --color-vibija-light-raised: var(--color-vibija-paper);
+  --color-vibija-light-text: var(--color-vibija-ink);
+  --color-vibija-light-muted: var(--color-vibija-neutral-600);
+  --color-vibija-light-border: var(--color-vibija-neutral-200);
+  --color-vibija-light-primary: var(--color-vibija-aubergine);
+  --color-vibija-light-on-primary: var(--color-vibija-paper);
+  --color-vibija-light-accent: var(--color-vibija-lime);
+  --color-vibija-light-on-accent: var(--color-vibija-aubergine);
+  --color-vibija-light-link: var(--color-vibija-aubergine);
+  --color-vibija-light-focus: var(--color-vibija-aubergine);
+  --color-vibija-dark-bg: var(--color-vibija-aubergine);
+  --color-vibija-dark-surface: color-mix(in oklab, var(--color-vibija-aubergine) 94%, var(--color-vibija-paper));
+  --color-vibija-dark-raised: color-mix(in oklab, var(--color-vibija-aubergine) 88%, var(--color-vibija-paper));
+  --color-vibija-dark-text: var(--color-vibija-paper);
+  --color-vibija-dark-muted: var(--color-vibija-neutral-300);
+  --color-vibija-dark-border: color-mix(in oklab, var(--color-vibija-aubergine) 75%, var(--color-vibija-paper));
+  --color-vibija-dark-primary: var(--color-vibija-lime);
+  --color-vibija-dark-on-primary: var(--color-vibija-aubergine);
+  --color-vibija-dark-accent: var(--color-vibija-lime);
+  --color-vibija-dark-on-accent: var(--color-vibija-aubergine);
+  --color-vibija-dark-link: var(--color-vibija-lime);
+  --color-vibija-dark-focus: var(--color-vibija-lime);
   /* Scenes of the background behind the slides, after the reference: one
      horizontal structure, a dark edge on the left, the body, a lighter edge on
      the right. Built from the palette only. core: slides 01-02; paper: the

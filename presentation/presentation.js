@@ -117,7 +117,7 @@
     // source), and take light text on dark colours
     document.querySelectorAll("[data-swatch]").forEach(function (el) {
       var token = el.getAttribute("data-swatch");
-      var hex = toHex(getComputedStyle(root).getPropertyValue(token).trim());
+      var hex = tokenHex(token);
       el.style.setProperty("--sw", "var(" + token + ")");
       el.setAttribute("data-on", luminance(hex) < 0.18 ? "dark" : "light");
       var hexOut = el.querySelector("[data-hex]");
@@ -125,14 +125,21 @@
       var rgbOut = el.querySelector("[data-rgb]");
       if (rgbOut) rgbOut.textContent = [1, 3, 5].map(function (i) { return parseInt(hex.substr(i, 2), 16); }).join("/");
     });
-    // Each colour pair states its contrast, measured from the page itself
+    // Every contrast on the slides is measured from the page itself, never typed.
+    // [data-contrast]: the element's text on its own background, written to its [data-ratio]
     document.querySelectorAll("[data-contrast]").forEach(function (el) {
-      var ground = luminance(toHex(getComputedStyle(el).backgroundColor));
-      var figure = luminance(toHex(getComputedStyle(el.firstElementChild).backgroundColor));
-      var ratio = (Math.max(ground, figure) + 0.05) / (Math.min(ground, figure) + 0.05);
-      var grade = ratio >= 7 ? "AAA" : ratio >= 4.5 ? "AA" : ratio >= 3 ? "AA large text" : "Below AA";
-      var out = el.parentNode.querySelector("[data-ratio]");
-      if (out) out.textContent = grade + " · " + ratio.toFixed(1) + ":1";
+      var cs = getComputedStyle(el);
+      var ratio = contrast(toHex(cs.color), toHex(cs.backgroundColor));
+      var grade = ratio >= 7 ? "AAA" : ratio >= 4.5 ? "AA" : ratio >= 3 ? "AA large" : "Below AA";
+      var out = el.querySelector("[data-ratio]");
+      if (out) out.textContent = oneDecimal(ratio) + ":1 " + grade;
+    });
+    // [data-ratio-on="--token"]: a colour (data-ratio-of, or the swatch it sits in) on that token
+    document.querySelectorAll("[data-ratio-on]").forEach(function (el) {
+      var swatch = el.closest("[data-swatch]");
+      var of = el.getAttribute("data-ratio-of") || (swatch && swatch.getAttribute("data-swatch"));
+      if (!of) return;
+      el.textContent = oneDecimal(contrast(tokenHex(of), tokenHex(el.getAttribute("data-ratio-on"))));
     });
     // Each slide numbers itself: 01 / 11
     landings.forEach(function (landing) {
@@ -360,8 +367,23 @@
     return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
   }
 
+  // WCAG contrast ratio of two #RRGGBB colours
+  function contrast(a, b) {
+    var la = luminance(a), lb = luminance(b);
+    return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+  }
+
+  // Rounded down, so a ratio never reads as passing when it falls short (4.49 is 4.4)
+  function oneDecimal(ratio) {
+    return (Math.floor(ratio * 10) / 10).toFixed(1);
+  }
+
+  function tokenHex(token) {
+    return toHex(getComputedStyle(root).getPropertyValue(token).trim());
+  }
+
   function isDark(token) {
-    return luminance(toHex(getComputedStyle(root).getPropertyValue(token).trim())) < 0.18;
+    return luminance(tokenHex(token)) < 0.18;
   }
 
   // ---------- Figma style variants (presentation/variants.js + --fig-* tokens) ----------

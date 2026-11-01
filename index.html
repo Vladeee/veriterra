@@ -158,53 +158,172 @@
 
       <!-- 09 Primary palette -->
       <section class="slide vb-palette" id="vibija-palette" data-scene="paper" data-tone="light" aria-labelledby="vibija-palette-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-palette-title">Primary palette</h2><p class="slide__desc anno anno--quiet">Paper and ink carry the text, aubergine is the ground, lime is the voice.</p><p class="slide__count anno anno--quiet" data-count></p></header>
+        <header class="slide__head"><h2 class="slide__title anno" id="vibija-palette-title">Primary palette</h2><p class="slide__desc anno anno--quiet">Aubergine is the base, lime the accent, paper and ink carry the text. Tones mix each colour toward paper in OKLab.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
-          <ul class="vb-swatches">
-            <li data-swatch="--color-vibija-paper" data-reveal style="--i: 1"><dl class="anno"><dt>Name</dt><dd>Paper</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
-            <li data-swatch="--color-vibija-ink" data-reveal style="--i: 2"><dl class="anno"><dt>Name</dt><dd>Ink</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
-            <li data-swatch="--color-vibija-aubergine" data-reveal style="--i: 3"><dl class="anno"><dt>Name</dt><dd>Aubergine</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
-            <li data-swatch="--color-vibija-lime" data-reveal style="--i: 4"><dl class="anno"><dt>Name</dt><dd>Lime</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
+          <ul class="vb-anchors">
+            <li class="vb-anchor" data-reveal style="--i: 1">
+              <div class="vb-anchor__swatch" data-swatch="--color-vibija-aubergine"><dl class="anno"><dt>Name</dt><dd>Aubergine</dd><dt>Role</dt><dd>Base</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></div>
+              <ul class="vb-tones">
+                <li class="anno" data-swatch="--color-vibija-aubergine-70"><span>Aubergine 70</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-aubergine-40"><span>Aubergine 40</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-aubergine-20"><span>Aubergine 20</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-aubergine-10"><span>Aubergine 10</span><span data-hex></span></li>
+              </ul>
+            </li>
+            <li class="vb-anchor" data-reveal style="--i: 2">
+              <div class="vb-anchor__swatch" data-swatch="--color-vibija-lime"><dl class="anno"><dt>Name</dt><dd>Lime</dd><dt>Role</dt><dd>Accent</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></div>
+              <ul class="vb-tones">
+                <li class="anno" data-swatch="--color-vibija-lime-deep"><span>Lime deep</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-lime-50"><span>Lime 50</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-lime-20"><span>Lime 20</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-lime-10"><span>Lime 10</span><span data-hex></span></li>
+              </ul>
+            </li>
+            <li class="vb-anchor" data-reveal style="--i: 3">
+              <div class="vb-anchor__swatch" data-swatch="--color-vibija-paper"><dl class="anno"><dt>Name</dt><dd>Paper</dd><dt>Role</dt><dd>Ground</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></div>
+              <ul class="vb-tones">
+                <li class="anno" data-swatch="--color-vibija-neutral-300"><span>Neutral 300</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-neutral-200"><span>Neutral 200</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-neutral-100"><span>Neutral 100</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-neutral-50"><span>Neutral 50</span><span data-hex></span></li>
+              </ul>
+            </li>
+            <li class="vb-anchor" data-reveal style="--i: 4">
+              <div class="vb-anchor__swatch" data-swatch="--color-vibija-ink"><dl class="anno"><dt>Name</dt><dd>Ink</dd><dt>Role</dt><dd>Text</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></div>
+              <ul class="vb-tones">
+                <li class="anno" data-swatch="--color-vibija-neutral-950"><span>Neutral 950</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-neutral-900"><span>Neutral 900</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-neutral-800"><span>Neutral 800</span><span data-hex></span></li>
+                <li class="anno" data-swatch="--color-vibija-neutral-700"><span>Neutral 700</span><span data-hex></span></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </section>
 
-      <!-- 10 Secondary palette -->
-      <section class="slide vb-secondary" id="vibija-secondary" data-scene="paper" data-tone="light" aria-labelledby="vibija-secondary-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-secondary-title">Secondary palette</h2><p class="slide__desc anno anno--quiet">Purples for backgrounds and depth, from pale to deep.</p><p class="slide__count anno anno--quiet" data-count></p></header>
+      <!-- 10 Neutrals -->
+      <section class="slide vb-neutrals" id="vibija-neutrals" data-scene="paper" data-tone="light" aria-labelledby="vibija-neutrals-title">
+        <header class="slide__head"><h2 class="slide__title anno" id="vibija-neutrals-title">Neutrals</h2><p class="slide__desc anno anno--quiet">Eleven greys from paper to ink, mixed in OKLab, so each keeps a trace of aubergine. Contrast on paper and on ink.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
-          <ul class="vb-swatches vb-swatches--wide">
-            <li data-swatch="--bgpick-veriterra-lavender" data-reveal style="--i: 1"><dl class="anno"><dt>Name</dt><dd>Lavender</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
-            <li data-swatch="--bgpick-veriterra-violet" data-reveal style="--i: 2"><dl class="anno"><dt>Name</dt><dd>Violet</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
-            <li data-swatch="--bgpick-veriterra-plum" data-reveal style="--i: 3"><dl class="anno"><dt>Name</dt><dd>Plum</dd><dt>RGB</dt><dd data-rgb></dd><dt>HEX</dt><dd data-hex></dd></dl></li>
+          <ul class="vb-ramp" data-reveal style="--i: 1">
+            <li class="anno" data-swatch="--color-vibija-neutral-50"><span>50</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-100"><span>100</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-200"><span>200</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-300"><span>300</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-400"><span>400</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-500"><span>500</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-600"><span>600</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-700"><span>700</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-800"><span>800</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-900"><span>900</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
+            <li class="anno" data-swatch="--color-vibija-neutral-950"><span>950</span><dl><dt class="visually-hidden">HEX</dt><dd data-hex></dd><dt>Paper</dt><dd data-ratio-on="--color-vibija-paper"></dd><dt>Ink</dt><dd data-ratio-on="--color-vibija-ink"></dd></dl></li>
           </ul>
-          <p class="vb-aside vb-aside--end anno anno--quiet" data-reveal style="--i: 4">The full range, lilac to aubergine, lives in the tokens.</p>
+          <ul class="vb-uses" data-reveal style="--i: 2">
+            <li><p class="anno">50–200</p><p class="anno anno--quiet">Surfaces, fills and borders on light pages.</p></li>
+            <li><p class="anno">300–500</p><p class="anno anno--quiet">Disabled states, placeholders and icons. Not for text on Paper.</p></li>
+            <li><p class="anno">600–700</p><p class="anno anno--quiet">Muted text: 600 is the lightest grey that passes AA on Paper.</p></li>
+            <li><p class="anno">800–950</p><p class="anno anno--quiet">Text and surfaces of the dark theme.</p></li>
+          </ul>
         </div>
       </section>
 
-      <!-- 11 Proportion -->
-      <section class="slide vb-proportion" id="vibija-proportion" data-scene="paper" data-tone="light" aria-labelledby="vibija-proportion-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-proportion-title">Proportion</h2><p class="slide__desc anno anno--quiet">How much of each colour a layout uses, so every page feels like Vibija.</p><p class="slide__count anno anno--quiet" data-count></p></header>
+      <!-- 11 Status -->
+      <section class="slide vb-statuses" id="vibija-status" data-scene="paper" data-tone="light" aria-labelledby="vibija-status-title">
+        <header class="slide__head"><h2 class="slide__title anno" id="vibija-status-title">Status</h2><p class="slide__desc anno anno--quiet">One lightness for every status, hues around the pair. Base on light, soft behind base, bright on dark.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
-          <ul class="vb-shares" data-reveal style="--i: 1">
-            <li class="anno" data-swatch="--color-vibija-paper" style="--share: 50"><span>Paper</span><span>50%</span></li>
-            <li class="anno" data-swatch="--color-vibija-aubergine" style="--share: 25"><span>Aubergine</span><span>25%</span></li>
-            <li class="anno" data-swatch="--color-vibija-lime" style="--share: 15"><span>Lime</span><span>15%</span></li>
-            <li class="anno" data-swatch="--color-vibija-ink" style="--share: 10"><span>Ink</span><span>10%</span></li>
+          <ul class="vb-status-list">
+            <li class="vb-status" data-reveal style="--i: 1; --base: var(--color-vibija-success); --soft: var(--color-vibija-success-soft); --bright: var(--color-vibija-success-bright)">
+              <p class="anno">Success</p>
+              <div class="vb-status__soft" data-contrast><p class="vb-status__text">Formula saved and sent to the greenhouse.</p><p class="anno" data-ratio></p></div>
+              <div class="vb-status__solid" data-contrast><p class="vb-status__tag">Saved</p><p class="anno" data-ratio></p></div>
+              <div class="vb-status__dark" data-contrast><p class="vb-status__text">Formula saved and sent to the greenhouse.</p><p class="anno" data-ratio></p></div>
+              <dl class="anno anno--quiet">
+                <dt>Base</dt><dd data-swatch="--color-vibija-success"><span data-hex></span></dd>
+                <dt>Soft</dt><dd data-swatch="--color-vibija-success-soft"><span data-hex></span></dd>
+                <dt>Bright</dt><dd data-swatch="--color-vibija-success-bright"><span data-hex></span></dd>
+              </dl>
+            </li>
+            <li class="vb-status" data-reveal style="--i: 2; --base: var(--color-vibija-warning); --soft: var(--color-vibija-warning-soft); --bright: var(--color-vibija-warning-bright)">
+              <p class="anno">Warning</p>
+              <div class="vb-status__soft" data-contrast><p class="vb-status__text">The water analysis is older than a month.</p><p class="anno" data-ratio></p></div>
+              <div class="vb-status__solid" data-contrast><p class="vb-status__tag">Check</p><p class="anno" data-ratio></p></div>
+              <div class="vb-status__dark" data-contrast><p class="vb-status__text">The water analysis is older than a month.</p><p class="anno" data-ratio></p></div>
+              <dl class="anno anno--quiet">
+                <dt>Base</dt><dd data-swatch="--color-vibija-warning"><span data-hex></span></dd>
+                <dt>Soft</dt><dd data-swatch="--color-vibija-warning-soft"><span data-hex></span></dd>
+                <dt>Bright</dt><dd data-swatch="--color-vibija-warning-bright"><span data-hex></span></dd>
+              </dl>
+            </li>
+            <li class="vb-status" data-reveal style="--i: 3; --base: var(--color-vibija-danger); --soft: var(--color-vibija-danger-soft); --bright: var(--color-vibija-danger-bright)">
+              <p class="anno">Danger</p>
+              <div class="vb-status__soft" data-contrast><p class="vb-status__text">This dose is above the limit for the crop.</p><p class="anno" data-ratio></p></div>
+              <div class="vb-status__solid" data-contrast><p class="vb-status__tag">Error</p><p class="anno" data-ratio></p></div>
+              <div class="vb-status__dark" data-contrast><p class="vb-status__text">This dose is above the limit for the crop.</p><p class="anno" data-ratio></p></div>
+              <dl class="anno anno--quiet">
+                <dt>Base</dt><dd data-swatch="--color-vibija-danger"><span data-hex></span></dd>
+                <dt>Soft</dt><dd data-swatch="--color-vibija-danger-soft"><span data-hex></span></dd>
+                <dt>Bright</dt><dd data-swatch="--color-vibija-danger-bright"><span data-hex></span></dd>
+              </dl>
+            </li>
+            <li class="vb-status" data-reveal style="--i: 4; --base: var(--color-vibija-info); --soft: var(--color-vibija-info-soft); --bright: var(--color-vibija-info-bright)">
+              <p class="anno">Info</p>
+              <div class="vb-status__soft" data-contrast><p class="vb-status__text">New substrate data is ready to use.</p><p class="anno" data-ratio></p></div>
+              <div class="vb-status__solid" data-contrast><p class="vb-status__tag">New</p><p class="anno" data-ratio></p></div>
+              <div class="vb-status__dark" data-contrast><p class="vb-status__text">New substrate data is ready to use.</p><p class="anno" data-ratio></p></div>
+              <dl class="anno anno--quiet">
+                <dt>Base</dt><dd data-swatch="--color-vibija-info"><span data-hex></span></dd>
+                <dt>Soft</dt><dd data-swatch="--color-vibija-info-soft"><span data-hex></span></dd>
+                <dt>Bright</dt><dd data-swatch="--color-vibija-info-bright"><span data-hex></span></dd>
+              </dl>
+            </li>
           </ul>
         </div>
       </section>
 
-      <!-- 12 Combinations -->
-      <section class="slide vb-combos" id="vibija-combinations" data-scene="paper" data-tone="light" aria-labelledby="vibija-combinations-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-combinations-title">Combinations</h2><p class="slide__desc anno anno--quiet">Approved pairs of ground and figure. The contrast is measured on the page.</p><p class="slide__count anno anno--quiet" data-count></p></header>
+      <!-- 12 Themes -->
+      <section class="slide vb-themes" id="vibija-themes" data-scene="paper" data-tone="light" aria-labelledby="vibija-themes-title">
+        <header class="slide__head"><h2 class="slide__title anno" id="vibija-themes-title">Themes</h2><p class="slide__desc anno anno--quiet">Light for most pages, dark for brand blocks and dark mode. A site reads only these roles.</p><p class="slide__count anno anno--quiet" data-count></p></header>
         <div class="slide__body">
-          <ul class="vb-combos__list">
-            <li data-reveal style="--i: 1"><span class="vb-combo" data-contrast style="--ground: var(--brand-on-deep); --figure: var(--brand-deep)"><span class="vb-combo__figure"></span></span><p class="anno">Aubergine on lime</p><p class="vb-combo__ratio anno anno--quiet" data-ratio></p></li>
-            <li data-reveal style="--i: 2"><span class="vb-combo" data-contrast style="--ground: var(--brand-deep); --figure: var(--brand-on-deep)"><span class="vb-combo__figure"></span></span><p class="anno">Lime on aubergine</p><p class="vb-combo__ratio anno anno--quiet" data-ratio></p></li>
-            <li data-reveal style="--i: 3"><span class="vb-combo" data-contrast style="--ground: var(--brand-paper); --figure: var(--brand-deep)"><span class="vb-combo__figure"></span></span><p class="anno">Aubergine on paper</p><p class="vb-combo__ratio anno anno--quiet" data-ratio></p></li>
-            <li data-reveal style="--i: 4"><span class="vb-combo" data-contrast style="--ground: var(--brand-night); --figure: var(--brand-paper)"><span class="vb-combo__figure"></span></span><p class="anno">Paper on ink</p><p class="vb-combo__ratio anno anno--quiet" data-ratio></p></li>
-          </ul>
+          <div class="vb-theme vb-theme--light" data-reveal style="--i: 1">
+            <div class="vb-theme__page">
+              <p class="vb-theme__tag">Eco</p>
+              <p class="vb-theme__title">Its own formula.</p>
+              <p class="vb-theme__text">Vibija calculates a fertilizer for the crop, the substrate and the water of each greenhouse.</p>
+              <p class="vb-theme__muted">Tomatoes on coco, drip irrigation.</p>
+              <p class="vb-theme__actions"><span class="vb-theme__button">Get a formula</span><span class="vb-theme__button vb-theme__button--secondary">Talk to an agronomist</span><span class="vb-theme__link">How we calculate</span></p>
+              <p class="vb-theme__status">Formula saved</p>
+            </div>
+            <dl class="vb-roles anno">
+              <dt>Light</dt><dd class="anno--quiet"><span>Token</span><span>Contrast</span></dd>
+              <dt>Text</dt><dd><span class="anno--quiet">--color-vibija-light-text</span><span data-ratio-of="--color-vibija-light-text" data-ratio-on="--color-vibija-light-bg"></span></dd>
+              <dt>Muted</dt><dd><span class="anno--quiet">--color-vibija-light-muted</span><span data-ratio-of="--color-vibija-light-muted" data-ratio-on="--color-vibija-light-bg"></span></dd>
+              <dt>Primary label</dt><dd><span class="anno--quiet">--color-vibija-light-on-primary</span><span data-ratio-of="--color-vibija-light-on-primary" data-ratio-on="--color-vibija-light-primary"></span></dd>
+              <dt>Accent label</dt><dd><span class="anno--quiet">--color-vibija-light-on-accent</span><span data-ratio-of="--color-vibija-light-on-accent" data-ratio-on="--color-vibija-light-accent"></span></dd>
+              <dt>Link</dt><dd><span class="anno--quiet">--color-vibija-light-link</span><span data-ratio-of="--color-vibija-light-link" data-ratio-on="--color-vibija-light-bg"></span></dd>
+              <dt>Focus</dt><dd><span class="anno--quiet">--color-vibija-light-focus</span><span data-ratio-of="--color-vibija-light-focus" data-ratio-on="--color-vibija-light-bg"></span></dd>
+              <dt>Border</dt><dd><span class="anno--quiet">--color-vibija-light-border</span><span data-ratio-of="--color-vibija-light-border" data-ratio-on="--color-vibija-light-bg"></span></dd>
+            </dl>
+          </div>
+          <div class="vb-theme vb-theme--dark" data-reveal style="--i: 2">
+            <div class="vb-theme__page">
+              <p class="vb-theme__tag">Eco</p>
+              <p class="vb-theme__title">Its own formula.</p>
+              <p class="vb-theme__text">Vibija calculates a fertilizer for the crop, the substrate and the water of each greenhouse.</p>
+              <p class="vb-theme__muted">Tomatoes on coco, drip irrigation.</p>
+              <p class="vb-theme__actions"><span class="vb-theme__button">Get a formula</span><span class="vb-theme__button vb-theme__button--secondary">Talk to an agronomist</span><span class="vb-theme__link">How we calculate</span></p>
+              <p class="vb-theme__status">Formula saved</p>
+            </div>
+            <dl class="vb-roles anno">
+              <dt>Dark</dt><dd class="anno--quiet"><span>Token</span><span>Contrast</span></dd>
+              <dt>Text</dt><dd><span class="anno--quiet">--color-vibija-dark-text</span><span data-ratio-of="--color-vibija-dark-text" data-ratio-on="--color-vibija-dark-bg"></span></dd>
+              <dt>Muted</dt><dd><span class="anno--quiet">--color-vibija-dark-muted</span><span data-ratio-of="--color-vibija-dark-muted" data-ratio-on="--color-vibija-dark-bg"></span></dd>
+              <dt>Primary label</dt><dd><span class="anno--quiet">--color-vibija-dark-on-primary</span><span data-ratio-of="--color-vibija-dark-on-primary" data-ratio-on="--color-vibija-dark-primary"></span></dd>
+              <dt>Accent label</dt><dd><span class="anno--quiet">--color-vibija-dark-on-accent</span><span data-ratio-of="--color-vibija-dark-on-accent" data-ratio-on="--color-vibija-dark-accent"></span></dd>
+              <dt>Link</dt><dd><span class="anno--quiet">--color-vibija-dark-link</span><span data-ratio-of="--color-vibija-dark-link" data-ratio-on="--color-vibija-dark-bg"></span></dd>
+              <dt>Focus</dt><dd><span class="anno--quiet">--color-vibija-dark-focus</span><span data-ratio-of="--color-vibija-dark-focus" data-ratio-on="--color-vibija-dark-bg"></span></dd>
+              <dt>Border</dt><dd><span class="anno--quiet">--color-vibija-dark-border</span><span data-ratio-of="--color-vibija-dark-border" data-ratio-on="--color-vibija-dark-bg"></span></dd>
+            </dl>
+          </div>
         </div>
       </section>
     </article>
