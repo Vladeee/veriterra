@@ -57,7 +57,7 @@
     </article>
 
     <!-- ==================== VIBIJA (id veriterra) ==================== -->
-    <article class="landing" id="veriterra" data-brand="veriterra" aria-labelledby="vibija-idea-title" hidden>
+    <article class="landing" id="veriterra" data-brand="veriterra" aria-label="Vibija" hidden>
 
       <!-- Brand book (minimum viable brand), ten click-through slides on a 1920x1080
            canvas: brand core (Idea, Who for) on the dark scene, then the visual base
@@ -67,17 +67,16 @@
            landings/veriterra.css (.vb-*). Copy is a working draft from the interview. -->
       <div class="slide-sky" data-scene-prefix="--color-vibija-scene-" aria-hidden="true"></div>
 
-      <!-- 01 Idea: the cover, centred, with the logo -->
-      <section class="slide vb-idea" id="vibija-idea" data-scene="core" data-tone="dark" aria-labelledby="vibija-idea-title">
-        <header class="slide__head"><h2 class="slide__title anno" id="vibija-idea-title">Idea</h2><p class="slide__desc anno anno--quiet">What Vibija stands for, in one line.</p><p class="slide__count anno anno--quiet" data-count></p></header>
+      <!-- 01 The cover: a title page, no section header. Three levels only:
+           the logo (signature), the line (statement), the promise (support);
+           one accent, the lime of the sign, echoed by the full stop. -->
+      <section class="slide vb-idea" id="vibija-idea" data-scene="cover" data-tone="dark" aria-label="Vibija, brand book">
         <div class="slide__body">
           <div class="vb-cover">
             <p class="vb-cover__logo" data-reveal style="--i: 1"><span class="vb-lockup"><span class="vb-sign" aria-hidden="true"></span><span data-brand-name="veriterra"></span></span></p>
-            <p class="vb-display" data-reveal style="--i: 2">Every greenhouse, its own formula.</p>
-            <p class="vb-term anno anno--quiet" data-reveal style="--i: 3">Our promise</p>
+            <p class="vb-display" data-reveal style="--i: 2">Every greenhouse,<br>its own formula<span class="vb-cover__stop">.</span></p>
             <p class="vb-promise" data-reveal style="--i: 3">Effective fertilizer, calculated for the context of each greenhouse.</p>
           </div>
-          <p class="vb-cover__note anno anno--quiet" data-reveal style="--i: 4">Fertilizer for greenhouses · Brand book, working draft</p>
         </div>
       </section>
 

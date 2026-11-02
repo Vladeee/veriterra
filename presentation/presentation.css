@@ -455,11 +455,14 @@ html.has-deck .topnav__inner {
   justify-self: end;
 }
 
+/* The body hangs from one line under the header, the same on every slide
+   (--slide-content-top), with air below; blocks keep one rhythm (tokens
+   --slide-gap-*). A centred slide (a cover, a logo) opts out in its own CSS. */
 .slide__body {
   flex: 1;
-  row-gap: var(--space-7);
-  align-content: end;
-  padding-top: var(--space-8);
+  row-gap: var(--slide-gap-block);
+  align-content: start;
+  padding-top: var(--slide-content-top);
 }
 
 .slide__body > * { grid-column: 1 / -1; }

@@ -60,7 +60,7 @@
 
   function slideName(slide) {
     var title = slide.querySelector(".slide__head h2");
-    return title ? title.textContent : slide.id;
+    return title ? title.textContent : slide.getAttribute("aria-label") || slide.id;   // the cover has no header
   }
 
   // ---------- routing ----------

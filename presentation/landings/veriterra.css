@@ -205,20 +205,23 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
   mask: url("../../brand/logo/veriterra/mark.svg") center / contain no-repeat;
 }
 
-/* ---------- 01 Idea, the cover: one centred group, the note at the foot ----------
-   The logo small and calm on top, the line at display size, the promise under
-   it in columns 2-3. The group sits in the middle of the space. */
+/* ---------- 01 The cover: a title page ----------
+   No section header. Three levels: the logo (signature), the line
+   (statement), the promise (support, one step down in size and colour).
+   The logo stands apart (--space-10), the promise belongs to the line
+   (--space-7). The group is centred on the canvas, then lifted to the
+   optical centre. One accent: the lime of the sign, echoed by the stop. */
 .vb-idea .slide__body {
-  grid-template-rows: 1fr auto;
-  align-content: stretch;
+  padding-top: 0;
+  align-content: center;
 }
 
 .vb-cover {
   grid-column: 1 / -1;
-  align-self: center;
   display: grid;
   grid-template-columns: subgrid;
   justify-items: center;
+  margin-bottom: var(--space-6);
   text-align: center;
 }
 
@@ -226,27 +229,24 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 
 .vb-cover__logo {
   --lockup-tracking: var(--logo-tracking-s);
-  margin-bottom: var(--space-9);
+  margin-bottom: var(--space-10);
   font-size: var(--text-cover-logo);
-  line-height: var(--leading-headline);
+  line-height: var(--leading-tight);
 }
 
-.vb-cover .vb-term { margin-top: var(--space-8); }
+.vb-cover__stop { color: var(--ui-accent); }
 
 .vb-cover .vb-promise {
   grid-column: 2 / span 2;
-  margin-top: var(--space-3);
+  margin-top: var(--space-7);
   font-size: var(--text-subhead);
   line-height: var(--leading-subhead);
   letter-spacing: var(--tracking-subhead);
+  color: var(--ui-muted);
   text-wrap: balance;
 }
 
-.vb-cover__note { justify-self: center; }
-
-/* ---------- 02 Who for: a headline, then one answer per column, with air below ---------- */
-.vb-who .slide__body { padding-bottom: var(--space-9); }
-
+/* ---------- 02 Who for: a headline, then one answer per column ---------- */
 .vb-who .vb-headline { grid-column: 1 / span 3; }
 
 .vb-four {
@@ -257,8 +257,8 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 .vb-four li {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding-top: var(--space-4);
+  gap: var(--slide-gap-caption);
+  padding-top: var(--slide-gap-rule);
   border-top: var(--border-width) solid var(--brand-rule);
 }
 
@@ -295,14 +295,15 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 }
 
 .vb-logo__notes li,
+.vb-uses li,
 .vb-pair {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--slide-gap-line);
 }
 
 .vb-logo__notes li {
-  padding-top: var(--space-4);
+  padding-top: var(--slide-gap-rule);
   border-top: var(--border-width) solid var(--brand-rule);
 }
 
@@ -310,15 +311,15 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 .vb-pairs {
   display: grid;
   grid-template-columns: subgrid;
-  row-gap: var(--space-6);
+  row-gap: var(--slide-gap-row);
 }
 
-.vb-pair { gap: var(--space-3); }
+.vb-pair { gap: var(--slide-gap-caption); }
 
 .vb-pair__panel {
   display: grid;
   place-items: center;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
   background: var(--ground);
   font-size: var(--text-headline);
   line-height: var(--leading-headline);
@@ -335,8 +336,8 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
   grid-column: span 2;
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
-  padding: var(--space-7);
+  gap: var(--slide-gap-item);
+  padding: var(--panel-pad);
   background: var(--ui-bg);
   color: var(--ui-text);
 }
@@ -366,7 +367,7 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
    Where a column-1 text pairs with content, the row shares one first baseline. */
 .vb-hierarchy .slide__body {
   align-items: baseline;
-  row-gap: var(--space-6);
+  row-gap: var(--slide-gap-row);
 }
 
 .vb-spec { grid-column: 1; }
@@ -407,14 +408,14 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 .vb-anchor {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--slide-gap-caption);
 }
 
 .vb-anchor__swatch {
   display: flex;
   align-items: flex-end;
   aspect-ratio: 1;
-  padding: var(--space-5);
+  padding: var(--panel-pad-sm);
   background: var(--sw);
 }
 
@@ -487,19 +488,17 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 .vb-status {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--slide-gap-caption);
 }
-
-.vb-status > .anno:first-child { margin-bottom: var(--space-2); }
 
 .vb-status__soft,
 .vb-status__dark {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: var(--space-5);
+  gap: var(--slide-gap-item);
   min-height: calc(var(--space-10) * 2);
-  padding: var(--space-5);
+  padding: var(--panel-pad-sm);
 }
 
 .vb-status__soft {
@@ -516,7 +515,7 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: var(--space-3) var(--space-5);
+  padding: var(--space-3) var(--panel-pad-sm);
   background: var(--base);
   color: var(--color-vibija-paper);
 }
@@ -534,7 +533,7 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: var(--space-4);
-  margin: var(--space-2) 0 0;
+  margin: 0;
 }
 
 .vb-status dd {
@@ -549,7 +548,7 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
   grid-column: span 2;
   display: grid;
   grid-template-columns: subgrid;
-  row-gap: var(--space-5);
+  row-gap: var(--slide-gap-item);
 }
 
 .vb-theme__page {
@@ -557,8 +556,8 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-5);
-  padding: var(--space-7);
+  gap: var(--slide-gap-item);
+  padding: var(--panel-pad);
   background: var(--ui-bg);
   color: var(--ui-text);
   font-family: var(--brand-font-text);
@@ -583,7 +582,7 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 
 .vb-theme__muted {
   width: 100%;
-  padding-bottom: var(--space-5);
+  padding-bottom: var(--slide-gap-item);
   border-bottom: var(--border-width) solid var(--ui-border);
   color: var(--ui-muted);
 }

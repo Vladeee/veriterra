@@ -454,6 +454,9 @@
      the right. Built from the theme roles only, like a page of the site:
      core (dark theme, slides 01-02) = Ink, the dark ground, the raised surface;
      paper (light theme, the visual base) = the light ground, a breath of Neutral 50. */
+  --color-vibija-scene-cover-edge: var(--color-vibija-dark-bg);   /* the cover: an even ground, symmetric like its type */
+  --color-vibija-scene-cover-body: var(--color-vibija-dark-bg);
+  --color-vibija-scene-cover-light: var(--color-vibija-dark-bg);
   --color-vibija-scene-core-edge: var(--color-vibija-ink);
   --color-vibija-scene-core-body: var(--color-vibija-dark-bg);
   --color-vibija-scene-core-light: var(--color-vibija-dark-raised);
@@ -479,6 +482,16 @@
   --deck-width: 120rem;
   --deck-height: 67.5rem;
   --deck-pad-bottom: 6rem;   /* room under every slide; the arrows sit in it */
+  /* Slide spacing: one rhythm for the whole deck, on the 8-pt space scale */
+  --slide-content-top: var(--space-9);    /* header row -> first line of content, the same on every slide */
+  --slide-gap-block: var(--space-8);      /* major blocks in one body */
+  --slide-gap-row: var(--space-7);        /* rows of captioned items, levels of a hierarchy */
+  --slide-gap-item: var(--grid-gutter);   /* items without captions; equals the gutter */
+  --slide-gap-caption: var(--space-3);    /* an object and its caption, a name and its object */
+  --slide-gap-rule: var(--space-4);       /* a hairline and the text under it */
+  --slide-gap-line: var(--space-1);       /* stacked caption lines */
+  --panel-pad: var(--space-7);            /* inside big panels */
+  --panel-pad-sm: var(--space-5);         /* inside small panels and swatches */
   /* Logo lockup: the sign (brand/logo/veriterra/mark.svg, a placeholder circle) before
      the name. Sized like a round capital of Andika (cap 0.72em, O 0.75em with its
      overshoot below the baseline); the gap is a little more than a letter space. */
