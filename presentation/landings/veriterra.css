@@ -206,11 +206,11 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 }
 
 /* ---------- 01 The cover: a title page ----------
-   No section header. Three levels: the logo (signature), the line
-   (statement), the promise (support, one step down in size and colour).
-   The logo stands apart (--space-10), the promise belongs to the line
-   (--space-7). The group is centred on the canvas, then lifted to the
-   optical centre. One accent: the lime of the sign, echoed by the stop. */
+   No section header. A hero stack on the deck rhythm: the logo as the
+   eyebrow of the line (block gap), the line, the promise on one line across
+   the grid (row gap), then the button that opens the brand book (block gap).
+   Centred on the canvas, then lifted to the optical centre. One accent: the
+   lime of the sign, echoed by the full stop and the button. */
 .vb-idea .slide__body {
   padding-top: 0;
   align-content: center;
@@ -229,7 +229,7 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 
 .vb-cover__logo {
   --lockup-tracking: var(--logo-tracking-s);
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--slide-gap-block);
   font-size: var(--text-cover-logo);
   line-height: var(--leading-tight);
 }
@@ -237,13 +237,40 @@ html[data-brand="veriterra"].has-deck .page-arrow--next {
 .vb-cover__stop { color: var(--ui-accent); }
 
 .vb-cover .vb-promise {
-  grid-column: 2 / span 2;
-  margin-top: var(--space-7);
+  margin-top: var(--slide-gap-row);
   font-size: var(--text-subhead);
   line-height: var(--leading-subhead);
   letter-spacing: var(--tracking-subhead);
   color: var(--ui-muted);
   text-wrap: balance;
+}
+
+/* The button: the site's primary button at hero size; it opens slide 02 and
+   stands in for the arrows here (data-own-next) */
+.vb-cover__action { margin-top: var(--slide-gap-block); }
+
+.vb-cover__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--button-height-lg);
+  padding: 0 var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--ui-primary);
+  color: var(--ui-on-primary);
+  font-family: var(--brand-font-text);
+  font-weight: var(--weight-text);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: background-color var(--duration-base) var(--ease-standard);
+}
+
+.vb-cover__cta:active { scale: var(--press-scale); }
+
+@media (hover: hover) {
+  .vb-cover__cta:hover { background: var(--ui-primary-hover); }
 }
 
 /* ---------- 02 Who for: a headline, then one answer per column ---------- */

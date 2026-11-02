@@ -311,6 +311,7 @@
   --grid-gap: clamp(1rem, 2vw, 1.5rem);
   --grid-min: 16rem;
   --tap-min: 2.75rem;
+  --button-height-lg: 4rem;   /* a hero button (the Vibija cover) */
   --tap-comfort: 3rem;
   --nav-height: 3rem;   /* the compact top menu */
   --dot-size: 0.375rem;

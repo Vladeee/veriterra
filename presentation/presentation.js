@@ -51,7 +51,9 @@
     [["prev", -1], ["next", 1]].forEach(function (d) {
       var to = deck.slides[deck.index + d[1]];
       var a = arrows.querySelector(".page-arrow--" + d[0]);
-      a.hidden = !to;   // the deck stops at its first and last slide
+      // the deck stops at its first and last slide; a slide with its own way on
+      // (the cover's button, data-own-next) shows no next arrow
+      a.hidden = !to || (d[1] > 0 && deck.slides[deck.index].hasAttribute("data-own-next"));
       if (!to) return;
       a.href = "#" + to.id;
       a.setAttribute("aria-label", (d[1] < 0 ? "Previous slide: " : "Next slide: ") + slideName(to));
