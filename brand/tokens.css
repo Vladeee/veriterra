@@ -129,7 +129,7 @@
   --fig-vitreeone-1-ink: #F3EFE6;
   --fig-vitreeone-1-font: var(--font-logo);
   --fig-vitreeone-1-size: var(--text-logo);
-  --fig-vitreeone-1-tracking: var(--tracking-headline);
+  --fig-vitreeone-1-tracking: var(--logo-tracking-m);
   --fig-vitreeone-1-weight: var(--weight-heading);
   --fig-vitreeone-1-case: none;
   /* veriterra 1 (Vibija): lime on aubergine, its brand book colours (was Earth, Figma 75:267) */
@@ -138,7 +138,7 @@
   --fig-veriterra-1-ink: var(--color-vibija-lime);
   --fig-veriterra-1-font: var(--font-logo);
   --fig-veriterra-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-veriterra-1-tracking: var(--tracking-headline);
+  --fig-veriterra-1-tracking: var(--logo-tracking-m);
   --fig-veriterra-1-weight: var(--weight-heading);
   --fig-veriterra-1-case: none;
   /* verdo 1: Lime · Varela Round (Figma 90:154) */
@@ -147,7 +147,7 @@
   --fig-verdo-1-ink: #000000;
   --fig-verdo-1-font: var(--font-logo);
   --fig-verdo-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-verdo-1-tracking: var(--tracking-headline);
+  --fig-verdo-1-tracking: var(--logo-tracking-m);
   --fig-verdo-1-weight: var(--weight-heading);
   --fig-verdo-1-case: none;
   /* vaya 1: Sky · Faculty Glyphic (Figma 75:294) */
@@ -156,7 +156,7 @@
   --fig-vaya-1-ink: #181F1F;
   --fig-vaya-1-font: var(--font-logo);
   --fig-vaya-1-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-1-tracking: var(--tracking-headline);
+  --fig-vaya-1-tracking: var(--logo-tracking-m);
   --fig-vaya-1-weight: var(--weight-heading);
   --fig-vaya-1-case: none;
   /* vaya 2: Sunrise · Faculty Glyphic (Figma 75:291) */
@@ -165,7 +165,7 @@
   --fig-vaya-2-ink: #181F1F;
   --fig-vaya-2-font: var(--font-logo);
   --fig-vaya-2-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-2-tracking: var(--tracking-headline);
+  --fig-vaya-2-tracking: var(--logo-tracking-m);
   --fig-vaya-2-weight: var(--weight-heading);
   --fig-vaya-2-case: none;
   /* vaya 3: Lavender · Faculty Glyphic (Figma 75:300) */
@@ -174,7 +174,7 @@
   --fig-vaya-3-ink: #181F1F;
   --fig-vaya-3-font: var(--font-logo);
   --fig-vaya-3-size: clamp(2.5rem, 5.0vw, 6.0rem);
-  --fig-vaya-3-tracking: var(--tracking-headline);
+  --fig-vaya-3-tracking: var(--logo-tracking-m);
   --fig-vaya-3-weight: var(--weight-heading);
   --fig-vaya-3-case: none;
   /* vita 1: Stone · Momo Trust (Figma 75:305) */
@@ -183,7 +183,7 @@
   --fig-vita-1-ink: #1D1D1D;
   --fig-vita-1-font: var(--font-logo);
   --fig-vita-1-size: clamp(2.5rem, 5.83vw, 7.0rem);
-  --fig-vita-1-tracking: var(--tracking-headline);
+  --fig-vita-1-tracking: var(--logo-tracking-m);
   --fig-vita-1-weight: var(--weight-heading);
   --fig-vita-1-case: none;
 
@@ -267,6 +267,7 @@
   --text-headline: 5rem;     /* 80 / 88 */
   --text-display: 10rem;     /* 160 / 152 */
   --text-mark: 26rem;        /* the logo on the Logo slide */
+  --text-cover-logo: 3.5rem;  /* the logo on the cover: small and calm */
   --text-glyph: 18rem;       /* the "Aa" of each face on the Typography slide */
   --text-specimen: 7rem;     /* 112 / 118: a specimen line */
 
@@ -483,10 +484,12 @@
      overshoot below the baseline); the gap is a little more than a letter space. */
   --logo-sign-size: 0.75em;
   --logo-sign-drop: -0.016em;
-  --logo-sign-gap: 0.2em;
-  /* Dot pattern, drawn from the sign */
-  --pattern-dot-step: 2.5rem;
-  --pattern-dot-radius: 0.375rem;
+  --logo-sign-gap: 0.17em;
+  /* Logo tracking by size, on top of the spacing by ink (spaceLogo in presentation.js):
+     small logos keep the face's room, large ones close up, as type does */
+  --logo-tracking-s: 0em;        /* up to about 60 px: the cover, tiles */
+  --logo-tracking-m: -0.01em;    /* about 80 px: logo screens, On colour */
+  --logo-tracking-l: -0.025em;   /* the Logo slide */
   --glow-blur: 4rem;
   --duration-drift: 18s;
   --press-scale: 0.98;

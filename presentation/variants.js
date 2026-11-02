@@ -5,7 +5,7 @@
   frames; edit the tokens to tweak a variant, add an entry here to add one.
   Only the variants the user picked are kept (git history has the rest). Every
   logo is set in the logo face (Andika for now); a variant keeps the colours of its frame.
-  kern: true spaces the letters by their ink (for faces with monospaced Latin).
+  Every logo is spaced by its ink (spaceLogo() in presentation.js).
   mesh: true lets a layered background drift slowly.
   split: n draws the first n letters in ink and the rest in ink2.
   Keys are landing ids: vitreeone = GukoV Group, veriterra = Vibija, vita = Viva.

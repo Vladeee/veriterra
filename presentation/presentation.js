@@ -316,33 +316,107 @@
     word.style.setProperty("--ink-shift", (line / 2 - inkMid).toFixed(2) + "px");
   }
 
-  // Faces with monospaced Latin (Kosugi Maru) leave holes around narrow letters.
-  // Space each letter by its ink instead: the same side bearing on every glyph,
-  // the way a wordmark is kerned by hand. Tracking is added on top in CSS.
-  var KERN_BEARING = 0.045; // em, each side of every letter
+  // ---------- logo spacing: every pair of letters by its ink ----------
+  // A face's own spacing is made for reading; in a logo, open pairs (V or k
+  // next to a letter, r, y) leave holes. Each gap is measured from the ink:
+  // the average room between two letters over the x-height band, where a row
+  // with no ink on one side counts as the full depth. Pairs roomier than the
+  // face's own round pair ("oo") close by three quarters of the difference,
+  // the way a wordmark is kerned by hand, but never closer than SPACE.touch at
+  // their nearest point over the whole height (an r arm or a V top stays clear
+  // of the next letter). In em, so it holds at any size; tracking by size comes
+  // on top in CSS (--logo-tracking-*).
+  var SPACE = { size: 160, depth: 0.35, strength: 0.75, touch: 0.06 };
+  var spaceCanvas = null;
+  var spaceCache = {};
 
-  function kernInk(word) {
-    var glyphs = word ? word.querySelectorAll(".logo-hero__g") : [];
-    if (!glyphs.length || !probe.measureText) return;
-    var cs = getComputedStyle(word);
-    var size = parseFloat(cs.fontSize);
-    probe.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
-    glyphs.forEach(function (g) {
-      var c = g.textContent;
-      if (cs.textTransform === "uppercase") c = c.toUpperCase();
-      else if (cs.textTransform === "lowercase") c = c.toLowerCase();
-      var m = probe.measureText(c);
-      var left = -m.actualBoundingBoxLeft;
-      var right = m.width - m.actualBoundingBoxRight;
-      g.style.marginLeft = (KERN_BEARING * size - left).toFixed(2) + "px";
-      g.style.marginRight = (KERN_BEARING * size - right).toFixed(2) + "px";
+  function spaceKerns(font, text) {
+    var key = font + "|" + text;
+    if (spaceCache[key]) return spaceCache[key];
+    var s = SPACE.size;
+    if (!spaceCanvas) {
+      spaceCanvas = document.createElement("canvas");
+      spaceCanvas.width = spaceCanvas.height = s * 2;
+    }
+    var ctx = spaceCanvas.getContext("2d", { willReadFrequently: true });
+    ctx.font = font;
+    var base = Math.round(s * 1.4);
+    var xTop = Math.round(base - ctx.measureText("x").actualBoundingBoxAscent);
+    var rows = {};
+    // Left and right ink of a letter on every row of the canvas (null: no ink)
+    var ink = function (ch) {
+      if (rows[ch]) return rows[ch];
+      ctx.clearRect(0, 0, s * 2, s * 2);
+      ctx.fillText(ch, s / 2, base);
+      var d = ctx.getImageData(0, 0, s * 2, s * 2).data;
+      var out = [];
+      for (var y = 0; y < s * 2; y++) {
+        var l = null, r = null;
+        for (var x = 0; x < s * 2; x++) {
+          if (d[(y * s * 2 + x) * 4 + 3] > 110) { if (l === null) l = x; r = x + 1; }
+        }
+        out.push(l === null ? null : [(l - s / 2) / s, (r - s / 2) / s]);
+      }
+      return (rows[ch] = out);
+    };
+    var gap = function (a, b) {
+      var advance = (ctx.measureText(a + b).width - ctx.measureText(b).width) / s;
+      var pa = ink(a), pb = ink(b), sum = 0, near = SPACE.depth;
+      for (var y = 0; y < pa.length; y++) {
+        var room = pa[y] && pb[y] ? advance + pb[y][0] - pa[y][1] : SPACE.depth;
+        near = Math.min(near, room);
+        if (y >= xTop && y < base) sum += Math.min(SPACE.depth, room);
+      }
+      return { mean: sum / (base - xTop), near: near };
+    };
+    var round = gap("o", "o").mean;
+    var kerns = text.split("").map(function (a, i) {
+      var b = text[i + 1];
+      if (!b || a === " " || b === " ") return 0;
+      var g = gap(a, b);
+      return -Math.min(Math.max(0, g.mean - round) * SPACE.strength, Math.max(0, g.near - SPACE.touch));
     });
+    return (spaceCache[key] = kerns);
+  }
+
+  // Wraps the letters of a logo (once) and sets each one's room to the next
+  function spaceLogo(word) {
+    if (!word || !probe.measureText) return;
+    if (!word.querySelector(".logo-g")) {
+      if (word.children.length) return;   // two-tone markup keeps the face's own spacing
+      var name = word.textContent;
+      word.textContent = "";
+      name.split("").forEach(function (c) {
+        if (c === " ") { word.appendChild(document.createTextNode(" ")); return; }
+        var g = document.createElement("span");
+        g.className = "logo-g";
+        g.textContent = c;
+        word.appendChild(g);
+      });
+    }
+    var cs = getComputedStyle(word);
+    var text = word.textContent;
+    if (cs.textTransform === "uppercase") text = text.toUpperCase();
+    else if (cs.textTransform === "lowercase") text = text.toLowerCase();
+    var kerns = spaceKerns(cs.fontWeight + " " + SPACE.size + "px " + cs.fontFamily, text);
+    var glyphs = word.querySelectorAll(".logo-g");
+    var n = 0;
+    text.split("").forEach(function (c, i) {
+      if (c === " ") return;
+      var g = glyphs[n++];
+      if (g) g.style.marginRight = kerns[i] ? kerns[i].toFixed(3) + "em" : "";
+    });
+  }
+
+  // The Vibija lockups (logo slides) take the same spacing
+  function spaceLockups() {
+    document.querySelectorAll(".vb-lockup [data-brand-name]").forEach(spaceLogo);
   }
 
   function fitWord(word, box, token) {
     sizeInk(word, tokenLength(token));
-    kernInk(word);
-    if (fitWidth(word, box)) kernInk(word);
+    spaceLogo(word);
+    fitWidth(word, box);
   }
 
   function centreCurrent() {
@@ -408,12 +482,11 @@
     try { return window.localStorage.getItem(key); } catch (e) { return null; }
   }
 
-  // The wordmark's markup for a variant: plain, two-tone (split) or letter by letter (kern)
+  // The wordmark's markup for a variant: plain or two-tone (split); spaceLogo() wraps the letters
   function setWord(word, name, v, ref) {
     if (!word) return;
     word.setAttribute("data-ref", ref);
     if (v.split) word.innerHTML = name.slice(0, v.split) + '<span class="logo-hero__b">' + name.slice(v.split) + "</span>";
-    else if (v.kern) word.innerHTML = name.split("").map(function (c) { return '<span class="logo-hero__g">' + c + "</span>"; }).join("");
     else word.textContent = name;
     word.setAttribute("aria-label", name);
   }
@@ -516,7 +589,7 @@
       });
     });
     // Measurements need the real fonts
-    Promise.all(loads).then(centreCurrent);
+    Promise.all(loads).then(function () { spaceLockups(); centreCurrent(); });
   }
 
   function initVariants() {
