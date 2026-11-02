@@ -27,10 +27,7 @@
       li.appendChild(a);
       menu.appendChild(li);
     });
-    // The last page: every variant in one grid
-    var li = document.createElement("li");
-    li.innerHTML = '<a class="topnav__link" href="#overview">All</a>';
-    menu.appendChild(li);
+    // The All variants page (#overview) is no longer in the menu (the user's request); its hash still opens it
   }
 
   // On narrow screens the menu scrolls: mark which edge hides more items, CSS fades it
@@ -65,6 +62,27 @@
     return title ? title.textContent : slide.getAttribute("aria-label") || slide.id;   // the cover has no header
   }
 
+  // ---------- one menu everywhere ----------
+  // A deck scales its root font size to the canvas (--deck-rem); the menu is
+  // zoomed back, so it has the same size and place on every page: full width,
+  // from the page margin, at the base type size.
+  var baseRem = parseFloat(getComputedStyle(root).fontSize) || 16;
+  var topnav = document.querySelector(".topnav");
+  function fitMenu() {
+    var rem = parseFloat(getComputedStyle(root).fontSize) || baseRem;
+    topnav.style.zoom = root.classList.contains("has-deck") ? String(baseRem / rem) : "";
+  }
+
+  // The menu takes the tone of whatever sits under it (a deck sets it per slide in goTo)
+  function syncMenuTone() {
+    if (deck.slides.length) return;
+    var y = topnav.getBoundingClientRect().bottom - 2;
+    var stack = document.elementsFromPoint ? document.elementsFromPoint(window.innerWidth * 0.25, y) : [];
+    var toned = stack.filter(function (el) { return !topnav.contains(el) && el.closest("[data-tone]"); })[0];
+    var tone = toned ? toned.closest("[data-tone]").getAttribute("data-tone") : "light";
+    document.body.classList.toggle("nav-on-dark", tone === "dark");
+  }
+
   // ---------- routing ----------
   function show(hash) {
     var target = hash ? document.getElementById(hash) : null;
@@ -86,10 +104,14 @@
       deck.slides = Array.prototype.slice.call(landing.querySelectorAll(".slide"));
       deck.index = -1;
       root.classList.toggle("has-deck", deck.slides.length > 0);
+      // Logo screens are one screen too: no scrollbar, so the menu keeps one width everywhere
+      root.classList.toggle("one-screen", landing.id !== "overview");
+      fitMenu();
       tintChrome(landing);
       syncPageColour();
       centreCurrent();
       playLogo(landing);
+      syncMenuTone();   // at once, not on the next frame: the last page's tone must not linger
     }
 
     if (deck.slides.length) goTo(Math.max(0, deck.slides.indexOf(target)));
@@ -661,10 +683,10 @@
     BrandUI.hydrateIcons();
     window.addEventListener("hashchange", route);
     window.addEventListener("resize", centreCurrent);
+    window.addEventListener("resize", fitMenu);
     menu.addEventListener("scroll", fadeMenu, { passive: true });
     window.addEventListener("resize", fadeMenu);
     // Scrolled state + the tone of whatever sits under the menu (light or dark slide)
-    var nav = document.querySelector(".topnav");
     var ticking = false;
     var onScroll = function () {
       if (ticking) return;
@@ -672,12 +694,7 @@
       window.requestAnimationFrame(function () {
         ticking = false;
         document.body.classList.toggle("is-scrolled", window.scrollY > 8);
-        if (deck.slides.length) return;   // a deck sets the menu tone in goTo()
-        var y = nav.getBoundingClientRect().bottom - 2;
-        var stack = document.elementsFromPoint ? document.elementsFromPoint(window.innerWidth * 0.25, y) : [];
-        var toned = stack.filter(function (el) { return !nav.contains(el) && el.closest("[data-tone]"); })[0];
-        var tone = toned ? toned.closest("[data-tone]").getAttribute("data-tone") : "light";
-        document.body.classList.toggle("nav-on-dark", tone === "dark");
+        syncMenuTone();
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });

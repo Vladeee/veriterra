@@ -365,11 +365,12 @@ html.has-deck {
   font-size: var(--deck-rem);
 }
 
-/* The menu keeps to the canvas, so it lines up with the slide grid */
-html.has-deck .topnav__inner {
-  max-width: var(--deck-width);
-  margin-inline: auto;
-}
+/* A logo screen is one screen: no scrollbar (a fraction of a pixel of dvh
+   rounding would add one and shift the menu) */
+html.one-screen { overflow: hidden; }
+
+/* The menu is the same on every page: presentation.js zooms it back from the
+   deck's scaled root size (fitMenu), and it spans the window, not the canvas */
 
 /* The sky sits behind the slides but above the landing's own background */
 .landing:has(.slide-sky) { isolation: isolate; }
